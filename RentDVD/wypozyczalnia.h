@@ -19,6 +19,11 @@ public:
     explicit Wypozyczalnia(QWidget *parent = 0);
     ~Wypozyczalnia();
 
+private slots:
+    void on_pushButtonDodajUzytkownika_clicked();
+
+    void on_pushButtonDodajFilm_clicked();
+
 private:
     Ui::Wypozyczalnia *ui;
 };
