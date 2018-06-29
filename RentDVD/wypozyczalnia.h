@@ -6,6 +6,7 @@
 #include <QString>
 #include <QDateTime>
 #include "obslugabd.h"
+#include <QCheckBox>
 
 namespace Ui {
 class Wypozyczalnia;
@@ -23,6 +24,10 @@ private slots:
     void on_pushButtonDodajUzytkownika_clicked();
 
     void on_pushButtonDodajFilm_clicked();
+
+    void on_pushButtonWyszukajRokGatunek_clicked();
+
+    void on_pushButtonWyszukajTytulOpis_clicked();
 
 private:
     Ui::Wypozyczalnia *ui;

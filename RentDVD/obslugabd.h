@@ -20,8 +20,15 @@ public:
     bool dodajUzytkownika(QString &login, QString &haslo, QString &imie, QString &nazwisko);
     bool dodajFilm(QString &tytul, int &rokProdukcji, QString &opis, int &iloscKopii, int &gatunek1, int &gatunek2, int &gatunek3);
     bool logowanie(QString &login, QString &haslo);
+    void wyszukajFilmTytulOpis(QString &tytul, QString &opis);
+    void wyszukajFilmRokGatunek(int &rokProdukcji, int &gatunek);
     QStringList odczytGatunki();
     static int idZalogowanyUzytkownik;
+    QString wyszukajTytul[100];
+    QString wyszukajOpis[100];
+    int wyszukajRok[100];
+    QString wyszukajGatunek[100];
+    int wyszukajIleWierszy;
 
 signals:
 

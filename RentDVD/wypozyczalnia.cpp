@@ -13,6 +13,17 @@ Wypozyczalnia::Wypozyczalnia(QWidget *parent) :
     ui->comboBoxGatunek1->addItems(bd.odczytGatunki());
     ui->comboBoxGatunek2->addItems(bd.odczytGatunki());
     ui->comboBoxGatunek3->addItems(bd.odczytGatunki());
+    ui->comboBoxGatunekWyszukaj->addItems(bd.odczytGatunki());
+    //    ui->tabWidget->setStyleSheet("QTabWidget::pane { border: 1px solid #000033; }");
+    ui->tabWidget->setStyleSheet("QTabWidget::pane > QWidget { background-color: #b8b8b8; }");
+    ui->tableWidgetWyszukaj->setColumnWidth(0,200);
+    ui->tableWidgetWyszukaj->setColumnWidth(1,70);
+    ui->tableWidgetWyszukaj->setColumnWidth(2,100);
+    ui->tableWidgetWyszukaj->setColumnWidth(3,500);
+    ui->tableWidgetWyszukaj->setColumnWidth(4,90);
+    ui->tableWidgetWyszukaj->setColumnWidth(5,80);
+
+
 }
 
 Wypozyczalnia::~Wypozyczalnia()
@@ -27,13 +38,17 @@ void Wypozyczalnia::on_pushButtonDodajUzytkownika_clicked()
     haslo = ui->lineEditHaslo->text();
     imie = ui->lineEditImie->text();
     nazwisko = ui->lineEditNazwisko->text();
-    ObslugaBD bd;
-    if (bd.dodajUzytkownika(login, haslo, imie, nazwisko))
-        ui->komunikatyDodajUzytkownika->setText("Dodano nowego użytkownika do bazy danych.");
+    if(login == "" || haslo == "" || imie == "" || nazwisko == "")
+        ui->komunikatyDodajUzytkownika->setText("Proszę uzupełnić wszystkie pola forlmularza.");
     else
-        ui->komunikatyDodajUzytkownika->setText("Błąd: nie udało się dodać użytkownika do bazy danych.");
+    {
+        ObslugaBD bd;
+        if (bd.dodajUzytkownika(login, haslo, imie, nazwisko))
+            ui->komunikatyDodajUzytkownika->setText("Dodano nowego użytkownika do bazy danych.");
+        else
+            ui->komunikatyDodajUzytkownika->setText("Błąd: nie udało się dodać użytkownika do bazy danych.");
+    }
 }
-
 
 void Wypozyczalnia::on_pushButtonDodajFilm_clicked()
 {
@@ -46,9 +61,55 @@ void Wypozyczalnia::on_pushButtonDodajFilm_clicked()
     gatunek1 = ui->comboBoxGatunek1->currentIndex();
     gatunek2 = ui->comboBoxGatunek2->currentIndex();
     gatunek3 = ui->comboBoxGatunek3->currentIndex();
+    if (tytul == "" || opis == "" || rok == 0 || ilosckopii == 0 || gatunek1 == 0)
+        ui->komunikatyDodajFilm->setText("Proszę uzupełnić wszystkie pola forlmularza.");
+    else {
+        ObslugaBD bd;
+        if (bd.dodajFilm(tytul, rok, opis, ilosckopii, gatunek1, gatunek2, gatunek3))
+            ui->komunikatyDodajFilm->setText("Dodano nowy film do bazy danych.");
+        else
+            ui->komunikatyDodajFilm->setText("Błąd: nie udało się dodać filmu do bazy danych.");
+    }
+}
+
+void Wypozyczalnia::on_pushButtonWyszukajRokGatunek_clicked()
+{
     ObslugaBD bd;
-    if (bd.dodajFilm(tytul, rok, opis, ilosckopii, gatunek1, gatunek2, gatunek3))
-        ui->komunikatyDodajFilm->setText("Dodano nowy film do bazy danych.");
-    else
-        ui->komunikatyDodajFilm->setText("Błąd: nie udało się dodać filmu do bazy danych.");
+    int rok, gatunek;
+    rok = ui->lineEditRokWyszukaj->text().toInt();
+    gatunek = ui->comboBoxGatunekWyszukaj->currentIndex();
+    bd.wyszukajFilmRokGatunek(rok, gatunek);
+    ui->tableWidgetWyszukaj->setRowCount(bd.wyszukajIleWierszy);
+    for(int i=0; i<bd.wyszukajIleWierszy; i++)
+    {
+        ui->tableWidgetWyszukaj->setItem(i,0, new QTableWidgetItem(bd.wyszukajTytul[i]));
+        ui->tableWidgetWyszukaj->setItem(i,1, new QTableWidgetItem(QString("%1").arg(bd.wyszukajRok[i])));
+        ui->tableWidgetWyszukaj->setItem(i,2, new QTableWidgetItem(bd.wyszukajGatunek[i]));
+        ui->tableWidgetWyszukaj->setItem(i,3, new QTableWidgetItem(bd.wyszukajOpis[i]));
+        QCheckBox *boxWypozyczenie = new QCheckBox();
+        ui->tableWidgetWyszukaj->setCellWidget(i,4, boxWypozyczenie);
+        QCheckBox *boxRezerwacja = new QCheckBox();
+        ui->tableWidgetWyszukaj->setCellWidget(i,5, boxRezerwacja);
+    }
+}
+
+void Wypozyczalnia::on_pushButtonWyszukajTytulOpis_clicked()
+{
+    ObslugaBD bd;
+    QString tytul, opis;
+    tytul = ui->lineEditTytulWyszukaj->text();
+    opis = ui->lineEditOpisWyszukaj->text();
+    bd.wyszukajFilmTytulOpis(tytul, opis);
+    ui->tableWidgetWyszukaj->setRowCount(bd.wyszukajIleWierszy);
+    for(int i=0; i<bd.wyszukajIleWierszy; i++)
+    {
+        ui->tableWidgetWyszukaj->setItem(i,0, new QTableWidgetItem(bd.wyszukajTytul[i]));
+        ui->tableWidgetWyszukaj->setItem(i,1, new QTableWidgetItem(QString("%1").arg(bd.wyszukajRok[i])));
+        ui->tableWidgetWyszukaj->setItem(i,2, new QTableWidgetItem(bd.wyszukajGatunek[i]));
+        ui->tableWidgetWyszukaj->setItem(i,3, new QTableWidgetItem(bd.wyszukajOpis[i]));
+        QCheckBox *boxWypozyczenie = new QCheckBox();
+        ui->tableWidgetWyszukaj->setCellWidget(i,4, boxWypozyczenie);
+        QCheckBox *boxRezerwacja = new QCheckBox();
+        ui->tableWidgetWyszukaj->setCellWidget(i,5, boxRezerwacja);
+    }
 }

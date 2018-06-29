@@ -32,7 +32,7 @@ bool ObslugaBD::logowanie(QString &login, QString &haslo)
     query.exec("SELECT idUzytkownika, login, haslo FROM uzytkownicy");
     while (query.next())
     {
-        idUzytkownikaBaza = query.value(0).toString().toInt();
+        idUzytkownikaBaza = query.value(0).toInt();
         loginBaza = query.value(1).toString();
         hasloBaza = query.value(2).toString();
         if (login == loginBaza && hasloHash == hasloBaza)
@@ -100,4 +100,49 @@ QStringList ObslugaBD::odczytGatunki()
         listaGatunki.append(query.value(0).toString());
     listaGatunki.insert(0,"Wybierz gatunek");
     return listaGatunki;
+}
+
+void ObslugaBD::wyszukajFilmTytulOpis(QString &tytul, QString &opis)
+{
+    wyszukajIleWierszy = 0;
+    QSqlQuery query;
+    query.prepare("SELECT Tytul, RokProdukcji, Opis, Nazwa FROM filmy LEFT JOIN gatunki ON filmy.Gatunek1 = gatunki.idGatunku WHERE Tytul like (:tytul) AND Opis LIKE (:opis)");
+    query.bindValue(":tytul", "%" + tytul + "%");
+    query.bindValue(":opis", "%" + opis + "%");
+
+    if (query.exec())
+    {
+        while (query.next())
+        {
+            wyszukajTytul[wyszukajIleWierszy] = query.value(0).toString();
+            wyszukajRok[wyszukajIleWierszy] = query.value(1).toInt();
+            wyszukajOpis[wyszukajIleWierszy] = query.value(2).toString();
+            wyszukajGatunek[wyszukajIleWierszy] = query.value(3).toString();
+            wyszukajIleWierszy++;
+        }
+    }
+    else
+        qDebug() << "Nie udało się wyszukać filmu";
+}
+
+void ObslugaBD::wyszukajFilmRokGatunek(int &rokProdukcji, int &gatunek)
+{
+    wyszukajIleWierszy = 0;
+    QSqlQuery query;
+    query.prepare("SELECT Tytul, RokProdukcji, Opis, Gatunek1, Nazwa FROM filmy LEFT JOIN gatunki ON filmy.Gatunek1 = gatunki.idGatunku WHERE RokProdukcji = (:rokProdukcji) OR Gatunek1 = (:gatunek)");
+    query.bindValue(":rokProdukcji", rokProdukcji);
+    query.bindValue(":gatunek", gatunek);
+    if (query.exec())
+    {
+        while (query.next())
+        {
+            wyszukajTytul[wyszukajIleWierszy] = query.value(0).toString();
+            wyszukajRok[wyszukajIleWierszy] = query.value(1).toInt();
+            wyszukajOpis[wyszukajIleWierszy] = query.value(2).toString();
+            wyszukajGatunek[wyszukajIleWierszy] = query.value(4).toString();
+            wyszukajIleWierszy++;
+        }
+    }
+    else
+        qDebug() << "Nie udało się wyszukać filmu";
 }
