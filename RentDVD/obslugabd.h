@@ -24,11 +24,12 @@ public:
     void wyszukajFilmRokGatunek(int &rokProdukcji, int &gatunek);
     QStringList odczytGatunki();
     static int idZalogowanyUzytkownik;
-    QString wyszukajTytul[100];
-    QString wyszukajOpis[100];
-    int wyszukajRok[100];
-    QString wyszukajGatunek[100];
-    int wyszukajIleWierszy;
+    QStringList wyszukajTytul;
+    QStringList wyszukajOpis;
+    QVector<int> wyszukajRok;
+    QStringList wyszukajGatunek;
+    static int ileWierszy;
+    static QVector<int> wyszukajIdFilmu;
 
 signals:
 

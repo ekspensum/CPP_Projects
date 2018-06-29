@@ -31,7 +31,6 @@ void MainWindow::on_logowanie_clicked()
             w = new Wypozyczalnia();
             w->show();
             close();
-            qDebug() << ObslugaBD::idZalogowanyUzytkownik;
         }
         else
             ui->komunikat->setText("Nie poprawny login lub hasło.");

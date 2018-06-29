@@ -78,18 +78,20 @@ void Wypozyczalnia::on_pushButtonWyszukajRokGatunek_clicked()
     int rok, gatunek;
     rok = ui->lineEditRokWyszukaj->text().toInt();
     gatunek = ui->comboBoxGatunekWyszukaj->currentIndex();
+    listaBoxWypozyczenie.clear();
+    listaBoxRezerwacja.clear();
     bd.wyszukajFilmRokGatunek(rok, gatunek);
-    ui->tableWidgetWyszukaj->setRowCount(bd.wyszukajIleWierszy);
-    for(int i=0; i<bd.wyszukajIleWierszy; i++)
+    ui->tableWidgetWyszukaj->setRowCount(bd.ileWierszy);
+    for(int i=0; i<bd.ileWierszy; i++)
     {
-        ui->tableWidgetWyszukaj->setItem(i,0, new QTableWidgetItem(bd.wyszukajTytul[i]));
-        ui->tableWidgetWyszukaj->setItem(i,1, new QTableWidgetItem(QString("%1").arg(bd.wyszukajRok[i])));
-        ui->tableWidgetWyszukaj->setItem(i,2, new QTableWidgetItem(bd.wyszukajGatunek[i]));
-        ui->tableWidgetWyszukaj->setItem(i,3, new QTableWidgetItem(bd.wyszukajOpis[i]));
-        QCheckBox *boxWypozyczenie = new QCheckBox();
-        ui->tableWidgetWyszukaj->setCellWidget(i,4, boxWypozyczenie);
-        QCheckBox *boxRezerwacja = new QCheckBox();
-        ui->tableWidgetWyszukaj->setCellWidget(i,5, boxRezerwacja);
+        ui->tableWidgetWyszukaj->setItem(i,0, new QTableWidgetItem(bd.wyszukajTytul.at(i)));
+        ui->tableWidgetWyszukaj->setItem(i,1, new QTableWidgetItem(QString("%1").arg(bd.wyszukajRok.at(i))));
+        ui->tableWidgetWyszukaj->setItem(i,2, new QTableWidgetItem(bd.wyszukajGatunek.at(i)));
+        ui->tableWidgetWyszukaj->setItem(i,3, new QTableWidgetItem(bd.wyszukajOpis.at(i)));
+        listaBoxWypozyczenie.append(new QCheckBox);
+        ui->tableWidgetWyszukaj->setCellWidget(i,4, listaBoxWypozyczenie.value(i));
+        listaBoxRezerwacja.append(new QCheckBox());
+        ui->tableWidgetWyszukaj->setCellWidget(i,5, listaBoxRezerwacja.value(i));
     }
 }
 
@@ -99,17 +101,33 @@ void Wypozyczalnia::on_pushButtonWyszukajTytulOpis_clicked()
     QString tytul, opis;
     tytul = ui->lineEditTytulWyszukaj->text();
     opis = ui->lineEditOpisWyszukaj->text();
+    listaBoxWypozyczenie.clear();
+    listaBoxRezerwacja.clear();
     bd.wyszukajFilmTytulOpis(tytul, opis);
-    ui->tableWidgetWyszukaj->setRowCount(bd.wyszukajIleWierszy);
-    for(int i=0; i<bd.wyszukajIleWierszy; i++)
+    ui->tableWidgetWyszukaj->setRowCount(bd.ileWierszy);
+    for(int i=0; i<bd.ileWierszy; i++)
     {
-        ui->tableWidgetWyszukaj->setItem(i,0, new QTableWidgetItem(bd.wyszukajTytul[i]));
-        ui->tableWidgetWyszukaj->setItem(i,1, new QTableWidgetItem(QString("%1").arg(bd.wyszukajRok[i])));
-        ui->tableWidgetWyszukaj->setItem(i,2, new QTableWidgetItem(bd.wyszukajGatunek[i]));
-        ui->tableWidgetWyszukaj->setItem(i,3, new QTableWidgetItem(bd.wyszukajOpis[i]));
-        QCheckBox *boxWypozyczenie = new QCheckBox();
-        ui->tableWidgetWyszukaj->setCellWidget(i,4, boxWypozyczenie);
-        QCheckBox *boxRezerwacja = new QCheckBox();
-        ui->tableWidgetWyszukaj->setCellWidget(i,5, boxRezerwacja);
+        ui->tableWidgetWyszukaj->setItem(i,0, new QTableWidgetItem(bd.wyszukajTytul.at(i)));
+        ui->tableWidgetWyszukaj->setItem(i,1, new QTableWidgetItem(QString("%1").arg(bd.wyszukajRok.at(i))));
+        ui->tableWidgetWyszukaj->setItem(i,2, new QTableWidgetItem(bd.wyszukajGatunek.at(i)));
+        ui->tableWidgetWyszukaj->setItem(i,3, new QTableWidgetItem(bd.wyszukajOpis.at(i)));
+        listaBoxWypozyczenie.append(new QCheckBox);
+        ui->tableWidgetWyszukaj->setCellWidget(i,4, listaBoxWypozyczenie.value(i));
+        listaBoxRezerwacja.append(new QCheckBox());
+        ui->tableWidgetWyszukaj->setCellWidget(i,5, listaBoxRezerwacja.value(i));
+    }
+}
+
+void Wypozyczalnia::on_pushButtonWypozyczenie_clicked()
+{
+    for(int i=0; i<ObslugaBD::ileWierszy; i++)
+    {
+        if (listaBoxWypozyczenie.value(i)->isChecked())
+        {
+            qDebug() << ObslugaBD::wyszukajIdFilmu.at(i);
+        }
+
+//        qDebug() << listaBoxRezerwacja.value(i)->isChecked() << ObslugaBD::wyszukajIdFilmu.at(i);
+
     }
 }

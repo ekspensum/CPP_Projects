@@ -149,6 +149,64 @@
       <string>LUB</string>
      </property>
     </widget>
+    <widget class="QLabel" name="komunikatyWypozycz">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>475</y>
+       <width>631</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButtonWypozyczenie">
+     <property name="geometry">
+      <rect>
+       <x>979</x>
+       <y>470</y>
+       <width>101</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Wypożyczenie</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButtonRezerwacja">
+     <property name="geometry">
+      <rect>
+       <x>769</x>
+       <y>470</y>
+       <width>91</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Rezerwacja</string>
+     </property>
+    </widget>
     <widget class="QWidget" name="">
      <property name="geometry">
       <rect>

@@ -3,6 +3,8 @@
 //QString idZalogowanyUzytkownik; //zmienna globalna
 
 int ObslugaBD::idZalogowanyUzytkownik; //zmienna statyczna
+int ObslugaBD::ileWierszy;
+QVector<int> ObslugaBD::wyszukajIdFilmu;
 
 ObslugaBD::ObslugaBD()
 {
@@ -104,21 +106,26 @@ QStringList ObslugaBD::odczytGatunki()
 
 void ObslugaBD::wyszukajFilmTytulOpis(QString &tytul, QString &opis)
 {
-    wyszukajIleWierszy = 0;
+    ileWierszy = 0;
+    wyszukajTytul.clear();
+    wyszukajRok.clear();
+    wyszukajOpis.clear();
+    wyszukajGatunek.clear();
+    wyszukajIdFilmu.clear();
     QSqlQuery query;
-    query.prepare("SELECT Tytul, RokProdukcji, Opis, Nazwa FROM filmy LEFT JOIN gatunki ON filmy.Gatunek1 = gatunki.idGatunku WHERE Tytul like (:tytul) AND Opis LIKE (:opis)");
+    query.prepare("SELECT Tytul, RokProdukcji, Opis, Nazwa, idFilmu FROM filmy LEFT JOIN gatunki ON filmy.Gatunek1 = gatunki.idGatunku WHERE Tytul like (:tytul) AND Opis LIKE (:opis)");
     query.bindValue(":tytul", "%" + tytul + "%");
     query.bindValue(":opis", "%" + opis + "%");
-
     if (query.exec())
     {
         while (query.next())
         {
-            wyszukajTytul[wyszukajIleWierszy] = query.value(0).toString();
-            wyszukajRok[wyszukajIleWierszy] = query.value(1).toInt();
-            wyszukajOpis[wyszukajIleWierszy] = query.value(2).toString();
-            wyszukajGatunek[wyszukajIleWierszy] = query.value(3).toString();
-            wyszukajIleWierszy++;
+            wyszukajTytul.append(query.value(0).toString());
+            wyszukajRok.append(query.value(1).toInt());
+            wyszukajOpis.append(query.value(2).toString());
+            wyszukajGatunek.append(query.value(3).toString());
+            wyszukajIdFilmu.append(query.value(4).toInt());
+            ileWierszy++;
         }
     }
     else
@@ -127,20 +134,26 @@ void ObslugaBD::wyszukajFilmTytulOpis(QString &tytul, QString &opis)
 
 void ObslugaBD::wyszukajFilmRokGatunek(int &rokProdukcji, int &gatunek)
 {
-    wyszukajIleWierszy = 0;
+    ileWierszy = 0;
+    wyszukajTytul.clear();
+    wyszukajRok.clear();
+    wyszukajOpis.clear();
+    wyszukajGatunek.clear();
+    wyszukajIdFilmu.clear();
     QSqlQuery query;
-    query.prepare("SELECT Tytul, RokProdukcji, Opis, Gatunek1, Nazwa FROM filmy LEFT JOIN gatunki ON filmy.Gatunek1 = gatunki.idGatunku WHERE RokProdukcji = (:rokProdukcji) OR Gatunek1 = (:gatunek)");
+    query.prepare("SELECT Tytul, RokProdukcji, Opis, Gatunek1, Nazwa, idFilmu FROM filmy LEFT JOIN gatunki ON filmy.Gatunek1 = gatunki.idGatunku WHERE RokProdukcji = (:rokProdukcji) OR Gatunek1 = (:gatunek)");
     query.bindValue(":rokProdukcji", rokProdukcji);
     query.bindValue(":gatunek", gatunek);
     if (query.exec())
     {
         while (query.next())
         {
-            wyszukajTytul[wyszukajIleWierszy] = query.value(0).toString();
-            wyszukajRok[wyszukajIleWierszy] = query.value(1).toInt();
-            wyszukajOpis[wyszukajIleWierszy] = query.value(2).toString();
-            wyszukajGatunek[wyszukajIleWierszy] = query.value(4).toString();
-            wyszukajIleWierszy++;
+            wyszukajTytul.append(query.value(0).toString());
+            wyszukajRok.append(query.value(1).toInt());
+            wyszukajOpis.append(query.value(2).toString());
+            wyszukajGatunek.append(query.value(4).toString());
+            wyszukajIdFilmu.append(query.value(5).toInt());
+            ileWierszy++;
         }
     }
     else

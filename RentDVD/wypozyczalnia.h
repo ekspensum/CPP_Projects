@@ -7,6 +7,7 @@
 #include <QDateTime>
 #include "obslugabd.h"
 #include <QCheckBox>
+#include <QList>
 
 namespace Ui {
 class Wypozyczalnia;
@@ -29,8 +30,14 @@ private slots:
 
     void on_pushButtonWyszukajTytulOpis_clicked();
 
+    void on_pushButtonWypozyczenie_clicked();
+
 private:
     Ui::Wypozyczalnia *ui;
+    QCheckBox *boxWypozyczenie;
+    QCheckBox *boxRezerwacja;
+    QList<QCheckBox *> listaBoxWypozyczenie;
+    QList<QCheckBox *> listaBoxRezerwacja;
 };
 
 #endif // WYPOZYCZALNIA_H
