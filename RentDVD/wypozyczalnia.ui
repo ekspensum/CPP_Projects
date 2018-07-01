@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1122</width>
-    <height>554</height>
+    <height>658</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,7 +22,7 @@
      <x>10</x>
      <y>10</y>
      <width>1101</width>
-     <height>541</height>
+     <height>641</height>
     </rect>
    </property>
    <property name="tabShape">
@@ -33,15 +33,15 @@
    </property>
    <widget class="QWidget" name="tabWypozyczenie">
     <attribute name="title">
-     <string>Wypożyczenie</string>
+     <string>Wypożyczenie / Rezerwacja</string>
     </attribute>
-    <widget class="QTableWidget" name="tableWidgetWyszukaj">
+    <widget class="QTableWidget" name="tableWidgetWyszukajFilm">
      <property name="geometry">
       <rect>
        <x>10</x>
        <y>90</y>
        <width>1071</width>
-       <height>361</height>
+       <height>261</height>
       </rect>
      </property>
      <column>
@@ -81,7 +81,7 @@
        <x>190</x>
        <y>51</y>
        <width>141</width>
-       <height>22</height>
+       <height>25</height>
       </rect>
      </property>
     </widget>
@@ -91,7 +91,7 @@
        <x>360</x>
        <y>51</y>
        <width>80</width>
-       <height>21</height>
+       <height>25</height>
       </rect>
      </property>
      <property name="font">
@@ -108,22 +108,22 @@
      <property name="geometry">
       <rect>
        <x>240</x>
-       <y>15</y>
-       <width>31</width>
-       <height>16</height>
+       <y>9</y>
+       <width>61</width>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
-      <string>ORAZ</string>
+      <string>LUB / ORAZ</string>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButtonWyszukajTytulOpis">
      <property name="geometry">
       <rect>
-       <x>560</x>
+       <x>590</x>
        <y>11</y>
        <width>80</width>
-       <height>21</height>
+       <height>25</height>
       </rect>
      </property>
      <property name="font">
@@ -140,9 +140,9 @@
      <property name="geometry">
       <rect>
        <x>150</x>
-       <y>53</y>
+       <y>50</y>
        <width>21</width>
-       <height>20</height>
+       <height>25</height>
       </rect>
      </property>
      <property name="text">
@@ -152,10 +152,10 @@
     <widget class="QLabel" name="komunikatyWypozycz">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>475</y>
-       <width>631</width>
-       <height>21</height>
+       <x>740</x>
+       <y>20</y>
+       <width>281</width>
+       <height>41</height>
       </rect>
      </property>
      <property name="font">
@@ -173,9 +173,9 @@
      <property name="geometry">
       <rect>
        <x>979</x>
-       <y>470</y>
+       <y>430</y>
        <width>101</width>
-       <height>21</height>
+       <height>25</height>
       </rect>
      </property>
      <property name="font">
@@ -191,10 +191,10 @@
     <widget class="QPushButton" name="pushButtonRezerwacja">
      <property name="geometry">
       <rect>
-       <x>769</x>
-       <y>470</y>
+       <x>820</x>
+       <y>430</y>
        <width>91</width>
-       <height>21</height>
+       <height>25</height>
       </rect>
      </property>
      <property name="font">
@@ -207,10 +207,10 @@
       <string>Rezerwacja</string>
      </property>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget4">
      <property name="geometry">
       <rect>
-       <x>290</x>
+       <x>320</x>
        <y>10</y>
        <width>236</width>
        <height>24</height>
@@ -239,7 +239,7 @@
       </item>
      </layout>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget2">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -271,7 +271,7 @@
       </item>
      </layout>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget3">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -306,11 +306,328 @@
       </item>
      </layout>
     </widget>
+    <widget class="QTableWidget" name="tableWidgetWyszukajKlienta">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>430</y>
+       <width>701</width>
+       <height>161</height>
+      </rect>
+     </property>
+     <column>
+      <property name="text">
+       <string>Imię</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Nazwisko</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Miasto</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Ulica</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Nr domu</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Wypożyczenie</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Rezerwacja</string>
+      </property>
+     </column>
+    </widget>
+    <widget class="QLineEdit" name="lineEditImieWyszukaj">
+     <property name="geometry">
+      <rect>
+       <x>41</x>
+       <y>400</y>
+       <width>70</width>
+       <height>22</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEditNazwiskoWyszukaj">
+     <property name="geometry">
+      <rect>
+       <x>223</x>
+       <y>400</y>
+       <width>70</width>
+       <height>22</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEditMiastoWyszukaj">
+     <property name="geometry">
+      <rect>
+       <x>394</x>
+       <y>400</y>
+       <width>70</width>
+       <height>22</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEditUlicaWyszukaj">
+     <property name="geometry">
+      <rect>
+       <x>553</x>
+       <y>400</y>
+       <width>70</width>
+       <height>22</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_17">
+     <property name="geometry">
+      <rect>
+       <x>15</x>
+       <y>400</y>
+       <width>21</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Imię:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_18">
+     <property name="geometry">
+      <rect>
+       <x>118</x>
+       <y>400</y>
+       <width>101</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>LUB/ORAZ Nazwisko:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_19">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>400</y>
+       <width>91</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>LUB/ORAZ Miasto:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_20">
+     <property name="geometry">
+      <rect>
+       <x>470</x>
+       <y>400</y>
+       <width>81</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>LUB/ORAZ Ulica:</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButtonWyszukajKlienta">
+     <property name="geometry">
+      <rect>
+       <x>632</x>
+       <y>399</y>
+       <width>80</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Wyszukaj</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_21">
+     <property name="geometry">
+      <rect>
+       <x>15</x>
+       <y>374</y>
+       <width>191</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Wyszukaj wg całości lub fragmentu:</string>
+     </property>
+    </widget>
    </widget>
-   <widget class="QWidget" name="tabRezerwacja">
+   <widget class="QWidget" name="tabZwrotOdwolanieRezerwacji">
     <attribute name="title">
-     <string>Rezerwacja</string>
+     <string>Zwrot / Odwołanie rezerwacji</string>
     </attribute>
+   </widget>
+   <widget class="QWidget" name="tabDodajKlienta">
+    <attribute name="title">
+     <string>Dodaj Klienta</string>
+    </attribute>
+    <widget class="QPushButton" name="pushButtonDodajKlienta">
+     <property name="geometry">
+      <rect>
+       <x>232</x>
+       <y>250</y>
+       <width>80</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Dodaj</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="komunikatyDodajKlienta">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>300</y>
+       <width>311</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_29">
+     <property name="geometry">
+      <rect>
+       <x>330</x>
+       <y>99</y>
+       <width>131</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>* pole NIE jest wymagane</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_30">
+     <property name="geometry">
+      <rect>
+       <x>330</x>
+       <y>210</y>
+       <width>131</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>* pole NIE jest wymagane</string>
+     </property>
+    </widget>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>38</y>
+       <width>251</width>
+       <height>192</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_10">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_22">
+        <property name="text">
+         <string>Imię:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="lineEditImieKlienta"/>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_23">
+        <property name="text">
+         <string>Nazwisko:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="lineEditNazwiskoKlienta"/>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_24">
+        <property name="text">
+         <string>Kod pocztowy:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="lineEditKodPocztowy"/>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_25">
+        <property name="text">
+         <string>Miasto:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="lineEditMiasto"/>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_26">
+        <property name="text">
+         <string>Ulica:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QLineEdit" name="lineEditUlica"/>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="label_27">
+        <property name="text">
+         <string>Nr domu:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QLineEdit" name="lineEditNrDomu"/>
+      </item>
+      <item row="6" column="0">
+       <widget class="QLabel" name="label_28">
+        <property name="text">
+         <string>Nr lokalu:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="QLineEdit" name="lineEditNrLokalu"/>
+      </item>
+     </layout>
+    </widget>
    </widget>
    <widget class="QWidget" name="tabDodajFilm">
     <attribute name="title">
@@ -516,6 +833,29 @@
           </property>
          </widget>
         </item>
+        <item row="2" column="3">
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_10">
+          <property name="text">
+           <string>Gatunek2:</string>
+          </property>
+          <property name="buddy">
+           <cstring>comboBoxGatunek2</cstring>
+          </property>
+         </widget>
+        </item>
         <item row="2" column="1">
          <widget class="QComboBox" name="comboBoxGatunek3">
           <property name="minimumSize">
@@ -537,28 +877,19 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="label_10">
+        <item row="2" column="2">
+         <widget class="QLabel" name="label_31">
           <property name="text">
-           <string>Gatunek2:</string>
-          </property>
-          <property name="buddy">
-           <cstring>comboBoxGatunek2</cstring>
+           <string>* pole NIE jest wymagane</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="2">
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
+        <item row="1" column="2">
+         <widget class="QLabel" name="label_32">
+          <property name="text">
+           <string>* pole NIE jest wymagane</string>
           </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
+         </widget>
         </item>
        </layout>
       </item>
@@ -610,10 +941,10 @@
     <widget class="QPushButton" name="pushButtonDodajFilm">
      <property name="geometry">
       <rect>
-       <x>679</x>
+       <x>980</x>
        <y>420</y>
        <width>91</width>
-       <height>21</height>
+       <height>25</height>
       </rect>
      </property>
      <property name="sizePolicy">
@@ -638,7 +969,7 @@
       <rect>
        <x>20</x>
        <y>420</y>
-       <width>551</width>
+       <width>601</width>
        <height>21</height>
       </rect>
      </property>
@@ -672,8 +1003,8 @@
      <property name="geometry">
       <rect>
        <x>60</x>
-       <y>20</y>
-       <width>221</width>
+       <y>37</y>
+       <width>251</width>
        <height>111</height>
       </rect>
      </property>
@@ -725,12 +1056,12 @@
          <string>Imię:</string>
         </property>
         <property name="buddy">
-         <cstring>lineEditImie</cstring>
+         <cstring>lineEditImieUzytkownika</cstring>
         </property>
        </widget>
       </item>
       <item row="2" column="1">
-       <widget class="QLineEdit" name="lineEditImie">
+       <widget class="QLineEdit" name="lineEditImieUzytkownika">
         <property name="font">
          <font>
           <pointsize>9</pointsize>
@@ -744,12 +1075,12 @@
          <string>Nazwisko:</string>
         </property>
         <property name="buddy">
-         <cstring>lineEditNazwisko</cstring>
+         <cstring>lineEditNazwiskoUzytkownika</cstring>
         </property>
        </widget>
       </item>
       <item row="3" column="1">
-       <widget class="QLineEdit" name="lineEditNazwisko">
+       <widget class="QLineEdit" name="lineEditNazwiskoUzytkownika">
         <property name="font">
          <font>
           <pointsize>9</pointsize>
@@ -762,10 +1093,10 @@
     <widget class="QPushButton" name="pushButtonDodajUzytkownika">
      <property name="geometry">
       <rect>
-       <x>200</x>
-       <y>140</y>
+       <x>230</x>
+       <y>160</y>
        <width>81</width>
-       <height>21</height>
+       <height>25</height>
       </rect>
      </property>
      <property name="sizePolicy">
@@ -814,8 +1145,8 @@
   <tabstop>comboBoxGatunek3</tabstop>
   <tabstop>lineEditLogin</tabstop>
   <tabstop>lineEditHaslo</tabstop>
-  <tabstop>lineEditImie</tabstop>
-  <tabstop>lineEditNazwisko</tabstop>
+  <tabstop>lineEditImieUzytkownika</tabstop>
+  <tabstop>lineEditNazwiskoUzytkownika</tabstop>
   <tabstop>pushButtonDodajUzytkownika</tabstop>
   <tabstop>tabWidget</tabstop>
  </tabstops>

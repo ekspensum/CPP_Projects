@@ -32,12 +32,18 @@ private slots:
 
     void on_pushButtonWypozyczenie_clicked();
 
+    void on_pushButtonDodajKlienta_clicked();
+
+    void on_pushButtonWyszukajKlienta_clicked();
+
 private:
     Ui::Wypozyczalnia *ui;
-    QCheckBox *boxWypozyczenie;
-    QCheckBox *boxRezerwacja;
+//    QCheckBox *boxWypozyczenie = new QCheckBox();
+//    QCheckBox *boxRezerwacja = new QCheckBox();
     QList<QCheckBox *> listaBoxWypozyczenie;
     QList<QCheckBox *> listaBoxRezerwacja;
+    QCheckBox **tablicaBoxWypozyczenie;
+    QCheckBox **tablicaBoxRezerwacja;
 };
 
 #endif // WYPOZYCZALNIA_H

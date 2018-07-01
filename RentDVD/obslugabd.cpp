@@ -3,8 +3,10 @@
 //QString idZalogowanyUzytkownik; //zmienna globalna
 
 int ObslugaBD::idZalogowanyUzytkownik; //zmienna statyczna
-int ObslugaBD::ileWierszy;
-QVector<int> ObslugaBD::wyszukajIdFilmu;
+int ObslugaBD::ileWierszyFilm;
+int ObslugaBD::ileWierszyKlient;
+QVector<int> ObslugaBD::idFilmu;
+QVector<int> ObslugaBD::idKlienta;
 
 ObslugaBD::ObslugaBD()
 {
@@ -71,6 +73,28 @@ bool ObslugaBD::dodajUzytkownika(QString &login, QString &haslo, QString &imie, 
     return dodano;
 }
 
+bool ObslugaBD::dodajKlienta(QString &imie, QString &nazwisko, QString &kodPocztowy, QString &miasto, QString &ulica, QString &nrDomu, QString &nrLokalu)
+{
+    bool dodano = false;
+    QSqlQuery query;
+    query.prepare("insert into klienci (imie, nazwisko, kod, miasto, ulica, nrDomu, nrLokalu, dataRejestracji, idUzytkownika) values (:imie, :nazwisko, :kodPocztowy, :miasto, :ulica, :nrDomu, :nrLokalu, :dataRejestracji, :idUzytkownika)");
+    query.bindValue(":imie", imie);
+    query.bindValue(":nazwisko", nazwisko);
+    query.bindValue(":kodPocztowy", kodPocztowy);
+    query.bindValue(":miasto", miasto);
+    query.bindValue(":ulica", ulica);
+    query.bindValue(":nrDomu", nrDomu);
+    query.bindValue(":nrLokalu", nrLokalu);
+    query.bindValue(":dataRejestracji", QDateTime::currentDateTime());
+    query.bindValue(":idUzytkownika", ObslugaBD::idZalogowanyUzytkownik);
+    if (query.exec())
+        dodano = true;
+    else
+        qDebug() << "Nie udało się dodać użytkownika";
+
+    return dodano;
+}
+
 bool ObslugaBD::dodajFilm(QString &tytul, int &rokProdukcji, QString &opis, int &iloscKopii, int &gatunek1, int &gatunek2, int &gatunek3)
 {
     bool dodano = false;
@@ -106,12 +130,12 @@ QStringList ObslugaBD::odczytGatunki()
 
 void ObslugaBD::wyszukajFilmTytulOpis(QString &tytul, QString &opis)
 {
-    ileWierszy = 0;
-    wyszukajTytul.clear();
-    wyszukajRok.clear();
-    wyszukajOpis.clear();
-    wyszukajGatunek.clear();
-    wyszukajIdFilmu.clear();
+    ileWierszyFilm = 0;
+    listaTytul.clear();
+    listaRok.clear();
+    listaOpis.clear();
+    listaGatunek.clear();
+    idFilmu.clear();
     QSqlQuery query;
     query.prepare("SELECT Tytul, RokProdukcji, Opis, Nazwa, idFilmu FROM filmy LEFT JOIN gatunki ON filmy.Gatunek1 = gatunki.idGatunku WHERE Tytul like (:tytul) AND Opis LIKE (:opis)");
     query.bindValue(":tytul", "%" + tytul + "%");
@@ -120,12 +144,12 @@ void ObslugaBD::wyszukajFilmTytulOpis(QString &tytul, QString &opis)
     {
         while (query.next())
         {
-            wyszukajTytul.append(query.value(0).toString());
-            wyszukajRok.append(query.value(1).toInt());
-            wyszukajOpis.append(query.value(2).toString());
-            wyszukajGatunek.append(query.value(3).toString());
-            wyszukajIdFilmu.append(query.value(4).toInt());
-            ileWierszy++;
+            listaTytul.append(query.value(0).toString());
+            listaRok.append(query.value(1).toInt());
+            listaOpis.append(query.value(2).toString());
+            listaGatunek.append(query.value(3).toString());
+            idFilmu.append(query.value(4).toInt());
+            ileWierszyFilm++;
         }
     }
     else
@@ -134,12 +158,12 @@ void ObslugaBD::wyszukajFilmTytulOpis(QString &tytul, QString &opis)
 
 void ObslugaBD::wyszukajFilmRokGatunek(int &rokProdukcji, int &gatunek)
 {
-    ileWierszy = 0;
-    wyszukajTytul.clear();
-    wyszukajRok.clear();
-    wyszukajOpis.clear();
-    wyszukajGatunek.clear();
-    wyszukajIdFilmu.clear();
+    ileWierszyFilm = 0;
+    listaTytul.clear();
+    listaRok.clear();
+    listaOpis.clear();
+    listaGatunek.clear();
+    idFilmu.clear();
     QSqlQuery query;
     query.prepare("SELECT Tytul, RokProdukcji, Opis, Gatunek1, Nazwa, idFilmu FROM filmy LEFT JOIN gatunki ON filmy.Gatunek1 = gatunki.idGatunku WHERE RokProdukcji = (:rokProdukcji) OR Gatunek1 = (:gatunek)");
     query.bindValue(":rokProdukcji", rokProdukcji);
@@ -148,14 +172,45 @@ void ObslugaBD::wyszukajFilmRokGatunek(int &rokProdukcji, int &gatunek)
     {
         while (query.next())
         {
-            wyszukajTytul.append(query.value(0).toString());
-            wyszukajRok.append(query.value(1).toInt());
-            wyszukajOpis.append(query.value(2).toString());
-            wyszukajGatunek.append(query.value(4).toString());
-            wyszukajIdFilmu.append(query.value(5).toInt());
-            ileWierszy++;
+            listaTytul.append(query.value(0).toString());
+            listaRok.append(query.value(1).toInt());
+            listaOpis.append(query.value(2).toString());
+            listaGatunek.append(query.value(4).toString());
+            idFilmu.append(query.value(5).toInt());
+            ileWierszyFilm++;
         }
     }
     else
         qDebug() << "Nie udało się wyszukać filmu";
+}
+
+void ObslugaBD::wyszukajKlienta(QString &imie, QString &nazwisko, QString &miasto, QString &ulica)
+{
+    ileWierszyKlient = 0;
+    listaImie.clear();
+    listaNazwisko.clear();
+    listaMiasto.clear();
+    listaUlica.clear();
+    idKlienta.clear();
+    QSqlQuery query;
+    query.prepare("SELECT idKlienta, Imie, Nazwisko, Miasto, Ulica, nrDomu FROM klienci WHERE Imie LIKE (:imie) AND Nazwisko LIKE (:nazwisko) AND Miasto LIKE (:miasto) AND Ulica LIKE (:ulica)");
+    query.bindValue(":imie", "%" + imie + "%");
+    query.bindValue(":nazwisko", "%" + nazwisko + "%");
+    query.bindValue(":miasto", "%" + miasto + "%");
+    query.bindValue(":ulica", "%" + ulica + "%");
+    if (query.exec())
+    {
+        while (query.next())
+        {
+            idKlienta.append(query.value(0).toInt());
+            listaImie.append(query.value(1).toString());
+            listaNazwisko.append(query.value(2).toString());
+            listaMiasto.append(query.value(3).toString());
+            listaUlica.append(query.value(4).toString());
+            listaNrDomu.append(query.value(5).toString());
+            ileWierszyKlient++;
+        }
+    }
+    else
+        qDebug() << "Nie udało się wyszukać klienta";
 }
