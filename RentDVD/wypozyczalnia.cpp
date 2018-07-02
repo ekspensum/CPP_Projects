@@ -19,9 +19,10 @@ Wypozyczalnia::Wypozyczalnia(QWidget *parent) :
     ui->tableWidgetWyszukajFilm->setColumnWidth(0,200);
     ui->tableWidgetWyszukajFilm->setColumnWidth(1,70);
     ui->tableWidgetWyszukajFilm->setColumnWidth(2,100);
-    ui->tableWidgetWyszukajFilm->setColumnWidth(3,500);
-    ui->tableWidgetWyszukajFilm->setColumnWidth(4,90);
-    ui->tableWidgetWyszukajFilm->setColumnWidth(5,80);
+    ui->tableWidgetWyszukajFilm->setColumnWidth(3,450);
+    ui->tableWidgetWyszukajFilm->setColumnWidth(4,50);
+    ui->tableWidgetWyszukajFilm->setColumnWidth(5,90);
+    ui->tableWidgetWyszukajFilm->setColumnWidth(6,80);
 
     ui->tableWidgetWyszukajKlienta->setColumnWidth(0,100);
     ui->tableWidgetWyszukajKlienta->setColumnWidth(1,120);
@@ -32,15 +33,21 @@ Wypozyczalnia::Wypozyczalnia(QWidget *parent) :
     ui->tableWidgetWyszukajKlienta->setColumnWidth(6,80);
     tablicaBoxWypozyczenie = new QCheckBox*[ObslugaBD::ileWierszyKlient];
     tablicaBoxRezerwacja = new QCheckBox*[ObslugaBD::ileWierszyKlient];
+    ui->dateTimeEditZwrot->setDateTime(planowaDataZwrotu.currentDateTime().addDays(2));
+    ui->dateTimeEditTerminRezerwacji->setDateTime(czasRezerwacji.currentDateTime().addDays(1));
+    p.setColor(QPalette::ButtonText, Qt::blue);
+    ui->pushButtonWypozyczenie->setPalette(p);
+    jedenFilm.setText("Proszę zazanaczyć jeden film do rezerwacji.");
+    jedenKlient.setText("Proszę zazanaczyć jednego klienta do rezerwacji.");
+
 
 }
 
 Wypozyczalnia::~Wypozyczalnia()
 {
-    delete ui;
     delete [] tablicaBoxWypozyczenie;
     delete [] tablicaBoxRezerwacja;
-    qDebug() << "Działa destruktor";
+    delete ui;
 }
 
 void Wypozyczalnia::on_pushButtonDodajUzytkownika_clicked()
@@ -103,23 +110,26 @@ void Wypozyczalnia::on_pushButtonDodajFilm_clicked()
 {
     QString tytul, opis;
     int rok, ilosckopii, gatunek1, gatunek2, gatunek3;
+    double cena;
     tytul = ui->lineEditTytul->text();
     rok = ui->lineEditRok->text().toInt();
     opis = ui->plainTextEditOpis->toPlainText();
+    cena = ui->lineEditCena->text().toDouble();
     ilosckopii = ui->spinBoxIleKopii->text().toInt();
     gatunek1 = ui->comboBoxGatunek1->currentIndex();
     gatunek2 = ui->comboBoxGatunek2->currentIndex();
     gatunek3 = ui->comboBoxGatunek3->currentIndex();
-    if (tytul == "" || opis == "" || rok == 0 || ilosckopii == 0 || gatunek1 == 0)
+    if (tytul == "" || opis == "" || cena == 0.00 || rok == 0 || ilosckopii == 0 || gatunek1 == 0)
         ui->komunikatyDodajFilm->setText("Proszę uzupełnić wymagane pola forlmularza.");
     else {
         ObslugaBD bd;
-        if (bd.dodajFilm(tytul, rok, opis, ilosckopii, gatunek1, gatunek2, gatunek3))
+        if (bd.dodajFilm(tytul, rok, opis, cena, ilosckopii, gatunek1, gatunek2, gatunek3))
         {
             ui->komunikatyDodajFilm->setText("Dodano nowy film do bazy danych.");
             ui->lineEditTytul->clear();
             ui->lineEditRok->clear();
             ui->plainTextEditOpis->clear();
+            ui->lineEditCena->clear();
             ui->spinBoxIleKopii->setValue(1);
             ui->comboBoxGatunek1->setCurrentIndex(0);
             ui->comboBoxGatunek2->setCurrentIndex(0);
@@ -147,10 +157,11 @@ void Wypozyczalnia::on_pushButtonWyszukajRokGatunek_clicked()
         ui->tableWidgetWyszukajFilm->setItem(i,1, new QTableWidgetItem(QString("%1").arg(bd.listaRok.at(i))));
         ui->tableWidgetWyszukajFilm->setItem(i,2, new QTableWidgetItem(bd.listaGatunek.at(i)));
         ui->tableWidgetWyszukajFilm->setItem(i,3, new QTableWidgetItem(bd.listaOpis.at(i)));
+        ui->tableWidgetWyszukajFilm->setItem(i,4, new QTableWidgetItem(QString("%1").arg(bd.listaCena.at(i))));
         listaBoxWypozyczenie.append(new QCheckBox());
-        ui->tableWidgetWyszukajFilm->setCellWidget(i,4, listaBoxWypozyczenie.value(i));
+        ui->tableWidgetWyszukajFilm->setCellWidget(i,5, listaBoxWypozyczenie.value(i));
         listaBoxRezerwacja.append(new QCheckBox());
-        ui->tableWidgetWyszukajFilm->setCellWidget(i,5, listaBoxRezerwacja.value(i));
+        ui->tableWidgetWyszukajFilm->setCellWidget(i,6, listaBoxRezerwacja.value(i));
     }
 }
 
@@ -170,10 +181,11 @@ void Wypozyczalnia::on_pushButtonWyszukajTytulOpis_clicked()
         ui->tableWidgetWyszukajFilm->setItem(i,1, new QTableWidgetItem(QString("%1").arg(bd.listaRok.at(i))));
         ui->tableWidgetWyszukajFilm->setItem(i,2, new QTableWidgetItem(bd.listaGatunek.at(i)));
         ui->tableWidgetWyszukajFilm->setItem(i,3, new QTableWidgetItem(bd.listaOpis.at(i)));
+        ui->tableWidgetWyszukajFilm->setItem(i,4, new QTableWidgetItem(QString("%1").arg(bd.listaCena.at(i))));
         listaBoxWypozyczenie.append(new QCheckBox());
-        ui->tableWidgetWyszukajFilm->setCellWidget(i,4, listaBoxWypozyczenie.value(i));
+        ui->tableWidgetWyszukajFilm->setCellWidget(i,5, listaBoxWypozyczenie.value(i));
         listaBoxRezerwacja.append(new QCheckBox());
-        ui->tableWidgetWyszukajFilm->setCellWidget(i,5, listaBoxRezerwacja.value(i));
+        ui->tableWidgetWyszukajFilm->setCellWidget(i,6, listaBoxRezerwacja.value(i));
     }
 }
 
@@ -224,4 +236,50 @@ void Wypozyczalnia::on_pushButtonWypozyczenie_clicked()
     }
 
 
+}
+
+void Wypozyczalnia::on_pushButtonRezerwacja_clicked()
+{
+    // sprawdzenie czy zaznaczono film oraz czy zaznaczonych filmów jest więcej niż jeden
+    int ileFilmow = 0;
+    for(int i=0; i<ObslugaBD::ileWierszyFilm; i++)
+    {
+        if (listaBoxRezerwacja.value(i)->isChecked())
+            ileFilmow++;
+    }
+    if (ileFilmow != 1)
+        jedenFilm.exec();
+
+    // sprawdzenie czy zaznaczono klienta oraz czy zaznaczonych klientow jest więcej niż jeden
+    int ileKlientow = 0;
+    for(int i=0; i<ObslugaBD::ileWierszyKlient; i++)
+    {
+        if (tablicaBoxRezerwacja[i]->isChecked())
+            ileKlientow++;
+    }
+    if (ileKlientow != 1)
+        jedenKlient.exec();
+
+    if (ileFilmow == 1 && ileKlientow == 1)
+    {
+        int wybraneIdFilmu = 0;
+        int wybraneIdKlienta = 0;
+        ObslugaBD bd;
+        QDateTime terminRezerwacji;
+        for(int i=0; i<ObslugaBD::ileWierszyFilm; i++)
+        {
+            if (listaBoxRezerwacja.value(i)->isChecked())
+                wybraneIdFilmu = ObslugaBD::idFilmu.at(i);
+        }
+        for(int i=0; i<ObslugaBD::ileWierszyKlient; i++)
+        {
+            if (tablicaBoxRezerwacja[i]->isChecked())
+                wybraneIdKlienta = ObslugaBD::idKlienta.at(i);
+        }
+        terminRezerwacji = ui->dateTimeEditTerminRezerwacji->dateTime();
+        if (bd.wykonajRezerwacje(wybraneIdKlienta, wybraneIdFilmu, terminRezerwacji))
+            ui->komunikatyWypozycz->setText("Dokonano rezerwacji wybranego filmu.");
+        else
+            ui->komunikatyWypozycz->setText("Błąd! Nie udało się dokonać rezerwacji wybranego filmu.");
+    }
 }

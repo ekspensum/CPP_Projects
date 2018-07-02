@@ -95,14 +95,15 @@ bool ObslugaBD::dodajKlienta(QString &imie, QString &nazwisko, QString &kodPoczt
     return dodano;
 }
 
-bool ObslugaBD::dodajFilm(QString &tytul, int &rokProdukcji, QString &opis, int &iloscKopii, int &gatunek1, int &gatunek2, int &gatunek3)
+bool ObslugaBD::dodajFilm(QString &tytul, int &rokProdukcji, QString &opis, double &cena, int &iloscKopii, int &gatunek1, int &gatunek2, int &gatunek3)
 {
     bool dodano = false;
     QSqlQuery query;
-    query.prepare("insert into filmy(tytul, rokProdukcji, opis, iloscKopii, gatunek1, gatunek2, gatunek3, dataDodania, idUzytkownika) values(:tytul, :rokProdukcji, :opis, :iloscKopii, :gatunek1, :gatunek2, :gatunek3, :dataDodania, :idUzytkownika)");
+    query.prepare("insert into filmy(tytul, rokProdukcji, opis, cena, iloscKopii, gatunek1, gatunek2, gatunek3, dataDodania, idUzytkownika) values(:tytul, :rokProdukcji, :opis, :cena, :iloscKopii, :gatunek1, :gatunek2, :gatunek3, :dataDodania, :idUzytkownika)");
     query.bindValue(":tytul", tytul);
     query.bindValue(":rokProdukcji", rokProdukcji);
     query.bindValue(":opis", opis);
+    query.bindValue(":cena", cena);
     query.bindValue(":iloscKopii", iloscKopii);
     query.bindValue(":gatunek1", gatunek1);
     query.bindValue(":gatunek2", gatunek2);
@@ -136,8 +137,9 @@ void ObslugaBD::wyszukajFilmTytulOpis(QString &tytul, QString &opis)
     listaOpis.clear();
     listaGatunek.clear();
     idFilmu.clear();
+    listaCena.clear();
     QSqlQuery query;
-    query.prepare("SELECT Tytul, RokProdukcji, Opis, Nazwa, idFilmu FROM filmy LEFT JOIN gatunki ON filmy.Gatunek1 = gatunki.idGatunku WHERE Tytul like (:tytul) AND Opis LIKE (:opis)");
+    query.prepare("SELECT Tytul, RokProdukcji, Opis, Nazwa, idFilmu, cena FROM filmy LEFT JOIN gatunki ON filmy.Gatunek1 = gatunki.idGatunku WHERE Tytul like (:tytul) AND Opis LIKE (:opis)");
     query.bindValue(":tytul", "%" + tytul + "%");
     query.bindValue(":opis", "%" + opis + "%");
     if (query.exec())
@@ -149,6 +151,7 @@ void ObslugaBD::wyszukajFilmTytulOpis(QString &tytul, QString &opis)
             listaOpis.append(query.value(2).toString());
             listaGatunek.append(query.value(3).toString());
             idFilmu.append(query.value(4).toInt());
+            listaCena.append(query.value(5).toDouble());
             ileWierszyFilm++;
         }
     }
@@ -164,8 +167,9 @@ void ObslugaBD::wyszukajFilmRokGatunek(int &rokProdukcji, int &gatunek)
     listaOpis.clear();
     listaGatunek.clear();
     idFilmu.clear();
+    listaCena.clear();
     QSqlQuery query;
-    query.prepare("SELECT Tytul, RokProdukcji, Opis, Gatunek1, Nazwa, idFilmu FROM filmy LEFT JOIN gatunki ON filmy.Gatunek1 = gatunki.idGatunku WHERE RokProdukcji = (:rokProdukcji) OR Gatunek1 = (:gatunek)");
+    query.prepare("SELECT Tytul, RokProdukcji, Opis, Gatunek1, Nazwa, idFilmu, cena FROM filmy LEFT JOIN gatunki ON filmy.Gatunek1 = gatunki.idGatunku WHERE RokProdukcji = (:rokProdukcji) OR Gatunek1 = (:gatunek)");
     query.bindValue(":rokProdukcji", rokProdukcji);
     query.bindValue(":gatunek", gatunek);
     if (query.exec())
@@ -177,6 +181,7 @@ void ObslugaBD::wyszukajFilmRokGatunek(int &rokProdukcji, int &gatunek)
             listaOpis.append(query.value(2).toString());
             listaGatunek.append(query.value(4).toString());
             idFilmu.append(query.value(5).toInt());
+            listaCena.append(query.value(6).toDouble());
             ileWierszyFilm++;
         }
     }
@@ -213,4 +218,19 @@ void ObslugaBD::wyszukajKlienta(QString &imie, QString &nazwisko, QString &miast
     }
     else
         qDebug() << "Nie udało się wyszukać klienta";
+}
+
+bool ObslugaBD::wykonajRezerwacje(int &idKlienta, int &idFilmu, QDateTime &terminRezerwacji)
+{
+    bool wykonano = false;
+    QSqlQuery query;
+    query.prepare("INSERT INTO rezerwacje (DataRezerwacji, TerminRezerwacji, idKlienta, idFilmu, idUzytkownika) VALUES (:DataRezerwacji, :TerminRezerwacji, :idKlienta, :idFilmu, :idUzytkownika)");
+    query.bindValue(":DataRezerwacji", QDateTime::currentDateTime());
+    query.bindValue(":TerminRezerwacji", terminRezerwacji);
+    query.bindValue(":idKlienta", idKlienta);
+    query.bindValue(":idFilmu", idFilmu);
+    query.bindValue(":idUzytkownika", ObslugaBD::idZalogowanyUzytkownik);
+    if (query.exec())
+        wykonano = true;
+    return wykonano;
 }

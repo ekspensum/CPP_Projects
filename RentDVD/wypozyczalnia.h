@@ -36,6 +36,8 @@ private slots:
 
     void on_pushButtonWyszukajKlienta_clicked();
 
+    void on_pushButtonRezerwacja_clicked();
+
 private:
     Ui::Wypozyczalnia *ui;
 //    QCheckBox *boxWypozyczenie = new QCheckBox();
@@ -44,6 +46,11 @@ private:
     QList<QCheckBox *> listaBoxRezerwacja;
     QCheckBox **tablicaBoxWypozyczenie;
     QCheckBox **tablicaBoxRezerwacja;
+    QDateTime planowaDataZwrotu;
+    QDateTime czasRezerwacji;
+    QPalette p;
+    QMessageBox jedenFilm;
+    QMessageBox jedenKlient;
 };
 
 #endif // WYPOZYCZALNIA_H

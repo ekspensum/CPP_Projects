@@ -66,6 +66,11 @@
      </column>
      <column>
       <property name="text">
+       <string>Cena</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
        <string>Wypożyczenie</string>
       </property>
      </column>
@@ -79,9 +84,9 @@
      <property name="geometry">
       <rect>
        <x>190</x>
-       <y>51</y>
+       <y>52</y>
        <width>141</width>
-       <height>25</height>
+       <height>22</height>
       </rect>
      </property>
     </widget>
@@ -172,14 +177,52 @@
     <widget class="QPushButton" name="pushButtonWypozyczenie">
      <property name="geometry">
       <rect>
-       <x>979</x>
-       <y>430</y>
-       <width>101</width>
-       <height>25</height>
+       <x>950</x>
+       <y>380</y>
+       <width>130</width>
+       <height>40</height>
       </rect>
+     </property>
+     <property name="palette">
+      <palette>
+       <active>
+        <colorrole role="Link">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>138</red>
+           <green>124</green>
+           <blue>244</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </active>
+       <inactive>
+        <colorrole role="Link">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>138</red>
+           <green>124</green>
+           <blue>244</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </inactive>
+       <disabled>
+        <colorrole role="Link">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>138</red>
+           <green>124</green>
+           <blue>244</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </disabled>
+      </palette>
      </property>
      <property name="font">
       <font>
+       <pointsize>11</pointsize>
        <weight>75</weight>
        <bold>true</bold>
       </font>
@@ -191,14 +234,15 @@
     <widget class="QPushButton" name="pushButtonRezerwacja">
      <property name="geometry">
       <rect>
-       <x>820</x>
-       <y>430</y>
-       <width>91</width>
-       <height>25</height>
+       <x>951</x>
+       <y>540</y>
+       <width>130</width>
+       <height>40</height>
       </rect>
      </property>
      <property name="font">
       <font>
+       <pointsize>11</pointsize>
        <weight>75</weight>
        <bold>true</bold>
       </font>
@@ -475,11 +519,81 @@
       <string>Wyszukaj wg całości lub fragmentu:</string>
      </property>
     </widget>
+    <widget class="QDateTimeEdit" name="dateTimeEditZwrot">
+     <property name="geometry">
+      <rect>
+       <x>748</x>
+       <y>390</y>
+       <width>171</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_33">
+     <property name="geometry">
+      <rect>
+       <x>748</x>
+       <y>370</y>
+       <width>171</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Planowana data i godzina zwrotu:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_34">
+     <property name="geometry">
+      <rect>
+       <x>751</x>
+       <y>530</y>
+       <width>171</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Czas zakończenia rezerwacji:</string>
+     </property>
+    </widget>
+    <widget class="QDateTimeEdit" name="dateTimeEditTerminRezerwacji">
+     <property name="geometry">
+      <rect>
+       <x>750</x>
+       <y>550</y>
+       <width>171</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="tabZwrotOdwolanieRezerwacji">
     <attribute name="title">
      <string>Zwrot / Odwołanie rezerwacji</string>
     </attribute>
+    <widget class="QWidget" name="widget" native="true">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>370</y>
+       <width>120</width>
+       <height>80</height>
+      </rect>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="tabDodajKlienta">
     <attribute name="title">
@@ -546,7 +660,7 @@
       <string>* pole NIE jest wymagane</string>
      </property>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget1">
      <property name="geometry">
       <rect>
        <x>60</x>
@@ -633,311 +747,6 @@
     <attribute name="title">
      <string>Dodaj film</string>
     </attribute>
-    <widget class="QWidget" name="layoutWidget1">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>30</y>
-       <width>1051</width>
-       <height>371</height>
-      </rect>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_6">
-      <item row="0" column="0">
-       <layout class="QGridLayout" name="gridLayout">
-        <item row="0" column="0">
-         <widget class="QLabel" name="label_5">
-          <property name="minimumSize">
-           <size>
-            <width>68</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>Tytuł:</string>
-          </property>
-          <property name="buddy">
-           <cstring>lineEditTytul</cstring>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QLineEdit" name="lineEditTytul">
-          <property name="font">
-           <font>
-            <pointsize>10</pointsize>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item row="1" column="0">
-       <layout class="QGridLayout" name="gridLayout_2">
-        <item row="0" column="1">
-         <widget class="QLineEdit" name="lineEditRok">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>10</pointsize>
-           </font>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="2">
-         <spacer name="horizontalSpacer_4">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::MinimumExpanding</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="0" column="0">
-         <widget class="QLabel" name="label_6">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>68</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>Rok produkcji:</string>
-          </property>
-          <property name="buddy">
-           <cstring>lineEditRok</cstring>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item row="2" column="0">
-       <layout class="QGridLayout" name="gridLayout_5">
-        <item row="0" column="0">
-         <widget class="QLabel" name="label_9">
-          <property name="minimumSize">
-           <size>
-            <width>68</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>Opis:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QPlainTextEdit" name="plainTextEditOpis">
-          <property name="font">
-           <font>
-            <pointsize>10</pointsize>
-           </font>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item row="4" column="0">
-       <layout class="QGridLayout" name="gridLayout_4">
-        <item row="0" column="1">
-         <widget class="QComboBox" name="comboBoxGatunek1">
-          <property name="minimumSize">
-           <size>
-            <width>120</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>72</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>9</pointsize>
-           </font>
-          </property>
-          <property name="currentIndex">
-           <number>-1</number>
-          </property>
-          <property name="minimumContentsLength">
-           <number>0</number>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QComboBox" name="comboBoxGatunek2">
-          <property name="minimumSize">
-           <size>
-            <width>120</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>72</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>9</pointsize>
-           </font>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0">
-         <widget class="QLabel" name="label_7">
-          <property name="minimumSize">
-           <size>
-            <width>68</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>Gatunek1:</string>
-          </property>
-          <property name="buddy">
-           <cstring>comboBoxGatunek1</cstring>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="0">
-         <widget class="QLabel" name="label_11">
-          <property name="text">
-           <string>Gatunek3:</string>
-          </property>
-          <property name="buddy">
-           <cstring>comboBoxGatunek3</cstring>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="3">
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="label_10">
-          <property name="text">
-           <string>Gatunek2:</string>
-          </property>
-          <property name="buddy">
-           <cstring>comboBoxGatunek2</cstring>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1">
-         <widget class="QComboBox" name="comboBoxGatunek3">
-          <property name="minimumSize">
-           <size>
-            <width>120</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>72</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <pointsize>9</pointsize>
-           </font>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="2">
-         <widget class="QLabel" name="label_31">
-          <property name="text">
-           <string>* pole NIE jest wymagane</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="2">
-         <widget class="QLabel" name="label_32">
-          <property name="text">
-           <string>* pole NIE jest wymagane</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item row="3" column="0">
-       <layout class="QGridLayout" name="gridLayout_3">
-        <item row="0" column="1">
-         <widget class="QSpinBox" name="spinBoxIleKopii">
-          <property name="value">
-           <number>1</number>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0">
-         <widget class="QLabel" name="label_8">
-          <property name="minimumSize">
-           <size>
-            <width>68</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>Ilość kopii:</string>
-          </property>
-          <property name="buddy">
-           <cstring>spinBoxIleKopii</cstring>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="2">
-         <spacer name="horizontalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::MinimumExpanding</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
-      </item>
-     </layout>
-    </widget>
     <widget class="QPushButton" name="pushButtonDodajFilm">
      <property name="geometry">
       <rect>
@@ -968,7 +777,7 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>420</y>
+       <y>451</y>
        <width>601</width>
        <height>21</height>
       </rect>
@@ -989,6 +798,363 @@
       <string/>
      </property>
     </widget>
+    <widget class="QWidget" name="layoutWidget5">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>110</y>
+       <width>607</width>
+       <height>26</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_5">
+        <property name="minimumSize">
+         <size>
+          <width>99</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Tytuł:</string>
+        </property>
+        <property name="buddy">
+         <cstring>lineEditTytul</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="lineEditTytul">
+        <property name="minimumSize">
+         <size>
+          <width>500</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="layoutWidget6">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>140</y>
+       <width>215</width>
+       <height>26</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_6">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>99</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Rok produkcji:</string>
+        </property>
+        <property name="buddy">
+         <cstring>lineEditRok</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="lineEditRok">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="layoutWidget7">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>320</y>
+       <width>196</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <item row="0" column="1">
+       <widget class="QSpinBox" name="spinBoxIleKopii">
+        <property name="value">
+         <number>1</number>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_8">
+        <property name="minimumSize">
+         <size>
+          <width>99</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Ilość kopii:</string>
+        </property>
+        <property name="buddy">
+         <cstring>spinBoxIleKopii</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::MinimumExpanding</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="layoutWidget8">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>351</y>
+       <width>373</width>
+       <height>80</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_4">
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_11">
+        <property name="minimumSize">
+         <size>
+          <width>99</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Gatunek3:</string>
+        </property>
+        <property name="buddy">
+         <cstring>comboBoxGatunek3</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QComboBox" name="comboBoxGatunek1">
+        <property name="minimumSize">
+         <size>
+          <width>120</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>9</pointsize>
+         </font>
+        </property>
+        <property name="currentIndex">
+         <number>-1</number>
+        </property>
+        <property name="minimumContentsLength">
+         <number>0</number>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_7">
+        <property name="minimumSize">
+         <size>
+          <width>99</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Gatunek1:</string>
+        </property>
+        <property name="buddy">
+         <cstring>comboBoxGatunek1</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QComboBox" name="comboBoxGatunek2">
+        <property name="minimumSize">
+         <size>
+          <width>120</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>9</pointsize>
+         </font>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_10">
+        <property name="minimumSize">
+         <size>
+          <width>99</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Gatunek2:</string>
+        </property>
+        <property name="buddy">
+         <cstring>comboBoxGatunek2</cstring>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QComboBox" name="comboBoxGatunek3">
+        <property name="minimumSize">
+         <size>
+          <width>120</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>9</pointsize>
+         </font>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <widget class="QLabel" name="label_31">
+        <property name="text">
+         <string>* pole NIE jest wymagane</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QLabel" name="label_32">
+        <property name="text">
+         <string>* pole NIE jest wymagane</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="3">
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="layoutWidget9">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>290</y>
+       <width>215</width>
+       <height>24</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_6">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_35">
+        <property name="text">
+         <string>Cena wypożyczenia:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="lineEditCena"/>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="layoutWidget10">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>171</y>
+       <width>1021</width>
+       <height>111</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_5">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_9">
+        <property name="minimumSize">
+         <size>
+          <width>99</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Opis:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QPlainTextEdit" name="plainTextEditOpis">
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </widget>
    <widget class="QWidget" name="tabUstawienia">
     <attribute name="title">
@@ -999,7 +1165,7 @@
     <attribute name="title">
      <string>Dodaj Użytkownika</string>
     </attribute>
-    <widget class="QWidget" name="layoutWidget">
+    <widget class="QWidget" name="layoutWidget11">
      <property name="geometry">
       <rect>
        <x>60</x>
@@ -1138,7 +1304,6 @@
  <tabstops>
   <tabstop>lineEditTytul</tabstop>
   <tabstop>lineEditRok</tabstop>
-  <tabstop>plainTextEditOpis</tabstop>
   <tabstop>spinBoxIleKopii</tabstop>
   <tabstop>comboBoxGatunek1</tabstop>
   <tabstop>comboBoxGatunek2</tabstop>

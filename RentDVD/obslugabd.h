@@ -19,17 +19,19 @@ public:
     ~ObslugaBD();
     bool dodajUzytkownika(QString &login, QString &haslo, QString &imie, QString &nazwisko);
     bool dodajKlienta(QString &imie, QString &nazwisko, QString &kodPocztowy, QString &miasto, QString &ulica, QString &nrDomu, QString &nrLokalu);
-    bool dodajFilm(QString &tytul, int &rokProdukcji, QString &opis, int &iloscKopii, int &gatunek1, int &gatunek2, int &gatunek3);
+    bool dodajFilm(QString &tytul, int &rokProdukcji, QString &opis, double &cena, int &iloscKopii, int &gatunek1, int &gatunek2, int &gatunek3);
     bool logowanie(QString &login, QString &haslo);
     void wyszukajFilmTytulOpis(QString &tytul, QString &opis);
     void wyszukajFilmRokGatunek(int &rokProdukcji, int &gatunek);
     void wyszukajKlienta(QString &imie, QString &nazwisko, QString &miasto, QString &ulica);
+    bool wykonajRezerwacje(int &idKlienta, int &idFilmu, QDateTime &terminRezerwacji);
     QStringList odczytGatunki();
-    static int idZalogowanyUzytkownik;
     QStringList listaTytul;
     QStringList listaOpis;
     QVector<int> listaRok;
+    QVector<double> listaCena;
     QStringList listaGatunek;
+    static int idZalogowanyUzytkownik;
     static int ileWierszyFilm;
     static int ileWierszyKlient;
     static QVector<int> idFilmu;
@@ -39,6 +41,7 @@ public:
     QStringList listaMiasto;
     QStringList listaUlica;
     QStringList listaNrDomu;
+
 
 signals:
 
