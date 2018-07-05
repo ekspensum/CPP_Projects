@@ -27,12 +27,14 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     obslugabd.cpp \
-    wypozyczalnia.cpp
+    wypozyczalnia.cpp \
+    filtrznakow.cpp
 
 HEADERS += \
         mainwindow.h \
     obslugabd.h \
-    wypozyczalnia.h
+    wypozyczalnia.h \
+    filtrznakow.h
 
 FORMS += \
         mainwindow.ui \

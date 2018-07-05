@@ -30,13 +30,15 @@ private slots:
 
     void on_pushButtonWyszukajTytulOpis_clicked();
 
-    void on_pushButtonWypozyczenie_clicked();
-
     void on_pushButtonDodajKlienta_clicked();
 
     void on_pushButtonWyszukajKlienta_clicked();
 
     void on_pushButtonRezerwacja_clicked();
+
+    void on_pushButtonWypozyczenie_clicked();
+
+    void on_pushButton_clicked();
 
 private:
     Ui::Wypozyczalnia *ui;
@@ -49,8 +51,10 @@ private:
     QDateTime planowaDataZwrotu;
     QDateTime czasRezerwacji;
     QPalette p;
-    QMessageBox jedenFilm;
-    QMessageBox jedenKlient;
+    QMessageBox jedenFilmWypozycz;
+    QMessageBox jedenFilmRezerwuj;
+    QMessageBox jedenKlientWypozycz;
+    QMessageBox jedenKlientRezerwuj;
 };
 
 #endif // WYPOZYCZALNIA_H

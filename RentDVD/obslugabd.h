@@ -19,17 +19,19 @@ public:
     ~ObslugaBD();
     bool dodajUzytkownika(QString &login, QString &haslo, QString &imie, QString &nazwisko);
     bool dodajKlienta(QString &imie, QString &nazwisko, QString &kodPocztowy, QString &miasto, QString &ulica, QString &nrDomu, QString &nrLokalu);
-    bool dodajFilm(QString &tytul, int &rokProdukcji, QString &opis, double &cena, int &iloscKopii, int &gatunek1, int &gatunek2, int &gatunek3);
+    bool dodajFilm(QString &tytul, int &rokProdukcji, QString &opis, double &cenaWypozyczenia, int &iloscKopii, int &gatunek1, int &gatunek2, int &gatunek3);
     bool logowanie(QString &login, QString &haslo);
     void wyszukajFilmTytulOpis(QString &tytul, QString &opis);
     void wyszukajFilmRokGatunek(int &rokProdukcji, int &gatunek);
     void wyszukajKlienta(QString &imie, QString &nazwisko, QString &miasto, QString &ulica);
+    bool czyMozliwaRezerwacjaWypozyczenie(int &idFilmu); // sprawdza czy zakupiona ilość kopii filmu > od sumy istniejących wypożyczeń i rezerwacji
     bool wykonajRezerwacje(int &idKlienta, int &idFilmu, QDateTime &terminRezerwacji);
+    bool wykonajWypozyczenie(int &idKlienta, int &idFilmu, QDateTime &planowaDataZwrotu);
     QStringList odczytGatunki();
     QStringList listaTytul;
     QStringList listaOpis;
     QVector<int> listaRok;
-    QVector<double> listaCena;
+    QVector<double> listaCenaWypozyczenia;
     QStringList listaGatunek;
     static int idZalogowanyUzytkownik;
     static int ileWierszyFilm;

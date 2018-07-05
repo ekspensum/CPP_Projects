@@ -48,35 +48,77 @@
       <property name="text">
        <string>Tytuł</string>
       </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
      </column>
      <column>
       <property name="text">
        <string>Rok prod.</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
       </property>
      </column>
      <column>
       <property name="text">
        <string>Gatunek gł.</string>
       </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
      </column>
      <column>
       <property name="text">
        <string>Opis</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
       </property>
      </column>
      <column>
       <property name="text">
        <string>Cena</string>
       </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
      </column>
      <column>
       <property name="text">
        <string>Wypożyczenie</string>
       </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
      </column>
      <column>
       <property name="text">
        <string>Rezerwacja</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
       </property>
      </column>
     </widget>
@@ -159,7 +201,7 @@
       <rect>
        <x>740</x>
        <y>20</y>
-       <width>281</width>
+       <width>341</width>
        <height>41</height>
       </rect>
      </property>
@@ -172,6 +214,15 @@
      </property>
      <property name="text">
       <string/>
+     </property>
+     <property name="textFormat">
+      <enum>Qt::AutoText</enum>
+     </property>
+     <property name="scaledContents">
+      <bool>false</bool>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButtonWypozyczenie">
@@ -363,35 +414,77 @@
       <property name="text">
        <string>Imię</string>
       </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
      </column>
      <column>
       <property name="text">
        <string>Nazwisko</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
       </property>
      </column>
      <column>
       <property name="text">
        <string>Miasto</string>
       </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
      </column>
      <column>
       <property name="text">
        <string>Ulica</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
       </property>
      </column>
      <column>
       <property name="text">
        <string>Nr domu</string>
       </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
      </column>
      <column>
       <property name="text">
        <string>Wypożyczenie</string>
       </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
      </column>
      <column>
       <property name="text">
        <string>Rezerwacja</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
       </property>
      </column>
     </widget>
@@ -519,7 +612,7 @@
       <string>Wyszukaj wg całości lub fragmentu:</string>
      </property>
     </widget>
-    <widget class="QDateTimeEdit" name="dateTimeEditZwrot">
+    <widget class="QDateTimeEdit" name="dateTimeEditTerminZwrotu">
      <property name="geometry">
       <rect>
        <x>748</x>
@@ -577,6 +670,19 @@
        <weight>75</weight>
        <bold>true</bold>
       </font>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton">
+     <property name="geometry">
+      <rect>
+       <x>930</x>
+       <y>460</y>
+       <width>80</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>PushButton</string>
      </property>
     </widget>
    </widget>
@@ -1117,7 +1223,7 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QLineEdit" name="lineEditCena"/>
+       <widget class="QLineEdit" name="lineEditCenaWypozyczenia"/>
       </item>
      </layout>
     </widget>
