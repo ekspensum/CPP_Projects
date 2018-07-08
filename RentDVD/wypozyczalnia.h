@@ -42,8 +42,13 @@ private slots:
 
     void on_lineEditNazwiskoWyszukajZwrot_textChanged(const QString &nazwisko);
 
-
     void on_pushButtonZwrot_clicked();
+
+    void on_pushButtonWyszukajZarezerwowaneKlientFilm_clicked();
+
+    void on_lineEditNazwiskoWyszukajZarezerwowane_textChanged(const QString &nazwisko);
+
+    void on_pushButtonOdwolanie_clicked();
 
 private:
     Ui::Wypozyczalnia *ui;
@@ -58,8 +63,11 @@ private:
     QPalette p;
     QMessageBox jedenFilmWypozycz;
     QMessageBox jedenFilmRezerwuj;
+    QMessageBox jedenFilmZwrot;
+    QMessageBox jedenFilmOdwolaj;
     QMessageBox jedenKlientWypozycz;
     QMessageBox jedenKlientRezerwuj;
+
 };
 
 #endif // WYPOZYCZALNIA_H

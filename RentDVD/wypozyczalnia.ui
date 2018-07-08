@@ -29,7 +29,7 @@
     <enum>QTabWidget::Rounded</enum>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="tabWypozyczenie">
     <attribute name="title">
@@ -677,16 +677,6 @@
     <attribute name="title">
      <string>Zwrot / Odwołanie rezerwacji</string>
     </attribute>
-    <widget class="QWidget" name="widget" native="true">
-     <property name="geometry">
-      <rect>
-       <x>140</x>
-       <y>370</y>
-       <width>120</width>
-       <height>80</height>
-      </rect>
-     </property>
-    </widget>
     <widget class="QPushButton" name="pushButtonWyszukajWypozyczoneKlientFilm">
      <property name="geometry">
       <rect>
@@ -918,6 +908,303 @@
      </property>
      <property name="text">
       <string>ZWROT</string>
+     </property>
+    </widget>
+    <widget class="QTableWidget" name="tableWidgetWyszukajZarezerwowane">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>381</y>
+       <width>871</width>
+       <height>201</height>
+      </rect>
+     </property>
+     <column>
+      <property name="text">
+       <string>id Filmu</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Tytuł</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Cena</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>id Klienta</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Imie</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Nazwisko</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Data rezerwacji</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Termin rezerw.</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>ODWOŁANIE</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+    </widget>
+    <widget class="QLabel" name="label_40">
+     <property name="geometry">
+      <rect>
+       <x>203</x>
+       <y>322</y>
+       <width>91</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>LUB    Id klienta:</string>
+     </property>
+     <property name="buddy">
+      <cstring>lineEditTytulWyszukaj</cstring>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_41">
+     <property name="geometry">
+      <rect>
+       <x>350</x>
+       <y>351</y>
+       <width>301</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>- wyszukiwanie dynamiczne po wprowadzaniu każdej litery</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEditNazwiskoWyszukajZarezerwowane">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>351</y>
+       <width>150</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>150</width>
+       <height>0</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_42">
+     <property name="geometry">
+      <rect>
+       <x>13</x>
+       <y>351</y>
+       <width>171</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Wyszukaj wg fragmentu nazwiska:</string>
+     </property>
+     <property name="buddy">
+      <cstring>lineEditOpisWyszukaj</cstring>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_43">
+     <property name="geometry">
+      <rect>
+       <x>13</x>
+       <y>322</y>
+       <width>111</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Wyszukaj wg Id filmu:</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEditIdFilmuWyszukajZarezerwowane">
+     <property name="geometry">
+      <rect>
+       <x>138</x>
+       <y>322</y>
+       <width>40</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>60</width>
+       <height>16777215</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButtonOdwolanie">
+     <property name="geometry">
+      <rect>
+       <x>926</x>
+       <y>381</y>
+       <width>130</width>
+       <height>40</height>
+      </rect>
+     </property>
+     <property name="palette">
+      <palette>
+       <active>
+        <colorrole role="Link">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>138</red>
+           <green>124</green>
+           <blue>244</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </active>
+       <inactive>
+        <colorrole role="Link">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>138</red>
+           <green>124</green>
+           <blue>244</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </inactive>
+       <disabled>
+        <colorrole role="Link">
+         <brush brushstyle="SolidPattern">
+          <color alpha="255">
+           <red>138</red>
+           <green>124</green>
+           <blue>244</blue>
+          </color>
+         </brush>
+        </colorrole>
+       </disabled>
+      </palette>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>ODWOŁANIE</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEditIdKlientaWyszukajZarezerwowane">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>322</y>
+       <width>40</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>30</width>
+       <height>0</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButtonWyszukajZarezerwowaneKlientFilm">
+     <property name="geometry">
+      <rect>
+       <x>360</x>
+       <y>320</y>
+       <width>80</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Wyszukaj</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="lineEditIdFilmuWyszukajZwrot">

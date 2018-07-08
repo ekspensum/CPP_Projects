@@ -6,9 +6,11 @@ int ObslugaBD::idZalogowanyUzytkownik; //zmienna statyczna
 int ObslugaBD::ileWierszyFilm;
 int ObslugaBD::ileWierszyKlient;
 int ObslugaBD::ileWierszyWypozyczone;
+int ObslugaBD::ileWierszyRezerwacja;
 QVector<int> ObslugaBD::idFilmuVector;
 QVector<int> ObslugaBD::idKlientaVector;
 QVector<int> ObslugaBD::idWypozyczeniaVector;
+QVector<int> ObslugaBD::idRezerwacjiVector;
 
 ObslugaBD::ObslugaBD()
 {
@@ -322,6 +324,64 @@ bool ObslugaBD::wykonajZwrotFilmu(int &idWypozyczenia)
     query.bindValue(":dataZwrotu", QDateTime::currentDateTime());
     query.bindValue(":idUzytkownikaZwrot", ObslugaBD::idZalogowanyUzytkownik);
     query.bindValue(":idWypozyczenia", idWypozyczenia);
+    if (query.exec())
+        wykonano = true;
+    return wykonano;
+}
+
+void ObslugaBD::wyszukajRezerwacjeFilmyIdFilmuIdKlienta(int &idFilmu, int &idKlienta)
+{
+    ileWierszyRezerwacja = 0;
+    listaRezerwacje.clear();
+    idRezerwacjiVector.clear();
+    QSqlQuery query;
+    query.prepare("SELECT rezerwacje.idFilmu, tytul, cenaWypozyczenia, rezerwacje.idKlienta, imie, nazwisko, dataRezerwacji, terminRezerwacji, idRezerwacji FROM rezerwacje LEFT JOIN klienci ON rezerwacje.idKlienta = klienci.idKlienta LEFT JOIN filmy ON rezerwacje.idFilmu = filmy.idFilmu WHERE odwolanieRezerwacji IS NULL AND (rezerwacje.idFilmu = (:idFilmu) OR rezerwacje.idKlienta = (:idKlienta)) ORDER BY rezerwacje.idFilmu");
+    query.bindValue(":idFilmu", idFilmu);
+    query.bindValue(":idKlienta", idKlienta);
+    if (query.exec())
+    {
+        while (query.next())
+        {
+            rezerwacje = new Rezerwacje(query.value(0).toInt(), query.value(1).toString(), query.value(2).toDouble(), query.value(3).toInt(), query.value(4).toString(), query.value(5).toString(), query.value(6).toDateTime(), query.value(7).toDateTime());
+            listaRezerwacje.append(rezerwacje);
+            idRezerwacjiVector.append(query.value(8).toInt());
+            ileWierszyRezerwacja++;
+        }
+    }
+    else
+        qDebug() << "Nie udało się wyszukać zarezerwowanych filmów";
+}
+
+void ObslugaBD::wyszukajRezerwacjeFilmyNazwisko(const QString &nazwisko)
+{
+    ileWierszyRezerwacja = 0;
+    listaRezerwacje.clear();
+    idRezerwacjiVector.clear();
+    QSqlQuery query;
+    query.prepare("SELECT rezerwacje.idFilmu, tytul, cenaWypozyczenia, rezerwacje.idKlienta, imie, nazwisko, dataRezerwacji, terminRezerwacji, idRezerwacji FROM rezerwacje LEFT JOIN klienci ON rezerwacje.idKlienta = klienci.idKlienta LEFT JOIN filmy ON rezerwacje.idFilmu = filmy.idFilmu WHERE odwolanieRezerwacji IS NULL AND nazwisko LIKE (:nazwisko) ORDER BY rezerwacje.idFilmu");
+    query.bindValue(":nazwisko", "%" + nazwisko + "%");
+    if (query.exec())
+    {
+        while (query.next())
+        {
+            rezerwacje = new Rezerwacje(query.value(0).toInt(), query.value(1).toString(), query.value(2).toDouble(), query.value(3).toInt(), query.value(4).toString(), query.value(5).toString(), query.value(6).toDateTime(), query.value(7).toDateTime());
+            listaRezerwacje.append(rezerwacje);
+            idRezerwacjiVector.append(query.value(8).toInt());
+            ileWierszyRezerwacja++;
+        }
+    }
+    else
+        qDebug() << "Nie udało się wyszukać zarezerwowanych filmów";
+}
+
+bool ObslugaBD::wykonajOdwolanieRezerwacji(int &idRezerwacji)
+{
+    bool wykonano = false;
+    QSqlQuery query;
+    query.prepare("UPDATE rezerwacje SET odwolanieRezerwacji = (:dataOdwolania), idUzytkownikaOdwolanie = (:idUzytkownikaOdwolanie) WHERE idRezerwacji = (:idRezerwacji)");
+    query.bindValue(":dataOdwolania", QDateTime::currentDateTime());
+    query.bindValue(":idUzytkownikaOdwolanie", ObslugaBD::idZalogowanyUzytkownik);
+    query.bindValue(":idRezerwacji", idRezerwacji);
     if (query.exec())
         wykonano = true;
     return wykonano;

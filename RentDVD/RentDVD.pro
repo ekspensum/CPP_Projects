@@ -31,7 +31,8 @@ SOURCES += \
     filtrznakow.cpp \
     klienci.cpp \
     filmy.cpp \
-    wypozyczenia.cpp
+    wypozyczenia.cpp \
+    rezerwacje.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -40,7 +41,8 @@ HEADERS += \
     filtrznakow.h \
     klienci.h \
     filmy.h \
-    wypozyczenia.h
+    wypozyczenia.h \
+    rezerwacje.h
 
 FORMS += \
         mainwindow.ui \

@@ -14,6 +14,7 @@
 #include "klienci.h"
 #include "filmy.h"
 #include "wypozyczenia.h"
+#include "rezerwacje.h"
 
 
 class ObslugaBD
@@ -35,15 +36,20 @@ public:
     void wyszukajWypozyczoneFilmyIdFilmuIdKlienta(int &idFilmu, int &idKlienta);
     void wyszukajWypozyczoneFilmyNazwisko(const QString &nazwisko);
     bool wykonajZwrotFilmu(int &idWypozyczenia);
+    void wyszukajRezerwacjeFilmyIdFilmuIdKlienta(int &idFilmu, int &idKlienta);
+    void wyszukajRezerwacjeFilmyNazwisko(const QString &nazwisko);
+    bool wykonajOdwolanieRezerwacji(int &idRezerwacji);
     QStringList odczytGatunki();
 
     static int idZalogowanyUzytkownik;
     static int ileWierszyFilm;
     static int ileWierszyKlient;
     static int ileWierszyWypozyczone;
+    static int ileWierszyRezerwacja;
     static QVector<int> idFilmuVector;
     static QVector<int> idKlientaVector;
     static QVector<int> idWypozyczeniaVector;
+    static QVector<int> idRezerwacjiVector;
 
     Filmy *filmy;
     QList<Filmy *> listaFilmy;
@@ -51,8 +57,8 @@ public:
     QList<Klienci *> listaKlienci;
     Wypozyczenia *wypozyczenia;
     QList<Wypozyczenia *> listaWypozyczenia;
-
-
+    Rezerwacje *rezerwacje;
+    QList<Rezerwacje *> listaRezerwacje;
 
 signals:
 
