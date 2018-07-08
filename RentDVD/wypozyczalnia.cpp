@@ -38,6 +38,7 @@ Wypozyczalnia::Wypozyczalnia(QWidget *parent) :
     ui->dateTimeEditTerminRezerwacji->setDateTime(czasRezerwacji.currentDateTime().addDays(1));
     p.setColor(QPalette::ButtonText, Qt::blue);
     ui->pushButtonWypozyczenie->setPalette(p);
+    ui->pushButtonZwrot->setPalette(p);
     jedenFilmRezerwuj.setText("Proszę zazanaczyć jeden film do rezerwacji.");
     jedenKlientRezerwuj.setText("Proszę zazanaczyć jednego klienta do rezerwacji.");
     jedenFilmWypozycz.setText("Proszę zazanaczyć jeden film do wypożyczenia.");
@@ -392,4 +393,35 @@ void Wypozyczalnia::on_lineEditNazwiskoWyszukajZwrot_textChanged(const QString &
         listaBoxWypozyczenie.append(boxWypozyczenie);
         ui->tableWidgetWyszukajWypozyczone->setCellWidget(i,8, listaBoxWypozyczenie.value(i));
     }
+}
+
+void Wypozyczalnia::on_pushButtonZwrot_clicked()
+{
+    // sprawdzenie czy zaznaczono film oraz czy zaznaczonych filmów jest więcej niż jeden
+    int ileFilmow = 0;
+    for(int i=0; i<ObslugaBD::ileWierszyWypozyczone; i++)
+    {
+        if (listaBoxWypozyczenie.value(i)->isChecked())
+            ileFilmow++;
+    }
+    if (ileFilmow != 1)
+        jedenFilmWypozycz.exec();
+
+    if (ileFilmow == 1)
+    {
+        int wybraneIdWypozyczenia = 0;
+        ObslugaBD bd;
+        QDateTime dataZwrotu;
+        for(int i=0; i<ObslugaBD::ileWierszyWypozyczone; i++)
+        {
+            if (listaBoxWypozyczenie.value(i)->isChecked())
+                wybraneIdWypozyczenia = ObslugaBD::idWypozyczeniaVector.at(i);
+        }
+
+        if (bd.wykonajZwrotFilmu(wybraneIdWypozyczenia))
+            ui->komunikatyZwrotOdwolanie->setText("Dokonano zwrotu wybranego filmu.");
+        else
+            ui->komunikatyZwrotOdwolanie->setText("Błąd! Nie udało się dokonać zwrotu wybranego filmu.");
+    }
+
 }

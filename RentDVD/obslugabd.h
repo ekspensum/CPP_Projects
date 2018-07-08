@@ -34,6 +34,7 @@ public:
     bool wykonajWypozyczenie(int &idKlienta, int &idFilmu, QDateTime &planowaDataZwrotu);
     void wyszukajWypozyczoneFilmyIdFilmuIdKlienta(int &idFilmu, int &idKlienta);
     void wyszukajWypozyczoneFilmyNazwisko(const QString &nazwisko);
+    bool wykonajZwrotFilmu(int &idWypozyczenia);
     QStringList odczytGatunki();
 
     static int idZalogowanyUzytkownik;
@@ -42,6 +43,7 @@ public:
     static int ileWierszyWypozyczone;
     static QVector<int> idFilmuVector;
     static QVector<int> idKlientaVector;
+    static QVector<int> idWypozyczeniaVector;
 
     Filmy *filmy;
     QList<Filmy *> listaFilmy;

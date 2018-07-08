@@ -8,6 +8,7 @@ int ObslugaBD::ileWierszyKlient;
 int ObslugaBD::ileWierszyWypozyczone;
 QVector<int> ObslugaBD::idFilmuVector;
 QVector<int> ObslugaBD::idKlientaVector;
+QVector<int> ObslugaBD::idWypozyczeniaVector;
 
 ObslugaBD::ObslugaBD()
 {
@@ -242,12 +243,12 @@ bool ObslugaBD::wykonajRezerwacje(int &idKlienta, int &idFilmu, QDateTime &termi
 {
     bool wykonano = false;
     QSqlQuery query;
-    query.prepare("INSERT INTO rezerwacje (DataRezerwacji, TerminRezerwacji, idKlienta, idFilmu, idUzytkownika) VALUES (:DataRezerwacji, :TerminRezerwacji, :idKlienta, :idFilmu, :idUzytkownika)");
+    query.prepare("INSERT INTO rezerwacje (DataRezerwacji, TerminRezerwacji, idKlienta, idFilmu, idUzytkownikaRezerwacja) VALUES (:DataRezerwacji, :TerminRezerwacji, :idKlienta, :idFilmu, :idUzytkownikaRezerwacja)");
     query.bindValue(":DataRezerwacji", QDateTime::currentDateTime());
     query.bindValue(":TerminRezerwacji", terminRezerwacji);
     query.bindValue(":idKlienta", idKlienta);
     query.bindValue(":idFilmu", idFilmu);
-    query.bindValue(":idUzytkownika", ObslugaBD::idZalogowanyUzytkownik);
+    query.bindValue(":idUzytkownikaRezerwacja", ObslugaBD::idZalogowanyUzytkownik);
     if (query.exec())
         wykonano = true;
     return wykonano;
@@ -257,12 +258,12 @@ bool ObslugaBD::wykonajWypozyczenie(int &idKlienta, int &idFilmu, QDateTime &pla
 {
     bool wykonano = false;
     QSqlQuery query;
-    query.prepare("INSERT INTO wypozyczenia (dataWypozyczenia, planowaDataZwrotu, idKlienta, idFilmu, idUzytkownika) VALUES (:dataWypozyczenia, :planowaDataZwrotu, :idKlienta, :idFilmu, :idUzytkownika)");
+    query.prepare("INSERT INTO wypozyczenia (dataWypozyczenia, planowaDataZwrotu, idKlienta, idFilmu, idUzytkownikaWypozyczenie) VALUES (:dataWypozyczenia, :planowaDataZwrotu, :idKlienta, :idFilmu, :idUzytkownikaWypozyczenie)");
     query.bindValue(":dataWypozyczenia", QDateTime::currentDateTime());
     query.bindValue(":planowaDataZwrotu", planowaDataZwrotu);
     query.bindValue(":idKlienta", idKlienta);
     query.bindValue(":idFilmu", idFilmu);
-    query.bindValue(":idUzytkownika", ObslugaBD::idZalogowanyUzytkownik);
+    query.bindValue(":idUzytkownikaWypozyczenie", ObslugaBD::idZalogowanyUzytkownik);
     if (query.exec())
         wykonano = true;
     return wykonano;
@@ -272,9 +273,9 @@ void ObslugaBD::wyszukajWypozyczoneFilmyIdFilmuIdKlienta(int &idFilmu, int &idKl
 {
     ileWierszyWypozyczone = 0;
     listaWypozyczenia.clear();
-    idFilmuVector.clear();
+    idWypozyczeniaVector.clear();
     QSqlQuery query;
-    query.prepare("SELECT wypozyczenia.idFilmu, tytul, cenaWypozyczenia, wypozyczenia.idKlienta, imie, nazwisko, dataWypozyczenia, planowaDataZwrotu FROM wypozyczenia LEFT JOIN klienci ON wypozyczenia.idKlienta = klienci.idKlienta LEFT JOIN filmy ON wypozyczenia.idFilmu = filmy.idFilmu WHERE dataZwrotu IS NULL AND (wypozyczenia.idFilmu = (:idFilmu) OR wypozyczenia.idKlienta = (:idKlienta)) ORDER BY wypozyczenia.idFilmu");
+    query.prepare("SELECT wypozyczenia.idFilmu, tytul, cenaWypozyczenia, wypozyczenia.idKlienta, imie, nazwisko, dataWypozyczenia, planowaDataZwrotu, idWypozyczenia FROM wypozyczenia LEFT JOIN klienci ON wypozyczenia.idKlienta = klienci.idKlienta LEFT JOIN filmy ON wypozyczenia.idFilmu = filmy.idFilmu WHERE dataZwrotu IS NULL AND (wypozyczenia.idFilmu = (:idFilmu) OR wypozyczenia.idKlienta = (:idKlienta)) ORDER BY wypozyczenia.idFilmu");
     query.bindValue(":idFilmu", idFilmu);
     query.bindValue(":idKlienta", idKlienta);
     if (query.exec())
@@ -283,7 +284,7 @@ void ObslugaBD::wyszukajWypozyczoneFilmyIdFilmuIdKlienta(int &idFilmu, int &idKl
         {
             wypozyczenia = new Wypozyczenia(query.value(0).toInt(), query.value(1).toString(), query.value(2).toDouble(), query.value(3).toInt(), query.value(4).toString(), query.value(5).toString(), query.value(6).toDateTime(), query.value(7).toDateTime());
             listaWypozyczenia.append(wypozyczenia);
-            idFilmuVector.append(query.value(0).toInt());
+            idWypozyczeniaVector.append(query.value(8).toInt());
             ileWierszyWypozyczone++;
         }
     }
@@ -295,9 +296,9 @@ void ObslugaBD::wyszukajWypozyczoneFilmyNazwisko(const QString &nazwisko)
 {
     ileWierszyWypozyczone = 0;
     listaWypozyczenia.clear();
-    idFilmuVector.clear();
+    idWypozyczeniaVector.clear();
     QSqlQuery query;
-    query.prepare("SELECT wypozyczenia.idFilmu, tytul, cenaWypozyczenia, wypozyczenia.idKlienta, imie, nazwisko, dataWypozyczenia, planowaDataZwrotu FROM wypozyczenia LEFT JOIN klienci ON wypozyczenia.idKlienta = klienci.idKlienta LEFT JOIN filmy ON wypozyczenia.idFilmu = filmy.idFilmu WHERE dataZwrotu IS NULL AND nazwisko LIKE (:nazwisko) ORDER BY wypozyczenia.idFilmu");
+    query.prepare("SELECT wypozyczenia.idFilmu, tytul, cenaWypozyczenia, wypozyczenia.idKlienta, imie, nazwisko, dataWypozyczenia, planowaDataZwrotu, idWypozyczenia FROM wypozyczenia LEFT JOIN klienci ON wypozyczenia.idKlienta = klienci.idKlienta LEFT JOIN filmy ON wypozyczenia.idFilmu = filmy.idFilmu WHERE dataZwrotu IS NULL AND nazwisko LIKE (:nazwisko) ORDER BY wypozyczenia.idFilmu");
     query.bindValue(":nazwisko", "%" + nazwisko + "%");
     if (query.exec())
     {
@@ -305,10 +306,23 @@ void ObslugaBD::wyszukajWypozyczoneFilmyNazwisko(const QString &nazwisko)
         {
             wypozyczenia = new Wypozyczenia(query.value(0).toInt(), query.value(1).toString(), query.value(2).toDouble(), query.value(3).toInt(), query.value(4).toString(), query.value(5).toString(), query.value(6).toDateTime(), query.value(7).toDateTime());
             listaWypozyczenia.append(wypozyczenia);
-            idFilmuVector.append(query.value(0).toInt());
+            idWypozyczeniaVector.append(query.value(8).toInt());
             ileWierszyWypozyczone++;
         }
     }
     else
         qDebug() << "Nie udało się wyszukać wypożyczonych filmów";
+}
+
+bool ObslugaBD::wykonajZwrotFilmu(int &idWypozyczenia)
+{
+    bool wykonano = false;
+    QSqlQuery query;
+    query.prepare("UPDATE wypozyczenia SET dataZwrotu = (:dataZwrotu), idUzytkownikaZwrot = (:idUzytkownikaZwrot) WHERE idWypozyczenia = (:idWypozyczenia)");
+    query.bindValue(":dataZwrotu", QDateTime::currentDateTime());
+    query.bindValue(":idUzytkownikaZwrot", ObslugaBD::idZalogowanyUzytkownik);
+    query.bindValue(":idWypozyczenia", idWypozyczenia);
+    if (query.exec())
+        wykonano = true;
+    return wykonano;
 }

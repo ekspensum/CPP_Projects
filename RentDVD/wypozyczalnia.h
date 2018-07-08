@@ -43,6 +43,8 @@ private slots:
     void on_lineEditNazwiskoWyszukajZwrot_textChanged(const QString &nazwisko);
 
 
+    void on_pushButtonZwrot_clicked();
+
 private:
     Ui::Wypozyczalnia *ui;
     QCheckBox *boxWypozyczenie;

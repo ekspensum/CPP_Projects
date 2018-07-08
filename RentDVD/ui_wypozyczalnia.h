@@ -75,8 +75,9 @@ public:
     QWidget *widget;
     QPushButton *pushButtonWyszukajWypozyczoneKlientFilm;
     QTableWidget *tableWidgetWyszukajWypozyczone;
-    QLabel *komunikatyWypozycz_2;
+    QLabel *komunikatyZwrotOdwolanie;
     QLabel *label_37;
+    QPushButton *pushButtonZwrot;
     QLineEdit *lineEditIdFilmuWyszukajZwrot;
     QLabel *label_38;
     QLineEdit *lineEditIdKlientaWyszukajZwrot;
@@ -240,7 +241,7 @@ public:
         pushButtonWypozyczenie->setFont(font2);
         pushButtonRezerwacja = new QPushButton(tabWypozyczenie);
         pushButtonRezerwacja->setObjectName(QStringLiteral("pushButtonRezerwacja"));
-        pushButtonRezerwacja->setGeometry(QRect(951, 540, 130, 40));
+        pushButtonRezerwacja->setGeometry(QRect(951, 541, 130, 40));
         pushButtonRezerwacja->setFont(font2);
         layoutWidget4 = new QWidget(tabWypozyczenie);
         layoutWidget4->setObjectName(QStringLiteral("layoutWidget4"));
@@ -412,17 +413,26 @@ public:
         __qtablewidgetitem22->setFont(font);
         tableWidgetWyszukajWypozyczone->setHorizontalHeaderItem(8, __qtablewidgetitem22);
         tableWidgetWyszukajWypozyczone->setObjectName(QStringLiteral("tableWidgetWyszukajWypozyczone"));
-        tableWidgetWyszukajWypozyczone->setGeometry(QRect(10, 70, 901, 201));
-        komunikatyWypozycz_2 = new QLabel(tabZwrotOdwolanieRezerwacji);
-        komunikatyWypozycz_2->setObjectName(QStringLiteral("komunikatyWypozycz_2"));
-        komunikatyWypozycz_2->setGeometry(QRect(660, 20, 421, 41));
-        komunikatyWypozycz_2->setFont(font1);
-        komunikatyWypozycz_2->setTextFormat(Qt::AutoText);
-        komunikatyWypozycz_2->setScaledContents(false);
-        komunikatyWypozycz_2->setWordWrap(true);
+        tableWidgetWyszukajWypozyczone->setGeometry(QRect(10, 70, 871, 201));
+        komunikatyZwrotOdwolanie = new QLabel(tabZwrotOdwolanieRezerwacji);
+        komunikatyZwrotOdwolanie->setObjectName(QStringLiteral("komunikatyZwrotOdwolanie"));
+        komunikatyZwrotOdwolanie->setGeometry(QRect(770, 10, 311, 51));
+        komunikatyZwrotOdwolanie->setFont(font1);
+        komunikatyZwrotOdwolanie->setTextFormat(Qt::AutoText);
+        komunikatyZwrotOdwolanie->setScaledContents(false);
+        komunikatyZwrotOdwolanie->setWordWrap(true);
         label_37 = new QLabel(tabZwrotOdwolanieRezerwacji);
         label_37->setObjectName(QStringLiteral("label_37"));
         label_37->setGeometry(QRect(350, 40, 301, 22));
+        pushButtonZwrot = new QPushButton(tabZwrotOdwolanieRezerwacji);
+        pushButtonZwrot->setObjectName(QStringLiteral("pushButtonZwrot"));
+        pushButtonZwrot->setGeometry(QRect(926, 70, 130, 40));
+        QPalette palette1;
+        palette1.setBrush(QPalette::Active, QPalette::Link, brush);
+        palette1.setBrush(QPalette::Inactive, QPalette::Link, brush);
+        palette1.setBrush(QPalette::Disabled, QPalette::Link, brush);
+        pushButtonZwrot->setPalette(palette1);
+        pushButtonZwrot->setFont(font2);
         lineEditIdFilmuWyszukajZwrot = new QLineEdit(tabZwrotOdwolanieRezerwacji);
         lineEditIdFilmuWyszukajZwrot->setObjectName(QStringLiteral("lineEditIdFilmuWyszukajZwrot"));
         lineEditIdFilmuWyszukajZwrot->setGeometry(QRect(138, 11, 40, 22));
@@ -837,7 +847,7 @@ public:
 
         retranslateUi(Wypozyczalnia);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(0);
         comboBoxGatunek1->setCurrentIndex(-1);
 
 
@@ -913,8 +923,9 @@ public:
         ___qtablewidgetitem21->setText(QApplication::translate("Wypozyczalnia", "Plan. data zwrotu", nullptr));
         QTableWidgetItem *___qtablewidgetitem22 = tableWidgetWyszukajWypozyczone->horizontalHeaderItem(8);
         ___qtablewidgetitem22->setText(QApplication::translate("Wypozyczalnia", "ZWROT", nullptr));
-        komunikatyWypozycz_2->setText(QString());
+        komunikatyZwrotOdwolanie->setText(QString());
         label_37->setText(QApplication::translate("Wypozyczalnia", "- wyszukiwanie dynamiczne po wprowadzaniu ka\305\274dej litery", nullptr));
+        pushButtonZwrot->setText(QApplication::translate("Wypozyczalnia", "ZWROT", nullptr));
         label_38->setText(QApplication::translate("Wypozyczalnia", "Wyszukaj wg Id filmu:", nullptr));
         label_36->setText(QApplication::translate("Wypozyczalnia", "LUB    Id klienta:", nullptr));
         label_39->setText(QApplication::translate("Wypozyczalnia", "Wyszukaj wg fragmentu nazwiska:", nullptr));
