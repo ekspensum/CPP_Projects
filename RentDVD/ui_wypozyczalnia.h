@@ -71,9 +71,18 @@ public:
     QLabel *label_33;
     QLabel *label_34;
     QDateTimeEdit *dateTimeEditTerminRezerwacji;
-    QPushButton *pushButton;
     QWidget *tabZwrotOdwolanieRezerwacji;
     QWidget *widget;
+    QPushButton *pushButtonWyszukajWypozyczoneKlientFilm;
+    QTableWidget *tableWidgetWyszukajWypozyczone;
+    QLabel *komunikatyWypozycz_2;
+    QLabel *label_37;
+    QLineEdit *lineEditIdFilmuWyszukajZwrot;
+    QLabel *label_38;
+    QLineEdit *lineEditIdKlientaWyszukajZwrot;
+    QLabel *label_36;
+    QLabel *label_39;
+    QLineEdit *lineEditNazwiskoWyszukajZwrot;
     QWidget *tabDodajKlienta;
     QPushButton *pushButtonDodajKlienta;
     QLabel *komunikatyDodajKlienta;
@@ -198,7 +207,7 @@ public:
         label_15->setGeometry(QRect(240, 9, 61, 25));
         pushButtonWyszukajTytulOpis = new QPushButton(tabWypozyczenie);
         pushButtonWyszukajTytulOpis->setObjectName(QStringLiteral("pushButtonWyszukajTytulOpis"));
-        pushButtonWyszukajTytulOpis->setGeometry(QRect(590, 11, 80, 25));
+        pushButtonWyszukajTytulOpis->setGeometry(QRect(590, 10, 80, 25));
         pushButtonWyszukajTytulOpis->setFont(font);
         label_16 = new QLabel(tabWypozyczenie);
         label_16->setObjectName(QStringLiteral("label_16"));
@@ -341,34 +350,102 @@ public:
         label_20->setGeometry(QRect(470, 400, 81, 22));
         pushButtonWyszukajKlienta = new QPushButton(tabWypozyczenie);
         pushButtonWyszukajKlienta->setObjectName(QStringLiteral("pushButtonWyszukajKlienta"));
-        pushButtonWyszukajKlienta->setGeometry(QRect(632, 399, 80, 25));
+        pushButtonWyszukajKlienta->setGeometry(QRect(632, 398, 80, 25));
         pushButtonWyszukajKlienta->setFont(font);
         label_21 = new QLabel(tabWypozyczenie);
         label_21->setObjectName(QStringLiteral("label_21"));
         label_21->setGeometry(QRect(15, 374, 191, 16));
         dateTimeEditTerminZwrotu = new QDateTimeEdit(tabWypozyczenie);
         dateTimeEditTerminZwrotu->setObjectName(QStringLiteral("dateTimeEditTerminZwrotu"));
-        dateTimeEditTerminZwrotu->setGeometry(QRect(748, 390, 171, 31));
+        dateTimeEditTerminZwrotu->setGeometry(QRect(748, 387, 171, 31));
         dateTimeEditTerminZwrotu->setFont(font2);
         label_33 = new QLabel(tabWypozyczenie);
         label_33->setObjectName(QStringLiteral("label_33"));
-        label_33->setGeometry(QRect(748, 370, 171, 16));
+        label_33->setGeometry(QRect(748, 367, 171, 16));
         label_34 = new QLabel(tabWypozyczenie);
         label_34->setObjectName(QStringLiteral("label_34"));
-        label_34->setGeometry(QRect(751, 530, 171, 16));
+        label_34->setGeometry(QRect(751, 528, 171, 16));
         dateTimeEditTerminRezerwacji = new QDateTimeEdit(tabWypozyczenie);
         dateTimeEditTerminRezerwacji->setObjectName(QStringLiteral("dateTimeEditTerminRezerwacji"));
-        dateTimeEditTerminRezerwacji->setGeometry(QRect(750, 550, 171, 31));
+        dateTimeEditTerminRezerwacji->setGeometry(QRect(750, 548, 171, 31));
         dateTimeEditTerminRezerwacji->setFont(font2);
-        pushButton = new QPushButton(tabWypozyczenie);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(930, 460, 80, 21));
         tabWidget->addTab(tabWypozyczenie, QString());
         tabZwrotOdwolanieRezerwacji = new QWidget();
         tabZwrotOdwolanieRezerwacji->setObjectName(QStringLiteral("tabZwrotOdwolanieRezerwacji"));
         widget = new QWidget(tabZwrotOdwolanieRezerwacji);
         widget->setObjectName(QStringLiteral("widget"));
         widget->setGeometry(QRect(140, 370, 120, 80));
+        pushButtonWyszukajWypozyczoneKlientFilm = new QPushButton(tabZwrotOdwolanieRezerwacji);
+        pushButtonWyszukajWypozyczoneKlientFilm->setObjectName(QStringLiteral("pushButtonWyszukajWypozyczoneKlientFilm"));
+        pushButtonWyszukajWypozyczoneKlientFilm->setGeometry(QRect(360, 9, 80, 25));
+        pushButtonWyszukajWypozyczoneKlientFilm->setFont(font);
+        tableWidgetWyszukajWypozyczone = new QTableWidget(tabZwrotOdwolanieRezerwacji);
+        if (tableWidgetWyszukajWypozyczone->columnCount() < 9)
+            tableWidgetWyszukajWypozyczone->setColumnCount(9);
+        QTableWidgetItem *__qtablewidgetitem14 = new QTableWidgetItem();
+        __qtablewidgetitem14->setTextAlignment(Qt::AlignCenter);
+        __qtablewidgetitem14->setFont(font);
+        tableWidgetWyszukajWypozyczone->setHorizontalHeaderItem(0, __qtablewidgetitem14);
+        QTableWidgetItem *__qtablewidgetitem15 = new QTableWidgetItem();
+        __qtablewidgetitem15->setFont(font);
+        tableWidgetWyszukajWypozyczone->setHorizontalHeaderItem(1, __qtablewidgetitem15);
+        QTableWidgetItem *__qtablewidgetitem16 = new QTableWidgetItem();
+        __qtablewidgetitem16->setFont(font);
+        tableWidgetWyszukajWypozyczone->setHorizontalHeaderItem(2, __qtablewidgetitem16);
+        QTableWidgetItem *__qtablewidgetitem17 = new QTableWidgetItem();
+        __qtablewidgetitem17->setTextAlignment(Qt::AlignCenter);
+        __qtablewidgetitem17->setFont(font);
+        tableWidgetWyszukajWypozyczone->setHorizontalHeaderItem(3, __qtablewidgetitem17);
+        QTableWidgetItem *__qtablewidgetitem18 = new QTableWidgetItem();
+        __qtablewidgetitem18->setFont(font);
+        tableWidgetWyszukajWypozyczone->setHorizontalHeaderItem(4, __qtablewidgetitem18);
+        QTableWidgetItem *__qtablewidgetitem19 = new QTableWidgetItem();
+        __qtablewidgetitem19->setFont(font);
+        tableWidgetWyszukajWypozyczone->setHorizontalHeaderItem(5, __qtablewidgetitem19);
+        QTableWidgetItem *__qtablewidgetitem20 = new QTableWidgetItem();
+        __qtablewidgetitem20->setFont(font);
+        tableWidgetWyszukajWypozyczone->setHorizontalHeaderItem(6, __qtablewidgetitem20);
+        QTableWidgetItem *__qtablewidgetitem21 = new QTableWidgetItem();
+        __qtablewidgetitem21->setFont(font);
+        tableWidgetWyszukajWypozyczone->setHorizontalHeaderItem(7, __qtablewidgetitem21);
+        QTableWidgetItem *__qtablewidgetitem22 = new QTableWidgetItem();
+        __qtablewidgetitem22->setFont(font);
+        tableWidgetWyszukajWypozyczone->setHorizontalHeaderItem(8, __qtablewidgetitem22);
+        tableWidgetWyszukajWypozyczone->setObjectName(QStringLiteral("tableWidgetWyszukajWypozyczone"));
+        tableWidgetWyszukajWypozyczone->setGeometry(QRect(10, 70, 901, 201));
+        komunikatyWypozycz_2 = new QLabel(tabZwrotOdwolanieRezerwacji);
+        komunikatyWypozycz_2->setObjectName(QStringLiteral("komunikatyWypozycz_2"));
+        komunikatyWypozycz_2->setGeometry(QRect(660, 20, 421, 41));
+        komunikatyWypozycz_2->setFont(font1);
+        komunikatyWypozycz_2->setTextFormat(Qt::AutoText);
+        komunikatyWypozycz_2->setScaledContents(false);
+        komunikatyWypozycz_2->setWordWrap(true);
+        label_37 = new QLabel(tabZwrotOdwolanieRezerwacji);
+        label_37->setObjectName(QStringLiteral("label_37"));
+        label_37->setGeometry(QRect(350, 40, 301, 22));
+        lineEditIdFilmuWyszukajZwrot = new QLineEdit(tabZwrotOdwolanieRezerwacji);
+        lineEditIdFilmuWyszukajZwrot->setObjectName(QStringLiteral("lineEditIdFilmuWyszukajZwrot"));
+        lineEditIdFilmuWyszukajZwrot->setGeometry(QRect(138, 11, 40, 22));
+        sizePolicy.setHeightForWidth(lineEditIdFilmuWyszukajZwrot->sizePolicy().hasHeightForWidth());
+        lineEditIdFilmuWyszukajZwrot->setSizePolicy(sizePolicy);
+        lineEditIdFilmuWyszukajZwrot->setMaximumSize(QSize(60, 16777215));
+        label_38 = new QLabel(tabZwrotOdwolanieRezerwacji);
+        label_38->setObjectName(QStringLiteral("label_38"));
+        label_38->setGeometry(QRect(13, 11, 111, 22));
+        lineEditIdKlientaWyszukajZwrot = new QLineEdit(tabZwrotOdwolanieRezerwacji);
+        lineEditIdKlientaWyszukajZwrot->setObjectName(QStringLiteral("lineEditIdKlientaWyszukajZwrot"));
+        lineEditIdKlientaWyszukajZwrot->setGeometry(QRect(300, 11, 40, 22));
+        lineEditIdKlientaWyszukajZwrot->setMinimumSize(QSize(30, 0));
+        label_36 = new QLabel(tabZwrotOdwolanieRezerwacji);
+        label_36->setObjectName(QStringLiteral("label_36"));
+        label_36->setGeometry(QRect(203, 11, 91, 22));
+        label_39 = new QLabel(tabZwrotOdwolanieRezerwacji);
+        label_39->setObjectName(QStringLiteral("label_39"));
+        label_39->setGeometry(QRect(13, 40, 171, 22));
+        lineEditNazwiskoWyszukajZwrot = new QLineEdit(tabZwrotOdwolanieRezerwacji);
+        lineEditNazwiskoWyszukajZwrot->setObjectName(QStringLiteral("lineEditNazwiskoWyszukajZwrot"));
+        lineEditNazwiskoWyszukajZwrot->setGeometry(QRect(190, 40, 150, 22));
+        lineEditNazwiskoWyszukajZwrot->setMinimumSize(QSize(150, 0));
         tabWidget->addTab(tabZwrotOdwolanieRezerwacji, QString());
         tabDodajKlienta = new QWidget();
         tabDodajKlienta->setObjectName(QStringLiteral("tabDodajKlienta"));
@@ -419,6 +496,7 @@ public:
 
         lineEditKodPocztowy = new QLineEdit(layoutWidget1);
         lineEditKodPocztowy->setObjectName(QStringLiteral("lineEditKodPocztowy"));
+        lineEditKodPocztowy->setMaxLength(6);
 
         gridLayout_10->addWidget(lineEditKodPocztowy, 2, 1, 1, 1);
 
@@ -507,6 +585,7 @@ public:
         font4.setBold(true);
         font4.setWeight(75);
         lineEditTytul->setFont(font4);
+        lineEditTytul->setMaxLength(100);
 
         gridLayout->addWidget(lineEditTytul, 0, 1, 1, 1);
 
@@ -534,6 +613,7 @@ public:
         QFont font5;
         font5.setPointSize(10);
         lineEditRok->setFont(font5);
+        lineEditRok->setMaxLength(4);
 
         gridLayout_2->addWidget(lineEditRok, 0, 1, 1, 1);
 
@@ -637,6 +717,7 @@ public:
 
         lineEditCenaWypozyczenia = new QLineEdit(layoutWidget9);
         lineEditCenaWypozyczenia->setObjectName(QStringLiteral("lineEditCenaWypozyczenia"));
+        lineEditCenaWypozyczenia->setMaxLength(5);
 
         gridLayout_6->addWidget(lineEditCenaWypozyczenia, 0, 1, 1, 1);
 
@@ -729,6 +810,8 @@ public:
 #ifndef QT_NO_SHORTCUT
         label_13->setBuddy(lineEditOpisWyszukaj);
         label_12->setBuddy(lineEditTytulWyszukaj);
+        label_36->setBuddy(lineEditTytulWyszukaj);
+        label_39->setBuddy(lineEditOpisWyszukaj);
         label_5->setBuddy(lineEditTytul);
         label_6->setBuddy(lineEditRok);
         label_8->setBuddy(spinBoxIleKopii);
@@ -754,7 +837,7 @@ public:
 
         retranslateUi(Wypozyczalnia);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
         comboBoxGatunek1->setCurrentIndex(-1);
 
 
@@ -810,8 +893,31 @@ public:
         label_21->setText(QApplication::translate("Wypozyczalnia", "Wyszukaj wg ca\305\202o\305\233ci lub fragmentu:", nullptr));
         label_33->setText(QApplication::translate("Wypozyczalnia", "Planowana data i godzina zwrotu:", nullptr));
         label_34->setText(QApplication::translate("Wypozyczalnia", "Czas zako\305\204czenia rezerwacji:", nullptr));
-        pushButton->setText(QApplication::translate("Wypozyczalnia", "PushButton", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tabWypozyczenie), QApplication::translate("Wypozyczalnia", "Wypo\305\274yczenie / Rezerwacja", nullptr));
+        pushButtonWyszukajWypozyczoneKlientFilm->setText(QApplication::translate("Wypozyczalnia", "Wyszukaj", nullptr));
+        QTableWidgetItem *___qtablewidgetitem14 = tableWidgetWyszukajWypozyczone->horizontalHeaderItem(0);
+        ___qtablewidgetitem14->setText(QApplication::translate("Wypozyczalnia", "id Filmu", nullptr));
+        QTableWidgetItem *___qtablewidgetitem15 = tableWidgetWyszukajWypozyczone->horizontalHeaderItem(1);
+        ___qtablewidgetitem15->setText(QApplication::translate("Wypozyczalnia", "Tytu\305\202", nullptr));
+        QTableWidgetItem *___qtablewidgetitem16 = tableWidgetWyszukajWypozyczone->horizontalHeaderItem(2);
+        ___qtablewidgetitem16->setText(QApplication::translate("Wypozyczalnia", "Cena", nullptr));
+        QTableWidgetItem *___qtablewidgetitem17 = tableWidgetWyszukajWypozyczone->horizontalHeaderItem(3);
+        ___qtablewidgetitem17->setText(QApplication::translate("Wypozyczalnia", "id Klienta", nullptr));
+        QTableWidgetItem *___qtablewidgetitem18 = tableWidgetWyszukajWypozyczone->horizontalHeaderItem(4);
+        ___qtablewidgetitem18->setText(QApplication::translate("Wypozyczalnia", "Imie", nullptr));
+        QTableWidgetItem *___qtablewidgetitem19 = tableWidgetWyszukajWypozyczone->horizontalHeaderItem(5);
+        ___qtablewidgetitem19->setText(QApplication::translate("Wypozyczalnia", "Nazwisko", nullptr));
+        QTableWidgetItem *___qtablewidgetitem20 = tableWidgetWyszukajWypozyczone->horizontalHeaderItem(6);
+        ___qtablewidgetitem20->setText(QApplication::translate("Wypozyczalnia", "Data wypo\305\274ycz.", nullptr));
+        QTableWidgetItem *___qtablewidgetitem21 = tableWidgetWyszukajWypozyczone->horizontalHeaderItem(7);
+        ___qtablewidgetitem21->setText(QApplication::translate("Wypozyczalnia", "Plan. data zwrotu", nullptr));
+        QTableWidgetItem *___qtablewidgetitem22 = tableWidgetWyszukajWypozyczone->horizontalHeaderItem(8);
+        ___qtablewidgetitem22->setText(QApplication::translate("Wypozyczalnia", "ZWROT", nullptr));
+        komunikatyWypozycz_2->setText(QString());
+        label_37->setText(QApplication::translate("Wypozyczalnia", "- wyszukiwanie dynamiczne po wprowadzaniu ka\305\274dej litery", nullptr));
+        label_38->setText(QApplication::translate("Wypozyczalnia", "Wyszukaj wg Id filmu:", nullptr));
+        label_36->setText(QApplication::translate("Wypozyczalnia", "LUB    Id klienta:", nullptr));
+        label_39->setText(QApplication::translate("Wypozyczalnia", "Wyszukaj wg fragmentu nazwiska:", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tabZwrotOdwolanieRezerwacji), QApplication::translate("Wypozyczalnia", "Zwrot / Odwo\305\202anie rezerwacji", nullptr));
         pushButtonDodajKlienta->setText(QApplication::translate("Wypozyczalnia", "Dodaj", nullptr));
         label_29->setText(QApplication::translate("Wypozyczalnia", "* pole NIE jest wymagane", nullptr));
@@ -819,6 +925,7 @@ public:
         label_22->setText(QApplication::translate("Wypozyczalnia", "Imi\304\231:", nullptr));
         label_23->setText(QApplication::translate("Wypozyczalnia", "Nazwisko:", nullptr));
         label_24->setText(QApplication::translate("Wypozyczalnia", "Kod pocztowy:", nullptr));
+        lineEditKodPocztowy->setInputMask(QApplication::translate("Wypozyczalnia", "99-999", nullptr));
         label_25->setText(QApplication::translate("Wypozyczalnia", "Miasto:", nullptr));
         label_26->setText(QApplication::translate("Wypozyczalnia", "Ulica:", nullptr));
         label_27->setText(QApplication::translate("Wypozyczalnia", "Nr domu:", nullptr));
@@ -828,6 +935,8 @@ public:
         komunikatyDodajFilm->setText(QString());
         label_5->setText(QApplication::translate("Wypozyczalnia", "Tytu\305\202:", nullptr));
         label_6->setText(QApplication::translate("Wypozyczalnia", "Rok produkcji:", nullptr));
+        lineEditRok->setInputMask(QApplication::translate("Wypozyczalnia", "9999", nullptr));
+        lineEditRok->setText(QString());
         label_8->setText(QApplication::translate("Wypozyczalnia", "Ilo\305\233\304\207 kopii:", nullptr));
         label_11->setText(QApplication::translate("Wypozyczalnia", "Gatunek3:", nullptr));
         label_7->setText(QApplication::translate("Wypozyczalnia", "Gatunek1:", nullptr));
@@ -835,6 +944,7 @@ public:
         label_31->setText(QApplication::translate("Wypozyczalnia", "* pole NIE jest wymagane", nullptr));
         label_32->setText(QApplication::translate("Wypozyczalnia", "* pole NIE jest wymagane", nullptr));
         label_35->setText(QApplication::translate("Wypozyczalnia", "Cena wypo\305\274yczenia:", nullptr));
+        lineEditCenaWypozyczenia->setInputMask(QApplication::translate("Wypozyczalnia", "99.99", nullptr));
         label_9->setText(QApplication::translate("Wypozyczalnia", "Opis:", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tabDodajFilm), QApplication::translate("Wypozyczalnia", "Dodaj film", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tabUstawienia), QApplication::translate("Wypozyczalnia", "Ustawienia", nullptr));

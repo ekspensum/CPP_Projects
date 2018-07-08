@@ -9,6 +9,11 @@
 #include <QCryptographicHash>
 #include <QByteArray>
 #include <QStringList>
+#include <QDir>
+#include <QList>
+#include "klienci.h"
+#include "filmy.h"
+#include "wypozyczenia.h"
 
 
 class ObslugaBD
@@ -27,22 +32,24 @@ public:
     bool czyMozliwaRezerwacjaWypozyczenie(int &idFilmu); // sprawdza czy zakupiona ilość kopii filmu > od sumy istniejących wypożyczeń i rezerwacji
     bool wykonajRezerwacje(int &idKlienta, int &idFilmu, QDateTime &terminRezerwacji);
     bool wykonajWypozyczenie(int &idKlienta, int &idFilmu, QDateTime &planowaDataZwrotu);
+    void wyszukajWypozyczoneFilmyIdFilmuIdKlienta(int &idFilmu, int &idKlienta);
+    void wyszukajWypozyczoneFilmyNazwisko(const QString &nazwisko);
     QStringList odczytGatunki();
-    QStringList listaTytul;
-    QStringList listaOpis;
-    QVector<int> listaRok;
-    QVector<double> listaCenaWypozyczenia;
-    QStringList listaGatunek;
+
     static int idZalogowanyUzytkownik;
     static int ileWierszyFilm;
     static int ileWierszyKlient;
-    static QVector<int> idFilmu;
-    static QVector<int> idKlienta;
-    QStringList listaImie;
-    QStringList listaNazwisko;
-    QStringList listaMiasto;
-    QStringList listaUlica;
-    QStringList listaNrDomu;
+    static int ileWierszyWypozyczone;
+    static QVector<int> idFilmuVector;
+    static QVector<int> idKlientaVector;
+
+    Filmy *filmy;
+    QList<Filmy *> listaFilmy;
+    Klienci *klienci;
+    QList<Klienci *> listaKlienci;
+    Wypozyczenia *wypozyczenia;
+    QList<Wypozyczenia *> listaWypozyczenia;
+
 
 
 signals:
@@ -51,7 +58,7 @@ public slots:
 
 private:
     QSqlDatabase baza;
-    const QString sciezkaDoBazy = "C:\\Users\\Andrzej\\Documents\\Projekty_Cpp\\_Projekty_QT\\Projekty-GitHub\\RentDVD\\rentdvd.db";
+//    const QString sciezkaDoBazy = "C:\\Users\\Andrzej\\Documents\\Projekty_Cpp\\_Projekty_QT\\Projekty-GitHub\\RentDVD\\rentdvd.db";
 
 };
 

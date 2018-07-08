@@ -38,12 +38,15 @@ private slots:
 
     void on_pushButtonWypozyczenie_clicked();
 
-    void on_pushButton_clicked();
+    void on_pushButtonWyszukajWypozyczoneKlientFilm_clicked();
+
+    void on_lineEditNazwiskoWyszukajZwrot_textChanged(const QString &nazwisko);
+
 
 private:
     Ui::Wypozyczalnia *ui;
-//    QCheckBox *boxWypozyczenie = new QCheckBox();
-//    QCheckBox *boxRezerwacja = new QCheckBox();
+    QCheckBox *boxWypozyczenie;
+    QCheckBox *boxRezerwacja;
     QList<QCheckBox *> listaBoxWypozyczenie;
     QList<QCheckBox *> listaBoxRezerwacja;
     QCheckBox **tablicaBoxWypozyczenie;

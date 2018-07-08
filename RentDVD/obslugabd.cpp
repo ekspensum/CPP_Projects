@@ -5,13 +5,18 @@
 int ObslugaBD::idZalogowanyUzytkownik; //zmienna statyczna
 int ObslugaBD::ileWierszyFilm;
 int ObslugaBD::ileWierszyKlient;
-QVector<int> ObslugaBD::idFilmu;
-QVector<int> ObslugaBD::idKlienta;
+int ObslugaBD::ileWierszyWypozyczone;
+QVector<int> ObslugaBD::idFilmuVector;
+QVector<int> ObslugaBD::idKlientaVector;
 
 ObslugaBD::ObslugaBD()
 {
+    QString sciezkaDoBazy = QDir::currentPath();
+    sciezkaDoBazy = sciezkaDoBazy + "/rentdvd.db";
     baza = QSqlDatabase::addDatabase("QSQLITE");
+//    qDebug() << sciezkaDoBazy;
     baza.setDatabaseName(sciezkaDoBazy);
+//    baza.open();
     if (!baza.open())
         qDebug()<< "Błąd połączenia z bazą danych";
     else
@@ -22,7 +27,7 @@ ObslugaBD::~ObslugaBD()
 {
     if (baza.isOpen())
         baza.close();
-    qDebug() << "zamykam baze";
+    qDebug() << "zamykam połączenie z bazą";
 }
 
 bool ObslugaBD::logowanie(QString &login, QString &haslo)
@@ -132,26 +137,19 @@ QStringList ObslugaBD::odczytGatunki()
 void ObslugaBD::wyszukajFilmTytulOpis(QString &tytul, QString &opis)
 {
     ileWierszyFilm = 0;
-    listaTytul.clear();
-    listaRok.clear();
-    listaOpis.clear();
-    listaGatunek.clear();
-    idFilmu.clear();
-    listaCenaWypozyczenia.clear();
+    listaFilmy.clear();
+    idFilmuVector.clear();
     QSqlQuery query;
-    query.prepare("SELECT Tytul, RokProdukcji, Opis, Nazwa, idFilmu, cenaWypozyczenia FROM filmy LEFT JOIN gatunki ON filmy.Gatunek1 = gatunki.idGatunku WHERE Tytul like (:tytul) AND Opis LIKE (:opis)");
+    query.prepare("SELECT tytul, rokProdukcji, nazwa, opis, cenaWypozyczenia, idFilmu FROM filmy LEFT JOIN gatunki ON filmy.Gatunek1 = gatunki.idGatunku WHERE Tytul like (:tytul) AND Opis LIKE (:opis)");
     query.bindValue(":tytul", "%" + tytul + "%");
     query.bindValue(":opis", "%" + opis + "%");
     if (query.exec())
     {
         while (query.next())
         {
-            listaTytul.append(query.value(0).toString());
-            listaRok.append(query.value(1).toInt());
-            listaOpis.append(query.value(2).toString());
-            listaGatunek.append(query.value(3).toString());
-            idFilmu.append(query.value(4).toInt());
-            listaCenaWypozyczenia.append(query.value(5).toDouble());
+            filmy = new Filmy(query.value(0).toString(), query.value(1).toInt(), query.value(2).toString(), query.value(3).toString(), query.value(4).toDouble());
+            listaFilmy.append(filmy);
+            idFilmuVector.append(query.value(5).toInt());
             ileWierszyFilm++;
         }
     }
@@ -162,26 +160,19 @@ void ObslugaBD::wyszukajFilmTytulOpis(QString &tytul, QString &opis)
 void ObslugaBD::wyszukajFilmRokGatunek(int &rokProdukcji, int &gatunek)
 {
     ileWierszyFilm = 0;
-    listaTytul.clear();
-    listaRok.clear();
-    listaOpis.clear();
-    listaGatunek.clear();
-    idFilmu.clear();
-    listaCenaWypozyczenia.clear();
+    listaFilmy.clear();
+    idFilmuVector.clear();
     QSqlQuery query;
-    query.prepare("SELECT Tytul, RokProdukcji, Opis, Gatunek1, Nazwa, idFilmu, cenaWypozyczenia FROM filmy LEFT JOIN gatunki ON filmy.Gatunek1 = gatunki.idGatunku WHERE RokProdukcji = (:rokProdukcji) OR Gatunek1 = (:gatunek)");
+    query.prepare("SELECT tytul, rokProdukcji, nazwa, opis, cenaWypozyczenia, idFilmu FROM filmy LEFT JOIN gatunki ON filmy.Gatunek1 = gatunki.idGatunku WHERE RokProdukcji = (:rokProdukcji) OR Gatunek1 = (:gatunek)");
     query.bindValue(":rokProdukcji", rokProdukcji);
     query.bindValue(":gatunek", gatunek);
     if (query.exec())
     {
         while (query.next())
         {
-            listaTytul.append(query.value(0).toString());
-            listaRok.append(query.value(1).toInt());
-            listaOpis.append(query.value(2).toString());
-            listaGatunek.append(query.value(4).toString());
-            idFilmu.append(query.value(5).toInt());
-            listaCenaWypozyczenia.append(query.value(6).toDouble());
+            filmy = new Filmy(query.value(0).toString(), query.value(1).toInt(), query.value(2).toString(), query.value(3).toString(), query.value(4).toDouble());
+            listaFilmy.append(filmy);
+            idFilmuVector.append(query.value(5).toInt());
             ileWierszyFilm++;
         }
     }
@@ -192,11 +183,8 @@ void ObslugaBD::wyszukajFilmRokGatunek(int &rokProdukcji, int &gatunek)
 void ObslugaBD::wyszukajKlienta(QString &imie, QString &nazwisko, QString &miasto, QString &ulica)
 {
     ileWierszyKlient = 0;
-    listaImie.clear();
-    listaNazwisko.clear();
-    listaMiasto.clear();
-    listaUlica.clear();
-    idKlienta.clear();
+    idKlientaVector.clear();
+    listaKlienci.clear();
     QSqlQuery query;
     query.prepare("SELECT idKlienta, Imie, Nazwisko, Miasto, Ulica, nrDomu FROM klienci WHERE Imie LIKE (:imie) AND Nazwisko LIKE (:nazwisko) AND Miasto LIKE (:miasto) AND Ulica LIKE (:ulica)");
     query.bindValue(":imie", "%" + imie + "%");
@@ -207,12 +195,9 @@ void ObslugaBD::wyszukajKlienta(QString &imie, QString &nazwisko, QString &miast
     {
         while (query.next())
         {
-            idKlienta.append(query.value(0).toInt());
-            listaImie.append(query.value(1).toString());
-            listaNazwisko.append(query.value(2).toString());
-            listaMiasto.append(query.value(3).toString());
-            listaUlica.append(query.value(4).toString());
-            listaNrDomu.append(query.value(5).toString());
+            idKlientaVector.append(query.value(0).toInt());
+            klienci = new Klienci(query.value(1).toString(), query.value(2).toString(), query.value(3).toString(), query.value(4).toString(), query.value(5).toString());
+            listaKlienci.append(klienci);
             ileWierszyKlient++;
         }
     }
@@ -281,4 +266,49 @@ bool ObslugaBD::wykonajWypozyczenie(int &idKlienta, int &idFilmu, QDateTime &pla
     if (query.exec())
         wykonano = true;
     return wykonano;
+}
+
+void ObslugaBD::wyszukajWypozyczoneFilmyIdFilmuIdKlienta(int &idFilmu, int &idKlienta)
+{
+    ileWierszyWypozyczone = 0;
+    listaWypozyczenia.clear();
+    idFilmuVector.clear();
+    QSqlQuery query;
+    query.prepare("SELECT wypozyczenia.idFilmu, tytul, cenaWypozyczenia, wypozyczenia.idKlienta, imie, nazwisko, dataWypozyczenia, planowaDataZwrotu FROM wypozyczenia LEFT JOIN klienci ON wypozyczenia.idKlienta = klienci.idKlienta LEFT JOIN filmy ON wypozyczenia.idFilmu = filmy.idFilmu WHERE dataZwrotu IS NULL AND (wypozyczenia.idFilmu = (:idFilmu) OR wypozyczenia.idKlienta = (:idKlienta)) ORDER BY wypozyczenia.idFilmu");
+    query.bindValue(":idFilmu", idFilmu);
+    query.bindValue(":idKlienta", idKlienta);
+    if (query.exec())
+    {
+        while (query.next())
+        {
+            wypozyczenia = new Wypozyczenia(query.value(0).toInt(), query.value(1).toString(), query.value(2).toDouble(), query.value(3).toInt(), query.value(4).toString(), query.value(5).toString(), query.value(6).toDateTime(), query.value(7).toDateTime());
+            listaWypozyczenia.append(wypozyczenia);
+            idFilmuVector.append(query.value(0).toInt());
+            ileWierszyWypozyczone++;
+        }
+    }
+    else
+        qDebug() << "Nie udało się wyszukać wypożyczonych filmów";
+}
+
+void ObslugaBD::wyszukajWypozyczoneFilmyNazwisko(const QString &nazwisko)
+{
+    ileWierszyWypozyczone = 0;
+    listaWypozyczenia.clear();
+    idFilmuVector.clear();
+    QSqlQuery query;
+    query.prepare("SELECT wypozyczenia.idFilmu, tytul, cenaWypozyczenia, wypozyczenia.idKlienta, imie, nazwisko, dataWypozyczenia, planowaDataZwrotu FROM wypozyczenia LEFT JOIN klienci ON wypozyczenia.idKlienta = klienci.idKlienta LEFT JOIN filmy ON wypozyczenia.idFilmu = filmy.idFilmu WHERE dataZwrotu IS NULL AND nazwisko LIKE (:nazwisko) ORDER BY wypozyczenia.idFilmu");
+    query.bindValue(":nazwisko", "%" + nazwisko + "%");
+    if (query.exec())
+    {
+        while (query.next())
+        {
+            wypozyczenia = new Wypozyczenia(query.value(0).toInt(), query.value(1).toString(), query.value(2).toDouble(), query.value(3).toInt(), query.value(4).toString(), query.value(5).toString(), query.value(6).toDateTime(), query.value(7).toDateTime());
+            listaWypozyczenia.append(wypozyczenia);
+            idFilmuVector.append(query.value(0).toInt());
+            ileWierszyWypozyczone++;
+        }
+    }
+    else
+        qDebug() << "Nie udało się wyszukać wypożyczonych filmów";
 }

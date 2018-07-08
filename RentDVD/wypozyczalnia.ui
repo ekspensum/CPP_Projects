@@ -29,7 +29,7 @@
     <enum>QTabWidget::Rounded</enum>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="tabWypozyczenie">
     <attribute name="title">
@@ -168,7 +168,7 @@
      <property name="geometry">
       <rect>
        <x>590</x>
-       <y>11</y>
+       <y>10</y>
        <width>80</width>
        <height>25</height>
       </rect>
@@ -584,7 +584,7 @@
      <property name="geometry">
       <rect>
        <x>632</x>
-       <y>399</y>
+       <y>398</y>
        <width>80</width>
        <height>25</height>
       </rect>
@@ -616,7 +616,7 @@
      <property name="geometry">
       <rect>
        <x>748</x>
-       <y>390</y>
+       <y>387</y>
        <width>171</width>
        <height>31</height>
       </rect>
@@ -633,7 +633,7 @@
      <property name="geometry">
       <rect>
        <x>748</x>
-       <y>370</y>
+       <y>367</y>
        <width>171</width>
        <height>16</height>
       </rect>
@@ -646,7 +646,7 @@
      <property name="geometry">
       <rect>
        <x>751</x>
-       <y>530</y>
+       <y>528</y>
        <width>171</width>
        <height>16</height>
       </rect>
@@ -659,7 +659,7 @@
      <property name="geometry">
       <rect>
        <x>750</x>
-       <y>550</y>
+       <y>548</y>
        <width>171</width>
        <height>31</height>
       </rect>
@@ -670,19 +670,6 @@
        <weight>75</weight>
        <bold>true</bold>
       </font>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton">
-     <property name="geometry">
-      <rect>
-       <x>930</x>
-       <y>460</y>
-       <width>80</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>PushButton</string>
      </property>
     </widget>
    </widget>
@@ -698,6 +685,281 @@
        <width>120</width>
        <height>80</height>
       </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButtonWyszukajWypozyczoneKlientFilm">
+     <property name="geometry">
+      <rect>
+       <x>360</x>
+       <y>9</y>
+       <width>80</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Wyszukaj</string>
+     </property>
+    </widget>
+    <widget class="QTableWidget" name="tableWidgetWyszukajWypozyczone">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>70</y>
+       <width>901</width>
+       <height>201</height>
+      </rect>
+     </property>
+     <column>
+      <property name="text">
+       <string>id Filmu</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="textAlignment">
+       <set>AlignCenter</set>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Tytuł</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Cena</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>id Klienta</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="textAlignment">
+       <set>AlignCenter</set>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Imie</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Nazwisko</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Data wypożycz.</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Plan. data zwrotu</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>ZWROT</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+    </widget>
+    <widget class="QLabel" name="komunikatyWypozycz_2">
+     <property name="geometry">
+      <rect>
+       <x>660</x>
+       <y>20</y>
+       <width>421</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="textFormat">
+      <enum>Qt::AutoText</enum>
+     </property>
+     <property name="scaledContents">
+      <bool>false</bool>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_37">
+     <property name="geometry">
+      <rect>
+       <x>350</x>
+       <y>40</y>
+       <width>301</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>- wyszukiwanie dynamiczne po wprowadzaniu każdej litery</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEditIdFilmuWyszukajZwrot">
+     <property name="geometry">
+      <rect>
+       <x>138</x>
+       <y>11</y>
+       <width>40</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>60</width>
+       <height>16777215</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_38">
+     <property name="geometry">
+      <rect>
+       <x>13</x>
+       <y>11</y>
+       <width>111</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Wyszukaj wg Id filmu:</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEditIdKlientaWyszukajZwrot">
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>11</y>
+       <width>40</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>30</width>
+       <height>0</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_36">
+     <property name="geometry">
+      <rect>
+       <x>203</x>
+       <y>11</y>
+       <width>91</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>LUB    Id klienta:</string>
+     </property>
+     <property name="buddy">
+      <cstring>lineEditTytulWyszukaj</cstring>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_39">
+     <property name="geometry">
+      <rect>
+       <x>13</x>
+       <y>40</y>
+       <width>171</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Wyszukaj wg fragmentu nazwiska:</string>
+     </property>
+     <property name="buddy">
+      <cstring>lineEditOpisWyszukaj</cstring>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEditNazwiskoWyszukajZwrot">
+     <property name="geometry">
+      <rect>
+       <x>190</x>
+       <y>40</y>
+       <width>150</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>150</width>
+       <height>0</height>
+      </size>
      </property>
     </widget>
    </widget>
@@ -804,7 +1066,14 @@
        </widget>
       </item>
       <item row="2" column="1">
-       <widget class="QLineEdit" name="lineEditKodPocztowy"/>
+       <widget class="QLineEdit" name="lineEditKodPocztowy">
+        <property name="inputMask">
+         <string>99-999</string>
+        </property>
+        <property name="maxLength">
+         <number>6</number>
+        </property>
+       </widget>
       </item>
       <item row="3" column="0">
        <widget class="QLabel" name="label_25">
@@ -945,6 +1214,9 @@
           <bold>true</bold>
          </font>
         </property>
+        <property name="maxLength">
+         <number>100</number>
+        </property>
        </widget>
       </item>
      </layout>
@@ -993,6 +1265,15 @@
          <font>
           <pointsize>10</pointsize>
          </font>
+        </property>
+        <property name="inputMask">
+         <string>9999</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="maxLength">
+         <number>4</number>
         </property>
        </widget>
       </item>
@@ -1223,7 +1504,14 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QLineEdit" name="lineEditCenaWypozyczenia"/>
+       <widget class="QLineEdit" name="lineEditCenaWypozyczenia">
+        <property name="inputMask">
+         <string>99.99</string>
+        </property>
+        <property name="maxLength">
+         <number>5</number>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>

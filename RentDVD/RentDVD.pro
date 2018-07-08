@@ -28,13 +28,19 @@ SOURCES += \
         mainwindow.cpp \
     obslugabd.cpp \
     wypozyczalnia.cpp \
-    filtrznakow.cpp
+    filtrznakow.cpp \
+    klienci.cpp \
+    filmy.cpp \
+    wypozyczenia.cpp
 
 HEADERS += \
         mainwindow.h \
     obslugabd.h \
     wypozyczalnia.h \
-    filtrznakow.h
+    filtrznakow.h \
+    klienci.h \
+    filmy.h \
+    wypozyczenia.h
 
 FORMS += \
         mainwindow.ui \

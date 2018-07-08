@@ -16,6 +16,7 @@ Wypozyczalnia::Wypozyczalnia(QWidget *parent) :
     ui->comboBoxGatunekWyszukaj->addItems(bd.odczytGatunki());
     //    ui->tabWidget->setStyleSheet("QTabWidget::pane { border: 1px solid #000033; }");
     ui->tabWidget->setStyleSheet("QTabWidget::pane > QWidget { background-color: #b8b8b8; }");
+    ui->tableWidgetWyszukajFilm->setStyleSheet("QWidget::pane > QWidget { background-color: #C3C3AE; }");
     ui->tableWidgetWyszukajFilm->setColumnWidth(0,200);
     ui->tableWidgetWyszukajFilm->setColumnWidth(1,70);
     ui->tableWidgetWyszukajFilm->setColumnWidth(2,80);
@@ -23,11 +24,11 @@ Wypozyczalnia::Wypozyczalnia(QWidget *parent) :
     ui->tableWidgetWyszukajFilm->setColumnWidth(4,50);
     ui->tableWidgetWyszukajFilm->setColumnWidth(5,90);
     ui->tableWidgetWyszukajFilm->setColumnWidth(6,80);
-
+    ui->tableWidgetWyszukajKlienta->setStyleSheet("QWidget::pane > QWidget { background-color: #C3C3AE; }");
     ui->tableWidgetWyszukajKlienta->setColumnWidth(0,100);
     ui->tableWidgetWyszukajKlienta->setColumnWidth(1,120);
     ui->tableWidgetWyszukajKlienta->setColumnWidth(2,100);
-    ui->tableWidgetWyszukajKlienta->setColumnWidth(3,100);
+    ui->tableWidgetWyszukajKlienta->setColumnWidth(3,110);
     ui->tableWidgetWyszukajKlienta->setColumnWidth(4,60);
     ui->tableWidgetWyszukajKlienta->setColumnWidth(5,90);
     ui->tableWidgetWyszukajKlienta->setColumnWidth(6,80);
@@ -41,6 +42,16 @@ Wypozyczalnia::Wypozyczalnia(QWidget *parent) :
     jedenKlientRezerwuj.setText("Proszę zazanaczyć jednego klienta do rezerwacji.");
     jedenFilmWypozycz.setText("Proszę zazanaczyć jeden film do wypożyczenia.");
     jedenKlientWypozycz.setText("Proszę zazanaczyć jednego klienta do wypożyczenia.");
+    ui->tableWidgetWyszukajWypozyczone->setStyleSheet("QWidget::pane > QWidget { background-color: #C3C3AE; }");
+    ui->tableWidgetWyszukajWypozyczone->setColumnWidth(0,60);
+    ui->tableWidgetWyszukajWypozyczone->setColumnWidth(1,200);
+    ui->tableWidgetWyszukajWypozyczone->setColumnWidth(2,60);
+    ui->tableWidgetWyszukajWypozyczone->setColumnWidth(3,60);
+    ui->tableWidgetWyszukajWypozyczone->setColumnWidth(4,60);
+    ui->tableWidgetWyszukajWypozyczone->setColumnWidth(5,110);
+    ui->tableWidgetWyszukajWypozyczone->setColumnWidth(6,110);
+    ui->tableWidgetWyszukajWypozyczone->setColumnWidth(7,110);
+    ui->tableWidgetWyszukajWypozyczone->setColumnWidth(8,60);
 
 }
 
@@ -151,17 +162,21 @@ void Wypozyczalnia::on_pushButtonWyszukajRokGatunek_clicked()
     listaBoxWypozyczenie.clear();
     listaBoxRezerwacja.clear();
     bd.wyszukajFilmRokGatunek(rok, gatunek);
-    ui->tableWidgetWyszukajFilm->setRowCount(bd.ileWierszyFilm);
+    ui->tableWidgetWyszukajFilm->setRowCount(ObslugaBD::ileWierszyFilm);
     for(int i=0; i<bd.ileWierszyFilm; i++)
     {
-        ui->tableWidgetWyszukajFilm->setItem(i,0, new QTableWidgetItem(bd.listaTytul.at(i)));
-        ui->tableWidgetWyszukajFilm->setItem(i,1, new QTableWidgetItem(QString("%1").arg(bd.listaRok.at(i))));
-        ui->tableWidgetWyszukajFilm->setItem(i,2, new QTableWidgetItem(bd.listaGatunek.at(i)));
-        ui->tableWidgetWyszukajFilm->setItem(i,3, new QTableWidgetItem(bd.listaOpis.at(i)));
-        ui->tableWidgetWyszukajFilm->setItem(i,4, new QTableWidgetItem(QString("%1").arg(bd.listaCenaWypozyczenia.at(i))));
-        listaBoxWypozyczenie.append(new QCheckBox());
+        ui->tableWidgetWyszukajFilm->setItem(i,0, new QTableWidgetItem(bd.listaFilmy.at(i)->getTytul()));
+        ui->tableWidgetWyszukajFilm->setItem(i,1, new QTableWidgetItem(QString("%1").arg(bd.listaFilmy.at(i)->getRokProdukcji())));
+        ui->tableWidgetWyszukajFilm->setItem(i,2, new QTableWidgetItem(bd.listaFilmy.at(i)->getNazwaGatunku()));
+        ui->tableWidgetWyszukajFilm->setItem(i,3, new QTableWidgetItem(bd.listaFilmy.at(i)->getOpis()));
+        ui->tableWidgetWyszukajFilm->setItem(i,4, new QTableWidgetItem(QString("%1").arg(bd.listaFilmy.at(i)->getCenaWypozyczenia())));
+        boxWypozyczenie = new QCheckBox();
+        boxWypozyczenie->setStyleSheet("margin-left:40%; margin-right:60%;");
+        listaBoxWypozyczenie.append(boxWypozyczenie);
         ui->tableWidgetWyszukajFilm->setCellWidget(i,5, listaBoxWypozyczenie.value(i));
-        listaBoxRezerwacja.append(new QCheckBox());
+        boxRezerwacja = new QCheckBox();
+        boxRezerwacja->setStyleSheet("margin-left:40%; margin-right:60%;");
+        listaBoxRezerwacja.append(boxRezerwacja);
         ui->tableWidgetWyszukajFilm->setCellWidget(i,6, listaBoxRezerwacja.value(i));
     }
 }
@@ -175,17 +190,21 @@ void Wypozyczalnia::on_pushButtonWyszukajTytulOpis_clicked()
     listaBoxWypozyczenie.clear();
     listaBoxRezerwacja.clear();
     bd.wyszukajFilmTytulOpis(tytul, opis);
-    ui->tableWidgetWyszukajFilm->setRowCount(bd.ileWierszyFilm);
-    for(int i=0; i<bd.ileWierszyFilm; i++)
+    ui->tableWidgetWyszukajFilm->setRowCount(ObslugaBD::ileWierszyFilm);
+    for(int i=0; i<ObslugaBD::ileWierszyFilm; i++)
     {
-        ui->tableWidgetWyszukajFilm->setItem(i,0, new QTableWidgetItem(bd.listaTytul.at(i)));
-        ui->tableWidgetWyszukajFilm->setItem(i,1, new QTableWidgetItem(QString("%1").arg(bd.listaRok.at(i))));
-        ui->tableWidgetWyszukajFilm->setItem(i,2, new QTableWidgetItem(bd.listaGatunek.at(i)));
-        ui->tableWidgetWyszukajFilm->setItem(i,3, new QTableWidgetItem(bd.listaOpis.at(i)));
-        ui->tableWidgetWyszukajFilm->setItem(i,4, new QTableWidgetItem(QString("%1").arg(bd.listaCenaWypozyczenia.at(i))));
-        listaBoxWypozyczenie.append(new QCheckBox());
+        ui->tableWidgetWyszukajFilm->setItem(i,0, new QTableWidgetItem(bd.listaFilmy.at(i)->getTytul()));
+        ui->tableWidgetWyszukajFilm->setItem(i,1, new QTableWidgetItem(QString("%1").arg(bd.listaFilmy.at(i)->getRokProdukcji())));
+        ui->tableWidgetWyszukajFilm->setItem(i,2, new QTableWidgetItem(bd.listaFilmy.at(i)->getNazwaGatunku()));
+        ui->tableWidgetWyszukajFilm->setItem(i,3, new QTableWidgetItem(bd.listaFilmy.at(i)->getOpis()));
+        ui->tableWidgetWyszukajFilm->setItem(i,4, new QTableWidgetItem(QString("%1").arg(bd.listaFilmy.at(i)->getCenaWypozyczenia())));
+        boxWypozyczenie = new QCheckBox();
+        boxWypozyczenie->setStyleSheet("margin-left:40%; margin-right:60%;");
+        listaBoxWypozyczenie.append(boxWypozyczenie);
         ui->tableWidgetWyszukajFilm->setCellWidget(i,5, listaBoxWypozyczenie.value(i));
-        listaBoxRezerwacja.append(new QCheckBox());
+        boxRezerwacja = new QCheckBox();
+        boxRezerwacja->setStyleSheet("margin-left:40%; margin-right:60%;");
+        listaBoxRezerwacja.append(boxRezerwacja);
         ui->tableWidgetWyszukajFilm->setCellWidget(i,6, listaBoxRezerwacja.value(i));
     }
 }
@@ -202,14 +221,18 @@ void Wypozyczalnia::on_pushButtonWyszukajKlienta_clicked()
     ui->tableWidgetWyszukajKlienta->setRowCount(ObslugaBD::ileWierszyKlient);
     for(int i=0; i<ObslugaBD::ileWierszyKlient; i++)
     {
-        ui->tableWidgetWyszukajKlienta->setItem(i,0, new QTableWidgetItem(bd.listaImie.at(i)));
-        ui->tableWidgetWyszukajKlienta->setItem(i,1, new QTableWidgetItem(bd.listaNazwisko.at(i)));
-        ui->tableWidgetWyszukajKlienta->setItem(i,2, new QTableWidgetItem(bd.listaMiasto.at(i)));
-        ui->tableWidgetWyszukajKlienta->setItem(i,3, new QTableWidgetItem(bd.listaUlica.at(i)));
-        ui->tableWidgetWyszukajKlienta->setItem(i,4, new QTableWidgetItem(bd.listaNrDomu.at(i)));
-        tablicaBoxWypozyczenie[i] = new QCheckBox();
+        ui->tableWidgetWyszukajKlienta->setItem(i,0, new QTableWidgetItem(bd.listaKlienci.at(i)->getImie()));
+        ui->tableWidgetWyszukajKlienta->setItem(i,1, new QTableWidgetItem(bd.listaKlienci.at(i)->getNazwisko()));
+        ui->tableWidgetWyszukajKlienta->setItem(i,2, new QTableWidgetItem(bd.listaKlienci.at(i)->getMiasto()));
+        ui->tableWidgetWyszukajKlienta->setItem(i,3, new QTableWidgetItem(bd.listaKlienci.at(i)->getUlica()));
+        ui->tableWidgetWyszukajKlienta->setItem(i,4, new QTableWidgetItem(bd.listaKlienci.at(i)->getNrDomu()));
+        boxWypozyczenie = new QCheckBox();
+        boxWypozyczenie->setStyleSheet("margin-left:40%; margin-right:60%;");
+        tablicaBoxWypozyczenie[i] = boxWypozyczenie;
         ui->tableWidgetWyszukajKlienta->setCellWidget(i,5, tablicaBoxWypozyczenie[i]);
-        tablicaBoxRezerwacja[i] = new QCheckBox();
+        boxRezerwacja = new QCheckBox();
+        boxRezerwacja->setStyleSheet("margin-left:40%; margin-right:60%;");
+        tablicaBoxRezerwacja[i] = boxRezerwacja;
         ui->tableWidgetWyszukajKlienta->setCellWidget(i,6, tablicaBoxRezerwacja[i]);
     }
 }
@@ -245,12 +268,12 @@ void Wypozyczalnia::on_pushButtonRezerwacja_clicked()
         for(int i=0; i<ObslugaBD::ileWierszyFilm; i++)
         {
             if (listaBoxRezerwacja.value(i)->isChecked())
-                wybraneIdFilmu = ObslugaBD::idFilmu.at(i);
+                wybraneIdFilmu = ObslugaBD::idFilmuVector.at(i);
         }
         for(int i=0; i<ObslugaBD::ileWierszyKlient; i++)
         {
             if (tablicaBoxRezerwacja[i]->isChecked())
-                wybraneIdKlienta = ObslugaBD::idKlienta.at(i);
+                wybraneIdKlienta = ObslugaBD::idKlientaVector.at(i);
         }
         if (bd.czyMozliwaRezerwacjaWypozyczenie(wybraneIdFilmu))
         {
@@ -296,12 +319,12 @@ void Wypozyczalnia::on_pushButtonWypozyczenie_clicked()
         for(int i=0; i<ObslugaBD::ileWierszyFilm; i++)
         {
             if (listaBoxWypozyczenie.value(i)->isChecked())
-                wybraneIdFilmu = ObslugaBD::idFilmu.at(i);
+                wybraneIdFilmu = ObslugaBD::idFilmuVector.at(i);
         }
         for(int i=0; i<ObslugaBD::ileWierszyKlient; i++)
         {
             if (tablicaBoxWypozyczenie[i]->isChecked())
-                wybraneIdKlienta = ObslugaBD::idKlienta.at(i);
+                wybraneIdKlienta = ObslugaBD::idKlientaVector.at(i);
         }
         if (bd.czyMozliwaRezerwacjaWypozyczenie(wybraneIdFilmu))
         {
@@ -316,9 +339,57 @@ void Wypozyczalnia::on_pushButtonWypozyczenie_clicked()
     }
 }
 
-void Wypozyczalnia::on_pushButton_clicked()
+void Wypozyczalnia::on_pushButtonWyszukajWypozyczoneKlientFilm_clicked()
 {
     ObslugaBD bd;
-    int id = 1;
-    bd.czyMozliwaRezerwacjaWypozyczenie(id);
+    int idFilmu, idKlienta;
+    idFilmu = ui->lineEditIdFilmuWyszukajZwrot->text().toInt();
+    idKlienta = ui->lineEditIdKlientaWyszukajZwrot->text().toInt();
+    listaBoxWypozyczenie.clear();
+    bd.wyszukajWypozyczoneFilmyIdFilmuIdKlienta(idFilmu, idKlienta);
+    ui->tableWidgetWyszukajWypozyczone->setRowCount(ObslugaBD::ileWierszyWypozyczone);
+    for(int i=0; i<ObslugaBD::ileWierszyWypozyczone; i++)
+    {
+        ui->tableWidgetWyszukajWypozyczone->setItem(i,0, new QTableWidgetItem(QString("%1").arg(bd.listaWypozyczenia.at(i)->getIdFilmu())));
+        ui->tableWidgetWyszukajWypozyczone->setItem(i,1, new QTableWidgetItem(bd.listaWypozyczenia.at(i)->getTytul()));
+        ui->tableWidgetWyszukajWypozyczone->setItem(i,2, new QTableWidgetItem(QString("%1").arg(bd.listaWypozyczenia.at(i)->getCenaWypozyczenia())));
+        ui->tableWidgetWyszukajWypozyczone->setItem(i,3, new QTableWidgetItem(QString("%1").arg(bd.listaWypozyczenia.at(i)->getIdKlienta())));
+        ui->tableWidgetWyszukajWypozyczone->setItem(i,4, new QTableWidgetItem(bd.listaWypozyczenia.at(i)->getImie()));
+        ui->tableWidgetWyszukajWypozyczone->setItem(i,5, new QTableWidgetItem(bd.listaWypozyczenia.at(i)->getNazwisko()));
+        ui->tableWidgetWyszukajWypozyczone->setItem(i,6, new QTableWidgetItem(bd.listaWypozyczenia.at(i)->getDataWypozyczenia().toString("yyyy-MM-dd hh:mm")));
+        ui->tableWidgetWyszukajWypozyczone->setItem(i,7, new QTableWidgetItem(bd.listaWypozyczenia.at(i)->getPlanowaDataZwrotu().toString("yyyy-MM-dd hh:mm")));
+        if (QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm") > ui->tableWidgetWyszukajWypozyczone->item(i,7)->text())
+            ui->tableWidgetWyszukajWypozyczone->item(i,7)->setBackgroundColor(Qt::red);
+        boxWypozyczenie = new QCheckBox();
+        boxWypozyczenie->setStyleSheet("margin-left:25%;");
+        listaBoxWypozyczenie.append(boxWypozyczenie);
+        ui->tableWidgetWyszukajWypozyczone->setCellWidget(i,8, listaBoxWypozyczenie.value(i));
+    }
+    ui->lineEditIdFilmuWyszukajZwrot->clear();
+    ui->lineEditIdKlientaWyszukajZwrot->clear();
+}
+
+void Wypozyczalnia::on_lineEditNazwiskoWyszukajZwrot_textChanged(const QString &nazwisko)
+{
+    ObslugaBD bd;
+    listaBoxWypozyczenie.clear();
+    bd.wyszukajWypozyczoneFilmyNazwisko(nazwisko);
+    ui->tableWidgetWyszukajWypozyczone->setRowCount(ObslugaBD::ileWierszyWypozyczone);
+    for(int i=0; i<ObslugaBD::ileWierszyWypozyczone; i++)
+    {
+        ui->tableWidgetWyszukajWypozyczone->setItem(i,0, new QTableWidgetItem(QString("%1").arg(bd.listaWypozyczenia.at(i)->getIdFilmu())));
+        ui->tableWidgetWyszukajWypozyczone->setItem(i,1, new QTableWidgetItem(bd.listaWypozyczenia.at(i)->getTytul()));
+        ui->tableWidgetWyszukajWypozyczone->setItem(i,2, new QTableWidgetItem(QString("%1").arg(bd.listaWypozyczenia.at(i)->getCenaWypozyczenia())));
+        ui->tableWidgetWyszukajWypozyczone->setItem(i,3, new QTableWidgetItem(QString("%1").arg(bd.listaWypozyczenia.at(i)->getIdKlienta())));
+        ui->tableWidgetWyszukajWypozyczone->setItem(i,4, new QTableWidgetItem(bd.listaWypozyczenia.at(i)->getImie()));
+        ui->tableWidgetWyszukajWypozyczone->setItem(i,5, new QTableWidgetItem(bd.listaWypozyczenia.at(i)->getNazwisko()));
+        ui->tableWidgetWyszukajWypozyczone->setItem(i,6, new QTableWidgetItem(bd.listaWypozyczenia.at(i)->getDataWypozyczenia().toString("yyyy-MM-dd hh:mm")));
+        ui->tableWidgetWyszukajWypozyczone->setItem(i,7, new QTableWidgetItem(bd.listaWypozyczenia.at(i)->getPlanowaDataZwrotu().toString("yyyy-MM-dd hh:mm")));
+        if (QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm") > ui->tableWidgetWyszukajWypozyczone->item(i,7)->text())
+            ui->tableWidgetWyszukajWypozyczone->item(i,7)->setBackgroundColor(Qt::red);
+        boxWypozyczenie = new QCheckBox();
+        boxWypozyczenie->setStyleSheet("margin-left:25%");
+        listaBoxWypozyczenie.append(boxWypozyczenie);
+        ui->tableWidgetWyszukajWypozyczone->setCellWidget(i,8, listaBoxWypozyczenie.value(i));
+    }
 }
