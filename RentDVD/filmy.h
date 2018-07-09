@@ -15,7 +15,7 @@ protected:
 
 public:
     Filmy();
-    Filmy(QString tytul, int rokProdukcji, QString nazwaGatunku, QString opis, double cenaWypozyczenia);
+    Filmy(QString tytul, int rokProdukcji, QString nazwaGatunku, QString opis, double cenaWypozyczenia, int idFilmu);
 
     int getIdFilmu() const;
     QString getTytul() const;

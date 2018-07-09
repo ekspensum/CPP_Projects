@@ -25,11 +25,17 @@
      <height>641</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <weight>50</weight>
+     <bold>false</bold>
+    </font>
+   </property>
    <property name="tabShape">
     <enum>QTabWidget::Rounded</enum>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="tabWypozyczenie">
     <attribute name="title">
@@ -44,6 +50,17 @@
        <height>261</height>
       </rect>
      </property>
+     <column>
+      <property name="text">
+       <string>Id</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
      <column>
       <property name="text">
        <string>Tytuł</string>
@@ -199,10 +216,10 @@
     <widget class="QLabel" name="komunikatyWypozycz">
      <property name="geometry">
       <rect>
-       <x>740</x>
-       <y>20</y>
-       <width>341</width>
-       <height>41</height>
+       <x>710</x>
+       <y>10</y>
+       <width>371</width>
+       <height>51</height>
       </rect>
      </property>
      <property name="font">
@@ -211,6 +228,9 @@
        <weight>75</weight>
        <bold>true</bold>
       </font>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
      </property>
      <property name="text">
       <string/>
@@ -307,7 +327,7 @@
       <rect>
        <x>320</x>
        <y>10</y>
-       <width>236</width>
+       <width>249</width>
        <height>24</height>
       </rect>
      </property>
@@ -339,7 +359,7 @@
       <rect>
        <x>10</x>
        <y>10</y>
-       <width>210</width>
+       <width>224</width>
        <height>24</height>
       </rect>
      </property>
@@ -371,7 +391,7 @@
       <rect>
        <x>10</x>
        <y>50</y>
-       <width>119</width>
+       <width>125</width>
        <height>24</height>
       </rect>
      </property>
@@ -410,6 +430,17 @@
        <height>161</height>
       </rect>
      </property>
+     <column>
+      <property name="text">
+       <string>Id</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
      <column>
       <property name="text">
        <string>Imię</string>
@@ -707,6 +738,17 @@
      </property>
      <column>
       <property name="text">
+       <string>Id</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
        <string>id Filmu</string>
       </property>
       <property name="font">
@@ -716,7 +758,7 @@
        </font>
       </property>
       <property name="textAlignment">
-       <set>AlignCenter</set>
+       <set>AlignLeading|AlignVCenter</set>
       </property>
      </column>
      <column>
@@ -752,7 +794,7 @@
        </font>
       </property>
       <property name="textAlignment">
-       <set>AlignCenter</set>
+       <set>AlignLeading|AlignVCenter</set>
       </property>
      </column>
      <column>
@@ -814,9 +856,9 @@
     <widget class="QLabel" name="komunikatyZwrotOdwolanie">
      <property name="geometry">
       <rect>
-       <x>770</x>
+       <x>710</x>
        <y>10</y>
-       <width>311</width>
+       <width>371</width>
        <height>51</height>
       </rect>
      </property>
@@ -826,6 +868,9 @@
        <weight>75</weight>
        <bold>true</bold>
       </font>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
      </property>
      <property name="text">
       <string/>
@@ -919,6 +964,17 @@
        <height>201</height>
       </rect>
      </property>
+     <column>
+      <property name="text">
+       <string>Id</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
      <column>
       <property name="text">
        <string>id Filmu</string>
@@ -1309,14 +1365,14 @@
    </widget>
    <widget class="QWidget" name="tabDodajKlienta">
     <attribute name="title">
-     <string>Dodaj Klienta</string>
+     <string>Dodaj / Edytuj Klienta</string>
     </attribute>
     <widget class="QPushButton" name="pushButtonDodajKlienta">
      <property name="geometry">
       <rect>
-       <x>232</x>
-       <y>250</y>
-       <width>80</width>
+       <x>410</x>
+       <y>40</y>
+       <width>140</width>
        <height>25</height>
       </rect>
      </property>
@@ -1327,29 +1383,13 @@
       </font>
      </property>
      <property name="text">
-      <string>Dodaj</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="komunikatyDodajKlienta">
-     <property name="geometry">
-      <rect>
-       <x>60</x>
-       <y>300</y>
-       <width>311</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
+      <string>Dodaj nowego Klienta</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_29">
      <property name="geometry">
       <rect>
-       <x>330</x>
+       <x>270</x>
        <y>99</y>
        <width>131</width>
        <height>16</height>
@@ -1362,7 +1402,7 @@
     <widget class="QLabel" name="label_30">
      <property name="geometry">
       <rect>
-       <x>330</x>
+       <x>270</x>
        <y>210</y>
        <width>131</width>
        <height>16</height>
@@ -1372,99 +1412,453 @@
       <string>* pole NIE jest wymagane</string>
      </property>
     </widget>
-    <widget class="QWidget" name="layoutWidget1">
+    <widget class="QLineEdit" name="lineEditEmail">
      <property name="geometry">
       <rect>
-       <x>60</x>
-       <y>38</y>
-       <width>251</width>
-       <height>192</height>
+       <x>138</x>
+       <y>235</y>
+       <width>108</width>
+       <height>22</height>
       </rect>
      </property>
-     <layout class="QGridLayout" name="gridLayout_10">
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_22">
-        <property name="text">
-         <string>Imię:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="lineEditImieKlienta"/>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_23">
-        <property name="text">
-         <string>Nazwisko:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLineEdit" name="lineEditNazwiskoKlienta"/>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="label_24">
-        <property name="text">
-         <string>Kod pocztowy:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QLineEdit" name="lineEditKodPocztowy">
-        <property name="inputMask">
-         <string>99-999</string>
-        </property>
-        <property name="maxLength">
-         <number>6</number>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="label_25">
-        <property name="text">
-         <string>Miasto:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QLineEdit" name="lineEditMiasto"/>
-      </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="label_26">
-        <property name="text">
-         <string>Ulica:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="1">
-       <widget class="QLineEdit" name="lineEditUlica"/>
-      </item>
-      <item row="5" column="0">
-       <widget class="QLabel" name="label_27">
-        <property name="text">
-         <string>Nr domu:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="1">
-       <widget class="QLineEdit" name="lineEditNrDomu"/>
-      </item>
-      <item row="6" column="0">
-       <widget class="QLabel" name="label_28">
-        <property name="text">
-         <string>Nr lokalu:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="1">
-       <widget class="QLineEdit" name="lineEditNrLokalu"/>
-      </item>
-     </layout>
+    </widget>
+    <widget class="QLabel" name="label_44">
+     <property name="geometry">
+      <rect>
+       <x>61</x>
+       <y>235</y>
+       <width>45</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>E-mail:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_45">
+     <property name="geometry">
+      <rect>
+       <x>270</x>
+       <y>240</y>
+       <width>131</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>* pole NIE jest wymagane</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEditNazwiskoWyszukajEdytuj">
+     <property name="geometry">
+      <rect>
+       <x>197</x>
+       <y>320</y>
+       <width>150</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>150</width>
+       <height>0</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QTableWidget" name="tableWidgetWyszukajKlientaEdycja">
+     <property name="geometry">
+      <rect>
+       <x>17</x>
+       <y>350</y>
+       <width>941</width>
+       <height>201</height>
+      </rect>
+     </property>
+     <column>
+      <property name="text">
+       <string>Id</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Imię</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Nazwisko</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Kod poczt.</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Miasto</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Ulica</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Nr domu</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Nr lokalu</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>E-mail</string>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>8</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>EDYTUJ</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+    </widget>
+    <widget class="QLabel" name="label_46">
+     <property name="geometry">
+      <rect>
+       <x>357</x>
+       <y>320</y>
+       <width>301</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>- wyszukiwanie dynamiczne po wprowadzaniu każdej litery</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_47">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>320</y>
+       <width>171</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Wyszukaj wg fragmentu nazwiska:</string>
+     </property>
+     <property name="buddy">
+      <cstring>lineEditOpisWyszukaj</cstring>
+     </property>
+    </widget>
+    <widget class="QLabel" name="komunikatyDodajKlienta">
+     <property name="geometry">
+      <rect>
+       <x>710</x>
+       <y>10</y>
+       <width>371</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButtonDodajKlienta_2">
+     <property name="geometry">
+      <rect>
+       <x>978</x>
+       <y>350</y>
+       <width>100</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Zapisz zmiany</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_48">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>290</y>
+       <width>141</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Edytuj wybranego Klienta:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_49">
+     <property name="geometry">
+      <rect>
+       <x>36</x>
+       <y>10</y>
+       <width>141</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Dodaj nowego Klienta:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_22">
+     <property name="geometry">
+      <rect>
+       <x>61</x>
+       <y>39</y>
+       <width>24</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Imię:</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEditImieKlienta">
+     <property name="geometry">
+      <rect>
+       <x>138</x>
+       <y>39</y>
+       <width>108</width>
+       <height>22</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_23">
+     <property name="geometry">
+      <rect>
+       <x>61</x>
+       <y>67</y>
+       <width>48</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Nazwisko:</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEditNazwiskoKlienta">
+     <property name="geometry">
+      <rect>
+       <x>138</x>
+       <y>67</y>
+       <width>108</width>
+       <height>22</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_25">
+     <property name="geometry">
+      <rect>
+       <x>61</x>
+       <y>123</y>
+       <width>35</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Miasto:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_24">
+     <property name="geometry">
+      <rect>
+       <x>61</x>
+       <y>95</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Kod pocztowy:</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEditKodPocztowy">
+     <property name="geometry">
+      <rect>
+       <x>138</x>
+       <y>95</y>
+       <width>108</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="inputMask">
+      <string>99-999</string>
+     </property>
+     <property name="maxLength">
+      <number>6</number>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEditMiasto">
+     <property name="geometry">
+      <rect>
+       <x>138</x>
+       <y>123</y>
+       <width>108</width>
+       <height>22</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_26">
+     <property name="geometry">
+      <rect>
+       <x>61</x>
+       <y>151</y>
+       <width>26</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Ulica:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_27">
+     <property name="geometry">
+      <rect>
+       <x>61</x>
+       <y>179</y>
+       <width>44</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Nr domu:</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEditUlica">
+     <property name="geometry">
+      <rect>
+       <x>138</x>
+       <y>151</y>
+       <width>108</width>
+       <height>22</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEditNrDomu">
+     <property name="geometry">
+      <rect>
+       <x>138</x>
+       <y>179</y>
+       <width>108</width>
+       <height>22</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_28">
+     <property name="geometry">
+      <rect>
+       <x>61</x>
+       <y>207</y>
+       <width>45</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Nr lokalu:</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEditNrLokalu">
+     <property name="geometry">
+      <rect>
+       <x>138</x>
+       <y>207</y>
+       <width>108</width>
+       <height>22</height>
+      </rect>
+     </property>
     </widget>
    </widget>
    <widget class="QWidget" name="tabDodajFilm">
     <attribute name="title">
-     <string>Dodaj film</string>
+     <string>Dodaj / Edytuj film</string>
     </attribute>
     <widget class="QPushButton" name="pushButtonDodajFilm">
      <property name="geometry">
@@ -1495,10 +1889,10 @@
     <widget class="QLabel" name="komunikatyDodajFilm">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>451</y>
-       <width>601</width>
-       <height>21</height>
+       <x>710</x>
+       <y>10</y>
+       <width>371</width>
+       <height>51</height>
       </rect>
      </property>
      <property name="sizePolicy">
@@ -1509,12 +1903,19 @@
      </property>
      <property name="font">
       <font>
+       <pointsize>9</pointsize>
        <weight>75</weight>
        <bold>true</bold>
       </font>
      </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
      <property name="text">
       <string/>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
      </property>
     </widget>
     <widget class="QWidget" name="layoutWidget5">
@@ -1628,7 +2029,7 @@
       <rect>
        <x>20</x>
        <y>320</y>
-       <width>196</width>
+       <width>198</width>
        <height>25</height>
       </rect>
      </property>
@@ -1679,7 +2080,7 @@
       <rect>
        <x>20</x>
        <y>351</y>
-       <width>373</width>
+       <width>384</width>
        <height>80</height>
       </rect>
      </property>
@@ -1901,7 +2302,7 @@
    </widget>
    <widget class="QWidget" name="tabDodajUzytkownika">
     <attribute name="title">
-     <string>Dodaj Użytkownika</string>
+     <string>Dodaj / Edytuj Użytkownika</string>
     </attribute>
     <widget class="QWidget" name="layoutWidget11">
      <property name="geometry">
@@ -2023,17 +2424,24 @@
     <widget class="QLabel" name="komunikatyDodajUzytkownika">
      <property name="geometry">
       <rect>
-       <x>60</x>
-       <y>200</y>
-       <width>311</width>
-       <height>41</height>
+       <x>710</x>
+       <y>10</y>
+       <width>371</width>
+       <height>51</height>
       </rect>
      </property>
      <property name="font">
       <font>
+       <pointsize>9</pointsize>
        <weight>75</weight>
        <bold>true</bold>
       </font>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
      </property>
     </widget>
    </widget>

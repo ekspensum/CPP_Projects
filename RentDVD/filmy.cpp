@@ -6,13 +6,14 @@ Filmy::Filmy()
     
 }
 
-Filmy::Filmy(QString tytul, int rokProdukcji, QString nazwaGatunku, QString opis, double cenaWypozyczenia)
+Filmy::Filmy(QString tytul, int rokProdukcji, QString nazwaGatunku, QString opis, double cenaWypozyczenia, int idFilmu)
 {
     this->tytul = tytul;
     this->rokProdukcji = rokProdukcji;
     this->nazwaGatunku = nazwaGatunku;
     this->opis = opis;
     this->cenaWypozyczenia = cenaWypozyczenia;
+    this->idFilmu = idFilmu;
 }
 
 int Filmy::getIdFilmu() const

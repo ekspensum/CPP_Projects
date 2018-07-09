@@ -6,23 +6,31 @@
 class Klienci
 {
 protected:
+    int idKlienta;
     QString imie;
     QString nazwisko;
+    QString kod;
     QString miasto;
     QString ulica;
     QString nrDomu;
-    int idKlienta;
+    QString nrLokalu;
+    QString email;
 
 public:
     Klienci();
-    Klienci(QString imie, QString nazwisko, QString miasto, QString ulica, QString nrDomu);
+    Klienci(int idKlienta, QString imie, QString nazwisko, QString miasto, QString ulica, QString nrDomu);
+    Klienci(int idKlienta, QString imie, QString nazwisko, QString kod, QString miasto, QString ulica, QString nrDomu, QString nrLokalu, QString email);
 
     int getIdKlienta() const;
     QString getImie() const;
     QString getNazwisko() const;
+    QString getKod() const;
     QString getMiasto() const;
     QString getUlica() const;
     QString getNrDomu() const;
+    QString getNrLokalu() const;
+    QString getEmail() const;
+
 };
 
 #endif // KLIENCI_H

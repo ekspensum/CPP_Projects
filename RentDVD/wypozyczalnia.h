@@ -50,14 +50,20 @@ private slots:
 
     void on_pushButtonOdwolanie_clicked();
 
+    void on_lineEditNazwiskoWyszukajEdytuj_textChanged(const QString &nazwisko);
+
+    void on_pushButtonDodajKlienta_2_clicked();
+
 private:
     Ui::Wypozyczalnia *ui;
     QCheckBox *boxWypozyczenie;
     QCheckBox *boxRezerwacja;
+    QCheckBox *boxKlienci;
     QList<QCheckBox *> listaBoxWypozyczenie;
     QList<QCheckBox *> listaBoxRezerwacja;
     QCheckBox **tablicaBoxWypozyczenie;
     QCheckBox **tablicaBoxRezerwacja;
+    QCheckBox **tablicaBoxKlienci;
     QDateTime planowaDataZwrotu;
     QDateTime czasRezerwacji;
     QPalette p;
@@ -67,6 +73,7 @@ private:
     QMessageBox jedenFilmOdwolaj;
     QMessageBox jedenKlientWypozycz;
     QMessageBox jedenKlientRezerwuj;
+    QMessageBox jedenKlientEdytuj;
 
 };
 

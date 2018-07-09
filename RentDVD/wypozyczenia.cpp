@@ -15,12 +15,17 @@ QDateTime Wypozyczenia::getDataZwrotu() const
     return dataZwrotu;
 }
 
+int Wypozyczenia::getIdWypozyczenia() const
+{
+    return idWypozyczenia;
+}
+
 Wypozyczenia::Wypozyczenia()
 {
 
 }
 
-Wypozyczenia::Wypozyczenia(int idFilmu, QString tytul, double cenaWypozyczenia, int idKlienta, QString imie, QString nazwisko, QDateTime dataWypozyczenia, QDateTime planowaDataZwrotu)
+Wypozyczenia::Wypozyczenia(int idFilmu, QString tytul, double cenaWypozyczenia, int idKlienta, QString imie, QString nazwisko, QDateTime dataWypozyczenia, QDateTime planowaDataZwrotu, int idWypozyczenia)
 {
     this->idFilmu = idFilmu;
     this->tytul = tytul;
@@ -30,4 +35,5 @@ Wypozyczenia::Wypozyczenia(int idFilmu, QString tytul, double cenaWypozyczenia, 
     this->nazwisko = nazwisko;
     this->dataWypozyczenia = dataWypozyczenia;
     this->planowaDataZwrotu = planowaDataZwrotu;
+    this->idWypozyczenia = idWypozyczenia;
 }

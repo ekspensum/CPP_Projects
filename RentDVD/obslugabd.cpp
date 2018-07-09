@@ -7,10 +7,6 @@ int ObslugaBD::ileWierszyFilm;
 int ObslugaBD::ileWierszyKlient;
 int ObslugaBD::ileWierszyWypozyczone;
 int ObslugaBD::ileWierszyRezerwacja;
-QVector<int> ObslugaBD::idFilmuVector;
-QVector<int> ObslugaBD::idKlientaVector;
-QVector<int> ObslugaBD::idWypozyczeniaVector;
-QVector<int> ObslugaBD::idRezerwacjiVector;
 
 ObslugaBD::ObslugaBD()
 {
@@ -81,11 +77,11 @@ bool ObslugaBD::dodajUzytkownika(QString &login, QString &haslo, QString &imie, 
     return dodano;
 }
 
-bool ObslugaBD::dodajKlienta(QString &imie, QString &nazwisko, QString &kodPocztowy, QString &miasto, QString &ulica, QString &nrDomu, QString &nrLokalu)
+bool ObslugaBD::dodajKlienta(QString &imie, QString &nazwisko, QString &kodPocztowy, QString &miasto, QString &ulica, QString &nrDomu, QString &nrLokalu, QString &email)
 {
     bool dodano = false;
     QSqlQuery query;
-    query.prepare("insert into klienci (imie, nazwisko, kod, miasto, ulica, nrDomu, nrLokalu, dataRejestracji, idUzytkownika) values (:imie, :nazwisko, :kodPocztowy, :miasto, :ulica, :nrDomu, :nrLokalu, :dataRejestracji, :idUzytkownika)");
+    query.prepare("insert into klienci (imie, nazwisko, kod, miasto, ulica, nrDomu, nrLokalu, emial, dataRejestracji, idUzytkownika) values (:imie, :nazwisko, :kodPocztowy, :miasto, :ulica, :nrDomu, :nrLokalu, :email, :dataRejestracji, :idUzytkownika)");
     query.bindValue(":imie", imie);
     query.bindValue(":nazwisko", nazwisko);
     query.bindValue(":kodPocztowy", kodPocztowy);
@@ -93,6 +89,7 @@ bool ObslugaBD::dodajKlienta(QString &imie, QString &nazwisko, QString &kodPoczt
     query.bindValue(":ulica", ulica);
     query.bindValue(":nrDomu", nrDomu);
     query.bindValue(":nrLokalu", nrLokalu);
+    query.bindValue(":email", email);
     query.bindValue(":dataRejestracji", QDateTime::currentDateTime());
     query.bindValue(":idUzytkownika", ObslugaBD::idZalogowanyUzytkownik);
     if (query.exec())
@@ -141,18 +138,16 @@ void ObslugaBD::wyszukajFilmTytulOpis(QString &tytul, QString &opis)
 {
     ileWierszyFilm = 0;
     listaFilmy.clear();
-    idFilmuVector.clear();
     QSqlQuery query;
-    query.prepare("SELECT tytul, rokProdukcji, nazwa, opis, cenaWypozyczenia, idFilmu FROM filmy LEFT JOIN gatunki ON filmy.Gatunek1 = gatunki.idGatunku WHERE Tytul like (:tytul) AND Opis LIKE (:opis)");
+    query.prepare("SELECT tytul, rokProdukcji, nazwa, opis, cenaWypozyczenia, idFilmu FROM filmy LEFT JOIN gatunki ON filmy.Gatunek1 = gatunki.idGatunku WHERE Tytul like (:tytul) AND Opis LIKE (:opis) ORDER BY idFilmu");
     query.bindValue(":tytul", "%" + tytul + "%");
     query.bindValue(":opis", "%" + opis + "%");
     if (query.exec())
     {
         while (query.next())
         {
-            filmy = new Filmy(query.value(0).toString(), query.value(1).toInt(), query.value(2).toString(), query.value(3).toString(), query.value(4).toDouble());
+            filmy = new Filmy(query.value(0).toString(), query.value(1).toInt(), query.value(2).toString(), query.value(3).toString(), query.value(4).toDouble(), query.value(5).toInt());
             listaFilmy.append(filmy);
-            idFilmuVector.append(query.value(5).toInt());
             ileWierszyFilm++;
         }
     }
@@ -164,18 +159,16 @@ void ObslugaBD::wyszukajFilmRokGatunek(int &rokProdukcji, int &gatunek)
 {
     ileWierszyFilm = 0;
     listaFilmy.clear();
-    idFilmuVector.clear();
     QSqlQuery query;
-    query.prepare("SELECT tytul, rokProdukcji, nazwa, opis, cenaWypozyczenia, idFilmu FROM filmy LEFT JOIN gatunki ON filmy.Gatunek1 = gatunki.idGatunku WHERE RokProdukcji = (:rokProdukcji) OR Gatunek1 = (:gatunek)");
+    query.prepare("SELECT tytul, rokProdukcji, nazwa, opis, cenaWypozyczenia, idFilmu FROM filmy LEFT JOIN gatunki ON filmy.Gatunek1 = gatunki.idGatunku WHERE RokProdukcji = (:rokProdukcji) OR Gatunek1 = (:gatunek) ORDER BY idFilmu");
     query.bindValue(":rokProdukcji", rokProdukcji);
     query.bindValue(":gatunek", gatunek);
     if (query.exec())
     {
         while (query.next())
         {
-            filmy = new Filmy(query.value(0).toString(), query.value(1).toInt(), query.value(2).toString(), query.value(3).toString(), query.value(4).toDouble());
+            filmy = new Filmy(query.value(0).toString(), query.value(1).toInt(), query.value(2).toString(), query.value(3).toString(), query.value(4).toDouble(), query.value(5).toInt());
             listaFilmy.append(filmy);
-            idFilmuVector.append(query.value(5).toInt());
             ileWierszyFilm++;
         }
     }
@@ -186,10 +179,9 @@ void ObslugaBD::wyszukajFilmRokGatunek(int &rokProdukcji, int &gatunek)
 void ObslugaBD::wyszukajKlienta(QString &imie, QString &nazwisko, QString &miasto, QString &ulica)
 {
     ileWierszyKlient = 0;
-    idKlientaVector.clear();
     listaKlienci.clear();
     QSqlQuery query;
-    query.prepare("SELECT idKlienta, Imie, Nazwisko, Miasto, Ulica, nrDomu FROM klienci WHERE Imie LIKE (:imie) AND Nazwisko LIKE (:nazwisko) AND Miasto LIKE (:miasto) AND Ulica LIKE (:ulica)");
+    query.prepare("SELECT idKlienta, Imie, Nazwisko, Miasto, Ulica, nrDomu FROM klienci WHERE Imie LIKE (:imie) AND Nazwisko LIKE (:nazwisko) AND Miasto LIKE (:miasto) AND Ulica LIKE (:ulica) ORDER BY idKlienta");
     query.bindValue(":imie", "%" + imie + "%");
     query.bindValue(":nazwisko", "%" + nazwisko + "%");
     query.bindValue(":miasto", "%" + miasto + "%");
@@ -198,8 +190,7 @@ void ObslugaBD::wyszukajKlienta(QString &imie, QString &nazwisko, QString &miast
     {
         while (query.next())
         {
-            idKlientaVector.append(query.value(0).toInt());
-            klienci = new Klienci(query.value(1).toString(), query.value(2).toString(), query.value(3).toString(), query.value(4).toString(), query.value(5).toString());
+            klienci = new Klienci(query.value(0).toInt(), query.value(1).toString(), query.value(2).toString(), query.value(3).toString(), query.value(4).toString(), query.value(5).toString());
             listaKlienci.append(klienci);
             ileWierszyKlient++;
         }
@@ -275,7 +266,6 @@ void ObslugaBD::wyszukajWypozyczoneFilmyIdFilmuIdKlienta(int &idFilmu, int &idKl
 {
     ileWierszyWypozyczone = 0;
     listaWypozyczenia.clear();
-    idWypozyczeniaVector.clear();
     QSqlQuery query;
     query.prepare("SELECT wypozyczenia.idFilmu, tytul, cenaWypozyczenia, wypozyczenia.idKlienta, imie, nazwisko, dataWypozyczenia, planowaDataZwrotu, idWypozyczenia FROM wypozyczenia LEFT JOIN klienci ON wypozyczenia.idKlienta = klienci.idKlienta LEFT JOIN filmy ON wypozyczenia.idFilmu = filmy.idFilmu WHERE dataZwrotu IS NULL AND (wypozyczenia.idFilmu = (:idFilmu) OR wypozyczenia.idKlienta = (:idKlienta)) ORDER BY wypozyczenia.idFilmu");
     query.bindValue(":idFilmu", idFilmu);
@@ -284,9 +274,8 @@ void ObslugaBD::wyszukajWypozyczoneFilmyIdFilmuIdKlienta(int &idFilmu, int &idKl
     {
         while (query.next())
         {
-            wypozyczenia = new Wypozyczenia(query.value(0).toInt(), query.value(1).toString(), query.value(2).toDouble(), query.value(3).toInt(), query.value(4).toString(), query.value(5).toString(), query.value(6).toDateTime(), query.value(7).toDateTime());
+            wypozyczenia = new Wypozyczenia(query.value(0).toInt(), query.value(1).toString(), query.value(2).toDouble(), query.value(3).toInt(), query.value(4).toString(), query.value(5).toString(), query.value(6).toDateTime(), query.value(7).toDateTime(), query.value(8).toInt());
             listaWypozyczenia.append(wypozyczenia);
-            idWypozyczeniaVector.append(query.value(8).toInt());
             ileWierszyWypozyczone++;
         }
     }
@@ -298,7 +287,6 @@ void ObslugaBD::wyszukajWypozyczoneFilmyNazwisko(const QString &nazwisko)
 {
     ileWierszyWypozyczone = 0;
     listaWypozyczenia.clear();
-    idWypozyczeniaVector.clear();
     QSqlQuery query;
     query.prepare("SELECT wypozyczenia.idFilmu, tytul, cenaWypozyczenia, wypozyczenia.idKlienta, imie, nazwisko, dataWypozyczenia, planowaDataZwrotu, idWypozyczenia FROM wypozyczenia LEFT JOIN klienci ON wypozyczenia.idKlienta = klienci.idKlienta LEFT JOIN filmy ON wypozyczenia.idFilmu = filmy.idFilmu WHERE dataZwrotu IS NULL AND nazwisko LIKE (:nazwisko) ORDER BY wypozyczenia.idFilmu");
     query.bindValue(":nazwisko", "%" + nazwisko + "%");
@@ -306,9 +294,8 @@ void ObslugaBD::wyszukajWypozyczoneFilmyNazwisko(const QString &nazwisko)
     {
         while (query.next())
         {
-            wypozyczenia = new Wypozyczenia(query.value(0).toInt(), query.value(1).toString(), query.value(2).toDouble(), query.value(3).toInt(), query.value(4).toString(), query.value(5).toString(), query.value(6).toDateTime(), query.value(7).toDateTime());
+            wypozyczenia = new Wypozyczenia(query.value(0).toInt(), query.value(1).toString(), query.value(2).toDouble(), query.value(3).toInt(), query.value(4).toString(), query.value(5).toString(), query.value(6).toDateTime(), query.value(7).toDateTime(), query.value(8).toInt());
             listaWypozyczenia.append(wypozyczenia);
-            idWypozyczeniaVector.append(query.value(8).toInt());
             ileWierszyWypozyczone++;
         }
     }
@@ -333,7 +320,6 @@ void ObslugaBD::wyszukajRezerwacjeFilmyIdFilmuIdKlienta(int &idFilmu, int &idKli
 {
     ileWierszyRezerwacja = 0;
     listaRezerwacje.clear();
-    idRezerwacjiVector.clear();
     QSqlQuery query;
     query.prepare("SELECT rezerwacje.idFilmu, tytul, cenaWypozyczenia, rezerwacje.idKlienta, imie, nazwisko, dataRezerwacji, terminRezerwacji, idRezerwacji FROM rezerwacje LEFT JOIN klienci ON rezerwacje.idKlienta = klienci.idKlienta LEFT JOIN filmy ON rezerwacje.idFilmu = filmy.idFilmu WHERE odwolanieRezerwacji IS NULL AND (rezerwacje.idFilmu = (:idFilmu) OR rezerwacje.idKlienta = (:idKlienta)) ORDER BY rezerwacje.idFilmu");
     query.bindValue(":idFilmu", idFilmu);
@@ -342,9 +328,8 @@ void ObslugaBD::wyszukajRezerwacjeFilmyIdFilmuIdKlienta(int &idFilmu, int &idKli
     {
         while (query.next())
         {
-            rezerwacje = new Rezerwacje(query.value(0).toInt(), query.value(1).toString(), query.value(2).toDouble(), query.value(3).toInt(), query.value(4).toString(), query.value(5).toString(), query.value(6).toDateTime(), query.value(7).toDateTime());
+            rezerwacje = new Rezerwacje(query.value(0).toInt(), query.value(1).toString(), query.value(2).toDouble(), query.value(3).toInt(), query.value(4).toString(), query.value(5).toString(), query.value(6).toDateTime(), query.value(7).toDateTime(), query.value(8).toInt());
             listaRezerwacje.append(rezerwacje);
-            idRezerwacjiVector.append(query.value(8).toInt());
             ileWierszyRezerwacja++;
         }
     }
@@ -356,7 +341,6 @@ void ObslugaBD::wyszukajRezerwacjeFilmyNazwisko(const QString &nazwisko)
 {
     ileWierszyRezerwacja = 0;
     listaRezerwacje.clear();
-    idRezerwacjiVector.clear();
     QSqlQuery query;
     query.prepare("SELECT rezerwacje.idFilmu, tytul, cenaWypozyczenia, rezerwacje.idKlienta, imie, nazwisko, dataRezerwacji, terminRezerwacji, idRezerwacji FROM rezerwacje LEFT JOIN klienci ON rezerwacje.idKlienta = klienci.idKlienta LEFT JOIN filmy ON rezerwacje.idFilmu = filmy.idFilmu WHERE odwolanieRezerwacji IS NULL AND nazwisko LIKE (:nazwisko) ORDER BY rezerwacje.idFilmu");
     query.bindValue(":nazwisko", "%" + nazwisko + "%");
@@ -364,9 +348,8 @@ void ObslugaBD::wyszukajRezerwacjeFilmyNazwisko(const QString &nazwisko)
     {
         while (query.next())
         {
-            rezerwacje = new Rezerwacje(query.value(0).toInt(), query.value(1).toString(), query.value(2).toDouble(), query.value(3).toInt(), query.value(4).toString(), query.value(5).toString(), query.value(6).toDateTime(), query.value(7).toDateTime());
+            rezerwacje = new Rezerwacje(query.value(0).toInt(), query.value(1).toString(), query.value(2).toDouble(), query.value(3).toInt(), query.value(4).toString(), query.value(5).toString(), query.value(6).toDateTime(), query.value(7).toDateTime(), query.value(8).toInt());
             listaRezerwacje.append(rezerwacje);
-            idRezerwacjiVector.append(query.value(8).toInt());
             ileWierszyRezerwacja++;
         }
     }
@@ -384,5 +367,49 @@ bool ObslugaBD::wykonajOdwolanieRezerwacji(int &idRezerwacji)
     query.bindValue(":idRezerwacji", idRezerwacji);
     if (query.exec())
         wykonano = true;
+    return wykonano;
+}
+
+void ObslugaBD::wyszukajKlienta(const QString &nazwisko)
+{
+    ileWierszyKlient = 0;
+    listaKlienci.clear();
+    QSqlQuery query;
+    query.prepare("SELECT idKlienta, imie, nazwisko, kod, miasto, ulica, nrDomu, nrLokalu, email FROM klienci WHERE nazwisko LIKE (:nazwisko)");
+    query.bindValue(":nazwisko", "%" + nazwisko + "%");
+    if (query.exec())
+    {
+        while (query.next())
+        {
+            klienci = new Klienci(query.value(0).toInt(), query.value(1).toString(), query.value(2).toString(), query.value(3).toString(), query.value(4).toString(), query.value(5).toString(), query.value(6).toString(), query.value(7).toString(), query.value(8).toString());
+            listaKlienci.append(klienci);
+            ileWierszyKlient++;
+        }
+    }
+    else
+        qDebug() << "Nie udało się wyszukać klienta";
+}
+
+bool ObslugaBD::wykonajEdycjeKlienta(int idKlienta, QString imie, QString nazwisko, QString kod, QString miasto, QString ulica, QString nrDomu, QString nrLokalu, QString email)
+{
+    bool wykonano = false;
+    QSqlQuery query;
+    query.prepare("UPDATE klienci SET imie = (:imie), nazwisko = (:nazwisko), kod = (:kodPocztowy), miasto = (:miasto), ulica = (:ulica), nrDomu = (:nrDomu), nrLokalu = (:nrLokalu), email = (:email), dataEdycji = (:dataEdycji), idUzytkownikaEdycja = (:idUzytkownika) WHERE idKlienta = (:idKlienta)");
+    query.bindValue(":idKlienta", idKlienta);
+    query.bindValue(":imie", imie);
+    query.bindValue(":nazwisko", nazwisko);
+    query.bindValue(":kodPocztowy", kod);
+    query.bindValue(":miasto", miasto);
+    query.bindValue(":ulica", ulica);
+    query.bindValue(":nrDomu", nrDomu);
+    query.bindValue(":nrLokalu", nrLokalu);
+    query.bindValue(":email", email);
+    query.bindValue(":dataEdycji", QDateTime::currentDateTime());
+    query.bindValue(":idUzytkownika", ObslugaBD::idZalogowanyUzytkownik);
+    if (query.exec())
+        wykonano = true;
+    else
+        qDebug() << "Nie udało się edytować klienta";
+
     return wykonano;
 }

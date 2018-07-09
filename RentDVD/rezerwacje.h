@@ -16,11 +16,12 @@ private:
 
 public:
     Rezerwacje();
-    Rezerwacje(int idFilmu, QString tytul, double cenaWypozyczenia, int idKlienta, QString imie, QString nazwisko, QDateTime dataRezerwacji, QDateTime terminRezerwacji);
+    Rezerwacje(int idFilmu, QString tytul, double cenaWypozyczenia, int idKlienta, QString imie, QString nazwisko, QDateTime dataRezerwacji, QDateTime terminRezerwacji, int idRezerwacji);
 
     QDateTime getDataRezerwacji() const;
     QDateTime getTerminRezerwacji() const;
     QDateTime getDataOdwolaniaRezerwacji() const;
+    int getIdRezerwacji() const;
 };
 
 #endif // REZERWACJE_H

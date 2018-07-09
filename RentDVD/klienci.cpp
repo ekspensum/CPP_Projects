@@ -1,17 +1,32 @@
 #include "klienci.h"
 
+
 Klienci::Klienci()
 {
-
+    
 }
 
-Klienci::Klienci(QString imie, QString nazwisko, QString miasto, QString ulica, QString nrDomu)
+Klienci::Klienci(int idKlienta, QString imie, QString nazwisko, QString miasto, QString ulica, QString nrDomu)
 {
+    this->idKlienta = idKlienta;
     this->imie = imie;
     this->nazwisko = nazwisko;
     this->miasto = miasto;
     this->ulica = ulica;
     this->nrDomu = nrDomu;
+}
+
+Klienci::Klienci(int idKlienta, QString imie, QString nazwisko, QString kod, QString miasto, QString ulica, QString nrDomu, QString nrLokalu, QString email)
+{
+    this->idKlienta = idKlienta;
+    this->imie = imie;
+    this->nazwisko = nazwisko;
+    this->kod = kod;
+    this->miasto = miasto;
+    this->ulica = ulica;
+    this->nrDomu = nrDomu;
+    this->nrLokalu = nrLokalu;
+    this->email = email;
 }
 
 int Klienci::getIdKlienta() const
@@ -29,6 +44,11 @@ QString Klienci::getNazwisko() const
     return nazwisko;
 }
 
+QString Klienci::getKod() const
+{
+    return kod;
+}
+
 QString Klienci::getMiasto() const
 {
     return miasto;
@@ -42,5 +62,15 @@ QString Klienci::getUlica() const
 QString Klienci::getNrDomu() const
 {
     return nrDomu;
+}
+
+QString Klienci::getNrLokalu() const
+{
+    return nrLokalu;
+}
+
+QString Klienci::getEmail() const
+{
+    return email;
 }
 

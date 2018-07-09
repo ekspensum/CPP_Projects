@@ -16,11 +16,12 @@ private:
 
 public:
     Wypozyczenia();
-    Wypozyczenia(int idFilmu, QString tytul, double cenaWypozyczenia, int idKlienta, QString imie, QString nazwisko, QDateTime dataWypozyczenia, QDateTime planowaDataZwrotu);
+    Wypozyczenia(int idFilmu, QString tytul, double cenaWypozyczenia, int idKlienta, QString imie, QString nazwisko, QDateTime dataWypozyczenia, QDateTime planowaDataZwrotu, int idWypozyczenia);
 
     QDateTime getDataWypozyczenia() const;
     QDateTime getPlanowaDataZwrotu() const;
     QDateTime getDataZwrotu() const;
+    int getIdWypozyczenia() const;
 };
 
 #endif // WYPOZYCZENIA_H

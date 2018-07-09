@@ -15,12 +15,17 @@ QDateTime Rezerwacje::getDataOdwolaniaRezerwacji() const
     return dataOdwolaniaRezerwacji;
 }
 
+int Rezerwacje::getIdRezerwacji() const
+{
+    return idRezerwacji;
+}
+
 Rezerwacje::Rezerwacje()
 {
 
 }
 
-Rezerwacje::Rezerwacje(int idFilmu, QString tytul, double cenaWypozyczenia, int idKlienta, QString imie, QString nazwisko, QDateTime dataRezerwacji, QDateTime terminRezerwacji)
+Rezerwacje::Rezerwacje(int idFilmu, QString tytul, double cenaWypozyczenia, int idKlienta, QString imie, QString nazwisko, QDateTime dataRezerwacji, QDateTime terminRezerwacji, int idRezerwacji)
 {
     this->idFilmu = idFilmu;
     this->tytul = tytul;
@@ -30,4 +35,5 @@ Rezerwacje::Rezerwacje(int idFilmu, QString tytul, double cenaWypozyczenia, int 
     this->nazwisko = nazwisko;
     this->dataRezerwacji = dataRezerwacji;
     this->terminRezerwacji = terminRezerwacji;
+    this->idRezerwacji = idRezerwacji;
 }
