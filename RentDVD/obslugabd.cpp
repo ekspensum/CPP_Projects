@@ -5,6 +5,8 @@
 int ObslugaBD::idZalogowanyUzytkownik; //zmienna statyczna
 int ObslugaBD::ileWierszyFilm;
 int ObslugaBD::ileWierszyKlient;
+int ObslugaBD::ileWierszyKlientEdycja;
+int ObslugaBD::ileWierszyFilmEdycja;
 int ObslugaBD::ileWierszyWypozyczone;
 int ObslugaBD::ileWierszyRezerwacja;
 
@@ -125,7 +127,7 @@ bool ObslugaBD::dodajFilm(QString &tytul, int &rokProdukcji, QString &opis, doub
 
 QStringList ObslugaBD::odczytGatunki()
 {
-    QStringList listaGatunki;
+    listaGatunki.clear();
     QSqlQuery query;
     query.exec("SELECT Nazwa FROM gatunki");
     while (query.next())
@@ -134,12 +136,32 @@ QStringList ObslugaBD::odczytGatunki()
     return listaGatunki;
 }
 
+QList<Rezerwacje *> ObslugaBD::getListaRezerwacje() const
+{
+    return listaRezerwacje;
+}
+
+QList<Wypozyczenia *> ObslugaBD::getListaWypozyczenia() const
+{
+    return listaWypozyczenia;
+}
+
+QList<Klienci *> ObslugaBD::getListaKlienci() const
+{
+    return listaKlienci;
+}
+
+QList<Filmy *> ObslugaBD::getListaFilmy() const
+{
+    return listaFilmy;
+}
+
 void ObslugaBD::wyszukajFilmTytulOpis(QString &tytul, QString &opis)
 {
     ileWierszyFilm = 0;
     listaFilmy.clear();
     QSqlQuery query;
-    query.prepare("SELECT tytul, rokProdukcji, nazwa, opis, cenaWypozyczenia, idFilmu FROM filmy LEFT JOIN gatunki ON filmy.Gatunek1 = gatunki.idGatunku WHERE Tytul like (:tytul) AND Opis LIKE (:opis) ORDER BY idFilmu");
+    query.prepare("SELECT tytul, rokProdukcji, nazwa, opis, cenaWypozyczenia, idFilmu FROM filmy LEFT JOIN gatunki ON filmy.gatunek1 = gatunki.idGatunku WHERE Tytul like (:tytul) AND Opis LIKE (:opis) ORDER BY idFilmu");
     query.bindValue(":tytul", "%" + tytul + "%");
     query.bindValue(":opis", "%" + opis + "%");
     if (query.exec())
@@ -160,7 +182,7 @@ void ObslugaBD::wyszukajFilmRokGatunek(int &rokProdukcji, int &gatunek)
     ileWierszyFilm = 0;
     listaFilmy.clear();
     QSqlQuery query;
-    query.prepare("SELECT tytul, rokProdukcji, nazwa, opis, cenaWypozyczenia, idFilmu FROM filmy LEFT JOIN gatunki ON filmy.Gatunek1 = gatunki.idGatunku WHERE RokProdukcji = (:rokProdukcji) OR Gatunek1 = (:gatunek) ORDER BY idFilmu");
+    query.prepare("SELECT tytul, rokProdukcji, nazwa, opis, cenaWypozyczenia, idFilmu FROM filmy LEFT JOIN gatunki ON filmy.gatunek1 = gatunki.idGatunku WHERE RokProdukcji = (:rokProdukcji) OR gatunek1 = (:gatunek) ORDER BY idFilmu");
     query.bindValue(":rokProdukcji", rokProdukcji);
     query.bindValue(":gatunek", gatunek);
     if (query.exec())
@@ -372,7 +394,7 @@ bool ObslugaBD::wykonajOdwolanieRezerwacji(int &idRezerwacji)
 
 void ObslugaBD::wyszukajKlienta(const QString &nazwisko)
 {
-    ileWierszyKlient = 0;
+    ileWierszyKlientEdycja = 0;
     listaKlienci.clear();
     QSqlQuery query;
     query.prepare("SELECT idKlienta, imie, nazwisko, kod, miasto, ulica, nrDomu, nrLokalu, email FROM klienci WHERE nazwisko LIKE (:nazwisko)");
@@ -383,14 +405,14 @@ void ObslugaBD::wyszukajKlienta(const QString &nazwisko)
         {
             klienci = new Klienci(query.value(0).toInt(), query.value(1).toString(), query.value(2).toString(), query.value(3).toString(), query.value(4).toString(), query.value(5).toString(), query.value(6).toString(), query.value(7).toString(), query.value(8).toString());
             listaKlienci.append(klienci);
-            ileWierszyKlient++;
+            ileWierszyKlientEdycja++;
         }
     }
     else
         qDebug() << "Nie udało się wyszukać klienta";
 }
 
-bool ObslugaBD::wykonajEdycjeKlienta(int idKlienta, QString imie, QString nazwisko, QString kod, QString miasto, QString ulica, QString nrDomu, QString nrLokalu, QString email)
+bool ObslugaBD::wykonajEdycjeKlienta(int &idKlienta, QString &imie, QString &nazwisko, QString &kod, QString &miasto, QString &ulica, QString &nrDomu, QString &nrLokalu, QString &email)
 {
     bool wykonano = false;
     QSqlQuery query;
@@ -410,6 +432,50 @@ bool ObslugaBD::wykonajEdycjeKlienta(int idKlienta, QString imie, QString nazwis
         wykonano = true;
     else
         qDebug() << "Nie udało się edytować klienta";
+
+    return wykonano;
+}
+
+void ObslugaBD::wyszukajFilm(const QString &tytul)
+{
+    ileWierszyFilmEdycja = 0;
+    listaFilmy.clear();
+    QSqlQuery query;
+    query.prepare("SELECT * FROM filmy WHERE tytul LIKE (:tytul)");
+    query.bindValue(":tytul", "%" + tytul + "%");
+    if (query.exec())
+    {
+        while (query.next())
+        {
+            filmy = new Filmy(query.value(0).toInt(), query.value(1).toString(), query.value(2).toInt(), query.value(3).toString(), query.value(4).toInt(), query.value(5).toDouble(), query.value(6).toInt(), query.value(7).toInt(), query.value(8).toInt());
+            listaFilmy.append(filmy);
+            ileWierszyFilmEdycja++;
+        }
+    }
+    else
+        qDebug() << "Nie udało się wyszukać filmu";
+}
+
+bool ObslugaBD::wykonajEdycjeFilmu(int &idFilmu, QString &tytul, int &rokProdukcji, QString &opis, int &iloscKopii, double &cenaWypozyczenia, int &gatunek1, int &gatunek2, int &gatunek3)
+{
+    bool wykonano = false;
+    QSqlQuery query;
+    query.prepare("UPDATE filmy SET tytul = (:tytul), rokProdukcji = (:rokProdukcji), opis = (:opis), iloscKopii = (:iloscKopii), cenaWypozyczenia = (:cenaWypozyczenia), gatunek1 = (:gatunek1), gatunek2 = (:gatunek2), gatunek3 = (:gatunek3), dataEdycji = (:dataEdycji), idUzytkownikaEdycja = (:idUzytkownika) WHERE idFilmu = (:idFilmu)");
+    query.bindValue(":idFilmu", idFilmu);
+    query.bindValue(":tytul", tytul);
+    query.bindValue(":rokProdukcji", rokProdukcji);
+    query.bindValue(":opis", opis);
+    query.bindValue(":iloscKopii", iloscKopii);
+    query.bindValue(":cenaWypozyczenia", cenaWypozyczenia);
+    query.bindValue(":gatunek1", gatunek1);
+    query.bindValue(":gatunek2", gatunek2);
+    query.bindValue(":gatunek3", gatunek3);
+    query.bindValue(":dataEdycji", QDateTime::currentDateTime());
+    query.bindValue(":idUzytkownika", ObslugaBD::idZalogowanyUzytkownik);
+    if (query.exec())
+        wykonano = true;
+    else
+        qDebug() << "Nie udało się edytować filmu";
 
     return wykonano;
 }

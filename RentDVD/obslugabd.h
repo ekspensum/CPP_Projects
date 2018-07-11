@@ -40,19 +40,22 @@ public:
     void wyszukajRezerwacjeFilmyNazwisko(const QString &nazwisko);
     bool wykonajOdwolanieRezerwacji(int &idRezerwacji);
     void wyszukajKlienta(const QString &nazwisko);
-    bool wykonajEdycjeKlienta(int idKlienta, QString imie, QString nazwisko, QString kod, QString miasto, QString ulica, QString nrDomu, QString nrLokalu, QString email);
+    bool wykonajEdycjeKlienta(int &idKlienta, QString &imie, QString &nazwisko, QString &kod, QString &miasto, QString &ulica, QString &nrDomu, QString &nrLokalu, QString &email);
+    void wyszukajFilm(const QString &tytul);
+    bool wykonajEdycjeFilmu(int &idFilmu, QString &tytul, int &rokProdukcji, QString &opis, int &iloscKopii, double &cenaWypozyczenia, int &gatunek1, int &gatunek2, int &gatunek3);
     QStringList odczytGatunki();
-
+    QList<Filmy *> getListaFilmy() const;
+    QList<Klienci *> getListaKlienci() const;
+    QList<Wypozyczenia *> getListaWypozyczenia() const;
+    QList<Rezerwacje *> getListaRezerwacje() const;
     static int idZalogowanyUzytkownik;
     static int ileWierszyFilm;
     static int ileWierszyKlient;
+    static int ileWierszyKlientEdycja;
+    static int ileWierszyFilmEdycja;
     static int ileWierszyWypozyczone;
     static int ileWierszyRezerwacja;
 
-    QList<Filmy *> listaFilmy;
-    QList<Klienci *> listaKlienci;
-    QList<Wypozyczenia *> listaWypozyczenia;
-    QList<Rezerwacje *> listaRezerwacje;
 
 signals:
 
@@ -61,10 +64,15 @@ public slots:
 private:
     QSqlDatabase baza;
 //    const QString sciezkaDoBazy = "C:\\Users\\Andrzej\\Documents\\Projekty_Cpp\\_Projekty_QT\\Projekty-GitHub\\RentDVD\\rentdvd.db";
+    QStringList listaGatunki;
     Filmy *filmy;
     Klienci *klienci;
     Wypozyczenia *wypozyczenia;
     Rezerwacje *rezerwacje;
+    QList<Filmy *> listaFilmy;
+    QList<Klienci *> listaKlienci;
+    QList<Wypozyczenia *> listaWypozyczenia;
+    QList<Rezerwacje *> listaRezerwacje;
 };
 
 #endif // OBSLUGABD_H

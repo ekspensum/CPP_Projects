@@ -8,6 +8,7 @@
 #include "obslugabd.h"
 #include <QCheckBox>
 #include <QList>
+#include <QComboBox>
 
 namespace Ui {
 class Wypozyczalnia;
@@ -52,18 +53,29 @@ private slots:
 
     void on_lineEditNazwiskoWyszukajEdytuj_textChanged(const QString &nazwisko);
 
-    void on_pushButtonDodajKlienta_2_clicked();
+    void on_pushButtonEdytujKlienta_clicked();
+
+    void on_lineEditTytulWyszukajEdytuj_textChanged(const QString &tytul);
+
+    void on_pushButtonEdytujFilm_clicked();
 
 private:
     Ui::Wypozyczalnia *ui;
     QCheckBox *boxWypozyczenie;
     QCheckBox *boxRezerwacja;
-    QCheckBox *boxKlienci;
+    QComboBox *comboGatunek1;
+    QComboBox *comboGatunek2;
+    QComboBox *comboGatunek3;
+    QList<QCheckBox *> listaBoxWypozyczenieFilmy;
+    QList<QCheckBox *> listaBoxRezerwacjaFilmy;
+    QList<QCheckBox *> listaBoxWypozyczenieKlienci;
+    QList<QCheckBox *> listaBoxRezerwacjaKlienci;
     QList<QCheckBox *> listaBoxWypozyczenie;
     QList<QCheckBox *> listaBoxRezerwacja;
-    QCheckBox **tablicaBoxWypozyczenie;
-    QCheckBox **tablicaBoxRezerwacja;
+    QCheckBox *boxKlienci;
     QCheckBox **tablicaBoxKlienci;
+    QCheckBox *boxFilmy;
+    QCheckBox **tablicaBoxFilmy;
     QDateTime planowaDataZwrotu;
     QDateTime czasRezerwacji;
     QPalette p;
@@ -74,6 +86,7 @@ private:
     QMessageBox jedenKlientWypozycz;
     QMessageBox jedenKlientRezerwuj;
     QMessageBox jedenKlientEdytuj;
+    QMessageBox jedenFilmEdytuj;
 
 };
 

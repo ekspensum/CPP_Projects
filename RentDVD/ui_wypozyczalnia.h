@@ -105,7 +105,7 @@ public:
     QLabel *label_46;
     QLabel *label_47;
     QLabel *komunikatyDodajKlienta;
-    QPushButton *pushButtonDodajKlienta_2;
+    QPushButton *pushButtonEdytujKlienta;
     QLabel *label_48;
     QLabel *label_49;
     QLabel *label_22;
@@ -153,8 +153,12 @@ public:
     QGridLayout *gridLayout_6;
     QLabel *label_35;
     QLineEdit *lineEditCenaWypozyczenia;
-    QWidget *layoutWidget10;
-    QGridLayout *gridLayout_5;
+    QTableWidget *tableWidgetWyszukajFilmEdycja;
+    QPushButton *pushButtonEdytujFilm;
+    QLabel *label_50;
+    QLabel *label_51;
+    QLabel *label_52;
+    QLineEdit *lineEditTytulWyszukajEdytuj;
     QLabel *label_9;
     QPlainTextEdit *plainTextEditOpis;
     QWidget *tabUstawienia;
@@ -637,10 +641,10 @@ public:
         komunikatyDodajKlienta->setFrameShape(QFrame::StyledPanel);
         komunikatyDodajKlienta->setFrameShadow(QFrame::Plain);
         komunikatyDodajKlienta->setWordWrap(true);
-        pushButtonDodajKlienta_2 = new QPushButton(tabDodajKlienta);
-        pushButtonDodajKlienta_2->setObjectName(QStringLiteral("pushButtonDodajKlienta_2"));
-        pushButtonDodajKlienta_2->setGeometry(QRect(978, 350, 100, 25));
-        pushButtonDodajKlienta_2->setFont(font1);
+        pushButtonEdytujKlienta = new QPushButton(tabDodajKlienta);
+        pushButtonEdytujKlienta->setObjectName(QStringLiteral("pushButtonEdytujKlienta"));
+        pushButtonEdytujKlienta->setGeometry(QRect(978, 350, 100, 25));
+        pushButtonEdytujKlienta->setFont(font1);
         label_48 = new QLabel(tabDodajKlienta);
         label_48->setObjectName(QStringLiteral("label_48"));
         label_48->setGeometry(QRect(20, 290, 141, 16));
@@ -695,7 +699,7 @@ public:
         tabDodajFilm->setObjectName(QStringLiteral("tabDodajFilm"));
         pushButtonDodajFilm = new QPushButton(tabDodajFilm);
         pushButtonDodajFilm->setObjectName(QStringLiteral("pushButtonDodajFilm"));
-        pushButtonDodajFilm->setGeometry(QRect(980, 420, 91, 25));
+        pushButtonDodajFilm->setGeometry(QRect(990, 150, 91, 25));
         QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Minimum);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
@@ -715,7 +719,7 @@ public:
         komunikatyDodajFilm->setWordWrap(true);
         layoutWidget5 = new QWidget(tabDodajFilm);
         layoutWidget5->setObjectName(QStringLiteral("layoutWidget5"));
-        layoutWidget5->setGeometry(QRect(20, 110, 607, 26));
+        layoutWidget5->setGeometry(QRect(20, 9, 607, 26));
         gridLayout = new QGridLayout(layoutWidget5);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         gridLayout->setContentsMargins(0, 0, 0, 0);
@@ -739,7 +743,7 @@ public:
 
         layoutWidget6 = new QWidget(tabDodajFilm);
         layoutWidget6->setObjectName(QStringLiteral("layoutWidget6"));
-        layoutWidget6->setGeometry(QRect(20, 140, 215, 26));
+        layoutWidget6->setGeometry(QRect(20, 39, 215, 26));
         gridLayout_2 = new QGridLayout(layoutWidget6);
         gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
         gridLayout_2->setContentsMargins(0, 0, 0, 0);
@@ -767,7 +771,7 @@ public:
 
         layoutWidget7 = new QWidget(tabDodajFilm);
         layoutWidget7->setObjectName(QStringLiteral("layoutWidget7"));
-        layoutWidget7->setGeometry(QRect(20, 320, 198, 25));
+        layoutWidget7->setGeometry(QRect(20, 169, 198, 25));
         gridLayout_3 = new QGridLayout(layoutWidget7);
         gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
         gridLayout_3->setContentsMargins(0, 0, 0, 0);
@@ -789,7 +793,7 @@ public:
 
         layoutWidget8 = new QWidget(tabDodajFilm);
         layoutWidget8->setObjectName(QStringLiteral("layoutWidget8"));
-        layoutWidget8->setGeometry(QRect(20, 351, 384, 80));
+        layoutWidget8->setGeometry(QRect(20, 200, 384, 80));
         gridLayout_4 = new QGridLayout(layoutWidget8);
         gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
         gridLayout_4->setContentsMargins(0, 0, 0, 0);
@@ -854,7 +858,7 @@ public:
 
         layoutWidget9 = new QWidget(tabDodajFilm);
         layoutWidget9->setObjectName(QStringLiteral("layoutWidget9"));
-        layoutWidget9->setGeometry(QRect(20, 290, 215, 24));
+        layoutWidget9->setGeometry(QRect(20, 139, 215, 24));
         gridLayout_6 = new QGridLayout(layoutWidget9);
         gridLayout_6->setObjectName(QStringLiteral("gridLayout_6"));
         gridLayout_6->setContentsMargins(0, 0, 0, 0);
@@ -869,24 +873,65 @@ public:
 
         gridLayout_6->addWidget(lineEditCenaWypozyczenia, 0, 1, 1, 1);
 
-        layoutWidget10 = new QWidget(tabDodajFilm);
-        layoutWidget10->setObjectName(QStringLiteral("layoutWidget10"));
-        layoutWidget10->setGeometry(QRect(20, 171, 1021, 111));
-        gridLayout_5 = new QGridLayout(layoutWidget10);
-        gridLayout_5->setObjectName(QStringLiteral("gridLayout_5"));
-        gridLayout_5->setContentsMargins(0, 0, 0, 0);
-        label_9 = new QLabel(layoutWidget10);
+        tableWidgetWyszukajFilmEdycja = new QTableWidget(tabDodajFilm);
+        if (tableWidgetWyszukajFilmEdycja->columnCount() < 10)
+            tableWidgetWyszukajFilmEdycja->setColumnCount(10);
+        QTableWidgetItem *__qtablewidgetitem46 = new QTableWidgetItem();
+        __qtablewidgetitem46->setFont(font1);
+        tableWidgetWyszukajFilmEdycja->setHorizontalHeaderItem(0, __qtablewidgetitem46);
+        QTableWidgetItem *__qtablewidgetitem47 = new QTableWidgetItem();
+        __qtablewidgetitem47->setFont(font1);
+        tableWidgetWyszukajFilmEdycja->setHorizontalHeaderItem(1, __qtablewidgetitem47);
+        QTableWidgetItem *__qtablewidgetitem48 = new QTableWidgetItem();
+        __qtablewidgetitem48->setFont(font1);
+        tableWidgetWyszukajFilmEdycja->setHorizontalHeaderItem(2, __qtablewidgetitem48);
+        QTableWidgetItem *__qtablewidgetitem49 = new QTableWidgetItem();
+        __qtablewidgetitem49->setFont(font1);
+        tableWidgetWyszukajFilmEdycja->setHorizontalHeaderItem(3, __qtablewidgetitem49);
+        QTableWidgetItem *__qtablewidgetitem50 = new QTableWidgetItem();
+        __qtablewidgetitem50->setFont(font1);
+        tableWidgetWyszukajFilmEdycja->setHorizontalHeaderItem(4, __qtablewidgetitem50);
+        QTableWidgetItem *__qtablewidgetitem51 = new QTableWidgetItem();
+        __qtablewidgetitem51->setFont(font1);
+        tableWidgetWyszukajFilmEdycja->setHorizontalHeaderItem(5, __qtablewidgetitem51);
+        QTableWidgetItem *__qtablewidgetitem52 = new QTableWidgetItem();
+        __qtablewidgetitem52->setFont(font1);
+        tableWidgetWyszukajFilmEdycja->setHorizontalHeaderItem(6, __qtablewidgetitem52);
+        QTableWidgetItem *__qtablewidgetitem53 = new QTableWidgetItem();
+        __qtablewidgetitem53->setFont(font1);
+        tableWidgetWyszukajFilmEdycja->setHorizontalHeaderItem(7, __qtablewidgetitem53);
+        QTableWidgetItem *__qtablewidgetitem54 = new QTableWidgetItem();
+        __qtablewidgetitem54->setFont(font1);
+        tableWidgetWyszukajFilmEdycja->setHorizontalHeaderItem(8, __qtablewidgetitem54);
+        QTableWidgetItem *__qtablewidgetitem55 = new QTableWidgetItem();
+        __qtablewidgetitem55->setFont(font1);
+        tableWidgetWyszukajFilmEdycja->setHorizontalHeaderItem(9, __qtablewidgetitem55);
+        tableWidgetWyszukajFilmEdycja->setObjectName(QStringLiteral("tableWidgetWyszukajFilmEdycja"));
+        tableWidgetWyszukajFilmEdycja->setGeometry(QRect(20, 380, 1061, 201));
+        pushButtonEdytujFilm = new QPushButton(tabDodajFilm);
+        pushButtonEdytujFilm->setObjectName(QStringLiteral("pushButtonEdytujFilm"));
+        pushButtonEdytujFilm->setGeometry(QRect(981, 340, 100, 25));
+        pushButtonEdytujFilm->setFont(font1);
+        label_50 = new QLabel(tabDodajFilm);
+        label_50->setObjectName(QStringLiteral("label_50"));
+        label_50->setGeometry(QRect(360, 350, 301, 22));
+        label_51 = new QLabel(tabDodajFilm);
+        label_51->setObjectName(QStringLiteral("label_51"));
+        label_51->setGeometry(QRect(23, 320, 141, 16));
+        label_52 = new QLabel(tabDodajFilm);
+        label_52->setObjectName(QStringLiteral("label_52"));
+        label_52->setGeometry(QRect(23, 350, 171, 22));
+        lineEditTytulWyszukajEdytuj = new QLineEdit(tabDodajFilm);
+        lineEditTytulWyszukajEdytuj->setObjectName(QStringLiteral("lineEditTytulWyszukajEdytuj"));
+        lineEditTytulWyszukajEdytuj->setGeometry(QRect(200, 350, 150, 22));
+        lineEditTytulWyszukajEdytuj->setMinimumSize(QSize(150, 0));
+        label_9 = new QLabel(tabDodajFilm);
         label_9->setObjectName(QStringLiteral("label_9"));
-        label_9->setMinimumSize(QSize(99, 0));
-
-        gridLayout_5->addWidget(label_9, 0, 0, 1, 1);
-
-        plainTextEditOpis = new QPlainTextEdit(layoutWidget10);
+        label_9->setGeometry(QRect(21, 71, 99, 16));
+        plainTextEditOpis = new QPlainTextEdit(tabDodajFilm);
         plainTextEditOpis->setObjectName(QStringLiteral("plainTextEditOpis"));
+        plainTextEditOpis->setGeometry(QRect(126, 71, 955, 60));
         plainTextEditOpis->setFont(font6);
-
-        gridLayout_5->addWidget(plainTextEditOpis, 0, 1, 1, 1);
-
         tabWidget->addTab(tabDodajFilm, QString());
         tabUstawienia = new QWidget();
         tabUstawienia->setObjectName(QStringLiteral("tabUstawienia"));
@@ -971,6 +1016,7 @@ public:
         label_11->setBuddy(comboBoxGatunek3);
         label_7->setBuddy(comboBoxGatunek1);
         label_10->setBuddy(comboBoxGatunek2);
+        label_52->setBuddy(lineEditOpisWyszukaj);
         label->setBuddy(lineEditLogin);
         label_2->setBuddy(lineEditHaslo);
         label_3->setBuddy(lineEditImieUzytkownika);
@@ -990,7 +1036,7 @@ public:
 
         retranslateUi(Wypozyczalnia);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(3);
         comboBoxGatunek1->setCurrentIndex(-1);
 
 
@@ -1133,7 +1179,7 @@ public:
         label_46->setText(QApplication::translate("Wypozyczalnia", "- wyszukiwanie dynamiczne po wprowadzaniu ka\305\274dej litery", nullptr));
         label_47->setText(QApplication::translate("Wypozyczalnia", "Wyszukaj wg fragmentu nazwiska:", nullptr));
         komunikatyDodajKlienta->setText(QString());
-        pushButtonDodajKlienta_2->setText(QApplication::translate("Wypozyczalnia", "Zapisz zmiany", nullptr));
+        pushButtonEdytujKlienta->setText(QApplication::translate("Wypozyczalnia", "Zapisz zmiany", nullptr));
         label_48->setText(QApplication::translate("Wypozyczalnia", "Edytuj wybranego Klienta:", nullptr));
         label_49->setText(QApplication::translate("Wypozyczalnia", "Dodaj nowego Klienta:", nullptr));
         label_22->setText(QApplication::translate("Wypozyczalnia", "Imi\304\231:", nullptr));
@@ -1159,6 +1205,30 @@ public:
         label_32->setText(QApplication::translate("Wypozyczalnia", "* pole NIE jest wymagane", nullptr));
         label_35->setText(QApplication::translate("Wypozyczalnia", "Cena wypo\305\274yczenia:", nullptr));
         lineEditCenaWypozyczenia->setInputMask(QApplication::translate("Wypozyczalnia", "99.99", nullptr));
+        QTableWidgetItem *___qtablewidgetitem46 = tableWidgetWyszukajFilmEdycja->horizontalHeaderItem(0);
+        ___qtablewidgetitem46->setText(QApplication::translate("Wypozyczalnia", "Id", nullptr));
+        QTableWidgetItem *___qtablewidgetitem47 = tableWidgetWyszukajFilmEdycja->horizontalHeaderItem(1);
+        ___qtablewidgetitem47->setText(QApplication::translate("Wypozyczalnia", "Tytu\305\202", nullptr));
+        QTableWidgetItem *___qtablewidgetitem48 = tableWidgetWyszukajFilmEdycja->horizontalHeaderItem(2);
+        ___qtablewidgetitem48->setText(QApplication::translate("Wypozyczalnia", "Rok pr.", nullptr));
+        QTableWidgetItem *___qtablewidgetitem49 = tableWidgetWyszukajFilmEdycja->horizontalHeaderItem(3);
+        ___qtablewidgetitem49->setText(QApplication::translate("Wypozyczalnia", "Opis", nullptr));
+        QTableWidgetItem *___qtablewidgetitem50 = tableWidgetWyszukajFilmEdycja->horizontalHeaderItem(4);
+        ___qtablewidgetitem50->setText(QApplication::translate("Wypozyczalnia", "Il kopii", nullptr));
+        QTableWidgetItem *___qtablewidgetitem51 = tableWidgetWyszukajFilmEdycja->horizontalHeaderItem(5);
+        ___qtablewidgetitem51->setText(QApplication::translate("Wypozyczalnia", "Cena wyp.", nullptr));
+        QTableWidgetItem *___qtablewidgetitem52 = tableWidgetWyszukajFilmEdycja->horizontalHeaderItem(6);
+        ___qtablewidgetitem52->setText(QApplication::translate("Wypozyczalnia", "Gatunek 1", nullptr));
+        QTableWidgetItem *___qtablewidgetitem53 = tableWidgetWyszukajFilmEdycja->horizontalHeaderItem(7);
+        ___qtablewidgetitem53->setText(QApplication::translate("Wypozyczalnia", "Gatunek 2", nullptr));
+        QTableWidgetItem *___qtablewidgetitem54 = tableWidgetWyszukajFilmEdycja->horizontalHeaderItem(8);
+        ___qtablewidgetitem54->setText(QApplication::translate("Wypozyczalnia", "Gatunek 3", nullptr));
+        QTableWidgetItem *___qtablewidgetitem55 = tableWidgetWyszukajFilmEdycja->horizontalHeaderItem(9);
+        ___qtablewidgetitem55->setText(QApplication::translate("Wypozyczalnia", "EDYTUJ", nullptr));
+        pushButtonEdytujFilm->setText(QApplication::translate("Wypozyczalnia", "Zapisz zmiany", nullptr));
+        label_50->setText(QApplication::translate("Wypozyczalnia", "- wyszukiwanie dynamiczne po wprowadzaniu ka\305\274dej litery", nullptr));
+        label_51->setText(QApplication::translate("Wypozyczalnia", "Edytuj wybrany film:", nullptr));
+        label_52->setText(QApplication::translate("Wypozyczalnia", "Wyszukaj wg fragmentu tytu\305\202u:", nullptr));
         label_9->setText(QApplication::translate("Wypozyczalnia", "Opis:", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tabDodajFilm), QApplication::translate("Wypozyczalnia", "Dodaj / Edytuj film", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tabUstawienia), QApplication::translate("Wypozyczalnia", "Ustawienia", nullptr));
