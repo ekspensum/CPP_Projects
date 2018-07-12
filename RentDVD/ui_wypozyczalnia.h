@@ -175,6 +175,12 @@ public:
     QLineEdit *lineEditNazwiskoUzytkownika;
     QPushButton *pushButtonDodajUzytkownika;
     QLabel *komunikatyDodajUzytkownika;
+    QLabel *label_53;
+    QTableWidget *tableWidgetWyszukajUzytkownikaEdycja;
+    QLabel *label_54;
+    QLabel *label_55;
+    QPushButton *pushButtonEdytujUzytkownika;
+    QLineEdit *lineEditNazwiskolWyszukajEdytuj;
 
     void setupUi(QWidget *Wypozyczalnia)
     {
@@ -356,38 +362,38 @@ public:
         __qtablewidgetitem15->setFont(font1);
         tableWidgetWyszukajKlienta->setHorizontalHeaderItem(7, __qtablewidgetitem15);
         tableWidgetWyszukajKlienta->setObjectName(QStringLiteral("tableWidgetWyszukajKlienta"));
-        tableWidgetWyszukajKlienta->setGeometry(QRect(10, 430, 701, 161));
+        tableWidgetWyszukajKlienta->setGeometry(QRect(10, 420, 701, 161));
         lineEditImieWyszukaj = new QLineEdit(tabWypozyczenie);
         lineEditImieWyszukaj->setObjectName(QStringLiteral("lineEditImieWyszukaj"));
-        lineEditImieWyszukaj->setGeometry(QRect(41, 400, 70, 22));
+        lineEditImieWyszukaj->setGeometry(QRect(41, 390, 70, 22));
         lineEditNazwiskoWyszukaj = new QLineEdit(tabWypozyczenie);
         lineEditNazwiskoWyszukaj->setObjectName(QStringLiteral("lineEditNazwiskoWyszukaj"));
-        lineEditNazwiskoWyszukaj->setGeometry(QRect(223, 400, 70, 22));
+        lineEditNazwiskoWyszukaj->setGeometry(QRect(223, 390, 70, 22));
         lineEditMiastoWyszukaj = new QLineEdit(tabWypozyczenie);
         lineEditMiastoWyszukaj->setObjectName(QStringLiteral("lineEditMiastoWyszukaj"));
-        lineEditMiastoWyszukaj->setGeometry(QRect(394, 400, 70, 22));
+        lineEditMiastoWyszukaj->setGeometry(QRect(394, 390, 70, 22));
         lineEditUlicaWyszukaj = new QLineEdit(tabWypozyczenie);
         lineEditUlicaWyszukaj->setObjectName(QStringLiteral("lineEditUlicaWyszukaj"));
-        lineEditUlicaWyszukaj->setGeometry(QRect(553, 400, 70, 22));
+        lineEditUlicaWyszukaj->setGeometry(QRect(553, 390, 70, 22));
         label_17 = new QLabel(tabWypozyczenie);
         label_17->setObjectName(QStringLiteral("label_17"));
-        label_17->setGeometry(QRect(15, 400, 21, 22));
+        label_17->setGeometry(QRect(15, 390, 21, 22));
         label_18 = new QLabel(tabWypozyczenie);
         label_18->setObjectName(QStringLiteral("label_18"));
-        label_18->setGeometry(QRect(118, 400, 101, 22));
+        label_18->setGeometry(QRect(118, 390, 101, 22));
         label_19 = new QLabel(tabWypozyczenie);
         label_19->setObjectName(QStringLiteral("label_19"));
-        label_19->setGeometry(QRect(300, 400, 91, 22));
+        label_19->setGeometry(QRect(300, 390, 91, 22));
         label_20 = new QLabel(tabWypozyczenie);
         label_20->setObjectName(QStringLiteral("label_20"));
-        label_20->setGeometry(QRect(470, 400, 81, 22));
+        label_20->setGeometry(QRect(470, 390, 81, 22));
         pushButtonWyszukajKlienta = new QPushButton(tabWypozyczenie);
         pushButtonWyszukajKlienta->setObjectName(QStringLiteral("pushButtonWyszukajKlienta"));
-        pushButtonWyszukajKlienta->setGeometry(QRect(632, 398, 80, 25));
+        pushButtonWyszukajKlienta->setGeometry(QRect(632, 388, 80, 25));
         pushButtonWyszukajKlienta->setFont(font1);
         label_21 = new QLabel(tabWypozyczenie);
         label_21->setObjectName(QStringLiteral("label_21"));
-        label_21->setGeometry(QRect(15, 374, 191, 16));
+        label_21->setGeometry(QRect(15, 364, 191, 16));
         dateTimeEditTerminZwrotu = new QDateTimeEdit(tabWypozyczenie);
         dateTimeEditTerminZwrotu->setObjectName(QStringLiteral("dateTimeEditTerminZwrotu"));
         dateTimeEditTerminZwrotu->setGeometry(QRect(748, 387, 171, 31));
@@ -627,7 +633,7 @@ public:
         __qtablewidgetitem45->setFont(font1);
         tableWidgetWyszukajKlientaEdycja->setHorizontalHeaderItem(9, __qtablewidgetitem45);
         tableWidgetWyszukajKlientaEdycja->setObjectName(QStringLiteral("tableWidgetWyszukajKlientaEdycja"));
-        tableWidgetWyszukajKlientaEdycja->setGeometry(QRect(17, 350, 941, 201));
+        tableWidgetWyszukajKlientaEdycja->setGeometry(QRect(17, 350, 941, 231));
         label_46 = new QLabel(tabDodajKlienta);
         label_46->setObjectName(QStringLiteral("label_46"));
         label_46->setGeometry(QRect(357, 320, 301, 22));
@@ -1001,6 +1007,46 @@ public:
         komunikatyDodajUzytkownika->setFont(font2);
         komunikatyDodajUzytkownika->setFrameShape(QFrame::StyledPanel);
         komunikatyDodajUzytkownika->setWordWrap(true);
+        label_53 = new QLabel(tabDodajUzytkownika);
+        label_53->setObjectName(QStringLiteral("label_53"));
+        label_53->setGeometry(QRect(61, 290, 171, 16));
+        tableWidgetWyszukajUzytkownikaEdycja = new QTableWidget(tabDodajUzytkownika);
+        if (tableWidgetWyszukajUzytkownikaEdycja->columnCount() < 6)
+            tableWidgetWyszukajUzytkownikaEdycja->setColumnCount(6);
+        QTableWidgetItem *__qtablewidgetitem56 = new QTableWidgetItem();
+        __qtablewidgetitem56->setFont(font1);
+        tableWidgetWyszukajUzytkownikaEdycja->setHorizontalHeaderItem(0, __qtablewidgetitem56);
+        QTableWidgetItem *__qtablewidgetitem57 = new QTableWidgetItem();
+        __qtablewidgetitem57->setFont(font1);
+        tableWidgetWyszukajUzytkownikaEdycja->setHorizontalHeaderItem(1, __qtablewidgetitem57);
+        QTableWidgetItem *__qtablewidgetitem58 = new QTableWidgetItem();
+        __qtablewidgetitem58->setFont(font1);
+        tableWidgetWyszukajUzytkownikaEdycja->setHorizontalHeaderItem(2, __qtablewidgetitem58);
+        QTableWidgetItem *__qtablewidgetitem59 = new QTableWidgetItem();
+        __qtablewidgetitem59->setFont(font1);
+        tableWidgetWyszukajUzytkownikaEdycja->setHorizontalHeaderItem(3, __qtablewidgetitem59);
+        QTableWidgetItem *__qtablewidgetitem60 = new QTableWidgetItem();
+        __qtablewidgetitem60->setFont(font1);
+        tableWidgetWyszukajUzytkownikaEdycja->setHorizontalHeaderItem(4, __qtablewidgetitem60);
+        QTableWidgetItem *__qtablewidgetitem61 = new QTableWidgetItem();
+        __qtablewidgetitem61->setFont(font1);
+        tableWidgetWyszukajUzytkownikaEdycja->setHorizontalHeaderItem(5, __qtablewidgetitem61);
+        tableWidgetWyszukajUzytkownikaEdycja->setObjectName(QStringLiteral("tableWidgetWyszukajUzytkownikaEdycja"));
+        tableWidgetWyszukajUzytkownikaEdycja->setGeometry(QRect(60, 350, 621, 231));
+        label_54 = new QLabel(tabDodajUzytkownika);
+        label_54->setObjectName(QStringLiteral("label_54"));
+        label_54->setGeometry(QRect(61, 320, 171, 22));
+        label_55 = new QLabel(tabDodajUzytkownika);
+        label_55->setObjectName(QStringLiteral("label_55"));
+        label_55->setGeometry(QRect(400, 320, 301, 22));
+        pushButtonEdytujUzytkownika = new QPushButton(tabDodajUzytkownika);
+        pushButtonEdytujUzytkownika->setObjectName(QStringLiteral("pushButtonEdytujUzytkownika"));
+        pushButtonEdytujUzytkownika->setGeometry(QRect(700, 350, 100, 25));
+        pushButtonEdytujUzytkownika->setFont(font1);
+        lineEditNazwiskolWyszukajEdytuj = new QLineEdit(tabDodajUzytkownika);
+        lineEditNazwiskolWyszukajEdytuj->setObjectName(QStringLiteral("lineEditNazwiskolWyszukajEdytuj"));
+        lineEditNazwiskolWyszukajEdytuj->setGeometry(QRect(240, 320, 150, 22));
+        lineEditNazwiskolWyszukajEdytuj->setMinimumSize(QSize(150, 0));
         tabWidget->addTab(tabDodajUzytkownika, QString());
 #ifndef QT_NO_SHORTCUT
         label_13->setBuddy(lineEditOpisWyszukaj);
@@ -1021,6 +1067,7 @@ public:
         label_2->setBuddy(lineEditHaslo);
         label_3->setBuddy(lineEditImieUzytkownika);
         label_4->setBuddy(lineEditNazwiskoUzytkownika);
+        label_54->setBuddy(lineEditOpisWyszukaj);
 #endif // QT_NO_SHORTCUT
         QWidget::setTabOrder(lineEditTytul, lineEditRok);
         QWidget::setTabOrder(lineEditRok, spinBoxIleKopii);
@@ -1036,7 +1083,7 @@ public:
 
         retranslateUi(Wypozyczalnia);
 
-        tabWidget->setCurrentIndex(3);
+        tabWidget->setCurrentIndex(5);
         comboBoxGatunek1->setCurrentIndex(-1);
 
 
@@ -1237,6 +1284,22 @@ public:
         label_3->setText(QApplication::translate("Wypozyczalnia", "Imi\304\231:", nullptr));
         label_4->setText(QApplication::translate("Wypozyczalnia", "Nazwisko:", nullptr));
         pushButtonDodajUzytkownika->setText(QApplication::translate("Wypozyczalnia", "Dodaj", nullptr));
+        label_53->setText(QApplication::translate("Wypozyczalnia", "Edytuj wybranego u\305\274tkownikam:", nullptr));
+        QTableWidgetItem *___qtablewidgetitem56 = tableWidgetWyszukajUzytkownikaEdycja->horizontalHeaderItem(0);
+        ___qtablewidgetitem56->setText(QApplication::translate("Wypozyczalnia", "Id", nullptr));
+        QTableWidgetItem *___qtablewidgetitem57 = tableWidgetWyszukajUzytkownikaEdycja->horizontalHeaderItem(1);
+        ___qtablewidgetitem57->setText(QApplication::translate("Wypozyczalnia", "Login", nullptr));
+        QTableWidgetItem *___qtablewidgetitem58 = tableWidgetWyszukajUzytkownikaEdycja->horizontalHeaderItem(2);
+        ___qtablewidgetitem58->setText(QApplication::translate("Wypozyczalnia", "Imi\304\231", nullptr));
+        QTableWidgetItem *___qtablewidgetitem59 = tableWidgetWyszukajUzytkownikaEdycja->horizontalHeaderItem(3);
+        ___qtablewidgetitem59->setText(QApplication::translate("Wypozyczalnia", "Nazwisko", nullptr));
+        QTableWidgetItem *___qtablewidgetitem60 = tableWidgetWyszukajUzytkownikaEdycja->horizontalHeaderItem(4);
+        ___qtablewidgetitem60->setText(QApplication::translate("Wypozyczalnia", "Telefon", nullptr));
+        QTableWidgetItem *___qtablewidgetitem61 = tableWidgetWyszukajUzytkownikaEdycja->horizontalHeaderItem(5);
+        ___qtablewidgetitem61->setText(QApplication::translate("Wypozyczalnia", "EDYTUJ", nullptr));
+        label_54->setText(QApplication::translate("Wypozyczalnia", "Wyszukaj wg fragmentu nazwiska:", nullptr));
+        label_55->setText(QApplication::translate("Wypozyczalnia", "- wyszukiwanie dynamiczne po wprowadzaniu ka\305\274dej litery", nullptr));
+        pushButtonEdytujUzytkownika->setText(QApplication::translate("Wypozyczalnia", "Zapisz zmiany", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tabDodajUzytkownika), QApplication::translate("Wypozyczalnia", "Dodaj / Edytuj U\305\274ytkownika", nullptr));
     } // retranslateUi
 

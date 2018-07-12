@@ -32,7 +32,8 @@ SOURCES += \
     klienci.cpp \
     filmy.cpp \
     wypozyczenia.cpp \
-    rezerwacje.cpp
+    rezerwacje.cpp \
+    uzytkownicy.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -42,7 +43,8 @@ HEADERS += \
     klienci.h \
     filmy.h \
     wypozyczenia.h \
-    rezerwacje.h
+    rezerwacje.h \
+    uzytkownicy.h
 
 FORMS += \
         mainwindow.ui \

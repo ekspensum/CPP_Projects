@@ -13,6 +13,7 @@
 #include <QList>
 #include "klienci.h"
 #include "filmy.h"
+#include "uzytkownicy.h"
 #include "wypozyczenia.h"
 #include "rezerwacje.h"
 
@@ -43,19 +44,17 @@ public:
     bool wykonajEdycjeKlienta(int &idKlienta, QString &imie, QString &nazwisko, QString &kod, QString &miasto, QString &ulica, QString &nrDomu, QString &nrLokalu, QString &email);
     void wyszukajFilm(const QString &tytul);
     bool wykonajEdycjeFilmu(int &idFilmu, QString &tytul, int &rokProdukcji, QString &opis, int &iloscKopii, double &cenaWypozyczenia, int &gatunek1, int &gatunek2, int &gatunek3);
+    void wyszukajUzytkownika(const QString &nazwisko);
+    bool wykonajEdycjeUzytkownika(int &idUzytkownika, QString login, QString &imie, QString &nazwisko, QString &telefon);
     QStringList odczytGatunki();
     QList<Filmy *> getListaFilmy() const;
     QList<Klienci *> getListaKlienci() const;
+    QList<Filmy *> getListaFilmyEdycja() const;
+    QList<Klienci *> getListaKlienciEdycja() const;
     QList<Wypozyczenia *> getListaWypozyczenia() const;
     QList<Rezerwacje *> getListaRezerwacje() const;
+    QList<Uzytkownicy *> getListaUzytkownicy() const;
     static int idZalogowanyUzytkownik;
-    static int ileWierszyFilm;
-    static int ileWierszyKlient;
-    static int ileWierszyKlientEdycja;
-    static int ileWierszyFilmEdycja;
-    static int ileWierszyWypozyczone;
-    static int ileWierszyRezerwacja;
-
 
 signals:
 
@@ -67,10 +66,14 @@ private:
     QStringList listaGatunki;
     Filmy *filmy;
     Klienci *klienci;
+    Uzytkownicy *uzytkownicy;
     Wypozyczenia *wypozyczenia;
     Rezerwacje *rezerwacje;
     QList<Filmy *> listaFilmy;
     QList<Klienci *> listaKlienci;
+    QList<Filmy *> listaFilmyEdycja;
+    QList<Klienci *> listaKlienciEdycja;
+    QList<Uzytkownicy *> listaUzytkownicy;
     QList<Wypozyczenia *> listaWypozyczenia;
     QList<Rezerwacje *> listaRezerwacje;
 };

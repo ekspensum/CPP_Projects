@@ -59,8 +59,16 @@ private slots:
 
     void on_pushButtonEdytujFilm_clicked();
 
+    void on_lineEditNazwiskolWyszukajEdytuj_textChanged(const QString &nazwisko);
+
+    void on_pushButtonEdytujUzytkownika_clicked();
+
 private:
     Ui::Wypozyczalnia *ui;
+    ObslugaBD *bd;
+    QCheckBox *boxFilmy;
+    QCheckBox *boxKlienci;
+    QCheckBox *boxUzytkownicy;
     QCheckBox *boxWypozyczenie;
     QCheckBox *boxRezerwacja;
     QComboBox *comboGatunek1;
@@ -72,10 +80,6 @@ private:
     QList<QCheckBox *> listaBoxRezerwacjaKlienci;
     QList<QCheckBox *> listaBoxWypozyczenie;
     QList<QCheckBox *> listaBoxRezerwacja;
-    QCheckBox *boxKlienci;
-    QCheckBox **tablicaBoxKlienci;
-    QCheckBox *boxFilmy;
-    QCheckBox **tablicaBoxFilmy;
     QDateTime planowaDataZwrotu;
     QDateTime czasRezerwacji;
     QPalette p;
@@ -87,7 +91,7 @@ private:
     QMessageBox jedenKlientRezerwuj;
     QMessageBox jedenKlientEdytuj;
     QMessageBox jedenFilmEdytuj;
-
+    QMessageBox jedenUzytkownikEdytuj;
 };
 
 #endif // WYPOZYCZALNIA_H
