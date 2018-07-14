@@ -10,9 +10,9 @@ ObslugaBD::ObslugaBD()
     QString sciezkaDoBazy = QDir::currentPath();
     sciezkaDoBazy = sciezkaDoBazy + "/rentdvd.db";
     baza = QSqlDatabase::addDatabase("QSQLITE");
-//    qDebug() << sciezkaDoBazy;
+    //    qDebug() << sciezkaDoBazy;
     baza.setDatabaseName(sciezkaDoBazy);
-//    baza.open();
+    //    baza.open();
     if (!baza.open())
         qDebug()<< "Błąd połączenia z bazą danych";
     else
@@ -22,8 +22,10 @@ ObslugaBD::ObslugaBD()
 ObslugaBD::~ObslugaBD()
 {
     if (baza.isOpen())
+    {
         baza.close();
-    qDebug() << "zamykam połączenie z bazą";
+        qDebug() << "zamykam połączenie z bazą";
+    }
 }
 
 bool ObslugaBD::logowanie(QString &login, QString &haslo)
@@ -51,34 +53,32 @@ bool ObslugaBD::logowanie(QString &login, QString &haslo)
     return zalogowano;
 }
 
-bool ObslugaBD::dodajUzytkownika(QString &login, QString &haslo, QString &imie, QString &nazwisko)
+bool ObslugaBD::dodajUzytkownika(QString &login, QString &haslo, QString &imie, QString &nazwisko, QString &telefon)
 {
     bool dodano = false;
     QByteArray hasloByteArray;
     QString hasloHash = QString(QCryptographicHash::hash(hasloByteArray.append(haslo), QCryptographicHash::Md5).toHex());
     QSqlQuery query;
-    query.prepare("insert into uzytkownicy (login, haslo, imie, nazwisko, dataRejestracji) values (:login, :haslo, :imie, :nazwisko, :dataRejestracji)");
+    query.prepare("insert into uzytkownicy (login, haslo, imie, nazwisko, telefon, dataRejestracji) values (:login, :haslo, :imie, :nazwisko, :telefon, :dataRejestracji)");
     query.bindValue(":login", login);
     query.bindValue(":haslo", hasloHash);
     query.bindValue(":imie", imie);
     query.bindValue(":nazwisko", nazwisko);
+    query.bindValue(":telefon", telefon);
     query.bindValue(":dataRejestracji", QDateTime::currentDateTime());
     if (query.exec())
-    {
         dodano = true;
-        qDebug()<< hasloHash;
-    }
     else
         qDebug() << "Nie udało się dodać użytkownika";
 
     return dodano;
 }
 
-bool ObslugaBD::dodajKlienta(QString &imie, QString &nazwisko, QString &kodPocztowy, QString &miasto, QString &ulica, QString &nrDomu, QString &nrLokalu, QString &email)
+bool ObslugaBD::dodajKlienta(QString &imie, QString &nazwisko, QString &kodPocztowy, QString &miasto, QString &ulica, QString &nrDomu, QString &nrLokalu, QString &email, QString &telefon)
 {
     bool dodano = false;
     QSqlQuery query;
-    query.prepare("insert into klienci (imie, nazwisko, kod, miasto, ulica, nrDomu, nrLokalu, email, dataRejestracji, idUzytkownika) values (:imie, :nazwisko, :kodPocztowy, :miasto, :ulica, :nrDomu, :nrLokalu, :email, :dataRejestracji, :idUzytkownika)");
+    query.prepare("insert into klienci (imie, nazwisko, kod, miasto, ulica, nrDomu, nrLokalu, email, telefon, dataRejestracji, idUzytkownika) values (:imie, :nazwisko, :kodPocztowy, :miasto, :ulica, :nrDomu, :nrLokalu, :email, :telefon, :dataRejestracji, :idUzytkownika)");
     query.bindValue(":imie", imie);
     query.bindValue(":nazwisko", nazwisko);
     query.bindValue(":kodPocztowy", kodPocztowy);
@@ -87,6 +87,7 @@ bool ObslugaBD::dodajKlienta(QString &imie, QString &nazwisko, QString &kodPoczt
     query.bindValue(":nrDomu", nrDomu);
     query.bindValue(":nrLokalu", nrLokalu);
     query.bindValue(":email", email);
+    query.bindValue(":telefon", telefon);
     query.bindValue(":dataRejestracji", QDateTime::currentDateTime());
     query.bindValue(":idUzytkownika", ObslugaBD::idZalogowanyUzytkownik);
     if (query.exec())
@@ -392,13 +393,13 @@ void ObslugaBD::wyszukajKlienta(const QString &nazwisko)
 {
     listaKlienciEdycja.clear();
     QSqlQuery query;
-    query.prepare("SELECT idKlienta, imie, nazwisko, kod, miasto, ulica, nrDomu, nrLokalu, email FROM klienci WHERE nazwisko LIKE (:nazwisko)");
+    query.prepare("SELECT idKlienta, imie, nazwisko, kod, miasto, ulica, nrDomu, nrLokalu, email, telefon FROM klienci WHERE nazwisko LIKE (:nazwisko)");
     query.bindValue(":nazwisko", "%" + nazwisko + "%");
     if (query.exec())
     {
         while (query.next())
         {
-            klienci = new Klienci(query.value(0).toInt(), query.value(1).toString(), query.value(2).toString(), query.value(3).toString(), query.value(4).toString(), query.value(5).toString(), query.value(6).toString(), query.value(7).toString(), query.value(8).toString());
+            klienci = new Klienci(query.value(0).toInt(), query.value(1).toString(), query.value(2).toString(), query.value(3).toString(), query.value(4).toString(), query.value(5).toString(), query.value(6).toString(), query.value(7).toString(), query.value(8).toString(), query.value(9).toString());
             listaKlienciEdycja.append(klienci);
         }
     }
@@ -406,11 +407,11 @@ void ObslugaBD::wyszukajKlienta(const QString &nazwisko)
         qDebug() << "Nie udało się wyszukać klienta";
 }
 
-bool ObslugaBD::wykonajEdycjeKlienta(int &idKlienta, QString &imie, QString &nazwisko, QString &kod, QString &miasto, QString &ulica, QString &nrDomu, QString &nrLokalu, QString &email)
+bool ObslugaBD::wykonajEdycjeKlienta(int &idKlienta, QString &imie, QString &nazwisko, QString &kod, QString &miasto, QString &ulica, QString &nrDomu, QString &nrLokalu, QString &email, QString &telefon)
 {
     bool wykonano = false;
     QSqlQuery query;
-    query.prepare("UPDATE klienci SET imie = (:imie), nazwisko = (:nazwisko), kod = (:kodPocztowy), miasto = (:miasto), ulica = (:ulica), nrDomu = (:nrDomu), nrLokalu = (:nrLokalu), email = (:email), dataEdycji = (:dataEdycji), idUzytkownikaEdycja = (:idUzytkownika) WHERE idKlienta = (:idKlienta)");
+    query.prepare("UPDATE klienci SET imie = (:imie), nazwisko = (:nazwisko), kod = (:kodPocztowy), miasto = (:miasto), ulica = (:ulica), nrDomu = (:nrDomu), nrLokalu = (:nrLokalu), email = (:email), telefon = (:telefon), dataEdycji = (:dataEdycji), idUzytkownikaEdycja = (:idUzytkownika) WHERE idKlienta = (:idKlienta)");
     query.bindValue(":idKlienta", idKlienta);
     query.bindValue(":imie", imie);
     query.bindValue(":nazwisko", nazwisko);
@@ -420,6 +421,7 @@ bool ObslugaBD::wykonajEdycjeKlienta(int &idKlienta, QString &imie, QString &naz
     query.bindValue(":nrDomu", nrDomu);
     query.bindValue(":nrLokalu", nrLokalu);
     query.bindValue(":email", email);
+    query.bindValue(":telefon", telefon);
     query.bindValue(":dataEdycji", QDateTime::currentDateTime());
     query.bindValue(":idUzytkownika", ObslugaBD::idZalogowanyUzytkownik);
     if (query.exec())
@@ -490,7 +492,7 @@ void ObslugaBD::wyszukajUzytkownika(const QString &nazwisko)
         qDebug() << "Nie udało się wyszukać użytkownika";
 }
 
-bool ObslugaBD::wykonajEdycjeUzytkownika(int &idUzytkownika, QString login, QString &imie, QString &nazwisko, QString &telefon)
+bool ObslugaBD::wykonajEdycjeUzytkownika(int &idUzytkownika, QString &login, QString &imie, QString &nazwisko, QString &telefon)
 {
     bool wykonano = false;
     QSqlQuery query;
@@ -507,4 +509,75 @@ bool ObslugaBD::wykonajEdycjeUzytkownika(int &idUzytkownika, QString login, QStr
         qDebug() << "Nie udało się edytować użytkownika";
 
     return wykonano;
+}
+
+int ObslugaBD::znajdzUzytkownika(QString &login, QString &haslo)
+{
+    int znaleziono = 0;
+    QByteArray hasloByteArray;
+    QString hasloHash = QString(QCryptographicHash::hash(hasloByteArray.append(haslo), QCryptographicHash::Md5).toHex());
+    QString loginBaza, hasloBaza;
+    int idUzytkownika;
+    QSqlQuery query;
+    query.exec("SELECT idUzytkownika, login, haslo FROM uzytkownicy");
+    while (query.next())
+    {
+        idUzytkownika = query.value(0).toInt();
+        loginBaza = query.value(1).toString();
+        hasloBaza = query.value(2).toString();
+        if (login == loginBaza && hasloHash == hasloBaza)
+        {
+            znaleziono = idUzytkownika;
+            break;
+        }
+    }
+
+    return znaleziono;
+}
+
+bool ObslugaBD::wykonajZmianeHasla(int &idUzytkownika, QString &hasloNowe)
+{
+    bool wykonano = false;
+    QByteArray hasloByteArray;
+    QString hasloHash = QString(QCryptographicHash::hash(hasloByteArray.append(hasloNowe), QCryptographicHash::Md5).toHex());
+    QSqlQuery query;
+    query.prepare("UPDATE uzytkownicy SET haslo = (:haslo), dataEdycji = (:dataEdycji) WHERE idUzytkownika = (:idUzytkownika)");
+    query.bindValue(":idUzytkownika", idUzytkownika);
+    query.bindValue(":haslo", hasloHash);
+    query.bindValue(":dataEdycji", QDateTime::currentDateTime());
+    if (query.exec())
+        wykonano = true;
+    else
+        qDebug() << "Nie udało się edytować użytkownika";
+
+    return wykonano;
+}
+
+bool ObslugaBD::dodajGatunek(QString gatunek)
+{
+    qDebug() << gatunek;
+    bool dodano = false;
+    QSqlQuery query;
+    query.prepare("INSERT INTO gatunki (nazwa, dataDodania) VALUES (:nazwa, :dataDodania)");
+    query.bindValue(":nazwa", gatunek);
+    query.bindValue(":dataDodania", QDateTime::currentDateTime());
+    if (query.exec())
+        dodano = true;
+    else
+        qDebug() << "Nie udało się dodać gatunku";
+
+    return dodano;
+}
+
+bool ObslugaBD::usunGatunki()
+{
+    bool usunieto = false;
+    QSqlQuery query;
+    query.prepare("DELETE FROM gatunki");
+    if (query.exec())
+        usunieto = true;
+    else
+        qDebug() << "Nie udało się usunąć gatunków";
+
+    return usunieto;
 }

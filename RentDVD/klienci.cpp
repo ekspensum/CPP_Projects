@@ -16,7 +16,7 @@ Klienci::Klienci(int idKlienta, QString imie, QString nazwisko, QString miasto, 
     this->nrDomu = nrDomu;
 }
 
-Klienci::Klienci(int idKlienta, QString imie, QString nazwisko, QString kod, QString miasto, QString ulica, QString nrDomu, QString nrLokalu, QString email)
+Klienci::Klienci(int idKlienta, QString imie, QString nazwisko, QString kod, QString miasto, QString ulica, QString nrDomu, QString nrLokalu, QString email, QString telefon)
 {
     this->idKlienta = idKlienta;
     this->imie = imie;
@@ -27,6 +27,7 @@ Klienci::Klienci(int idKlienta, QString imie, QString nazwisko, QString kod, QSt
     this->nrDomu = nrDomu;
     this->nrLokalu = nrLokalu;
     this->email = email;
+    this->telefon = telefon;
 }
 
 int Klienci::getIdKlienta() const
@@ -74,3 +75,7 @@ QString Klienci::getEmail() const
     return email;
 }
 
+QString Klienci::getTelefon() const
+{
+    return telefon;
+}

@@ -63,6 +63,16 @@ private slots:
 
     void on_pushButtonEdytujUzytkownika_clicked();
 
+    void on_pushButtonZmienHaslo_clicked();
+
+    void on_tabWidget_tabBarClicked(int index);
+
+    void on_pushButtonGatunekDodaj_clicked();
+
+    void on_pushButtonGatunekUsun_clicked();
+
+    void on_pushButtonGatunkiEdytuj_clicked();
+
 private:
     Ui::Wypozyczalnia *ui;
     ObslugaBD *bd;
@@ -92,6 +102,7 @@ private:
     QMessageBox jedenKlientEdytuj;
     QMessageBox jedenFilmEdytuj;
     QMessageBox jedenUzytkownikEdytuj;
+    QMessageBox zmianaHaslaUzytkownik;
 };
 
 #endif // WYPOZYCZALNIA_H

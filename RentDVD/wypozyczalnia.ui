@@ -639,6 +639,12 @@
        <height>16</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
      <property name="text">
       <string>Wyszukaj wg całości lub fragmentu:</string>
      </property>
@@ -1469,7 +1475,7 @@
       <rect>
        <x>17</x>
        <y>350</y>
-       <width>941</width>
+       <width>1061</width>
        <height>231</height>
       </rect>
      </property>
@@ -1575,6 +1581,17 @@
      </column>
      <column>
       <property name="text">
+       <string>Telefon</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
        <string>EDYTUJ</string>
       </property>
       <property name="font">
@@ -1647,7 +1664,7 @@
      <property name="geometry">
       <rect>
        <x>978</x>
-       <y>350</y>
+       <y>310</y>
        <width>100</width>
        <height>25</height>
       </rect>
@@ -1666,10 +1683,16 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>290</y>
+       <y>297</y>
        <width>141</width>
        <height>16</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
      </property>
      <property name="text">
       <string>Edytuj wybranego Klienta:</string>
@@ -1683,6 +1706,12 @@
        <width>141</width>
        <height>16</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
      </property>
      <property name="text">
       <string>Dodaj nowego Klienta:</string>
@@ -1855,6 +1884,42 @@
       </rect>
      </property>
     </widget>
+    <widget class="QLabel" name="label_56">
+     <property name="geometry">
+      <rect>
+       <x>270</x>
+       <y>268</y>
+       <width>131</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>* pole NIE jest wymagane</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEditTelefon">
+     <property name="geometry">
+      <rect>
+       <x>138</x>
+       <y>263</y>
+       <width>108</width>
+       <height>22</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_57">
+     <property name="geometry">
+      <rect>
+       <x>61</x>
+       <y>263</y>
+       <width>45</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Telefon:</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="tabDodajFilm">
     <attribute name="title">
@@ -1864,7 +1929,7 @@
      <property name="geometry">
       <rect>
        <x>990</x>
-       <y>150</y>
+       <y>180</y>
        <width>91</width>
        <height>25</height>
       </rect>
@@ -1922,7 +1987,7 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>9</y>
+       <y>39</y>
        <width>607</width>
        <height>26</height>
       </rect>
@@ -1970,7 +2035,7 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>39</y>
+       <y>69</y>
        <width>215</width>
        <height>26</height>
       </rect>
@@ -2028,7 +2093,7 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>169</y>
+       <y>199</y>
        <width>198</width>
        <height>25</height>
       </rect>
@@ -2079,7 +2144,7 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>200</y>
+       <y>230</y>
        <width>384</width>
        <height>80</height>
       </rect>
@@ -2235,7 +2300,7 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>139</y>
+       <y>169</y>
        <width>215</width>
        <height>24</height>
       </rect>
@@ -2416,10 +2481,16 @@
      <property name="geometry">
       <rect>
        <x>23</x>
-       <y>320</y>
+       <y>326</y>
        <width>141</width>
        <height>16</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
      </property>
      <property name="text">
       <string>Edytuj wybrany film:</string>
@@ -2461,7 +2532,7 @@
      <property name="geometry">
       <rect>
        <x>21</x>
-       <y>71</y>
+       <y>101</y>
        <width>99</width>
        <height>16</height>
       </rect>
@@ -2474,7 +2545,7 @@
      <property name="geometry">
       <rect>
        <x>126</x>
-       <y>71</y>
+       <y>101</y>
        <width>955</width>
        <height>60</height>
       </rect>
@@ -2485,112 +2556,336 @@
       </font>
      </property>
     </widget>
+    <widget class="QLabel" name="label_65">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>10</y>
+       <width>111</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Dodaj nowy film:</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab">
+    <attribute name="title">
+     <string>Statystyka</string>
+    </attribute>
    </widget>
    <widget class="QWidget" name="tabUstawienia">
     <attribute name="title">
      <string>Ustawienia</string>
     </attribute>
+    <widget class="QLabel" name="label_59">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>42</y>
+       <width>41</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Login:</string>
+     </property>
+     <property name="buddy">
+      <cstring>lineEditLogin</cstring>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEditZmianaHaslaLogin">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>42</y>
+       <width>108</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEditZmianaHaslaHaslo">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>70</y>
+       <width>108</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="echoMode">
+      <enum>QLineEdit::Password</enum>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_60">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>70</y>
+       <width>41</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Hasło:</string>
+     </property>
+     <property name="buddy">
+      <cstring>lineEditHaslo</cstring>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_61">
+     <property name="geometry">
+      <rect>
+       <x>19</x>
+       <y>10</y>
+       <width>81</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Zmiana hasła:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_62">
+     <property name="geometry">
+      <rect>
+       <x>21</x>
+       <y>128</y>
+       <width>81</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Powtórz hasło:</string>
+     </property>
+     <property name="buddy">
+      <cstring>lineEditHaslo</cstring>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEditZmianaHaslaPowtorz">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>128</y>
+       <width>108</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="echoMode">
+      <enum>QLineEdit::Password</enum>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_63">
+     <property name="geometry">
+      <rect>
+       <x>21</x>
+       <y>99</y>
+       <width>71</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Nowe hasło:</string>
+     </property>
+     <property name="buddy">
+      <cstring>lineEditHaslo</cstring>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEditZmianaHaslaNowe">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>99</y>
+       <width>108</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="echoMode">
+      <enum>QLineEdit::Password</enum>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButtonZmienHaslo">
+     <property name="geometry">
+      <rect>
+       <x>250</x>
+       <y>126</y>
+       <width>80</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Zmień hasło</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="komunikatyUstawienia">
+     <property name="geometry">
+      <rect>
+       <x>720</x>
+       <y>10</y>
+       <width>371</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_66">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>200</y>
+       <width>171</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Edycja gatunków filmowych:</string>
+     </property>
+    </widget>
+    <widget class="QTableWidget" name="tableWidgetGatunki">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>230</y>
+       <width>198</width>
+       <height>351</height>
+      </rect>
+     </property>
+     <column>
+      <property name="text">
+       <string>Nazwa gatunku</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+    </widget>
+    <widget class="QPushButton" name="pushButtonGatunekDodaj">
+     <property name="geometry">
+      <rect>
+       <x>250</x>
+       <y>230</y>
+       <width>101</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Dodaj gatunek</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButtonGatunkiEdytuj">
+     <property name="geometry">
+      <rect>
+       <x>250</x>
+       <y>556</y>
+       <width>101</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Zapisz zmiany</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButtonGatunekUsun">
+     <property name="geometry">
+      <rect>
+       <x>250</x>
+       <y>280</y>
+       <width>101</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Usuń gatunek</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="tabDodajUzytkownika">
     <attribute name="title">
      <string>Dodaj / Edytuj Użytkownika</string>
     </attribute>
-    <widget class="QWidget" name="layoutWidget11">
-     <property name="geometry">
-      <rect>
-       <x>60</x>
-       <y>37</y>
-       <width>251</width>
-       <height>111</height>
-      </rect>
-     </property>
-     <layout class="QFormLayout" name="formLayout">
-      <item row="0" column="0">
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>Login:</string>
-        </property>
-        <property name="buddy">
-         <cstring>lineEditLogin</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="lineEditLogin">
-        <property name="font">
-         <font>
-          <pointsize>9</pointsize>
-         </font>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>Hasło:</string>
-        </property>
-        <property name="buddy">
-         <cstring>lineEditHaslo</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLineEdit" name="lineEditHaslo">
-        <property name="font">
-         <font>
-          <pointsize>9</pointsize>
-         </font>
-        </property>
-        <property name="echoMode">
-         <enum>QLineEdit::Password</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>Imię:</string>
-        </property>
-        <property name="buddy">
-         <cstring>lineEditImieUzytkownika</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QLineEdit" name="lineEditImieUzytkownika">
-        <property name="font">
-         <font>
-          <pointsize>9</pointsize>
-         </font>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="label_4">
-        <property name="text">
-         <string>Nazwisko:</string>
-        </property>
-        <property name="buddy">
-         <cstring>lineEditNazwiskoUzytkownika</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QLineEdit" name="lineEditNazwiskoUzytkownika">
-        <property name="font">
-         <font>
-          <pointsize>9</pointsize>
-         </font>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
     <widget class="QPushButton" name="pushButtonDodajUzytkownika">
      <property name="geometry">
       <rect>
        <x>230</x>
-       <y>160</y>
+       <y>190</y>
        <width>81</width>
        <height>25</height>
       </rect>
@@ -2643,6 +2938,12 @@
        <width>171</width>
        <height>16</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
      </property>
      <property name="text">
       <string>Edytuj wybranego użtkownikam:</string>
@@ -2788,22 +3089,256 @@
       </size>
      </property>
     </widget>
+    <widget class="QLabel" name="label_58">
+     <property name="geometry">
+      <rect>
+       <x>61</x>
+       <y>150</y>
+       <width>48</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Telefon:</string>
+     </property>
+     <property name="buddy">
+      <cstring>lineEditNazwiskoUzytkownika</cstring>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEditTelefonUzytkownika">
+     <property name="geometry">
+      <rect>
+       <x>115</x>
+       <y>150</y>
+       <width>108</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_64">
+     <property name="geometry">
+      <rect>
+       <x>60</x>
+       <y>10</y>
+       <width>171</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Dodaj nowego Użytkownika:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>61</x>
+       <y>38</y>
+       <width>29</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Login:</string>
+     </property>
+     <property name="buddy">
+      <cstring>lineEditLogin</cstring>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEditLogin">
+     <property name="geometry">
+      <rect>
+       <x>115</x>
+       <y>38</y>
+       <width>108</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>61</x>
+       <y>66</y>
+       <width>31</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Hasło:</string>
+     </property>
+     <property name="buddy">
+      <cstring>lineEditHaslo</cstring>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_3">
+     <property name="geometry">
+      <rect>
+       <x>61</x>
+       <y>94</y>
+       <width>24</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Imię:</string>
+     </property>
+     <property name="buddy">
+      <cstring>lineEditImieUzytkownika</cstring>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEditHaslo">
+     <property name="geometry">
+      <rect>
+       <x>115</x>
+       <y>66</y>
+       <width>108</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="echoMode">
+      <enum>QLineEdit::Password</enum>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEditImieUzytkownika">
+     <property name="geometry">
+      <rect>
+       <x>115</x>
+       <y>94</y>
+       <width>108</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_4">
+     <property name="geometry">
+      <rect>
+       <x>61</x>
+       <y>122</y>
+       <width>48</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Nazwisko:</string>
+     </property>
+     <property name="buddy">
+      <cstring>lineEditNazwiskoUzytkownika</cstring>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEditNazwiskoUzytkownika">
+     <property name="geometry">
+      <rect>
+       <x>115</x>
+       <y>122</y>
+       <width>108</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+    </widget>
    </widget>
   </widget>
  </widget>
  <tabstops>
-  <tabstop>lineEditTytul</tabstop>
-  <tabstop>lineEditRok</tabstop>
-  <tabstop>spinBoxIleKopii</tabstop>
   <tabstop>comboBoxGatunek1</tabstop>
   <tabstop>comboBoxGatunek2</tabstop>
-  <tabstop>comboBoxGatunek3</tabstop>
   <tabstop>lineEditLogin</tabstop>
+  <tabstop>comboBoxGatunek3</tabstop>
   <tabstop>lineEditHaslo</tabstop>
-  <tabstop>lineEditImieUzytkownika</tabstop>
   <tabstop>lineEditNazwiskoUzytkownika</tabstop>
-  <tabstop>pushButtonDodajUzytkownika</tabstop>
   <tabstop>tabWidget</tabstop>
+  <tabstop>tableWidgetWyszukajFilm</tabstop>
+  <tabstop>comboBoxGatunekWyszukaj</tabstop>
+  <tabstop>pushButtonWyszukajRokGatunek</tabstop>
+  <tabstop>pushButtonWyszukajTytulOpis</tabstop>
+  <tabstop>pushButtonWypozyczenie</tabstop>
+  <tabstop>pushButtonRezerwacja</tabstop>
+  <tabstop>lineEditOpisWyszukaj</tabstop>
+  <tabstop>lineEditTytulWyszukaj</tabstop>
+  <tabstop>lineEditRokWyszukaj</tabstop>
+  <tabstop>tableWidgetWyszukajKlienta</tabstop>
+  <tabstop>lineEditImieWyszukaj</tabstop>
+  <tabstop>lineEditNazwiskoWyszukaj</tabstop>
+  <tabstop>lineEditMiastoWyszukaj</tabstop>
+  <tabstop>lineEditUlicaWyszukaj</tabstop>
+  <tabstop>pushButtonWyszukajKlienta</tabstop>
+  <tabstop>dateTimeEditTerminZwrotu</tabstop>
+  <tabstop>dateTimeEditTerminRezerwacji</tabstop>
+  <tabstop>pushButtonWyszukajWypozyczoneKlientFilm</tabstop>
+  <tabstop>tableWidgetWyszukajWypozyczone</tabstop>
+  <tabstop>pushButtonZwrot</tabstop>
+  <tabstop>tableWidgetWyszukajZarezerwowane</tabstop>
+  <tabstop>lineEditNazwiskoWyszukajZarezerwowane</tabstop>
+  <tabstop>lineEditIdFilmuWyszukajZarezerwowane</tabstop>
+  <tabstop>pushButtonOdwolanie</tabstop>
+  <tabstop>lineEditIdKlientaWyszukajZarezerwowane</tabstop>
+  <tabstop>pushButtonWyszukajZarezerwowaneKlientFilm</tabstop>
+  <tabstop>lineEditIdFilmuWyszukajZwrot</tabstop>
+  <tabstop>lineEditIdKlientaWyszukajZwrot</tabstop>
+  <tabstop>lineEditNazwiskoWyszukajZwrot</tabstop>
+  <tabstop>pushButtonDodajKlienta</tabstop>
+  <tabstop>lineEditEmail</tabstop>
+  <tabstop>lineEditNazwiskoWyszukajEdytuj</tabstop>
+  <tabstop>tableWidgetWyszukajKlientaEdycja</tabstop>
+  <tabstop>pushButtonEdytujKlienta</tabstop>
+  <tabstop>lineEditImieKlienta</tabstop>
+  <tabstop>lineEditNazwiskoKlienta</tabstop>
+  <tabstop>lineEditKodPocztowy</tabstop>
+  <tabstop>lineEditMiasto</tabstop>
+  <tabstop>lineEditUlica</tabstop>
+  <tabstop>lineEditNrDomu</tabstop>
+  <tabstop>lineEditNrLokalu</tabstop>
+  <tabstop>pushButtonDodajFilm</tabstop>
+  <tabstop>lineEditCenaWypozyczenia</tabstop>
+  <tabstop>tableWidgetWyszukajFilmEdycja</tabstop>
+  <tabstop>pushButtonEdytujFilm</tabstop>
+  <tabstop>lineEditTytulWyszukajEdytuj</tabstop>
+  <tabstop>plainTextEditOpis</tabstop>
+  <tabstop>tableWidgetWyszukajUzytkownikaEdycja</tabstop>
+  <tabstop>pushButtonEdytujUzytkownika</tabstop>
+  <tabstop>lineEditNazwiskolWyszukajEdytuj</tabstop>
+  <tabstop>lineEditTelefon</tabstop>
+  <tabstop>lineEditTelefonUzytkownika</tabstop>
+  <tabstop>lineEditZmianaHaslaLogin</tabstop>
+  <tabstop>lineEditZmianaHaslaHaslo</tabstop>
+  <tabstop>lineEditZmianaHaslaNowe</tabstop>
+  <tabstop>lineEditZmianaHaslaPowtorz</tabstop>
+  <tabstop>pushButtonZmienHaslo</tabstop>
+  <tabstop>lineEditTytul</tabstop>
+  <tabstop>lineEditImieUzytkownika</tabstop>
+  <tabstop>spinBoxIleKopii</tabstop>
+  <tabstop>pushButtonDodajUzytkownika</tabstop>
+  <tabstop>lineEditRok</tabstop>
  </tabstops>
  <resources/>
  <connections/>

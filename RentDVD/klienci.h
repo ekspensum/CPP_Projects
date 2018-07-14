@@ -15,11 +15,12 @@ protected:
     QString nrDomu;
     QString nrLokalu;
     QString email;
+    QString telefon;
 
 public:
     Klienci();
     Klienci(int idKlienta, QString imie, QString nazwisko, QString miasto, QString ulica, QString nrDomu);
-    Klienci(int idKlienta, QString imie, QString nazwisko, QString kod, QString miasto, QString ulica, QString nrDomu, QString nrLokalu, QString email);
+    Klienci(int idKlienta, QString imie, QString nazwisko, QString kod, QString miasto, QString ulica, QString nrDomu, QString nrLokalu, QString email, QString telefon);
 
     int getIdKlienta() const;
     QString getImie() const;
@@ -30,7 +31,7 @@ public:
     QString getNrDomu() const;
     QString getNrLokalu() const;
     QString getEmail() const;
-
+    QString getTelefon() const;
 };
 
 #endif // KLIENCI_H

@@ -6,9 +6,10 @@ Wypozyczalnia::Wypozyczalnia(QWidget *parent) :
     ui(new Ui::Wypozyczalnia)
 {
     ui->setupUi(this);
-    ui->tabWidget->setTabEnabled(5, false);
-    if (ObslugaBD::idZalogowanyUzytkownik == 1)
-        ui->tabWidget->setTabEnabled(5, true);
+    ui->tabWidget->setTabEnabled(6, false);
+    if (ObslugaBD::idZalogowanyUzytkownik == 1 || ObslugaBD::idZalogowanyUzytkownik == 23)
+        ui->tabWidget->setTabEnabled(6, true);
+    ui->tabWidget->setCurrentIndex(0);
     bd = new ObslugaBD();
     ui->comboBoxGatunek1->addItems(bd->odczytGatunki());
     ui->comboBoxGatunek2->addItems(bd->odczytGatunki());
@@ -52,6 +53,7 @@ Wypozyczalnia::Wypozyczalnia(QWidget *parent) :
     jedenFilmOdwolaj.setText("Proszę zazanaczyć jeden film do odwołania rezerwacji");
     jedenFilmEdytuj.setText("Proszę zazanaczyć jeden film do edycji.");
     jedenUzytkownikEdytuj.setText("Proszę zazanaczyć jednego użytkownika do edycji.");
+    zmianaHaslaUzytkownik.setText("Hasło użytkownika zostało zmienione.");
     ui->tableWidgetWyszukajWypozyczone->setStyleSheet("QWidget::pane > QWidget { background-color: #C3C3AE; }");
     ui->tableWidgetWyszukajWypozyczone->setColumnWidth(0,35);
     ui->tableWidgetWyszukajWypozyczone->setColumnWidth(1,55);
@@ -84,7 +86,8 @@ Wypozyczalnia::Wypozyczalnia(QWidget *parent) :
     ui->tableWidgetWyszukajKlientaEdycja->setColumnWidth(6,60);
     ui->tableWidgetWyszukajKlientaEdycja->setColumnWidth(7,60);
     ui->tableWidgetWyszukajKlientaEdycja->setColumnWidth(8,160);
-    ui->tableWidgetWyszukajKlientaEdycja->setColumnWidth(9,60);
+    ui->tableWidgetWyszukajKlientaEdycja->setColumnWidth(9,110);
+    ui->tableWidgetWyszukajKlientaEdycja->setColumnWidth(10,60);
     ui->tableWidgetWyszukajFilmEdycja->setStyleSheet("QWidget::pane > QWidget { background-color: #C3C3AE; }");
     ui->tableWidgetWyszukajFilmEdycja->setColumnWidth(0,35);
     ui->tableWidgetWyszukajFilmEdycja->setColumnWidth(1,150);
@@ -107,27 +110,30 @@ Wypozyczalnia::Wypozyczalnia(QWidget *parent) :
 
 Wypozyczalnia::~Wypozyczalnia()
 {
+    delete bd;
     delete ui;
 }
 
 void Wypozyczalnia::on_pushButtonDodajUzytkownika_clicked()
 {
-    QString login, haslo, imie, nazwisko;
+    QString login, haslo, imie, nazwisko, telefon;
     login = ui->lineEditLogin->text();
     haslo = ui->lineEditHaslo->text();
     imie = ui->lineEditImieUzytkownika->text();
     nazwisko = ui->lineEditNazwiskoUzytkownika->text();
+    telefon = ui->lineEditTelefonUzytkownika->text();
     if(login == "" || haslo == "" || imie == "" || nazwisko == "")
         ui->komunikatyDodajUzytkownika->setText("Proszę uzupełnić wszystkie pola forlmularza.");
     else
     {
-        if (bd->dodajUzytkownika(login, haslo, imie, nazwisko))
+        if (bd->dodajUzytkownika(login, haslo, imie, nazwisko, telefon))
         {
             ui->komunikatyDodajUzytkownika->setText("Dodano nowego użytkownika do bazy danych.");
             ui->lineEditLogin->clear();
             ui->lineEditHaslo->clear();
             ui->lineEditImieUzytkownika->clear();
             ui->lineEditNazwiskoUzytkownika->clear();
+            ui->lineEditTelefonUzytkownika->clear();
         }
         else
             ui->komunikatyDodajUzytkownika->setText("Błąd: nie udało się dodać użytkownika do bazy danych.");
@@ -136,7 +142,7 @@ void Wypozyczalnia::on_pushButtonDodajUzytkownika_clicked()
 
 void Wypozyczalnia::on_pushButtonDodajKlienta_clicked()
 {
-    QString imie, nazwisko, kodPocztowy, miasto, ulica, nrDomu, nrlokalu, email;
+    QString imie, nazwisko, kodPocztowy, miasto, ulica, nrDomu, nrlokalu, email, telefon;
     imie = ui->lineEditImieKlienta->text();
     nazwisko = ui->lineEditNazwiskoKlienta->text();
     kodPocztowy = ui->lineEditKodPocztowy->text();
@@ -145,11 +151,12 @@ void Wypozyczalnia::on_pushButtonDodajKlienta_clicked()
     nrDomu = ui->lineEditNrDomu->text();
     nrlokalu = ui->lineEditNrLokalu->text();
     email = ui->lineEditEmail->text();
+    telefon = ui->lineEditTelefon->text();
     if(imie == "" || nazwisko == "" || miasto == "" || ulica == "" || nrDomu == "")
         ui->komunikatyDodajKlienta->setText("Proszę uzupełnić wymagane pola forlmularza.");
     else
     {
-        if (bd->dodajKlienta(imie, nazwisko, kodPocztowy, miasto, ulica, nrDomu, nrlokalu, email))
+        if (bd->dodajKlienta(imie, nazwisko, kodPocztowy, miasto, ulica, nrDomu, nrlokalu, email, telefon))
         {
             ui->komunikatyDodajKlienta->setText("Dodano nowego klienta do bazy danych.");
             ui->lineEditImieKlienta->clear();
@@ -160,6 +167,7 @@ void Wypozyczalnia::on_pushButtonDodajKlienta_clicked()
             ui->lineEditNrDomu->clear();
             ui->lineEditNrLokalu->clear();
             ui->lineEditEmail->clear();
+            ui->lineEditTelefon->clear();
         }
         else
             ui->komunikatyDodajKlienta->setText("Błąd: nie udało się dodać klienta do bazy danych.");
@@ -590,9 +598,10 @@ void Wypozyczalnia::on_lineEditNazwiskoWyszukajEdytuj_textChanged(const QString 
         ui->tableWidgetWyszukajKlientaEdycja->setItem(i,6, new QTableWidgetItem(bd->getListaKlienciEdycja().at(i)->getNrDomu()));
         ui->tableWidgetWyszukajKlientaEdycja->setItem(i,7, new QTableWidgetItem(bd->getListaKlienciEdycja().at(i)->getNrLokalu()));
         ui->tableWidgetWyszukajKlientaEdycja->setItem(i,8, new QTableWidgetItem(bd->getListaKlienciEdycja().at(i)->getEmail()));
+        ui->tableWidgetWyszukajKlientaEdycja->setItem(i,9, new QTableWidgetItem(bd->getListaKlienciEdycja().at(i)->getTelefon()));
         boxKlienci = new QCheckBox();
         boxKlienci->setStyleSheet("margin-left:25%;");
-        ui->tableWidgetWyszukajKlientaEdycja->setCellWidget(i,9, boxKlienci);
+        ui->tableWidgetWyszukajKlientaEdycja->setCellWidget(i,10, boxKlienci);
     }
 }
 
@@ -605,7 +614,7 @@ void Wypozyczalnia::on_pushButtonEdytujKlienta_clicked()
         int iluKlientow = 0;
         for(int i=0; i<bd->getListaKlienciEdycja().size(); i++)
         {
-            boxKlienci = (QCheckBox *)ui->tableWidgetWyszukajKlientaEdycja->cellWidget(i, 9);
+            boxKlienci = (QCheckBox *)ui->tableWidgetWyszukajKlientaEdycja->cellWidget(i, 10);
             if (boxKlienci->isChecked())
                 iluKlientow++;
         }
@@ -615,10 +624,10 @@ void Wypozyczalnia::on_pushButtonEdytujKlienta_clicked()
         if (iluKlientow == 1)
         {
             int wybraneIdKlienta = 0;
-            QString imie, nazwisko, kod, miasto, ulica, nrDomu, nrLokalu, email;
+            QString imie, nazwisko, kod, miasto, ulica, nrDomu, nrLokalu, email, telefon;
             for(int i=0; i<bd->getListaKlienciEdycja().size(); i++)
             {
-                boxKlienci = (QCheckBox *)ui->tableWidgetWyszukajKlientaEdycja->cellWidget(i, 9);
+                boxKlienci = (QCheckBox *)ui->tableWidgetWyszukajKlientaEdycja->cellWidget(i, 10);
                 if (boxKlienci->isChecked())
                 {
                     wybraneIdKlienta = ui->tableWidgetWyszukajKlientaEdycja->item(i, 0)->text().toInt();
@@ -630,10 +639,11 @@ void Wypozyczalnia::on_pushButtonEdytujKlienta_clicked()
                     nrDomu = ui->tableWidgetWyszukajKlientaEdycja->item(i, 6)->text();
                     nrLokalu = ui->tableWidgetWyszukajKlientaEdycja->item(i, 7)->text();
                     email = ui->tableWidgetWyszukajKlientaEdycja->item(i, 8)->text();
+                    telefon = ui->tableWidgetWyszukajKlientaEdycja->item(i, 9)->text();
                     break;
                 }
             }
-            if (bd->wykonajEdycjeKlienta(wybraneIdKlienta, imie, nazwisko, kod, miasto, ulica, nrDomu, nrLokalu, email))
+            if (bd->wykonajEdycjeKlienta(wybraneIdKlienta, imie, nazwisko, kod, miasto, ulica, nrDomu, nrLokalu, email, telefon))
                 ui->komunikatyDodajKlienta->setText("Dokonano edycji wybranego klienta.");
             else
                 ui->komunikatyDodajKlienta->setText("Błąd! Nie udało się dokonać edycji wybranego klienta.");
@@ -790,4 +800,77 @@ void Wypozyczalnia::on_pushButtonEdytujUzytkownika_clicked()
     }
     else
         ui->komunikatyDodajUzytkownika->setText("Proszę wyszukać użytkownika do edycji.");
+}
+
+void Wypozyczalnia::on_pushButtonZmienHaslo_clicked()
+{
+    QString login, haslo, noweHaslo, powtorzHaslo;
+    login = ui->lineEditZmianaHaslaLogin->text();
+    haslo = ui->lineEditZmianaHaslaHaslo->text();
+    noweHaslo = ui->lineEditZmianaHaslaNowe->text();
+    powtorzHaslo = ui->lineEditZmianaHaslaPowtorz->text();
+    int idUzytkownika;
+    if (noweHaslo == powtorzHaslo)
+    {
+        if (bd->znajdzUzytkownika(login, haslo))
+        {
+            idUzytkownika = bd->znajdzUzytkownika(login, haslo);
+            if (bd->wykonajZmianeHasla(idUzytkownika, noweHaslo))
+                zmianaHaslaUzytkownik.exec();
+        }
+        else
+            ui->komunikatyUstawienia->setText("Dotychczasowy login lub hasło są niepoprawne.");
+    }
+    else
+        ui->komunikatyUstawienia->setText("Brak zgodności pomiędzy polem Nowe hasło i Powtórz hasło.");
+
+}
+
+void Wypozyczalnia::on_tabWidget_tabBarClicked(int index)
+{
+    if (index == 5)
+    {
+        ui->tableWidgetGatunki->setRowCount(bd->odczytGatunki().size()-1);
+        ui->tableWidgetGatunki->setColumnWidth(0, 198);
+        ui->tableWidgetGatunki->setStyleSheet("QWidget::pane > QWidget { background-color: #C3C3AE; }");
+        QString gatunki;
+        for(int i=0; i<bd->odczytGatunki().size()-1; i++)
+        {
+//            gatunki = bd->odczytGatunki().value(i+1);
+            qDebug() << gatunki;
+            gatunki = "ala";
+            ui->tableWidgetGatunki->setItem(i, 0, new QTableWidgetItem(gatunki));
+        }
+    }
+}
+
+void Wypozyczalnia::on_pushButtonGatunekDodaj_clicked()
+{
+    ui->tableWidgetGatunki->insertRow(ui->tableWidgetGatunki->rowCount());
+    ui->tableWidgetGatunki->setItem(ui->tableWidgetGatunki->rowCount()-1, 0, new QTableWidgetItem());
+    ui->tableWidgetGatunki->item(ui->tableWidgetGatunki->rowCount()-1, 0)->setSelected(true);
+}
+
+void Wypozyczalnia::on_pushButtonGatunekUsun_clicked()
+{
+    if (ui->tableWidgetGatunki->currentRow() == -1)
+        ui->komunikatyUstawienia->setText("Proszę zaznaczyć gatunek do usunięcia.");
+    else
+        ui->tableWidgetGatunki->removeRow(ui->tableWidgetGatunki->currentRow());
+}
+
+void Wypozyczalnia::on_pushButtonGatunkiEdytuj_clicked()
+{
+    QString gatunek;
+//    if (bd->usunGatunki())
+//    {
+//       for (int i=0; i<ui->tableWidgetGatunki->rowCount(); i++)
+//       {
+//           gatunek = ui->tableWidgetGatunki->item(i, 0)->text();
+           gatunek = "gatunek";
+//           qDebug() << gatunek;
+           bd->dodajGatunek(gatunek);
+//       }
+
+//    }
 }

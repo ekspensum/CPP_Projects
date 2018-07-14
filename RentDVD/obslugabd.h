@@ -24,8 +24,8 @@ class ObslugaBD
 public:
     ObslugaBD();
     ~ObslugaBD();
-    bool dodajUzytkownika(QString &login, QString &haslo, QString &imie, QString &nazwisko);
-    bool dodajKlienta(QString &imie, QString &nazwisko, QString &kodPocztowy, QString &miasto, QString &ulica, QString &nrDomu, QString &nrLokalu, QString &email);
+    bool dodajUzytkownika(QString &login, QString &haslo, QString &imie, QString &nazwisko, QString &telefon);
+    bool dodajKlienta(QString &imie, QString &nazwisko, QString &kodPocztowy, QString &miasto, QString &ulica, QString &nrDomu, QString &nrLokalu, QString &email, QString &telefon);
     bool dodajFilm(QString &tytul, int &rokProdukcji, QString &opis, double &cenaWypozyczenia, int &iloscKopii, int &gatunek1, int &gatunek2, int &gatunek3);
     bool logowanie(QString &login, QString &haslo);
     void wyszukajFilmTytulOpis(QString &tytul, QString &opis);
@@ -41,11 +41,15 @@ public:
     void wyszukajRezerwacjeFilmyNazwisko(const QString &nazwisko);
     bool wykonajOdwolanieRezerwacji(int &idRezerwacji);
     void wyszukajKlienta(const QString &nazwisko);
-    bool wykonajEdycjeKlienta(int &idKlienta, QString &imie, QString &nazwisko, QString &kod, QString &miasto, QString &ulica, QString &nrDomu, QString &nrLokalu, QString &email);
+    bool wykonajEdycjeKlienta(int &idKlienta, QString &imie, QString &nazwisko, QString &kod, QString &miasto, QString &ulica, QString &nrDomu, QString &nrLokalu, QString &email, QString &telefon);
     void wyszukajFilm(const QString &tytul);
     bool wykonajEdycjeFilmu(int &idFilmu, QString &tytul, int &rokProdukcji, QString &opis, int &iloscKopii, double &cenaWypozyczenia, int &gatunek1, int &gatunek2, int &gatunek3);
     void wyszukajUzytkownika(const QString &nazwisko);
-    bool wykonajEdycjeUzytkownika(int &idUzytkownika, QString login, QString &imie, QString &nazwisko, QString &telefon);
+    bool wykonajEdycjeUzytkownika(int &idUzytkownika, QString &login, QString &imie, QString &nazwisko, QString &telefon);
+    int znajdzUzytkownika(QString &login, QString &haslo);
+    bool wykonajZmianeHasla(int &idUzytkownika, QString &hasloNowe);
+    bool dodajGatunek(QString gatunek);
+    bool usunGatunki();
     QStringList odczytGatunki();
     QList<Filmy *> getListaFilmy() const;
     QList<Klienci *> getListaKlienci() const;
