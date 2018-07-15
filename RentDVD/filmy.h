@@ -16,11 +16,13 @@ protected:
     int gatunek2;
     int gatunek3;
     double cenaWypozyczenia;
+    int iloscWypozyczonych;
 
 public:
     Filmy();
     Filmy(QString tytul, int rokProdukcji, QString nazwaGatunku, QString opis, double cenaWypozyczenia, int idFilmu);
     Filmy(int idFilmu, QString tytul, int rokProdukcji, QString opis, int iloscKopii, double cenaWypozyczenia, int gatunek1, int gatunek2, int gatunek3);
+    Filmy(int iloscWypozyczonych, QString tytul, int rokProdukcji, QString nazwaGatunku, int iloscKopii, double cenaWypozyczenia);
 
     int getIdFilmu() const;
     QString getTytul() const;
@@ -32,6 +34,7 @@ public:
     int getGatunek1() const;
     int getGatunek2() const;
     int getGatunek3() const;
+    int getIloscWypozyczonych() const;
 };
 
 #endif // FILMY_H

@@ -71,6 +71,10 @@ private slots:
 
     void on_pushButtonGatunkiEdytuj_clicked();
 
+    void on_pushButtonWyswietlPrzychod_clicked();
+
+    void on_pushButtonWyswietlFilmyNajWyp_clicked();
+
 private:
     Ui::Wypozyczalnia *ui;
     ObslugaBD *bd;
@@ -90,6 +94,8 @@ private:
     QList<QCheckBox *> listaBoxRezerwacja;
     QDateTime planowaDataZwrotu;
     QDateTime czasRezerwacji;
+    QDateTime statystykaDataOd;
+    QDateTime statystykaDataDo;
     QPalette p;
     QMessageBox jedenFilmWypozycz;
     QMessageBox jedenFilmRezerwuj;

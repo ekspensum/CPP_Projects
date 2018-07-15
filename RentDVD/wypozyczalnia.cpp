@@ -45,6 +45,10 @@ Wypozyczalnia::Wypozyczalnia(QWidget *parent) :
     ui->tableWidgetWyszukajKlienta->setColumnWidth(7,80);
     ui->dateTimeEditTerminZwrotu->setDateTime(planowaDataZwrotu.currentDateTime().addDays(2));
     ui->dateTimeEditTerminRezerwacji->setDateTime(czasRezerwacji.currentDateTime().addDays(1));
+    ui->dateTimeEditStatystykaOd->setDateTime(statystykaDataOd.currentDateTime().addDays(-7));
+    ui->dateTimeEditStatystykaDo->setDateTime(statystykaDataDo.currentDateTime());
+//    ui->dateTimeEditStatystykaOd->dateTime().toString("yyyy-MM-dd hh:mm");
+//    ui->dateTimeEditStatystykaDo->dateTime().toString("yyyy-MM-dd hh:mm");
     p.setColor(QPalette::ButtonText, Qt::blue);
     ui->pushButtonWypozyczenie->setPalette(p);
     ui->pushButtonZwrot->setPalette(p);
@@ -111,6 +115,7 @@ Wypozyczalnia::Wypozyczalnia(QWidget *parent) :
     ui->tableWidgetWyszukajUzytkownikaEdycja->setColumnWidth(3,120);
     ui->tableWidgetWyszukajUzytkownikaEdycja->setColumnWidth(4,120);
     ui->tableWidgetWyszukajUzytkownikaEdycja->setColumnWidth(5,80);
+    ui->tableWidgetStatystyka->setStyleSheet("QWidget::pane > QWidget { background-color: #C3C3AE; }");
 }
 
 Wypozyczalnia::~Wypozyczalnia()
@@ -893,4 +898,46 @@ void Wypozyczalnia::on_pushButtonGatunkiEdytuj_clicked()
         bd->edytujGatunki(idGatunku, nazwaGatunku);
     }
     ui->komunikatyUstawienia->setText("Wykonano edycję gatunków.");
+}
+
+void Wypozyczalnia::on_pushButtonWyswietlPrzychod_clicked()
+{
+    QDateTime dataOd = ui->dateTimeEditStatystykaOd->dateTime();
+    QDateTime dataDo = ui->dateTimeEditStatystykaDo->dateTime();
+    ui->lineEditPrzychod->setText(QString("%1").arg(bd->obliczPrzychod(dataOd, dataDo)));
+}
+
+void Wypozyczalnia::on_pushButtonWyswietlFilmyNajWyp_clicked()
+{
+    QDateTime dataOd = ui->dateTimeEditStatystykaOd->dateTime();
+    QDateTime dataDo = ui->dateTimeEditStatystykaDo->dateTime();
+    bd->wyszukajNajczesciejWypozyczane(dataOd, dataDo);
+    ui->tableWidgetStatystyka->setColumnCount(6);
+    QStringList naglowek;
+    naglowek.append("Wypożyczono");
+    naglowek.append("Tytuł");
+    naglowek.append("Rok prod.");
+    naglowek.append("Gatunek");
+    naglowek.append("Ilość kopii");
+    naglowek.append("Cena wyp.");
+    ui->tableWidgetStatystyka->setHorizontalHeaderLabels(naglowek);
+    ui->tableWidgetStatystyka->setColumnWidth(0, 100);
+    ui->tableWidgetStatystyka->setColumnWidth(1, 200);
+    ui->tableWidgetStatystyka->setColumnWidth(2, 70);
+    ui->tableWidgetStatystyka->setColumnWidth(3, 100);
+    ui->tableWidgetStatystyka->setColumnWidth(4, 90);
+    ui->tableWidgetStatystyka->setColumnWidth(5, 90);
+    ui->tableWidgetStatystyka->setRowCount(bd->getListaFilmyWypozyczenia().size());
+    for(int i=0; i<bd->getListaFilmyWypozyczenia().size(); i++)
+    {
+        ui->tableWidgetStatystyka->setItem(i,0, new QTableWidgetItem(QString("%1").arg(bd->getListaFilmyWypozyczenia().at(i)->getIloscWypozyczonych())));
+        ui->tableWidgetStatystyka->item(i, 0)->setTextAlignment(Qt::AlignCenter);
+        ui->tableWidgetStatystyka->setItem(i,1, new QTableWidgetItem(bd->getListaFilmyWypozyczenia().at(i)->getTytul()));
+        ui->tableWidgetStatystyka->setItem(i,2, new QTableWidgetItem(QString("%1").arg(bd->getListaFilmyWypozyczenia().at(i)->getRokProdukcji())));
+        ui->tableWidgetStatystyka->setItem(i,3, new QTableWidgetItem(bd->getListaFilmyWypozyczenia().at(i)->getNazwaGatunku()));
+        ui->tableWidgetStatystyka->setItem(i,4, new QTableWidgetItem(QString("%1").arg(bd->getListaFilmyWypozyczenia().at(i)->getIloscKopii())));
+        ui->tableWidgetStatystyka->item(i, 4)->setTextAlignment(Qt::AlignCenter);
+        ui->tableWidgetStatystyka->setItem(i,5, new QTableWidgetItem(QString("%1").arg(bd->getListaFilmyWypozyczenia().at(i)->getCenaWypozyczenia())));
+        ui->tableWidgetStatystyka->item(i, 5)->setTextAlignment(Qt::AlignRight);
+    }
 }

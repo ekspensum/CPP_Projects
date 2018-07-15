@@ -52,6 +52,8 @@ public:
     bool dodajGatunek(QString &gatunek);
     void wyszukajGatunki();
     bool edytujGatunki(int &idGatunku, QString &gatunek);
+    double obliczPrzychod(QDateTime &dataOd, QDateTime &dataDo);
+    void wyszukajNajczesciejWypozyczane(QDateTime &dataOd, QDateTime &dataDo);
     QList<Filmy *> getListaFilmy() const;
     QList<Klienci *> getListaKlienci() const;
     QList<Filmy *> getListaFilmyEdycja() const;
@@ -60,6 +62,7 @@ public:
     QList<Rezerwacje *> getListaRezerwacje() const;
     QList<Uzytkownicy *> getListaUzytkownicy() const;
     QList<Gatunki *> getListaGatunkow();
+    QList<Filmy *> getListaFilmyWypozyczenia() const;
     static int idZalogowanyUzytkownik;
 
 
@@ -80,6 +83,7 @@ private:
     QList<Klienci *> listaKlienci;
     QList<Filmy *> listaFilmyEdycja;
     QList<Klienci *> listaKlienciEdycja;
+    QList<Filmy *> listaFilmyWypozyczenia;
     QList<Uzytkownicy *> listaUzytkownicy;
     QList<Wypozyczenia *> listaWypozyczenia;
     QList<Rezerwacje *> listaRezerwacje;

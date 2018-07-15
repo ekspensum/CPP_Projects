@@ -1,6 +1,11 @@
 #include "filmy.h"
 
 
+int Filmy::getIloscWypozyczonych() const
+{
+    return iloscWypozyczonych;
+}
+
 Filmy::Filmy()
 {
     
@@ -27,6 +32,16 @@ Filmy::Filmy(int idFilmu, QString tytul, int rokProdukcji, QString opis, int ilo
     this->gatunek1 = gatunek1;
     this->gatunek2 = gatunek2;
     this->gatunek3 = gatunek3;
+}
+
+Filmy::Filmy(int iloscWypozyczonych, QString tytul, int rokProdukcji, QString nazwaGatunku, int iloscKopii, double cenaWypozyczenia)
+{
+    this->iloscWypozyczonych = iloscWypozyczonych;
+    this->tytul = tytul;
+    this->rokProdukcji = rokProdukcji;
+    this->nazwaGatunku = nazwaGatunku;
+    this->iloscKopii = iloscKopii;
+    this->cenaWypozyczenia = cenaWypozyczenia;
 }
 
 int Filmy::getIdFilmu() const

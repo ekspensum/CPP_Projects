@@ -24,7 +24,7 @@ ObslugaBD::~ObslugaBD()
     if (baza.isOpen())
     {
         baza.close();
-        qDebug() << "zamykam połączenie z bazą";
+        qDebug() << "Zamykam połączenie z bazą";
     }
 }
 
@@ -121,17 +121,6 @@ bool ObslugaBD::dodajFilm(QString &tytul, int &rokProdukcji, QString &opis, doub
     return dodano;
 }
 
-//QStringList ObslugaBD::odczytGatunki()
-//{
-//    listaGatunki.clear();
-//    QSqlQuery query;
-//    query.exec("SELECT Nazwa FROM gatunki ORDER BY idGatunku");
-//    while (query.next())
-//        listaGatunki.append(query.value(0).toString());
-//    listaGatunki.insert(0,"Wybierz gatunek");
-//    return listaGatunki;
-//}
-
 QList<Rezerwacje *> ObslugaBD::getListaRezerwacje() const
 {
     return listaRezerwacje;
@@ -147,9 +136,18 @@ QList<Gatunki *> ObslugaBD::getListaGatunkow()
     return listaGatunkow;
 }
 
+QList<Filmy *> ObslugaBD::getListaFilmyWypozyczenia() const
+{
+    return listaFilmyWypozyczenia;
+}
+
 void ObslugaBD::wyszukajGatunki()
 {
-    listaGatunkow.clear();
+    if (!listaGatunkow.isEmpty())
+    {
+        qDeleteAll(listaGatunkow); //usuwa ze sterty (działa jak delete)
+        listaGatunkow.clear();
+    }
     QSqlQuery query;
     if (query.exec("SELECT idGatunku, nazwa FROM gatunki ORDER BY idGatunku"))
     {
@@ -190,7 +188,11 @@ QList<Filmy *> ObslugaBD::getListaFilmy() const
 
 void ObslugaBD::wyszukajFilmTytulOpis(QString &tytul, QString &opis)
 {
-    listaFilmy.clear();
+    if (!listaFilmy.isEmpty())
+    {
+        qDeleteAll(listaFilmy); //usuwa ze sterty (działa jak delete)
+        listaFilmy.clear();
+    }
     QSqlQuery query;
     query.prepare("SELECT tytul, rokProdukcji, nazwa, opis, cenaWypozyczenia, idFilmu FROM filmy LEFT JOIN gatunki ON filmy.gatunek1 = gatunki.idGatunku WHERE Tytul like (:tytul) AND Opis LIKE (:opis) ORDER BY idFilmu");
     query.bindValue(":tytul", "%" + tytul + "%");
@@ -209,7 +211,11 @@ void ObslugaBD::wyszukajFilmTytulOpis(QString &tytul, QString &opis)
 
 void ObslugaBD::wyszukajFilmRokGatunek(int &rokProdukcji, int &gatunek)
 {
-    listaFilmy.clear();
+    if (!listaFilmy.isEmpty())
+    {
+        qDeleteAll(listaFilmy); //usuwa ze sterty (działa jak delete)
+        listaFilmy.clear();
+    }
     QSqlQuery query;
     query.prepare("SELECT tytul, rokProdukcji, nazwa, opis, cenaWypozyczenia, idFilmu FROM filmy LEFT JOIN gatunki ON filmy.gatunek1 = gatunki.idGatunku WHERE RokProdukcji = (:rokProdukcji) OR gatunek1 = (:gatunek) ORDER BY idFilmu");
     query.bindValue(":rokProdukcji", rokProdukcji);
@@ -228,7 +234,11 @@ void ObslugaBD::wyszukajFilmRokGatunek(int &rokProdukcji, int &gatunek)
 
 void ObslugaBD::wyszukajKlienta(QString &imie, QString &nazwisko, QString &miasto, QString &ulica)
 {
-    listaKlienci.clear();
+    if (!listaKlienci.isEmpty())
+    {
+        qDeleteAll(listaKlienci); //usuwa ze sterty (działa jak delete)
+        listaKlienci.clear();
+    }
     QSqlQuery query;
     query.prepare("SELECT idKlienta, Imie, Nazwisko, Miasto, Ulica, nrDomu FROM klienci WHERE Imie LIKE (:imie) AND Nazwisko LIKE (:nazwisko) AND Miasto LIKE (:miasto) AND Ulica LIKE (:ulica) ORDER BY idKlienta");
     query.bindValue(":imie", "%" + imie + "%");
@@ -312,7 +322,11 @@ bool ObslugaBD::wykonajWypozyczenie(int &idKlienta, int &idFilmu, QDateTime &pla
 
 void ObslugaBD::wyszukajWypozyczoneFilmyIdFilmuIdKlienta(int &idFilmu, int &idKlienta)
 {
-    listaWypozyczenia.clear();
+    if (!listaWypozyczenia.isEmpty())
+    {
+        qDeleteAll(listaWypozyczenia); //usuwa ze sterty (działa jak delete)
+        listaWypozyczenia.clear();
+    }
     QSqlQuery query;
     query.prepare("SELECT wypozyczenia.idFilmu, tytul, cenaWypozyczenia, wypozyczenia.idKlienta, imie, nazwisko, dataWypozyczenia, planowaDataZwrotu, idWypozyczenia FROM wypozyczenia LEFT JOIN klienci ON wypozyczenia.idKlienta = klienci.idKlienta LEFT JOIN filmy ON wypozyczenia.idFilmu = filmy.idFilmu WHERE dataZwrotu IS NULL AND (wypozyczenia.idFilmu = (:idFilmu) OR wypozyczenia.idKlienta = (:idKlienta)) ORDER BY wypozyczenia.idFilmu");
     query.bindValue(":idFilmu", idFilmu);
@@ -331,7 +345,11 @@ void ObslugaBD::wyszukajWypozyczoneFilmyIdFilmuIdKlienta(int &idFilmu, int &idKl
 
 void ObslugaBD::wyszukajWypozyczoneFilmyNazwisko(const QString &nazwisko)
 {
-    listaWypozyczenia.clear();
+    if (!listaWypozyczenia.isEmpty())
+    {
+        qDeleteAll(listaWypozyczenia); //usuwa ze sterty (działa jak delete)
+        listaWypozyczenia.clear();
+    }
     QSqlQuery query;
     query.prepare("SELECT wypozyczenia.idFilmu, tytul, cenaWypozyczenia, wypozyczenia.idKlienta, imie, nazwisko, dataWypozyczenia, planowaDataZwrotu, idWypozyczenia FROM wypozyczenia LEFT JOIN klienci ON wypozyczenia.idKlienta = klienci.idKlienta LEFT JOIN filmy ON wypozyczenia.idFilmu = filmy.idFilmu WHERE dataZwrotu IS NULL AND nazwisko LIKE (:nazwisko) ORDER BY wypozyczenia.idFilmu");
     query.bindValue(":nazwisko", "%" + nazwisko + "%");
@@ -362,7 +380,11 @@ bool ObslugaBD::wykonajZwrotFilmu(int &idWypozyczenia)
 
 void ObslugaBD::wyszukajRezerwacjeFilmyIdFilmuIdKlienta(int &idFilmu, int &idKlienta)
 {
-    listaRezerwacje.clear();
+    if (!listaRezerwacje.isEmpty())
+    {
+        qDeleteAll(listaRezerwacje); //usuwa ze sterty (działa jak delete)
+        listaRezerwacje.clear();
+    }
     QSqlQuery query;
     query.prepare("SELECT rezerwacje.idFilmu, tytul, cenaWypozyczenia, rezerwacje.idKlienta, imie, nazwisko, dataRezerwacji, terminRezerwacji, idRezerwacji FROM rezerwacje LEFT JOIN klienci ON rezerwacje.idKlienta = klienci.idKlienta LEFT JOIN filmy ON rezerwacje.idFilmu = filmy.idFilmu WHERE odwolanieRezerwacji IS NULL AND (rezerwacje.idFilmu = (:idFilmu) OR rezerwacje.idKlienta = (:idKlienta)) ORDER BY rezerwacje.idFilmu");
     query.bindValue(":idFilmu", idFilmu);
@@ -381,7 +403,11 @@ void ObslugaBD::wyszukajRezerwacjeFilmyIdFilmuIdKlienta(int &idFilmu, int &idKli
 
 void ObslugaBD::wyszukajRezerwacjeFilmyNazwisko(const QString &nazwisko)
 {
-    listaRezerwacje.clear();
+    if (!listaRezerwacje.isEmpty())
+    {
+        qDeleteAll(listaRezerwacje); //usuwa ze sterty (działa jak delete)
+        listaRezerwacje.clear();
+    }
     QSqlQuery query;
     query.prepare("SELECT rezerwacje.idFilmu, tytul, cenaWypozyczenia, rezerwacje.idKlienta, imie, nazwisko, dataRezerwacji, terminRezerwacji, idRezerwacji FROM rezerwacje LEFT JOIN klienci ON rezerwacje.idKlienta = klienci.idKlienta LEFT JOIN filmy ON rezerwacje.idFilmu = filmy.idFilmu WHERE odwolanieRezerwacji IS NULL AND nazwisko LIKE (:nazwisko) ORDER BY rezerwacje.idFilmu");
     query.bindValue(":nazwisko", "%" + nazwisko + "%");
@@ -412,7 +438,11 @@ bool ObslugaBD::wykonajOdwolanieRezerwacji(int &idRezerwacji)
 
 void ObslugaBD::wyszukajKlienta(const QString &nazwisko)
 {
-    listaKlienciEdycja.clear();
+    if (!listaKlienciEdycja.isEmpty())
+    {
+        qDeleteAll(listaKlienciEdycja); //usuwa ze sterty (działa jak delete)
+        listaKlienciEdycja.clear();
+    }
     QSqlQuery query;
     query.prepare("SELECT idKlienta, imie, nazwisko, kod, miasto, ulica, nrDomu, nrLokalu, email, telefon FROM klienci WHERE nazwisko LIKE (:nazwisko)");
     query.bindValue(":nazwisko", "%" + nazwisko + "%");
@@ -455,7 +485,11 @@ bool ObslugaBD::wykonajEdycjeKlienta(int &idKlienta, QString &imie, QString &naz
 
 void ObslugaBD::wyszukajFilm(const QString &tytul)
 {
-    listaFilmyEdycja.clear();
+    if (!listaFilmyEdycja.isEmpty())
+    {
+        qDeleteAll(listaFilmyEdycja); //usuwa ze sterty (działa jak delete)
+        listaFilmyEdycja.clear();
+    }
     QSqlQuery query;
     query.prepare("SELECT * FROM filmy WHERE tytul LIKE (:tytul)");
     query.bindValue(":tytul", "%" + tytul + "%");
@@ -497,7 +531,11 @@ bool ObslugaBD::wykonajEdycjeFilmu(int &idFilmu, QString &tytul, int &rokProdukc
 
 void ObslugaBD::wyszukajUzytkownika(const QString &nazwisko)
 {
-    listaUzytkownicy.clear();
+    if (!listaUzytkownicy.isEmpty())
+    {
+        qDeleteAll(listaUzytkownicy); //usuwa ze sterty (działa jak delete)
+        listaUzytkownicy.clear();
+    }
     QSqlQuery query;
     query.prepare("SELECT idUzytkownika, login, imie, nazwisko, telefon FROM uzytkownicy WHERE nazwisko LIKE (:nazwisko)");
     query.bindValue(":nazwisko", "%" + nazwisko + "%");
@@ -605,4 +643,42 @@ bool ObslugaBD::edytujGatunki(int &idGatunku,QString &gatunek)
         qDebug() << "Nie udało się dodać gatunku";
 
     return dodano;
+}
+
+double ObslugaBD::obliczPrzychod(QDateTime &dataOd, QDateTime &dataDo)
+{
+    double suma = 0.00;
+    QSqlQuery query;
+    query.prepare("SELECT cenaWypozyczenia FROM wypozyczenia LEFT JOIN filmy ON wypozyczenia.idFilmu = filmy.idFilmu WHERE dataWypozyczenia BETWEEN (:dataOd) AND (:dataDo)");
+    query.bindValue(":dataOd", dataOd);
+    query.bindValue(":dataDo", dataDo);
+    if (query.exec())
+        while (query.next())
+            suma += query.value(0).toDouble();
+    else
+        qDebug() << "Nie udało się dokonać obliczenia.";
+    return suma;
+}
+
+void ObslugaBD::wyszukajNajczesciejWypozyczane(QDateTime &dataOd, QDateTime &dataDo)
+{
+    if (!listaFilmyWypozyczenia.isEmpty())
+    {
+        qDeleteAll(listaFilmyWypozyczenia); //usuwa ze sterty (działa jak delete)
+        listaFilmyWypozyczenia.clear();
+    }
+    QSqlQuery query;
+    query.prepare("SELECT COUNT(wypozyczenia.idFilmu), tytul, rokProdukcji, nazwa, iloscKopii, cenaWypozyczenia FROM filmy LEFT JOIN wypozyczenia ON wypozyczenia.idFilmu = filmy.idFilmu LEFT JOIN gatunki ON filmy.gatunek1 = gatunki.idGatunku WHERE dataWypozyczenia >= (:dataOd) AND dataWypozyczenia <= (:dataDo) GROUP BY wypozyczenia.idFilmu ORDER BY COUNT(wypozyczenia.idFilmu) DESC");
+    query.bindValue(":dataOd", dataOd);
+    query.bindValue(":dataDo", dataDo);
+    if (query.exec())
+    {
+        while (query.next())
+        {
+            filmy = new Filmy(query.value(0).toInt(), query.value(1).toString(), query.value(2).toInt(), query.value(3).toString(), query.value(4).toInt(), query.value(5).toDouble());
+            listaFilmyWypozyczenia.append(filmy);
+        }
+    }
+    else
+        qDebug() << "Nie udało się dokonać obliczenia.";
 }
