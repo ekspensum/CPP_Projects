@@ -11,10 +11,14 @@ Wypozyczalnia::Wypozyczalnia(QWidget *parent) :
         ui->tabWidget->setTabEnabled(6, true);
     ui->tabWidget->setCurrentIndex(0);
     bd = new ObslugaBD();
-    ui->comboBoxGatunek1->addItems(bd->odczytGatunki());
-    ui->comboBoxGatunek2->addItems(bd->odczytGatunki());
-    ui->comboBoxGatunek3->addItems(bd->odczytGatunki());
-    ui->comboBoxGatunekWyszukaj->addItems(bd->odczytGatunki());
+    bd->wyszukajGatunki();
+    for(int i=0; i<bd->getListaGatunkow().size(); i++)
+    {
+        ui->comboBoxGatunekWyszukaj->addItem(bd->getListaGatunkow().at(i)->getNazwa(), QVariant(bd->getListaGatunkow().at(i)->getIdGatunku()));
+        ui->comboBoxGatunek1->addItem(bd->getListaGatunkow().at(i)->getNazwa(), QVariant(bd->getListaGatunkow().at(i)->getIdGatunku()));
+        ui->comboBoxGatunek2->addItem(bd->getListaGatunkow().at(i)->getNazwa(), QVariant(bd->getListaGatunkow().at(i)->getIdGatunku()));
+        ui->comboBoxGatunek3->addItem(bd->getListaGatunkow().at(i)->getNazwa(), QVariant(bd->getListaGatunkow().at(i)->getIdGatunku()));
+    }
     //    ui->tabWidget->setStyleSheet("QTabWidget::pane { border: 1px solid #000033; }");
     ui->plainTextEditOpis->setStyleSheet("QWidget::pane > QWidget { background-color: #C3C3AE; }");
     ui->lineEditCenaWypozyczenia->setStyleSheet("QWidget::pane > QWidget { background-color: #C3C3AE; }");
@@ -54,6 +58,7 @@ Wypozyczalnia::Wypozyczalnia(QWidget *parent) :
     jedenFilmEdytuj.setText("Proszę zazanaczyć jeden film do edycji.");
     jedenUzytkownikEdytuj.setText("Proszę zazanaczyć jednego użytkownika do edycji.");
     zmianaHaslaUzytkownik.setText("Hasło użytkownika zostało zmienione.");
+    nowyGatunekPustePole.setText("Proszę wprowadzić nazwę gatunku filmowego.");
     ui->tableWidgetWyszukajWypozyczone->setStyleSheet("QWidget::pane > QWidget { background-color: #C3C3AE; }");
     ui->tableWidgetWyszukajWypozyczone->setColumnWidth(0,35);
     ui->tableWidgetWyszukajWypozyczone->setColumnWidth(1,55);
@@ -184,9 +189,9 @@ void Wypozyczalnia::on_pushButtonDodajFilm_clicked()
     opis = ui->plainTextEditOpis->toPlainText();
     cenaWypozyczenia = ui->lineEditCenaWypozyczenia->text().toDouble();
     ilosckopii = ui->spinBoxIleKopii->text().toInt();
-    gatunek1 = ui->comboBoxGatunek1->currentIndex();
-    gatunek2 = ui->comboBoxGatunek2->currentIndex();
-    gatunek3 = ui->comboBoxGatunek3->currentIndex();
+    gatunek1 = ui->comboBoxGatunek1->itemData(ui->comboBoxGatunek1->currentIndex()).toInt();
+    gatunek2 = ui->comboBoxGatunek2->itemData(ui->comboBoxGatunek2->currentIndex()).toInt();
+    gatunek3 = ui->comboBoxGatunek3->itemData(ui->comboBoxGatunek3->currentIndex()).toInt();
     if (tytul == "" || opis == "" || cenaWypozyczenia == 0.00 || rok == 0 || ilosckopii == 0 || gatunek1 == 0)
         ui->komunikatyDodajFilm->setText("Proszę uzupełnić wymagane pola forlmularza.");
     else {
@@ -211,7 +216,7 @@ void Wypozyczalnia::on_pushButtonWyszukajRokGatunek_clicked()
 {
     int rok, gatunek;
     rok = ui->lineEditRokWyszukaj->text().toInt();
-    gatunek = ui->comboBoxGatunekWyszukaj->currentIndex();
+    gatunek = ui->comboBoxGatunekWyszukaj->itemData(ui->comboBoxGatunekWyszukaj->currentIndex()).toInt();
     listaBoxWypozyczenieFilmy.clear();
     listaBoxRezerwacjaFilmy.clear();
     bd->wyszukajFilmRokGatunek(rok, gatunek);
@@ -669,15 +674,18 @@ void Wypozyczalnia::on_lineEditTytulWyszukajEdytuj_textChanged(const QString &ty
         ui->tableWidgetWyszukajFilmEdycja->setItem(i,4, new QTableWidgetItem(QString("%1").arg(bd->getListaFilmyEdycja().at(i)->getIloscKopii())));
         ui->tableWidgetWyszukajFilmEdycja->setItem(i,5, new QTableWidgetItem(QString("%1").arg(bd->getListaFilmyEdycja().at(i)->getCenaWypozyczenia())));
         comboGatunek1 = new QComboBox();
-        comboGatunek1->addItems(bd->odczytGatunki());
+        for(int j=0; j<bd->getListaGatunkow().size(); j++)
+            comboGatunek1->addItem(bd->getListaGatunkow().at(j)->getNazwa(), QVariant(bd->getListaGatunkow().at(j)->getIdGatunku()));
         comboGatunek1->setCurrentIndex(bd->getListaFilmyEdycja().at(i)->getGatunek1());
         ui->tableWidgetWyszukajFilmEdycja->setCellWidget(i, 6, comboGatunek1);
         comboGatunek2 = new QComboBox();
-        comboGatunek2->addItems(bd->odczytGatunki());
+        for(int j=0; j<bd->getListaGatunkow().size(); j++)
+            comboGatunek2->addItem(bd->getListaGatunkow().at(j)->getNazwa(), QVariant(bd->getListaGatunkow().at(j)->getIdGatunku()));
         comboGatunek2->setCurrentIndex(bd->getListaFilmyEdycja().at(i)->getGatunek2());
         ui->tableWidgetWyszukajFilmEdycja->setCellWidget(i, 7, comboGatunek2);
         comboGatunek3 = new QComboBox();
-        comboGatunek3->addItems(bd->odczytGatunki());
+        for(int j=0; j<bd->getListaGatunkow().size(); j++)
+            comboGatunek3->addItem(bd->getListaGatunkow().at(j)->getNazwa(), QVariant(bd->getListaGatunkow().at(j)->getIdGatunku()));
         comboGatunek3->setCurrentIndex(bd->getListaFilmyEdycja().at(i)->getGatunek3());
         ui->tableWidgetWyszukajFilmEdycja->setCellWidget(i, 8, comboGatunek3);
         boxFilmy = new QCheckBox();
@@ -720,11 +728,11 @@ void Wypozyczalnia::on_pushButtonEdytujFilm_clicked()
                     iloscKopii = ui->tableWidgetWyszukajFilmEdycja->item(i, 4)->text().toInt();
                     cenaWypozyczenia = ui->tableWidgetWyszukajFilmEdycja->item(i, 5)->text().toDouble();
                     comboGatunek1 = (QComboBox *)ui->tableWidgetWyszukajFilmEdycja->cellWidget(i, 6);
-                    gatunek1 = comboGatunek1->currentIndex();
+                    gatunek1 = comboGatunek1->itemData(comboGatunek1->currentIndex()).toInt();
                     comboGatunek2 = (QComboBox *)ui->tableWidgetWyszukajFilmEdycja->cellWidget(i, 7);
-                    gatunek2 = comboGatunek2->currentIndex();
+                    gatunek2 = comboGatunek2->itemData(comboGatunek2->currentIndex()).toInt();
                     comboGatunek3 = (QComboBox *)ui->tableWidgetWyszukajFilmEdycja->cellWidget(i, 8);
-                    gatunek3 = comboGatunek3->currentIndex();
+                    gatunek3 = comboGatunek3->itemData(comboGatunek3->currentIndex()).toInt();
                     break;
                 }
             }
@@ -830,47 +838,59 @@ void Wypozyczalnia::on_tabWidget_tabBarClicked(int index)
 {
     if (index == 5)
     {
-        ui->tableWidgetGatunki->setRowCount(bd->odczytGatunki().size()-1);
-        ui->tableWidgetGatunki->setColumnWidth(0, 198);
+        bd->wyszukajGatunki();
+        ui->tableWidgetGatunki->setRowCount(bd->getListaGatunkow().size());
+        ui->tableWidgetGatunki->setColumnWidth(0, 35);
+        ui->tableWidgetGatunki->setColumnWidth(1, 120);
         ui->tableWidgetGatunki->setStyleSheet("QWidget::pane > QWidget { background-color: #C3C3AE; }");
-        QString gatunki;
-        for(int i=0; i<bd->odczytGatunki().size()-1; i++)
+        for(int i=0; i<bd->getListaGatunkow().size(); i++)
         {
-//            gatunki = bd->odczytGatunki().value(i+1);
-            qDebug() << gatunki;
-            gatunki = "ala";
-            ui->tableWidgetGatunki->setItem(i, 0, new QTableWidgetItem(gatunki));
+            ui->tableWidgetGatunki->setItem(i, 0, new QTableWidgetItem(QString("%1").arg(bd->getListaGatunkow().at(i)->getIdGatunku())));
+            ui->tableWidgetGatunki->item(i, 0)->setFlags(Qt::ItemIsEditable);
+            ui->tableWidgetGatunki->item(i, 0)->setTextAlignment(Qt::AlignCenter);
+            ui->tableWidgetGatunki->setItem(i, 1, new QTableWidgetItem(bd->getListaGatunkow().at(i)->getNazwa()));
         }
+        ui->tableWidgetGatunki->item(0, 1)->setFlags(Qt::ItemIsEditable);
     }
 }
 
 void Wypozyczalnia::on_pushButtonGatunekDodaj_clicked()
 {
-    ui->tableWidgetGatunki->insertRow(ui->tableWidgetGatunki->rowCount());
-    ui->tableWidgetGatunki->setItem(ui->tableWidgetGatunki->rowCount()-1, 0, new QTableWidgetItem());
-    ui->tableWidgetGatunki->item(ui->tableWidgetGatunki->rowCount()-1, 0)->setSelected(true);
-}
-
-void Wypozyczalnia::on_pushButtonGatunekUsun_clicked()
-{
-    if (ui->tableWidgetGatunki->currentRow() == -1)
-        ui->komunikatyUstawienia->setText("Proszę zaznaczyć gatunek do usunięcia.");
+    QString nowyGatunek = ui->lineEditDodajGatunek->text();
+    if (!nowyGatunek.isEmpty())
+    {
+        if (bd->dodajGatunek(nowyGatunek))
+        {
+            ui->komunikatyUstawienia->setText("Dodano nowy gatunek filmowy do bazy danych.");
+            bd->wyszukajGatunki();
+            ui->comboBoxGatunekWyszukaj->clear();
+            ui->comboBoxGatunek1->clear();
+            ui->comboBoxGatunek2->clear();
+            ui->comboBoxGatunek3->clear();
+            for(int i=0; i<bd->getListaGatunkow().size(); i++)
+            {
+                ui->comboBoxGatunekWyszukaj->addItem(bd->getListaGatunkow().at(i)->getNazwa(), QVariant(bd->getListaGatunkow().at(i)->getIdGatunku()));
+                ui->comboBoxGatunek1->addItem(bd->getListaGatunkow().at(i)->getNazwa(), QVariant(bd->getListaGatunkow().at(i)->getIdGatunku()));
+                ui->comboBoxGatunek2->addItem(bd->getListaGatunkow().at(i)->getNazwa(), QVariant(bd->getListaGatunkow().at(i)->getIdGatunku()));
+                ui->comboBoxGatunek3->addItem(bd->getListaGatunkow().at(i)->getNazwa(), QVariant(bd->getListaGatunkow().at(i)->getIdGatunku()));
+            }
+        }
+        else
+            ui->komunikatyUstawienia->setText("Błąd. Nie udało się dodać nowego gatunku filmowego do bazy danych.");
+    }
     else
-        ui->tableWidgetGatunki->removeRow(ui->tableWidgetGatunki->currentRow());
+        nowyGatunekPustePole.exec();
 }
 
 void Wypozyczalnia::on_pushButtonGatunkiEdytuj_clicked()
 {
-    QString gatunek;
-//    if (bd->usunGatunki())
-//    {
-//       for (int i=0; i<ui->tableWidgetGatunki->rowCount(); i++)
-//       {
-//           gatunek = ui->tableWidgetGatunki->item(i, 0)->text();
-           gatunek = "gatunek";
-//           qDebug() << gatunek;
-           bd->dodajGatunek(gatunek);
-//       }
-
-//    }
+    QString nazwaGatunku;
+    int idGatunku;
+    for (int i=0; i<ui->tableWidgetGatunki->rowCount(); i++)
+    {
+        idGatunku = ui->tableWidgetGatunki->item(i, 0)->text().toInt();
+        nazwaGatunku = ui->tableWidgetGatunki->item(i, 1)->text();
+        bd->edytujGatunki(idGatunku, nazwaGatunku);
+    }
+    ui->komunikatyUstawienia->setText("Wykonano edycję gatunków.");
 }

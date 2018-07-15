@@ -69,8 +69,6 @@ private slots:
 
     void on_pushButtonGatunekDodaj_clicked();
 
-    void on_pushButtonGatunekUsun_clicked();
-
     void on_pushButtonGatunkiEdytuj_clicked();
 
 private:
@@ -103,6 +101,7 @@ private:
     QMessageBox jedenFilmEdytuj;
     QMessageBox jedenUzytkownikEdytuj;
     QMessageBox zmianaHaslaUzytkownik;
+    QMessageBox nowyGatunekPustePole;
 };
 
 #endif // WYPOZYCZALNIA_H

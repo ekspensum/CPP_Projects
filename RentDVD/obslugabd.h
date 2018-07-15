@@ -16,6 +16,7 @@
 #include "uzytkownicy.h"
 #include "wypozyczenia.h"
 #include "rezerwacje.h"
+#include "gatunki.h"
 
 
 class ObslugaBD
@@ -48,9 +49,9 @@ public:
     bool wykonajEdycjeUzytkownika(int &idUzytkownika, QString &login, QString &imie, QString &nazwisko, QString &telefon);
     int znajdzUzytkownika(QString &login, QString &haslo);
     bool wykonajZmianeHasla(int &idUzytkownika, QString &hasloNowe);
-    bool dodajGatunek(QString gatunek);
-    bool usunGatunki();
-    QStringList odczytGatunki();
+    bool dodajGatunek(QString &gatunek);
+    void wyszukajGatunki();
+    bool edytujGatunki(int &idGatunku, QString &gatunek);
     QList<Filmy *> getListaFilmy() const;
     QList<Klienci *> getListaKlienci() const;
     QList<Filmy *> getListaFilmyEdycja() const;
@@ -58,7 +59,9 @@ public:
     QList<Wypozyczenia *> getListaWypozyczenia() const;
     QList<Rezerwacje *> getListaRezerwacje() const;
     QList<Uzytkownicy *> getListaUzytkownicy() const;
+    QList<Gatunki *> getListaGatunkow();
     static int idZalogowanyUzytkownik;
+
 
 signals:
 
@@ -67,12 +70,12 @@ public slots:
 private:
     QSqlDatabase baza;
 //    const QString sciezkaDoBazy = "C:\\Users\\Andrzej\\Documents\\Projekty_Cpp\\_Projekty_QT\\Projekty-GitHub\\RentDVD\\rentdvd.db";
-    QStringList listaGatunki;
     Filmy *filmy;
     Klienci *klienci;
     Uzytkownicy *uzytkownicy;
     Wypozyczenia *wypozyczenia;
     Rezerwacje *rezerwacje;
+    Gatunki *gatunki;
     QList<Filmy *> listaFilmy;
     QList<Klienci *> listaKlienci;
     QList<Filmy *> listaFilmyEdycja;
@@ -80,6 +83,7 @@ private:
     QList<Uzytkownicy *> listaUzytkownicy;
     QList<Wypozyczenia *> listaWypozyczenia;
     QList<Rezerwacje *> listaRezerwacje;
+    QList<Gatunki *> listaGatunkow;
 };
 
 #endif // OBSLUGABD_H

@@ -121,16 +121,16 @@ bool ObslugaBD::dodajFilm(QString &tytul, int &rokProdukcji, QString &opis, doub
     return dodano;
 }
 
-QStringList ObslugaBD::odczytGatunki()
-{
-    listaGatunki.clear();
-    QSqlQuery query;
-    query.exec("SELECT Nazwa FROM gatunki");
-    while (query.next())
-        listaGatunki.append(query.value(0).toString());
-    listaGatunki.insert(0,"Wybierz gatunek");
-    return listaGatunki;
-}
+//QStringList ObslugaBD::odczytGatunki()
+//{
+//    listaGatunki.clear();
+//    QSqlQuery query;
+//    query.exec("SELECT Nazwa FROM gatunki ORDER BY idGatunku");
+//    while (query.next())
+//        listaGatunki.append(query.value(0).toString());
+//    listaGatunki.insert(0,"Wybierz gatunek");
+//    return listaGatunki;
+//}
 
 QList<Rezerwacje *> ObslugaBD::getListaRezerwacje() const
 {
@@ -140,6 +140,27 @@ QList<Rezerwacje *> ObslugaBD::getListaRezerwacje() const
 QList<Uzytkownicy *> ObslugaBD::getListaUzytkownicy() const
 {
     return listaUzytkownicy;
+}
+
+QList<Gatunki *> ObslugaBD::getListaGatunkow()
+{
+    return listaGatunkow;
+}
+
+void ObslugaBD::wyszukajGatunki()
+{
+    listaGatunkow.clear();
+    QSqlQuery query;
+    if (query.exec("SELECT idGatunku, nazwa FROM gatunki ORDER BY idGatunku"))
+    {
+        while (query.next())
+        {
+            gatunki = new Gatunki(query.value(0).toInt(), query.value(1).toString());
+            listaGatunkow.append(gatunki);
+        }
+    }
+    else
+        qDebug() << "Nie udało się wyszukać gatunków";
 }
 
 QList<Filmy *> ObslugaBD::getListaFilmyEdycja() const
@@ -553,14 +574,14 @@ bool ObslugaBD::wykonajZmianeHasla(int &idUzytkownika, QString &hasloNowe)
     return wykonano;
 }
 
-bool ObslugaBD::dodajGatunek(QString gatunek)
+bool ObslugaBD::dodajGatunek(QString &gatunek)
 {
-    qDebug() << gatunek;
     bool dodano = false;
     QSqlQuery query;
-    query.prepare("INSERT INTO gatunki (nazwa, dataDodania) VALUES (:nazwa, :dataDodania)");
+    query.prepare("INSERT INTO gatunki (nazwa, dataDodania, idUzytkownika) VALUES (:nazwa, :dataDodania, :idUzytkownika)");
     query.bindValue(":nazwa", gatunek);
     query.bindValue(":dataDodania", QDateTime::currentDateTime());
+    query.bindValue(":idUzytkownika", ObslugaBD::idZalogowanyUzytkownik);
     if (query.exec())
         dodano = true;
     else
@@ -569,15 +590,19 @@ bool ObslugaBD::dodajGatunek(QString gatunek)
     return dodano;
 }
 
-bool ObslugaBD::usunGatunki()
+bool ObslugaBD::edytujGatunki(int &idGatunku,QString &gatunek)
 {
-    bool usunieto = false;
+    bool dodano = false;
     QSqlQuery query;
-    query.prepare("DELETE FROM gatunki");
+    query.prepare("UPDATE gatunki SET nazwa = (:nazwa), dataEdycji = (:dataEdycji), idUzytkownika = (:idUzytkownika) WHERE idGatunku = (:idGatunku)");
+    query.bindValue(":idGatunku", idGatunku);
+    query.bindValue(":nazwa", gatunek);
+    query.bindValue(":dataEdycji", QDateTime::currentDateTime());
+    query.bindValue(":idUzytkownika", ObslugaBD::idZalogowanyUzytkownik);
     if (query.exec())
-        usunieto = true;
+        dodano = true;
     else
-        qDebug() << "Nie udało się usunąć gatunków";
+        qDebug() << "Nie udało się dodać gatunku";
 
-    return usunieto;
+    return dodano;
 }

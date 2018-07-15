@@ -35,7 +35,7 @@
     <enum>QTabWidget::Rounded</enum>
    </property>
    <property name="currentIndex">
-    <number>5</number>
+    <number>6</number>
    </property>
    <widget class="QWidget" name="tabWypozyczenie">
     <attribute name="title">
@@ -1395,7 +1395,7 @@
     <widget class="QLabel" name="label_29">
      <property name="geometry">
       <rect>
-       <x>270</x>
+       <x>256</x>
        <y>99</y>
        <width>131</width>
        <height>16</height>
@@ -1408,7 +1408,7 @@
     <widget class="QLabel" name="label_30">
      <property name="geometry">
       <rect>
-       <x>270</x>
+       <x>256</x>
        <y>210</y>
        <width>131</width>
        <height>16</height>
@@ -1421,7 +1421,7 @@
     <widget class="QLineEdit" name="lineEditEmail">
      <property name="geometry">
       <rect>
-       <x>138</x>
+       <x>124</x>
        <y>235</y>
        <width>108</width>
        <height>22</height>
@@ -1431,7 +1431,7 @@
     <widget class="QLabel" name="label_44">
      <property name="geometry">
       <rect>
-       <x>61</x>
+       <x>47</x>
        <y>235</y>
        <width>45</width>
        <height>16</height>
@@ -1444,7 +1444,7 @@
     <widget class="QLabel" name="label_45">
      <property name="geometry">
       <rect>
-       <x>270</x>
+       <x>256</x>
        <y>240</y>
        <width>131</width>
        <height>16</height>
@@ -1684,7 +1684,7 @@
       <rect>
        <x>20</x>
        <y>297</y>
-       <width>141</width>
+       <width>161</width>
        <height>16</height>
       </rect>
      </property>
@@ -1692,6 +1692,7 @@
       <font>
        <weight>75</weight>
        <bold>true</bold>
+       <underline>true</underline>
       </font>
      </property>
      <property name="text">
@@ -1701,7 +1702,7 @@
     <widget class="QLabel" name="label_49">
      <property name="geometry">
       <rect>
-       <x>36</x>
+       <x>22</x>
        <y>10</y>
        <width>141</width>
        <height>16</height>
@@ -1711,6 +1712,7 @@
       <font>
        <weight>75</weight>
        <bold>true</bold>
+       <underline>true</underline>
       </font>
      </property>
      <property name="text">
@@ -1720,7 +1722,7 @@
     <widget class="QLabel" name="label_22">
      <property name="geometry">
       <rect>
-       <x>61</x>
+       <x>47</x>
        <y>39</y>
        <width>24</width>
        <height>16</height>
@@ -1733,7 +1735,7 @@
     <widget class="QLineEdit" name="lineEditImieKlienta">
      <property name="geometry">
       <rect>
-       <x>138</x>
+       <x>124</x>
        <y>39</y>
        <width>108</width>
        <height>22</height>
@@ -1743,7 +1745,7 @@
     <widget class="QLabel" name="label_23">
      <property name="geometry">
       <rect>
-       <x>61</x>
+       <x>47</x>
        <y>67</y>
        <width>48</width>
        <height>16</height>
@@ -1756,7 +1758,7 @@
     <widget class="QLineEdit" name="lineEditNazwiskoKlienta">
      <property name="geometry">
       <rect>
-       <x>138</x>
+       <x>124</x>
        <y>67</y>
        <width>108</width>
        <height>22</height>
@@ -1766,7 +1768,7 @@
     <widget class="QLabel" name="label_25">
      <property name="geometry">
       <rect>
-       <x>61</x>
+       <x>47</x>
        <y>123</y>
        <width>35</width>
        <height>16</height>
@@ -1779,7 +1781,7 @@
     <widget class="QLabel" name="label_24">
      <property name="geometry">
       <rect>
-       <x>61</x>
+       <x>47</x>
        <y>95</y>
        <width>71</width>
        <height>16</height>
@@ -1792,7 +1794,7 @@
     <widget class="QLineEdit" name="lineEditKodPocztowy">
      <property name="geometry">
       <rect>
-       <x>138</x>
+       <x>124</x>
        <y>95</y>
        <width>108</width>
        <height>22</height>
@@ -1808,7 +1810,7 @@
     <widget class="QLineEdit" name="lineEditMiasto">
      <property name="geometry">
       <rect>
-       <x>138</x>
+       <x>124</x>
        <y>123</y>
        <width>108</width>
        <height>22</height>
@@ -1818,7 +1820,7 @@
     <widget class="QLabel" name="label_26">
      <property name="geometry">
       <rect>
-       <x>61</x>
+       <x>47</x>
        <y>151</y>
        <width>26</width>
        <height>16</height>
@@ -1831,7 +1833,7 @@
     <widget class="QLabel" name="label_27">
      <property name="geometry">
       <rect>
-       <x>61</x>
+       <x>47</x>
        <y>179</y>
        <width>44</width>
        <height>16</height>
@@ -1844,7 +1846,7 @@
     <widget class="QLineEdit" name="lineEditUlica">
      <property name="geometry">
       <rect>
-       <x>138</x>
+       <x>124</x>
        <y>151</y>
        <width>108</width>
        <height>22</height>
@@ -1854,7 +1856,7 @@
     <widget class="QLineEdit" name="lineEditNrDomu">
      <property name="geometry">
       <rect>
-       <x>138</x>
+       <x>124</x>
        <y>179</y>
        <width>108</width>
        <height>22</height>
@@ -1864,7 +1866,7 @@
     <widget class="QLabel" name="label_28">
      <property name="geometry">
       <rect>
-       <x>61</x>
+       <x>47</x>
        <y>207</y>
        <width>45</width>
        <height>16</height>
@@ -1877,7 +1879,7 @@
     <widget class="QLineEdit" name="lineEditNrLokalu">
      <property name="geometry">
       <rect>
-       <x>138</x>
+       <x>124</x>
        <y>207</y>
        <width>108</width>
        <height>22</height>
@@ -1887,7 +1889,7 @@
     <widget class="QLabel" name="label_56">
      <property name="geometry">
       <rect>
-       <x>270</x>
+       <x>256</x>
        <y>268</y>
        <width>131</width>
        <height>16</height>
@@ -1900,7 +1902,7 @@
     <widget class="QLineEdit" name="lineEditTelefon">
      <property name="geometry">
       <rect>
-       <x>138</x>
+       <x>124</x>
        <y>263</y>
        <width>108</width>
        <height>22</height>
@@ -1910,7 +1912,7 @@
     <widget class="QLabel" name="label_57">
      <property name="geometry">
       <rect>
-       <x>61</x>
+       <x>47</x>
        <y>263</y>
        <width>45</width>
        <height>16</height>
@@ -2490,6 +2492,7 @@
       <font>
        <weight>75</weight>
        <bold>true</bold>
+       <underline>true</underline>
       </font>
      </property>
      <property name="text">
@@ -2569,6 +2572,7 @@
       <font>
        <weight>75</weight>
        <bold>true</bold>
+       <underline>true</underline>
       </font>
      </property>
      <property name="text">
@@ -2663,6 +2667,7 @@
       <font>
        <weight>75</weight>
        <bold>true</bold>
+       <underline>true</underline>
       </font>
      </property>
      <property name="text">
@@ -2740,7 +2745,7 @@
     <widget class="QPushButton" name="pushButtonZmienHaslo">
      <property name="geometry">
       <rect>
-       <x>250</x>
+       <x>240</x>
        <y>126</y>
        <width>80</width>
        <height>25</height>
@@ -2792,6 +2797,7 @@
       <font>
        <weight>75</weight>
        <bold>true</bold>
+       <underline>true</underline>
       </font>
      </property>
      <property name="text">
@@ -2809,6 +2815,17 @@
      </property>
      <column>
       <property name="text">
+       <string>Id</string>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
        <string>Nazwa gatunku</string>
       </property>
       <property name="font">
@@ -2822,8 +2839,8 @@
     <widget class="QPushButton" name="pushButtonGatunekDodaj">
      <property name="geometry">
       <rect>
-       <x>250</x>
-       <y>230</y>
+       <x>570</x>
+       <y>40</y>
        <width>101</width>
        <height>25</height>
       </rect>
@@ -2841,8 +2858,8 @@
     <widget class="QPushButton" name="pushButtonGatunkiEdytuj">
      <property name="geometry">
       <rect>
-       <x>250</x>
-       <y>556</y>
+       <x>240</x>
+       <y>230</y>
        <width>101</width>
        <height>25</height>
       </rect>
@@ -2857,23 +2874,34 @@
       <string>Zapisz zmiany</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButtonGatunekUsun">
+    <widget class="QLabel" name="label_67">
      <property name="geometry">
       <rect>
-       <x>250</x>
-       <y>280</y>
-       <width>101</width>
-       <height>25</height>
+       <x>380</x>
+       <y>10</y>
+       <width>181</width>
+       <height>16</height>
       </rect>
      </property>
      <property name="font">
       <font>
        <weight>75</weight>
        <bold>true</bold>
+       <underline>true</underline>
       </font>
      </property>
      <property name="text">
-      <string>Usuń gatunek</string>
+      <string>Dodaj nowy gatunek filmowy:</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEditDodajGatunek">
+     <property name="geometry">
+      <rect>
+       <x>380</x>
+       <y>42</y>
+       <width>171</width>
+       <height>21</height>
+      </rect>
      </property>
     </widget>
    </widget>
@@ -2884,8 +2912,8 @@
     <widget class="QPushButton" name="pushButtonDodajUzytkownika">
      <property name="geometry">
       <rect>
-       <x>230</x>
-       <y>190</y>
+       <x>250</x>
+       <y>147</y>
        <width>81</width>
        <height>25</height>
       </rect>
@@ -2935,7 +2963,7 @@
       <rect>
        <x>61</x>
        <y>290</y>
-       <width>171</width>
+       <width>181</width>
        <height>16</height>
       </rect>
      </property>
@@ -2943,10 +2971,11 @@
       <font>
        <weight>75</weight>
        <bold>true</bold>
+       <underline>true</underline>
       </font>
      </property>
      <property name="text">
-      <string>Edytuj wybranego użtkownikam:</string>
+      <string>Edytuj wybranego użtkownika:</string>
      </property>
     </widget>
     <widget class="QTableWidget" name="tableWidgetWyszukajUzytkownikaEdycja">
@@ -3133,6 +3162,7 @@
       <font>
        <weight>75</weight>
        <bold>true</bold>
+       <underline>true</underline>
       </font>
      </property>
      <property name="text">
