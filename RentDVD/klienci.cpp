@@ -1,6 +1,16 @@
 #include "klienci.h"
 
 
+int Klienci::getIloscWypozyczonych() const
+{
+    return iloscWypozyczonych;
+}
+
+QDateTime Klienci::getDataRejestracji() const
+{
+    return dataRejestracji;
+}
+
 Klienci::Klienci()
 {
     
@@ -28,6 +38,17 @@ Klienci::Klienci(int idKlienta, QString imie, QString nazwisko, QString kod, QSt
     this->nrLokalu = nrLokalu;
     this->email = email;
     this->telefon = telefon;
+}
+
+Klienci::Klienci(int iloscWypozyczonych, QString imie, QString nazwisko, QString miasto, QString email, QString telefon, QDateTime dataRejestracji)
+{
+    this->iloscWypozyczonych = iloscWypozyczonych;
+    this->imie = imie;
+    this->nazwisko = nazwisko;
+    this->miasto = miasto;
+    this->email = email;
+    this->telefon = telefon;
+    this->dataRejestracji = dataRejestracji;
 }
 
 int Klienci::getIdKlienta() const

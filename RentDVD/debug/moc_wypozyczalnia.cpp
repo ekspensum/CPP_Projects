@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Wypozyczalnia_t {
-    QByteArrayData data[31];
-    char stringdata0[1030];
+    QByteArrayData data[32];
+    char stringdata0[1074];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -61,7 +61,8 @@ QT_MOC_LITERAL(26, 876, 5), // "index"
 QT_MOC_LITERAL(27, 882, 33), // "on_pushButtonGatunekDodaj_cli..."
 QT_MOC_LITERAL(28, 916, 34), // "on_pushButtonGatunkiEdytuj_cl..."
 QT_MOC_LITERAL(29, 951, 37), // "on_pushButtonWyswietlPrzychod..."
-QT_MOC_LITERAL(30, 989, 40) // "on_pushButtonWyswietlFilmyNaj..."
+QT_MOC_LITERAL(30, 989, 40), // "on_pushButtonWyswietlFilmyNaj..."
+QT_MOC_LITERAL(31, 1030, 43) // "on_pushButtonWyswietlKlientow..."
 
     },
     "Wypozyczalnia\0on_pushButtonDodajUzytkownika_clicked\0"
@@ -89,7 +90,8 @@ QT_MOC_LITERAL(30, 989, 40) // "on_pushButtonWyswietlFilmyNaj..."
     "on_pushButtonGatunekDodaj_clicked\0"
     "on_pushButtonGatunkiEdytuj_clicked\0"
     "on_pushButtonWyswietlPrzychod_clicked\0"
-    "on_pushButtonWyswietlFilmyNajWyp_clicked"
+    "on_pushButtonWyswietlFilmyNajWyp_clicked\0"
+    "on_pushButtonWyswietlKlientowNajWyp_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -99,7 +101,7 @@ static const uint qt_meta_data_Wypozyczalnia[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      26,   14, // methods
+      27,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -107,32 +109,33 @@ static const uint qt_meta_data_Wypozyczalnia[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,  144,    2, 0x08 /* Private */,
-       3,    0,  145,    2, 0x08 /* Private */,
-       4,    0,  146,    2, 0x08 /* Private */,
-       5,    0,  147,    2, 0x08 /* Private */,
-       6,    0,  148,    2, 0x08 /* Private */,
-       7,    0,  149,    2, 0x08 /* Private */,
-       8,    0,  150,    2, 0x08 /* Private */,
-       9,    0,  151,    2, 0x08 /* Private */,
-      10,    0,  152,    2, 0x08 /* Private */,
-      11,    1,  153,    2, 0x08 /* Private */,
-      13,    0,  156,    2, 0x08 /* Private */,
-      14,    0,  157,    2, 0x08 /* Private */,
-      15,    1,  158,    2, 0x08 /* Private */,
-      16,    0,  161,    2, 0x08 /* Private */,
-      17,    1,  162,    2, 0x08 /* Private */,
-      18,    0,  165,    2, 0x08 /* Private */,
-      19,    1,  166,    2, 0x08 /* Private */,
-      21,    0,  169,    2, 0x08 /* Private */,
-      22,    1,  170,    2, 0x08 /* Private */,
-      23,    0,  173,    2, 0x08 /* Private */,
-      24,    0,  174,    2, 0x08 /* Private */,
-      25,    1,  175,    2, 0x08 /* Private */,
-      27,    0,  178,    2, 0x08 /* Private */,
-      28,    0,  179,    2, 0x08 /* Private */,
-      29,    0,  180,    2, 0x08 /* Private */,
-      30,    0,  181,    2, 0x08 /* Private */,
+       1,    0,  149,    2, 0x08 /* Private */,
+       3,    0,  150,    2, 0x08 /* Private */,
+       4,    0,  151,    2, 0x08 /* Private */,
+       5,    0,  152,    2, 0x08 /* Private */,
+       6,    0,  153,    2, 0x08 /* Private */,
+       7,    0,  154,    2, 0x08 /* Private */,
+       8,    0,  155,    2, 0x08 /* Private */,
+       9,    0,  156,    2, 0x08 /* Private */,
+      10,    0,  157,    2, 0x08 /* Private */,
+      11,    1,  158,    2, 0x08 /* Private */,
+      13,    0,  161,    2, 0x08 /* Private */,
+      14,    0,  162,    2, 0x08 /* Private */,
+      15,    1,  163,    2, 0x08 /* Private */,
+      16,    0,  166,    2, 0x08 /* Private */,
+      17,    1,  167,    2, 0x08 /* Private */,
+      18,    0,  170,    2, 0x08 /* Private */,
+      19,    1,  171,    2, 0x08 /* Private */,
+      21,    0,  174,    2, 0x08 /* Private */,
+      22,    1,  175,    2, 0x08 /* Private */,
+      23,    0,  178,    2, 0x08 /* Private */,
+      24,    0,  179,    2, 0x08 /* Private */,
+      25,    1,  180,    2, 0x08 /* Private */,
+      27,    0,  183,    2, 0x08 /* Private */,
+      28,    0,  184,    2, 0x08 /* Private */,
+      29,    0,  185,    2, 0x08 /* Private */,
+      30,    0,  186,    2, 0x08 /* Private */,
+      31,    0,  187,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
@@ -157,6 +160,7 @@ static const uint qt_meta_data_Wypozyczalnia[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, QMetaType::Int,   26,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -197,6 +201,7 @@ void Wypozyczalnia::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         case 23: _t->on_pushButtonGatunkiEdytuj_clicked(); break;
         case 24: _t->on_pushButtonWyswietlPrzychod_clicked(); break;
         case 25: _t->on_pushButtonWyswietlFilmyNajWyp_clicked(); break;
+        case 26: _t->on_pushButtonWyswietlKlientowNajWyp_clicked(); break;
         default: ;
         }
     }
@@ -227,13 +232,13 @@ int Wypozyczalnia::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 26)
+        if (_id < 27)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 26;
+        _id -= 27;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 26)
+        if (_id < 27)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 26;
+        _id -= 27;
     }
     return _id;
 }

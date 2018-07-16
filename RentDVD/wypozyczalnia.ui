@@ -25,6 +25,24 @@
      <height>641</height>
     </rect>
    </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>1101</width>
+     <height>641</height>
+    </size>
+   </property>
+   <property name="sizeIncrement">
+    <size>
+     <width>0</width>
+     <height>0</height>
+    </size>
+   </property>
    <property name="font">
     <font>
      <weight>50</weight>
@@ -35,7 +53,22 @@
     <enum>QTabWidget::Rounded</enum>
    </property>
    <property name="currentIndex">
-    <number>4</number>
+    <number>6</number>
+   </property>
+   <property name="elideMode">
+    <enum>Qt::ElideNone</enum>
+   </property>
+   <property name="documentMode">
+    <bool>false</bool>
+   </property>
+   <property name="tabsClosable">
+    <bool>false</bool>
+   </property>
+   <property name="movable">
+    <bool>false</bool>
+   </property>
+   <property name="tabBarAutoHide">
+    <bool>false</bool>
    </property>
    <widget class="QWidget" name="tabWypozyczenie">
     <attribute name="title">
@@ -45,7 +78,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>90</y>
+       <y>109</y>
        <width>1071</width>
        <height>261</height>
       </rect>
@@ -143,7 +176,7 @@
      <property name="geometry">
       <rect>
        <x>190</x>
-       <y>52</y>
+       <y>71</y>
        <width>141</width>
        <height>22</height>
       </rect>
@@ -153,7 +186,7 @@
      <property name="geometry">
       <rect>
        <x>360</x>
-       <y>51</y>
+       <y>70</y>
        <width>80</width>
        <height>25</height>
       </rect>
@@ -172,7 +205,7 @@
      <property name="geometry">
       <rect>
        <x>240</x>
-       <y>9</y>
+       <y>28</y>
        <width>61</width>
        <height>25</height>
       </rect>
@@ -184,8 +217,8 @@
     <widget class="QPushButton" name="pushButtonWyszukajTytulOpis">
      <property name="geometry">
       <rect>
-       <x>590</x>
-       <y>10</y>
+       <x>540</x>
+       <y>29</y>
        <width>80</width>
        <height>25</height>
       </rect>
@@ -204,7 +237,7 @@
      <property name="geometry">
       <rect>
        <x>150</x>
-       <y>50</y>
+       <y>69</y>
        <width>21</width>
        <height>25</height>
       </rect>
@@ -249,7 +282,7 @@
      <property name="geometry">
       <rect>
        <x>950</x>
-       <y>380</y>
+       <y>399</y>
        <width>130</width>
        <height>40</height>
       </rect>
@@ -306,7 +339,7 @@
      <property name="geometry">
       <rect>
        <x>951</x>
-       <y>541</y>
+       <y>560</y>
        <width>130</width>
        <height>40</height>
       </rect>
@@ -322,75 +355,11 @@
       <string>Rezerwacja</string>
      </property>
     </widget>
-    <widget class="QWidget" name="layoutWidget4">
-     <property name="geometry">
-      <rect>
-       <x>320</x>
-       <y>10</y>
-       <width>249</width>
-       <height>24</height>
-      </rect>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_8">
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_13">
-        <property name="text">
-         <string>Fragment opisu:</string>
-        </property>
-        <property name="buddy">
-         <cstring>lineEditOpisWyszukaj</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="lineEditOpisWyszukaj">
-        <property name="minimumSize">
-         <size>
-          <width>150</width>
-          <height>0</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QWidget" name="layoutWidget2">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>224</width>
-       <height>24</height>
-      </rect>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_9">
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_12">
-        <property name="text">
-         <string>Fragment tytułu:</string>
-        </property>
-        <property name="buddy">
-         <cstring>lineEditTytulWyszukaj</cstring>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="lineEditTytulWyszukaj">
-        <property name="minimumSize">
-         <size>
-          <width>120</width>
-          <height>0</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
     <widget class="QWidget" name="layoutWidget3">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>50</y>
+       <y>69</y>
        <width>125</width>
        <height>24</height>
       </rect>
@@ -425,7 +394,7 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>420</y>
+       <y>439</y>
        <width>701</width>
        <height>161</height>
       </rect>
@@ -523,7 +492,7 @@
      <property name="geometry">
       <rect>
        <x>41</x>
-       <y>390</y>
+       <y>409</y>
        <width>70</width>
        <height>22</height>
       </rect>
@@ -533,7 +502,7 @@
      <property name="geometry">
       <rect>
        <x>223</x>
-       <y>390</y>
+       <y>409</y>
        <width>70</width>
        <height>22</height>
       </rect>
@@ -543,7 +512,7 @@
      <property name="geometry">
       <rect>
        <x>394</x>
-       <y>390</y>
+       <y>409</y>
        <width>70</width>
        <height>22</height>
       </rect>
@@ -553,7 +522,7 @@
      <property name="geometry">
       <rect>
        <x>553</x>
-       <y>390</y>
+       <y>409</y>
        <width>70</width>
        <height>22</height>
       </rect>
@@ -563,7 +532,7 @@
      <property name="geometry">
       <rect>
        <x>15</x>
-       <y>390</y>
+       <y>409</y>
        <width>21</width>
        <height>22</height>
       </rect>
@@ -576,7 +545,7 @@
      <property name="geometry">
       <rect>
        <x>118</x>
-       <y>390</y>
+       <y>409</y>
        <width>101</width>
        <height>22</height>
       </rect>
@@ -589,7 +558,7 @@
      <property name="geometry">
       <rect>
        <x>300</x>
-       <y>390</y>
+       <y>409</y>
        <width>91</width>
        <height>22</height>
       </rect>
@@ -602,7 +571,7 @@
      <property name="geometry">
       <rect>
        <x>470</x>
-       <y>390</y>
+       <y>409</y>
        <width>81</width>
        <height>22</height>
       </rect>
@@ -615,7 +584,7 @@
      <property name="geometry">
       <rect>
        <x>632</x>
-       <y>388</y>
+       <y>407</y>
        <width>80</width>
        <height>25</height>
       </rect>
@@ -634,8 +603,8 @@
      <property name="geometry">
       <rect>
        <x>15</x>
-       <y>364</y>
-       <width>191</width>
+       <y>383</y>
+       <width>211</width>
        <height>16</height>
       </rect>
      </property>
@@ -643,6 +612,7 @@
       <font>
        <weight>75</weight>
        <bold>true</bold>
+       <underline>true</underline>
       </font>
      </property>
      <property name="text">
@@ -653,7 +623,7 @@
      <property name="geometry">
       <rect>
        <x>748</x>
-       <y>387</y>
+       <y>406</y>
        <width>171</width>
        <height>31</height>
       </rect>
@@ -670,7 +640,7 @@
      <property name="geometry">
       <rect>
        <x>748</x>
-       <y>367</y>
+       <y>386</y>
        <width>171</width>
        <height>16</height>
       </rect>
@@ -683,7 +653,7 @@
      <property name="geometry">
       <rect>
        <x>751</x>
-       <y>528</y>
+       <y>547</y>
        <width>171</width>
        <height>16</height>
       </rect>
@@ -696,7 +666,7 @@
      <property name="geometry">
       <rect>
        <x>750</x>
-       <y>548</y>
+       <y>567</y>
        <width>171</width>
        <height>31</height>
       </rect>
@@ -707,6 +677,90 @@
        <weight>75</weight>
        <bold>true</bold>
       </font>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_73">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>6</y>
+       <width>211</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+       <underline>true</underline>
+      </font>
+     </property>
+     <property name="text">
+      <string>Wyszukaj wg całości lub fragmentu:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_12">
+     <property name="geometry">
+      <rect>
+       <x>11</x>
+       <y>30</y>
+       <width>29</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Tytuł:</string>
+     </property>
+     <property name="buddy">
+      <cstring>lineEditTytulWyszukaj</cstring>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEditTytulWyszukaj">
+     <property name="geometry">
+      <rect>
+       <x>50</x>
+       <y>30</y>
+       <width>171</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>120</width>
+       <height>0</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_13">
+     <property name="geometry">
+      <rect>
+       <x>321</x>
+       <y>33</y>
+       <width>31</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Opis:</string>
+     </property>
+     <property name="buddy">
+      <cstring>lineEditOpisWyszukaj</cstring>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="lineEditOpisWyszukaj">
+     <property name="geometry">
+      <rect>
+       <x>355</x>
+       <y>30</y>
+       <width>150</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>150</width>
+       <height>0</height>
+      </size>
      </property>
     </widget>
    </widget>
@@ -739,7 +793,7 @@
        <x>10</x>
        <y>70</y>
        <width>871</width>
-       <height>201</height>
+       <height>221</height>
       </rect>
      </property>
      <column>
@@ -967,7 +1021,7 @@
        <x>10</x>
        <y>381</y>
        <width>871</width>
-       <height>201</height>
+       <height>221</height>
       </rect>
      </property>
      <column>
@@ -1458,7 +1512,7 @@
      <property name="geometry">
       <rect>
        <x>197</x>
-       <y>320</y>
+       <y>340</y>
        <width>150</width>
        <height>22</height>
       </rect>
@@ -1474,7 +1528,7 @@
      <property name="geometry">
       <rect>
        <x>17</x>
-       <y>350</y>
+       <y>370</y>
        <width>1061</width>
        <height>231</height>
       </rect>
@@ -1606,7 +1660,7 @@
      <property name="geometry">
       <rect>
        <x>357</x>
-       <y>320</y>
+       <y>340</y>
        <width>301</width>
        <height>22</height>
       </rect>
@@ -1619,7 +1673,7 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>320</y>
+       <y>340</y>
        <width>171</width>
        <height>22</height>
       </rect>
@@ -1664,7 +1718,7 @@
      <property name="geometry">
       <rect>
        <x>978</x>
-       <y>310</y>
+       <y>330</y>
        <width>100</width>
        <height>25</height>
       </rect>
@@ -1683,7 +1737,7 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>297</y>
+       <y>312</y>
        <width>161</width>
        <height>16</height>
       </rect>
@@ -2331,9 +2385,9 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>380</y>
+       <y>390</y>
        <width>1061</width>
-       <height>201</height>
+       <height>211</height>
       </rect>
      </property>
      <column>
@@ -2451,7 +2505,7 @@
      <property name="geometry">
       <rect>
        <x>981</x>
-       <y>340</y>
+       <y>350</y>
        <width>100</width>
        <height>25</height>
       </rect>
@@ -2470,7 +2524,7 @@
      <property name="geometry">
       <rect>
        <x>360</x>
-       <y>350</y>
+       <y>360</y>
        <width>301</width>
        <height>22</height>
       </rect>
@@ -2483,7 +2537,7 @@
      <property name="geometry">
       <rect>
        <x>23</x>
-       <y>326</y>
+       <y>336</y>
        <width>141</width>
        <height>16</height>
       </rect>
@@ -2503,7 +2557,7 @@
      <property name="geometry">
       <rect>
        <x>23</x>
-       <y>350</y>
+       <y>360</y>
        <width>171</width>
        <height>22</height>
       </rect>
@@ -2519,7 +2573,7 @@
      <property name="geometry">
       <rect>
        <x>200</x>
-       <y>350</y>
+       <y>360</y>
        <width>150</width>
        <height>22</height>
       </rect>
@@ -2607,7 +2661,7 @@
        <x>30</x>
        <y>300</y>
        <width>891</width>
-       <height>281</height>
+       <height>301</height>
       </rect>
      </property>
     </widget>
@@ -2769,6 +2823,43 @@
      </property>
      <property name="wordWrap">
       <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_72">
+     <property name="geometry">
+      <rect>
+       <x>34</x>
+       <y>173</y>
+       <width>361</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Wyświetla klientów najczęściej wypożyczających w w/w okresie:</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButtonWyswietlKlientowNajWyp">
+     <property name="geometry">
+      <rect>
+       <x>420</x>
+       <y>170</y>
+       <width>71</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Wyświet</string>
      </property>
     </widget>
    </widget>
@@ -2997,7 +3088,7 @@
        <x>20</x>
        <y>230</y>
        <width>198</width>
-       <height>351</height>
+       <height>371</height>
       </rect>
      </property>
      <column>
@@ -3171,7 +3262,7 @@
        <x>60</x>
        <y>350</y>
        <width>621</width>
-       <height>231</height>
+       <height>251</height>
       </rect>
      </property>
      <column>
@@ -3481,6 +3572,19 @@
       <font>
        <pointsize>9</pointsize>
       </font>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_74">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>40</y>
+       <width>321</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>&lt;- dozwolone są litery małe i duże bez polskich znaków oraz cyfry</string>
      </property>
     </widget>
    </widget>

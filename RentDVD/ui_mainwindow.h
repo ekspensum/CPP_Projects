@@ -45,6 +45,8 @@ public:
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
         MainWindow->setEnabled(true);
         MainWindow->resize(417, 198);
+        MainWindow->setMinimumSize(QSize(417, 198));
+        MainWindow->setMaximumSize(QSize(417, 198));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         login = new QLineEdit(centralWidget);

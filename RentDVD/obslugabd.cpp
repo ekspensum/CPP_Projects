@@ -141,6 +141,11 @@ QList<Filmy *> ObslugaBD::getListaFilmyWypozyczenia() const
     return listaFilmyWypozyczenia;
 }
 
+QList<Klienci *> ObslugaBD::getListaKlienciWypozyczenia() const
+{
+    return listaKlienciWypozyczenia;
+}
+
 void ObslugaBD::wyszukajGatunki()
 {
     if (!listaGatunkow.isEmpty())
@@ -677,6 +682,29 @@ void ObslugaBD::wyszukajNajczesciejWypozyczane(QDateTime &dataOd, QDateTime &dat
         {
             filmy = new Filmy(query.value(0).toInt(), query.value(1).toString(), query.value(2).toInt(), query.value(3).toString(), query.value(4).toInt(), query.value(5).toDouble());
             listaFilmyWypozyczenia.append(filmy);
+        }
+    }
+    else
+        qDebug() << "Nie udało się dokonać obliczenia.";
+}
+
+void ObslugaBD::wyszukajNajczestszychKlientow(QDateTime &dataOd, QDateTime &dataDo)
+{
+    if (!listaKlienciWypozyczenia.isEmpty())
+    {
+        qDeleteAll(listaKlienciWypozyczenia); //usuwa ze sterty (działa jak delete)
+        listaKlienciWypozyczenia.clear();
+    }
+    QSqlQuery query;
+    query.prepare("SELECT COUNT(wypozyczenia.idKlienta), imie, nazwisko, miasto, email, telefon, dataRejestracji FROM wypozyczenia LEFT JOIN klienci ON wypozyczenia.idKlienta = klienci.idKlienta WHERE dataWypozyczenia >= (:dataOd) AND dataWypozyczenia <= (:dataDo) GROUP BY wypozyczenia.idKlienta ORDER BY COUNT(wypozyczenia.idKlienta) DESC");
+    query.bindValue(":dataOd", dataOd);
+    query.bindValue(":dataDo", dataDo);
+    if (query.exec())
+    {
+        while (query.next())
+        {
+            klienci = new Klienci(query.value(0).toInt(), query.value(1).toString(), query.value(2).toString(), query.value(3).toString(), query.value(4).toString(), query.value(5).toString(), query.value(6).toDateTime());
+            listaKlienciWypozyczenia.append(klienci);
         }
     }
     else

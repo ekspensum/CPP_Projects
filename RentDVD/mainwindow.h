@@ -5,6 +5,7 @@
 #include "obslugabd.h"
 #include "wypozyczalnia.h"
 #include <QKeySequence>
+#include <QRegularExpression>
 
 namespace Ui {
 class MainWindow;
@@ -25,6 +26,8 @@ private slots:
 private:
     Ui::MainWindow *ui;
     Wypozyczalnia *w;
+    QRegularExpression regex;
+    QRegularExpressionMatch match;
 
 };
 

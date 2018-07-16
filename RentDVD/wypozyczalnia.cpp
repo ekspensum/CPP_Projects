@@ -47,8 +47,8 @@ Wypozyczalnia::Wypozyczalnia(QWidget *parent) :
     ui->dateTimeEditTerminRezerwacji->setDateTime(czasRezerwacji.currentDateTime().addDays(1));
     ui->dateTimeEditStatystykaOd->setDateTime(statystykaDataOd.currentDateTime().addDays(-7));
     ui->dateTimeEditStatystykaDo->setDateTime(statystykaDataDo.currentDateTime());
-//    ui->dateTimeEditStatystykaOd->dateTime().toString("yyyy-MM-dd hh:mm");
-//    ui->dateTimeEditStatystykaDo->dateTime().toString("yyyy-MM-dd hh:mm");
+    //    ui->dateTimeEditStatystykaOd->dateTime().toString("yyyy-MM-dd hh:mm");
+    //    ui->dateTimeEditStatystykaDo->dateTime().toString("yyyy-MM-dd hh:mm");
     p.setColor(QPalette::ButtonText, Qt::blue);
     ui->pushButtonWypozyczenie->setPalette(p);
     ui->pushButtonZwrot->setPalette(p);
@@ -116,6 +116,7 @@ Wypozyczalnia::Wypozyczalnia(QWidget *parent) :
     ui->tableWidgetWyszukajUzytkownikaEdycja->setColumnWidth(4,120);
     ui->tableWidgetWyszukajUzytkownikaEdycja->setColumnWidth(5,80);
     ui->tableWidgetStatystyka->setStyleSheet("QWidget::pane > QWidget { background-color: #C3C3AE; }");
+
 }
 
 Wypozyczalnia::~Wypozyczalnia()
@@ -132,21 +133,30 @@ void Wypozyczalnia::on_pushButtonDodajUzytkownika_clicked()
     imie = ui->lineEditImieUzytkownika->text();
     nazwisko = ui->lineEditNazwiskoUzytkownika->text();
     telefon = ui->lineEditTelefonUzytkownika->text();
+    regex.setPattern("^[a-zA-Z1-9]+$");
+    match = regex.match(login);
+
+
     if(login == "" || haslo == "" || imie == "" || nazwisko == "")
         ui->komunikatyDodajUzytkownika->setText("Proszę uzupełnić wszystkie pola forlmularza.");
     else
     {
-        if (bd->dodajUzytkownika(login, haslo, imie, nazwisko, telefon))
-        {
-            ui->komunikatyDodajUzytkownika->setText("Dodano nowego użytkownika do bazy danych.");
-            ui->lineEditLogin->clear();
-            ui->lineEditHaslo->clear();
-            ui->lineEditImieUzytkownika->clear();
-            ui->lineEditNazwiskoUzytkownika->clear();
-            ui->lineEditTelefonUzytkownika->clear();
-        }
+        if (!match.hasMatch())
+            ui->komunikatyDodajUzytkownika->setText("Login zawiera niedozwolone znaki.");
         else
-            ui->komunikatyDodajUzytkownika->setText("Błąd: nie udało się dodać użytkownika do bazy danych.");
+        {
+            if (bd->dodajUzytkownika(login, haslo, imie, nazwisko, telefon))
+            {
+                ui->komunikatyDodajUzytkownika->setText("Dodano nowego użytkownika do bazy danych.");
+                ui->lineEditLogin->clear();
+                ui->lineEditHaslo->clear();
+                ui->lineEditImieUzytkownika->clear();
+                ui->lineEditNazwiskoUzytkownika->clear();
+                ui->lineEditTelefonUzytkownika->clear();
+            }
+            else
+                ui->komunikatyDodajUzytkownika->setText("Błąd: nie udało się dodać użytkownika do bazy danych.");
+        }
     }
 }
 
@@ -939,5 +949,41 @@ void Wypozyczalnia::on_pushButtonWyswietlFilmyNajWyp_clicked()
         ui->tableWidgetStatystyka->item(i, 4)->setTextAlignment(Qt::AlignCenter);
         ui->tableWidgetStatystyka->setItem(i,5, new QTableWidgetItem(QString("%1").arg(bd->getListaFilmyWypozyczenia().at(i)->getCenaWypozyczenia())));
         ui->tableWidgetStatystyka->item(i, 5)->setTextAlignment(Qt::AlignRight);
+    }
+}
+
+void Wypozyczalnia::on_pushButtonWyswietlKlientowNajWyp_clicked()
+{
+    QDateTime dataOd = ui->dateTimeEditStatystykaOd->dateTime();
+    QDateTime dataDo = ui->dateTimeEditStatystykaDo->dateTime();
+    bd->wyszukajNajczestszychKlientow(dataOd, dataDo);
+    ui->tableWidgetStatystyka->setColumnCount(7);
+    QStringList naglowek;
+    naglowek.append("Wypożyczono");
+    naglowek.append("Imię");
+    naglowek.append("Nazwisko");
+    naglowek.append("Miejscowość");
+    naglowek.append("Email");
+    naglowek.append("Telefon");
+    naglowek.append("Data rejestr.");
+    ui->tableWidgetStatystyka->setHorizontalHeaderLabels(naglowek);
+    ui->tableWidgetStatystyka->setColumnWidth(0, 100);
+    ui->tableWidgetStatystyka->setColumnWidth(1, 100);
+    ui->tableWidgetStatystyka->setColumnWidth(2, 150);
+    ui->tableWidgetStatystyka->setColumnWidth(3, 100);
+    ui->tableWidgetStatystyka->setColumnWidth(4, 150);
+    ui->tableWidgetStatystyka->setColumnWidth(5, 90);
+    ui->tableWidgetStatystyka->setColumnWidth(6, 90);
+    ui->tableWidgetStatystyka->setRowCount(bd->getListaKlienciWypozyczenia().size());
+    for(int i=0; i<bd->getListaKlienciWypozyczenia().size(); i++)
+    {
+        ui->tableWidgetStatystyka->setItem(i,0, new QTableWidgetItem(QString("%1").arg(bd->getListaKlienciWypozyczenia().at(i)->getIloscWypozyczonych())));
+        ui->tableWidgetStatystyka->item(i, 0)->setTextAlignment(Qt::AlignCenter);
+        ui->tableWidgetStatystyka->setItem(i,1, new QTableWidgetItem(bd->getListaKlienciWypozyczenia().at(i)->getImie()));
+        ui->tableWidgetStatystyka->setItem(i,2, new QTableWidgetItem(bd->getListaKlienciWypozyczenia().at(i)->getNazwisko()));
+        ui->tableWidgetStatystyka->setItem(i,3, new QTableWidgetItem(bd->getListaKlienciWypozyczenia().at(i)->getMiasto()));
+        ui->tableWidgetStatystyka->setItem(i,4, new QTableWidgetItem(bd->getListaKlienciWypozyczenia().at(i)->getEmail()));
+        ui->tableWidgetStatystyka->setItem(i,5, new QTableWidgetItem(bd->getListaKlienciWypozyczenia().at(i)->getTelefon()));
+        ui->tableWidgetStatystyka->setItem(i,6, new QTableWidgetItem(bd->getListaKlienciWypozyczenia().at(i)->getDataRejestracji().toString("yyyy-MM-dd")));
     }
 }

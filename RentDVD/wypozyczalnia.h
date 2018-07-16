@@ -75,6 +75,8 @@ private slots:
 
     void on_pushButtonWyswietlFilmyNajWyp_clicked();
 
+    void on_pushButtonWyswietlKlientowNajWyp_clicked();
+
 private:
     Ui::Wypozyczalnia *ui;
     ObslugaBD *bd;
@@ -108,6 +110,8 @@ private:
     QMessageBox jedenUzytkownikEdytuj;
     QMessageBox zmianaHaslaUzytkownik;
     QMessageBox nowyGatunekPustePole;
+    QRegularExpression regex;
+    QRegularExpressionMatch match;
 };
 
 #endif // WYPOZYCZALNIA_H

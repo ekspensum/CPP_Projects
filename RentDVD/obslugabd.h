@@ -54,6 +54,7 @@ public:
     bool edytujGatunki(int &idGatunku, QString &gatunek);
     double obliczPrzychod(QDateTime &dataOd, QDateTime &dataDo);
     void wyszukajNajczesciejWypozyczane(QDateTime &dataOd, QDateTime &dataDo);
+    void wyszukajNajczestszychKlientow(QDateTime &dataOd, QDateTime &dataDo);
     QList<Filmy *> getListaFilmy() const;
     QList<Klienci *> getListaKlienci() const;
     QList<Filmy *> getListaFilmyEdycja() const;
@@ -63,6 +64,7 @@ public:
     QList<Uzytkownicy *> getListaUzytkownicy() const;
     QList<Gatunki *> getListaGatunkow();
     QList<Filmy *> getListaFilmyWypozyczenia() const;
+    QList<Klienci *> getListaKlienciWypozyczenia() const;
     static int idZalogowanyUzytkownik;
 
 
@@ -84,6 +86,7 @@ private:
     QList<Filmy *> listaFilmyEdycja;
     QList<Klienci *> listaKlienciEdycja;
     QList<Filmy *> listaFilmyWypozyczenia;
+    QList<Klienci *> listaKlienciWypozyczenia;
     QList<Uzytkownicy *> listaUzytkownicy;
     QList<Wypozyczenia *> listaWypozyczenia;
     QList<Rezerwacje *> listaRezerwacje;

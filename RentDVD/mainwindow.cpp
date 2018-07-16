@@ -8,7 +8,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->logowanie->setShortcut(QKeySequence(Qt::Key_Enter));
+    ui->logowanie->setShortcut(QKeySequence(Qt::Key_Return));
+    regex.setPattern("^[a-zA-Z1-9]+$");
 }
 
 MainWindow::~MainWindow()
@@ -21,11 +22,12 @@ void MainWindow::on_logowanie_clicked()
 
     QString login = ui->login->text();
     QString haslo = ui->haslo->text();
+    match = regex.match(login);
     if (login == NULL || haslo == NULL)
         ui->komunikat->setText("Proszę uzupełnić dane logowania");
     else {
         ObslugaBD bd;
-        if (bd.logowanie(login, haslo))
+        if (bd.logowanie(login, haslo) && match.hasMatch())
         {
             ui->komunikat->setText("");
             w = new Wypozyczalnia();
@@ -33,6 +35,6 @@ void MainWindow::on_logowanie_clicked()
             close();
         }
         else
-            ui->komunikat->setText("Nie poprawny login lub hasło.");
+            ui->komunikat->setText("Niepoprawny login lub hasło.");
     }
 }
