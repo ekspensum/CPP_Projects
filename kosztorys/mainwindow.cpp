@@ -20,18 +20,20 @@ MainWindow::MainWindow(QWidget *parent) :
     for(int i=0; i<ileLinii; i++)
     {
         combo = new QComboBox();
-        ui->tableWidget->setCellWidget(i,2,combo);
+
         for(int j=0; j<jm.size(); j++)
             combo->addItem(jm.at(j),jmv);
+        ui->tableWidget->setCellWidget(i,2,combo);
+        ui->tableWidget->setItem(i, 2, new QTableWidgetItem(combo->currentText()));
     }
     ui->komunikaty->setText("");
     pustyItem.setText("Proszę wypełnić puste pole");
     openFile.setText("Błąd otwarcia pliku");
     znakiFiltr.setText(QString("Niedozwolone znaki: %1 %2").arg(f.getZnaki(0)).arg(f.getZnaki(1)));
-    connect(ui->tableWidget,SIGNAL(itemChanged(QTableWidgetItem*)),this,SLOT(oblicz(QTableWidgetItem*)));
-//    connect(this,SIGNAL(signalOblicz(int)),this,SLOT(slotOblicz(int)));
-//    connect(ui->tableWidget,&QTableWidget::itemChanged,this,&MainWindow::obliczPrzyOtwarciu);
-//    connect(this,&MainWindow::signalOblicz,this,&MainWindow::slotOblicz);
+//    connect(ui->tableWidget,SIGNAL(itemChanged(QTableWidgetItem*)),this,SLOT(oblicz(QTableWidgetItem*)));
+    //    connect(this,SIGNAL(signalOblicz(int)),this,SLOT(slotOblicz(int)));
+    //    connect(ui->tableWidget,&QTableWidget::itemChanged,this,&MainWindow::obliczPrzyOtwarciu);
+    //    connect(this,&MainWindow::signalOblicz,this,&MainWindow::slotOblicz);
 
 }
 
@@ -40,7 +42,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_pushButton_3_clicked()
+void MainWindow::on_pushButtonWstawWiersz_clicked()
 {
     ui->tableWidget->insertRow(ui->tableWidget->currentRow());
     combo = new QComboBox();
@@ -52,7 +54,7 @@ void MainWindow::on_pushButton_3_clicked()
     ileLinii++;
 }
 
-void MainWindow::on_pushButton_4_clicked()
+void MainWindow::on_pushButtonUsunWiersz_clicked()
 {
     //    czy trzeba usunąć combobox ??
     ui->tableWidget->removeRow(ui->tableWidget->currentRow());
@@ -66,7 +68,6 @@ void MainWindow::on_actionZapisz_triggered()
     {
         if(filtrItem())
         {
-            //            MainWindow::otwartyPlik;
             QFile plik(MainWindow::otwartyPlik);
             if (!plik.open(QIODevice::WriteOnly | QIODevice::Text)) openFile.exec();
             QTextStream out(&plik);
@@ -80,7 +81,7 @@ void MainWindow::on_actionZapisz_triggered()
     }
 }
 
-void MainWindow::on_pushButton_clicked()
+void MainWindow::on_pushButtonDodajWiersz_clicked()
 {
     ui->tableWidget->insertRow(ui->tableWidget->rowCount());
     combo = new QComboBox();
@@ -201,7 +202,7 @@ bool MainWindow::isNoEmptyItem()
     int m=0;
     for(int i=0; i<ui->tableWidget->rowCount(); i++)
     {
-        if(!ui->tableWidget->item(i,0) || ui->tableWidget->item(i,0)->text().isEmpty())
+        if(ui->tableWidget->item(i,0) == 0x0 || ui->tableWidget->item(i,0)->text().isEmpty())
         {
             ui->tableWidget->setCurrentCell(i,0);
             ui->komunikaty->setText(QString("I=%1 J=%2").arg(i).arg(0));
@@ -212,7 +213,7 @@ bool MainWindow::isNoEmptyItem()
         {
             for(int j=0; j<ui->tableWidget->columnCount(); j++)
             {
-                if(!ui->tableWidget->item(i,j) || ui->tableWidget->item(i,j)->text().isEmpty())
+                if(ui->tableWidget->item(i,j) == 0x0 || ui->tableWidget->item(i,j)->text().isEmpty())
                 {
                     ui->tableWidget->setCurrentCell(i,j);
                     ui->komunikaty->setText(QString("I=%1 J=%2").arg(i).arg(j));
@@ -230,24 +231,25 @@ bool MainWindow::isNoEmptyItem()
 
 void MainWindow::oblicz(QTableWidgetItem*)
 {
-    double suma=0;
-    for(int i=0; i<ileLinii; i++)
-    {
-        if (ui->tableWidget->item(i,3) && ui->tableWidget->item(i,4))
-        {
-            temp = ui->tableWidget->item(i,3)->text();
-            ilosc = temp.toDouble();
-            temp = ui->tableWidget->item(i,4)->text();
-            cena = temp.toDouble();
-            wartosc=cena*ilosc;
-            itm[i].setText(QString("%1").arg(wartosc));
-            ui->tableWidget->setItem(i,5,&itm[i]);
-            suma+=itm[i].text().toDouble();
-        }
-    }
-    ui->ogolem->setText(QString("%1").arg(suma));
-//    obliczPrzyOtwarciu();
-//    emit signalOblicz(y);
+//    double suma=0;
+//    for(int i=0; i<ileLinii; i++)
+//    {
+////        qDebug() << ui->tableWidget->item(i, 3);
+//        if (ui->tableWidget->item(i,3) && ui->tableWidget->item(i,4))
+//        {
+//            temp = ui->tableWidget->item(i,3)->text();
+//            ilosc = temp.toDouble();
+//            temp = ui->tableWidget->item(i,4)->text();
+//            cena = temp.toDouble();
+//            wartosc=cena*ilosc;
+//            itm[i].setText(QString("%1").arg(wartosc));
+//            ui->tableWidget->setItem(i,5,&itm[i]);
+//            suma+=itm[i].text().toDouble();
+//        }
+//    }
+//    ui->ogolem->setText(QString("%1").arg(suma));
+//    //    obliczPrzyOtwarciu();
+//    //    emit signalOblicz(y);
 }
 
 void MainWindow::obliczPrzyOtwarciu()
@@ -255,7 +257,7 @@ void MainWindow::obliczPrzyOtwarciu()
     double suma=0;
     for(int i=0; i<ileLinii; i++)
     {
-//        itm = new QTableWidgetItem[200];
+        //        itm = new QTableWidgetItem[200];
         if (ui->tableWidget->item(i,3) && ui->tableWidget->item(i,4))
         {
             temp = ui->tableWidget->item(i,3)->text();
@@ -264,10 +266,10 @@ void MainWindow::obliczPrzyOtwarciu()
             cena = temp.toDouble();
             wartosc=cena*ilosc;
             suma+=wartosc;
-//            itm[i].setText(QString("%1").arg(wartosc));
+            //            itm[i].setText(QString("%1").arg(wartosc));
             ui->tableWidget->setItem(i,5, new QTableWidgetItem(QString("%1").arg(wartosc)));
-//            ui->tableWidget->setItem(i,5,&itm[i]);
-//            suma+=itm[i].text().toDouble();
+            //            ui->tableWidget->setItem(i,5,&itm[i]);
+            //            suma+=itm[i].text().toDouble();
         }
     }
     ui->ogolem->setText(QString("%1").arg(suma));
@@ -284,3 +286,29 @@ void MainWindow::obliczPrzyOtwarciu()
 //    if(ui->tableWidget->cellChanged(0,0))
 //        emit x;
 //}
+
+void MainWindow::on_tableWidget_cellChanged(int row, int column)
+{
+    qDebug() << row << column << "zmiana";
+    double suma=0;
+    for(int i=0; i<ileLinii; i++)
+    {
+        if (ui->tableWidget->item(i,3) && ui->tableWidget->item(i,4))
+        {
+            temp = ui->tableWidget->item(i,3)->text();
+            ilosc = temp.toDouble();
+            temp = ui->tableWidget->item(i,4)->text();
+            cena = temp.toDouble();
+            wartosc=cena*ilosc;
+            ui->tableWidget->setCellWidget(i, 5, new QLabel(QString("%1").arg(wartosc)));
+//            ui->tableWidget->setItem(i,5, new QTableWidgetItem(QString("%1").arg(wartosc)));
+//            suma+=ui->tableWidget->cellWidget(i, 5);
+            QLabel *label = new QLabel();
+            label = (QLabel *)ui->tableWidget->cellWidget(i, 5);
+//            qDebug() << label->text().toDouble();
+            suma += label->text().toDouble();
+        }
+    }
+    ui->ogolem->setText(QString("%1").arg(suma));
+
+}

@@ -53,7 +53,7 @@
     <enum>QTabWidget::Rounded</enum>
    </property>
    <property name="currentIndex">
-    <number>6</number>
+    <number>4</number>
    </property>
    <property name="elideMode">
     <enum>Qt::ElideNone</enum>
@@ -83,15 +83,14 @@
        <height>261</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
      <column>
       <property name="text">
        <string>Id</string>
-      </property>
-      <property name="font">
-       <font>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
       </property>
      </column>
      <column>
@@ -100,8 +99,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -111,8 +111,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -122,8 +123,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -133,8 +135,7 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
        </font>
       </property>
      </column>
@@ -144,8 +145,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -155,8 +157,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -166,8 +169,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -206,7 +210,7 @@
       <rect>
        <x>240</x>
        <y>28</y>
-       <width>61</width>
+       <width>71</width>
        <height>25</height>
       </rect>
      </property>
@@ -217,7 +221,7 @@
     <widget class="QPushButton" name="pushButtonWyszukajTytulOpis">
      <property name="geometry">
       <rect>
-       <x>540</x>
+       <x>560</x>
        <y>29</y>
        <width>80</width>
        <height>25</height>
@@ -281,9 +285,9 @@
     <widget class="QPushButton" name="pushButtonWypozyczenie">
      <property name="geometry">
       <rect>
-       <x>950</x>
+       <x>942</x>
        <y>399</y>
-       <width>130</width>
+       <width>140</width>
        <height>40</height>
       </rect>
      </property>
@@ -338,9 +342,9 @@
     <widget class="QPushButton" name="pushButtonRezerwacja">
      <property name="geometry">
       <rect>
-       <x>951</x>
+       <x>943</x>
        <y>560</y>
-       <width>130</width>
+       <width>140</width>
        <height>40</height>
       </rect>
      </property>
@@ -360,8 +364,8 @@
       <rect>
        <x>10</x>
        <y>69</y>
-       <width>125</width>
-       <height>24</height>
+       <width>129</width>
+       <height>26</height>
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout_7">
@@ -399,14 +403,18 @@
        <height>161</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
      <column>
       <property name="text">
        <string>Id</string>
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
        </font>
       </property>
      </column>
@@ -416,8 +424,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -427,8 +436,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -438,8 +448,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -449,8 +460,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -460,8 +472,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -471,8 +484,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -482,8 +496,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -491,9 +506,9 @@
     <widget class="QLineEdit" name="lineEditImieWyszukaj">
      <property name="geometry">
       <rect>
-       <x>41</x>
+       <x>50</x>
        <y>409</y>
-       <width>70</width>
+       <width>61</width>
        <height>22</height>
       </rect>
      </property>
@@ -531,9 +546,9 @@
     <widget class="QLabel" name="label_17">
      <property name="geometry">
       <rect>
-       <x>15</x>
+       <x>13</x>
        <y>409</y>
-       <width>21</width>
+       <width>31</width>
        <height>22</height>
       </rect>
      </property>
@@ -550,8 +565,13 @@
        <height>22</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>7</pointsize>
+      </font>
+     </property>
      <property name="text">
-      <string>LUB/ORAZ Nazwisko:</string>
+      <string>lub/oraz Nazwisko:</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_19">
@@ -563,8 +583,13 @@
        <height>22</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>7</pointsize>
+      </font>
+     </property>
      <property name="text">
-      <string>LUB/ORAZ Miasto:</string>
+      <string>lub/oraz Miasto:</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_20">
@@ -576,8 +601,13 @@
        <height>22</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>7</pointsize>
+      </font>
+     </property>
      <property name="text">
-      <string>LUB/ORAZ Ulica:</string>
+      <string>lub/oraz Ulica:</string>
      </property>
     </widget>
     <widget class="QPushButton" name="pushButtonWyszukajKlienta">
@@ -604,7 +634,7 @@
       <rect>
        <x>15</x>
        <y>383</y>
-       <width>211</width>
+       <width>241</width>
        <height>16</height>
       </rect>
      </property>
@@ -622,9 +652,9 @@
     <widget class="QDateTimeEdit" name="dateTimeEditTerminZwrotu">
      <property name="geometry">
       <rect>
-       <x>748</x>
+       <x>736</x>
        <y>406</y>
-       <width>171</width>
+       <width>181</width>
        <height>31</height>
       </rect>
      </property>
@@ -639,9 +669,9 @@
     <widget class="QLabel" name="label_33">
      <property name="geometry">
       <rect>
-       <x>748</x>
+       <x>736</x>
        <y>386</y>
-       <width>171</width>
+       <width>201</width>
        <height>16</height>
       </rect>
      </property>
@@ -652,7 +682,7 @@
     <widget class="QLabel" name="label_34">
      <property name="geometry">
       <rect>
-       <x>751</x>
+       <x>739</x>
        <y>547</y>
        <width>171</width>
        <height>16</height>
@@ -665,9 +695,9 @@
     <widget class="QDateTimeEdit" name="dateTimeEditTerminRezerwacji">
      <property name="geometry">
       <rect>
-       <x>750</x>
+       <x>738</x>
        <y>567</y>
-       <width>171</width>
+       <width>181</width>
        <height>31</height>
       </rect>
      </property>
@@ -684,7 +714,7 @@
       <rect>
        <x>10</x>
        <y>6</y>
-       <width>211</width>
+       <width>241</width>
        <height>16</height>
       </rect>
      </property>
@@ -704,7 +734,7 @@
       <rect>
        <x>11</x>
        <y>30</y>
-       <width>29</width>
+       <width>41</width>
        <height>16</height>
       </rect>
      </property>
@@ -718,7 +748,7 @@
     <widget class="QLineEdit" name="lineEditTytulWyszukaj">
      <property name="geometry">
       <rect>
-       <x>50</x>
+       <x>55</x>
        <y>30</y>
        <width>171</width>
        <height>22</height>
@@ -734,7 +764,7 @@
     <widget class="QLabel" name="label_13">
      <property name="geometry">
       <rect>
-       <x>321</x>
+       <x>330</x>
        <y>33</y>
        <width>31</width>
        <height>16</height>
@@ -750,7 +780,7 @@
     <widget class="QLineEdit" name="lineEditOpisWyszukaj">
      <property name="geometry">
       <rect>
-       <x>355</x>
+       <x>375</x>
        <y>30</y>
        <width>150</width>
        <height>22</height>
@@ -771,7 +801,7 @@
     <widget class="QPushButton" name="pushButtonWyszukajWypozyczoneKlientFilm">
      <property name="geometry">
       <rect>
-       <x>360</x>
+       <x>372</x>
        <y>9</y>
        <width>80</width>
        <height>25</height>
@@ -796,14 +826,20 @@
        <height>221</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
      <column>
       <property name="text">
        <string>Id</string>
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -813,8 +849,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
       <property name="textAlignment">
@@ -827,8 +864,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -838,8 +876,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -849,8 +888,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
       <property name="textAlignment">
@@ -863,8 +903,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -874,8 +915,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -885,8 +927,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -896,8 +939,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -907,8 +951,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -916,9 +961,9 @@
     <widget class="QLabel" name="komunikatyZwrotOdwolanie">
      <property name="geometry">
       <rect>
-       <x>710</x>
+       <x>730</x>
        <y>10</y>
-       <width>371</width>
+       <width>351</width>
        <height>51</height>
       </rect>
      </property>
@@ -948,9 +993,9 @@
     <widget class="QLabel" name="label_37">
      <property name="geometry">
       <rect>
-       <x>350</x>
+       <x>380</x>
        <y>40</y>
-       <width>301</width>
+       <width>341</width>
        <height>22</height>
       </rect>
      </property>
@@ -1024,14 +1069,20 @@
        <height>221</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
      <column>
       <property name="text">
        <string>Id</string>
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -1041,8 +1092,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -1052,8 +1104,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -1063,8 +1116,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -1074,8 +1128,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -1085,8 +1140,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -1096,8 +1152,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -1107,8 +1164,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -1118,8 +1176,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -1129,8 +1188,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -1138,7 +1198,7 @@
     <widget class="QLabel" name="label_40">
      <property name="geometry">
       <rect>
-       <x>203</x>
+       <x>213</x>
        <y>322</y>
        <width>91</width>
        <height>22</height>
@@ -1154,9 +1214,9 @@
     <widget class="QLabel" name="label_41">
      <property name="geometry">
       <rect>
-       <x>350</x>
+       <x>380</x>
        <y>351</y>
-       <width>301</width>
+       <width>351</width>
        <height>22</height>
       </rect>
      </property>
@@ -1167,7 +1227,7 @@
     <widget class="QLineEdit" name="lineEditNazwiskoWyszukajZarezerwowane">
      <property name="geometry">
       <rect>
-       <x>190</x>
+       <x>220</x>
        <y>351</y>
        <width>150</width>
        <height>22</height>
@@ -1185,7 +1245,7 @@
       <rect>
        <x>13</x>
        <y>351</y>
-       <width>171</width>
+       <width>201</width>
        <height>22</height>
       </rect>
      </property>
@@ -1201,7 +1261,7 @@
       <rect>
        <x>13</x>
        <y>322</y>
-       <width>111</width>
+       <width>131</width>
        <height>22</height>
       </rect>
      </property>
@@ -1212,7 +1272,7 @@
     <widget class="QLineEdit" name="lineEditIdFilmuWyszukajZarezerwowane">
      <property name="geometry">
       <rect>
-       <x>138</x>
+       <x>148</x>
        <y>322</y>
        <width>40</width>
        <height>22</height>
@@ -1291,7 +1351,7 @@
     <widget class="QLineEdit" name="lineEditIdKlientaWyszukajZarezerwowane">
      <property name="geometry">
       <rect>
-       <x>300</x>
+       <x>310</x>
        <y>322</y>
        <width>40</width>
        <height>22</height>
@@ -1307,7 +1367,7 @@
     <widget class="QPushButton" name="pushButtonWyszukajZarezerwowaneKlientFilm">
      <property name="geometry">
       <rect>
-       <x>360</x>
+       <x>370</x>
        <y>320</y>
        <width>80</width>
        <height>25</height>
@@ -1326,7 +1386,7 @@
     <widget class="QLineEdit" name="lineEditIdFilmuWyszukajZwrot">
      <property name="geometry">
       <rect>
-       <x>138</x>
+       <x>150</x>
        <y>11</y>
        <width>40</width>
        <height>22</height>
@@ -1350,7 +1410,7 @@
       <rect>
        <x>13</x>
        <y>11</y>
-       <width>111</width>
+       <width>131</width>
        <height>22</height>
       </rect>
      </property>
@@ -1361,7 +1421,7 @@
     <widget class="QLineEdit" name="lineEditIdKlientaWyszukajZwrot">
      <property name="geometry">
       <rect>
-       <x>300</x>
+       <x>312</x>
        <y>11</y>
        <width>40</width>
        <height>22</height>
@@ -1377,7 +1437,7 @@
     <widget class="QLabel" name="label_36">
      <property name="geometry">
       <rect>
-       <x>203</x>
+       <x>215</x>
        <y>11</y>
        <width>91</width>
        <height>22</height>
@@ -1395,7 +1455,7 @@
       <rect>
        <x>13</x>
        <y>40</y>
-       <width>171</width>
+       <width>201</width>
        <height>22</height>
       </rect>
      </property>
@@ -1409,7 +1469,7 @@
     <widget class="QLineEdit" name="lineEditNazwiskoWyszukajZwrot">
      <property name="geometry">
       <rect>
-       <x>190</x>
+       <x>220</x>
        <y>40</y>
        <width>150</width>
        <height>22</height>
@@ -1432,7 +1492,7 @@
       <rect>
        <x>410</x>
        <y>40</y>
-       <width>140</width>
+       <width>151</width>
        <height>25</height>
       </rect>
      </property>
@@ -1449,7 +1509,7 @@
     <widget class="QLabel" name="label_29">
      <property name="geometry">
       <rect>
-       <x>256</x>
+       <x>280</x>
        <y>99</y>
        <width>131</width>
        <height>16</height>
@@ -1462,7 +1522,7 @@
     <widget class="QLabel" name="label_30">
      <property name="geometry">
       <rect>
-       <x>256</x>
+       <x>280</x>
        <y>210</y>
        <width>131</width>
        <height>16</height>
@@ -1475,7 +1535,7 @@
     <widget class="QLineEdit" name="lineEditEmail">
      <property name="geometry">
       <rect>
-       <x>124</x>
+       <x>148</x>
        <y>235</y>
        <width>108</width>
        <height>22</height>
@@ -1498,7 +1558,7 @@
     <widget class="QLabel" name="label_45">
      <property name="geometry">
       <rect>
-       <x>256</x>
+       <x>280</x>
        <y>240</y>
        <width>131</width>
        <height>16</height>
@@ -1511,7 +1571,7 @@
     <widget class="QLineEdit" name="lineEditNazwiskoWyszukajEdytuj">
      <property name="geometry">
       <rect>
-       <x>197</x>
+       <x>230</x>
        <y>340</y>
        <width>150</width>
        <height>22</height>
@@ -1533,14 +1593,20 @@
        <height>231</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
      <column>
       <property name="text">
        <string>Id</string>
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -1550,8 +1616,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -1561,8 +1628,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -1572,8 +1640,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -1583,8 +1652,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -1594,8 +1664,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -1605,8 +1676,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -1616,8 +1688,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -1628,8 +1701,8 @@
       <property name="font">
        <font>
         <pointsize>8</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -1639,8 +1712,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -1650,8 +1724,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -1659,9 +1734,9 @@
     <widget class="QLabel" name="label_46">
      <property name="geometry">
       <rect>
-       <x>357</x>
+       <x>390</x>
        <y>340</y>
-       <width>301</width>
+       <width>351</width>
        <height>22</height>
       </rect>
      </property>
@@ -1674,7 +1749,7 @@
       <rect>
        <x>20</x>
        <y>340</y>
-       <width>171</width>
+       <width>201</width>
        <height>22</height>
       </rect>
      </property>
@@ -1738,7 +1813,7 @@
       <rect>
        <x>20</x>
        <y>312</y>
-       <width>161</width>
+       <width>181</width>
        <height>16</height>
       </rect>
      </property>
@@ -1758,7 +1833,7 @@
       <rect>
        <x>22</x>
        <y>10</y>
-       <width>141</width>
+       <width>151</width>
        <height>16</height>
       </rect>
      </property>
@@ -1778,7 +1853,7 @@
       <rect>
        <x>47</x>
        <y>39</y>
-       <width>24</width>
+       <width>41</width>
        <height>16</height>
       </rect>
      </property>
@@ -1789,7 +1864,7 @@
     <widget class="QLineEdit" name="lineEditImieKlienta">
      <property name="geometry">
       <rect>
-       <x>124</x>
+       <x>148</x>
        <y>39</y>
        <width>108</width>
        <height>22</height>
@@ -1801,7 +1876,7 @@
       <rect>
        <x>47</x>
        <y>67</y>
-       <width>48</width>
+       <width>71</width>
        <height>16</height>
       </rect>
      </property>
@@ -1812,7 +1887,7 @@
     <widget class="QLineEdit" name="lineEditNazwiskoKlienta">
      <property name="geometry">
       <rect>
-       <x>124</x>
+       <x>148</x>
        <y>67</y>
        <width>108</width>
        <height>22</height>
@@ -1824,7 +1899,7 @@
       <rect>
        <x>47</x>
        <y>123</y>
-       <width>35</width>
+       <width>51</width>
        <height>16</height>
       </rect>
      </property>
@@ -1837,7 +1912,7 @@
       <rect>
        <x>47</x>
        <y>95</y>
-       <width>71</width>
+       <width>91</width>
        <height>16</height>
       </rect>
      </property>
@@ -1848,7 +1923,7 @@
     <widget class="QLineEdit" name="lineEditKodPocztowy">
      <property name="geometry">
       <rect>
-       <x>124</x>
+       <x>148</x>
        <y>95</y>
        <width>108</width>
        <height>22</height>
@@ -1864,7 +1939,7 @@
     <widget class="QLineEdit" name="lineEditMiasto">
      <property name="geometry">
       <rect>
-       <x>124</x>
+       <x>148</x>
        <y>123</y>
        <width>108</width>
        <height>22</height>
@@ -1876,7 +1951,7 @@
       <rect>
        <x>47</x>
        <y>151</y>
-       <width>26</width>
+       <width>41</width>
        <height>16</height>
       </rect>
      </property>
@@ -1889,7 +1964,7 @@
       <rect>
        <x>47</x>
        <y>179</y>
-       <width>44</width>
+       <width>61</width>
        <height>16</height>
       </rect>
      </property>
@@ -1900,7 +1975,7 @@
     <widget class="QLineEdit" name="lineEditUlica">
      <property name="geometry">
       <rect>
-       <x>124</x>
+       <x>148</x>
        <y>151</y>
        <width>108</width>
        <height>22</height>
@@ -1910,7 +1985,7 @@
     <widget class="QLineEdit" name="lineEditNrDomu">
      <property name="geometry">
       <rect>
-       <x>124</x>
+       <x>148</x>
        <y>179</y>
        <width>108</width>
        <height>22</height>
@@ -1922,7 +1997,7 @@
       <rect>
        <x>47</x>
        <y>207</y>
-       <width>45</width>
+       <width>61</width>
        <height>16</height>
       </rect>
      </property>
@@ -1933,7 +2008,7 @@
     <widget class="QLineEdit" name="lineEditNrLokalu">
      <property name="geometry">
       <rect>
-       <x>124</x>
+       <x>148</x>
        <y>207</y>
        <width>108</width>
        <height>22</height>
@@ -1943,7 +2018,7 @@
     <widget class="QLabel" name="label_56">
      <property name="geometry">
       <rect>
-       <x>256</x>
+       <x>280</x>
        <y>268</y>
        <width>131</width>
        <height>16</height>
@@ -1956,7 +2031,7 @@
     <widget class="QLineEdit" name="lineEditTelefon">
      <property name="geometry">
       <rect>
-       <x>124</x>
+       <x>148</x>
        <y>263</y>
        <width>108</width>
        <height>22</height>
@@ -1968,7 +2043,7 @@
       <rect>
        <x>47</x>
        <y>263</y>
-       <width>45</width>
+       <width>51</width>
        <height>16</height>
       </rect>
      </property>
@@ -2044,8 +2119,8 @@
       <rect>
        <x>20</x>
        <y>39</y>
-       <width>607</width>
-       <height>26</height>
+       <width>608</width>
+       <height>31</height>
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout">
@@ -2093,7 +2168,7 @@
        <x>20</x>
        <y>69</y>
        <width>215</width>
-       <height>26</height>
+       <height>31</height>
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
@@ -2150,8 +2225,8 @@
       <rect>
        <x>20</x>
        <y>199</y>
-       <width>198</width>
-       <height>25</height>
+       <width>201</width>
+       <height>27</height>
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout_3">
@@ -2201,8 +2276,8 @@
       <rect>
        <x>20</x>
        <y>230</y>
-       <width>384</width>
-       <height>80</height>
+       <width>422</width>
+       <height>94</height>
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout_4">
@@ -2226,7 +2301,7 @@
        <widget class="QComboBox" name="comboBoxGatunek1">
         <property name="minimumSize">
          <size>
-          <width>120</width>
+          <width>150</width>
           <height>0</height>
          </size>
         </property>
@@ -2238,7 +2313,7 @@
         </property>
         <property name="font">
          <font>
-          <pointsize>9</pointsize>
+          <pointsize>8</pointsize>
          </font>
         </property>
         <property name="currentIndex">
@@ -2269,7 +2344,7 @@
        <widget class="QComboBox" name="comboBoxGatunek2">
         <property name="minimumSize">
          <size>
-          <width>120</width>
+          <width>150</width>
           <height>0</height>
          </size>
         </property>
@@ -2281,7 +2356,7 @@
         </property>
         <property name="font">
          <font>
-          <pointsize>9</pointsize>
+          <pointsize>8</pointsize>
          </font>
         </property>
        </widget>
@@ -2306,7 +2381,7 @@
        <widget class="QComboBox" name="comboBoxGatunek3">
         <property name="minimumSize">
          <size>
-          <width>120</width>
+          <width>150</width>
           <height>0</height>
          </size>
         </property>
@@ -2318,7 +2393,7 @@
         </property>
         <property name="font">
          <font>
-          <pointsize>9</pointsize>
+          <pointsize>8</pointsize>
          </font>
         </property>
        </widget>
@@ -2358,7 +2433,7 @@
        <x>20</x>
        <y>169</y>
        <width>215</width>
-       <height>24</height>
+       <height>26</height>
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout_6">
@@ -2390,14 +2465,20 @@
        <height>211</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
      <column>
       <property name="text">
        <string>Id</string>
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -2407,8 +2488,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -2418,8 +2500,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -2429,8 +2512,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -2440,8 +2524,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -2451,8 +2536,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -2462,8 +2548,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -2473,8 +2560,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -2484,8 +2572,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -2495,8 +2584,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -2523,9 +2613,9 @@
     <widget class="QLabel" name="label_50">
      <property name="geometry">
       <rect>
-       <x>360</x>
+       <x>380</x>
        <y>360</y>
-       <width>301</width>
+       <width>351</width>
        <height>22</height>
       </rect>
      </property>
@@ -2558,7 +2648,7 @@
       <rect>
        <x>23</x>
        <y>360</y>
-       <width>171</width>
+       <width>181</width>
        <height>22</height>
       </rect>
      </property>
@@ -2572,7 +2662,7 @@
     <widget class="QLineEdit" name="lineEditTytulWyszukajEdytuj">
      <property name="geometry">
       <rect>
-       <x>200</x>
+       <x>220</x>
        <y>360</y>
        <width>150</width>
        <height>22</height>
@@ -2643,7 +2733,7 @@
       <rect>
        <x>32</x>
        <y>50</y>
-       <width>141</width>
+       <width>171</width>
        <height>27</height>
       </rect>
      </property>
@@ -2664,13 +2754,18 @@
        <height>301</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+      </font>
+     </property>
     </widget>
     <widget class="QDateTimeEdit" name="dateTimeEditStatystykaDo">
      <property name="geometry">
       <rect>
-       <x>192</x>
+       <x>239</x>
        <y>50</y>
-       <width>141</width>
+       <width>171</width>
        <height>27</height>
       </rect>
      </property>
@@ -2687,13 +2782,13 @@
       <rect>
        <x>33</x>
        <y>30</y>
-       <width>47</width>
-       <height>13</height>
+       <width>61</width>
+       <height>16</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <pointsize>9</pointsize>
+       <pointsize>8</pointsize>
       </font>
      </property>
      <property name="text">
@@ -2703,15 +2798,15 @@
     <widget class="QLabel" name="label_69">
      <property name="geometry">
       <rect>
-       <x>193</x>
+       <x>240</x>
        <y>30</y>
-       <width>47</width>
-       <height>13</height>
+       <width>51</width>
+       <height>16</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <pointsize>9</pointsize>
+       <pointsize>8</pointsize>
       </font>
      </property>
      <property name="text">
@@ -2723,13 +2818,13 @@
       <rect>
        <x>33</x>
        <y>92</y>
-       <width>281</width>
+       <width>291</width>
        <height>16</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <pointsize>9</pointsize>
+       <pointsize>8</pointsize>
       </font>
      </property>
      <property name="text">
@@ -2739,7 +2834,7 @@
     <widget class="QLineEdit" name="lineEditPrzychod">
      <property name="geometry">
       <rect>
-       <x>330</x>
+       <x>350</x>
        <y>92</y>
        <width>81</width>
        <height>21</height>
@@ -2749,7 +2844,7 @@
     <widget class="QPushButton" name="pushButtonWyswietlPrzychod">
      <property name="geometry">
       <rect>
-       <x>430</x>
+       <x>450</x>
        <y>90</y>
        <width>71</width>
        <height>25</height>
@@ -2770,13 +2865,13 @@
       <rect>
        <x>34</x>
        <y>133</y>
-       <width>321</width>
+       <width>341</width>
        <height>16</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <pointsize>9</pointsize>
+       <pointsize>8</pointsize>
       </font>
      </property>
      <property name="text">
@@ -2786,7 +2881,7 @@
     <widget class="QPushButton" name="pushButtonWyswietlFilmyNajWyp">
      <property name="geometry">
       <rect>
-       <x>378</x>
+       <x>398</x>
        <y>130</y>
        <width>71</width>
        <height>25</height>
@@ -2830,13 +2925,13 @@
       <rect>
        <x>34</x>
        <y>173</y>
-       <width>361</width>
+       <width>381</width>
        <height>16</height>
       </rect>
      </property>
      <property name="font">
       <font>
-       <pointsize>9</pointsize>
+       <pointsize>8</pointsize>
       </font>
      </property>
      <property name="text">
@@ -2846,7 +2941,7 @@
     <widget class="QPushButton" name="pushButtonWyswietlKlientowNajWyp">
      <property name="geometry">
       <rect>
-       <x>420</x>
+       <x>440</x>
        <y>170</y>
        <width>71</width>
        <height>25</height>
@@ -2886,7 +2981,7 @@
     <widget class="QLineEdit" name="lineEditZmianaHaslaLogin">
      <property name="geometry">
       <rect>
-       <x>110</x>
+       <x>130</x>
        <y>42</y>
        <width>108</width>
        <height>22</height>
@@ -2901,7 +2996,7 @@
     <widget class="QLineEdit" name="lineEditZmianaHaslaHaslo">
      <property name="geometry">
       <rect>
-       <x>110</x>
+       <x>130</x>
        <y>70</y>
        <width>108</width>
        <height>22</height>
@@ -2937,7 +3032,7 @@
       <rect>
        <x>19</x>
        <y>10</y>
-       <width>81</width>
+       <width>101</width>
        <height>16</height>
       </rect>
      </property>
@@ -2957,7 +3052,7 @@
       <rect>
        <x>21</x>
        <y>128</y>
-       <width>81</width>
+       <width>91</width>
        <height>16</height>
       </rect>
      </property>
@@ -2971,7 +3066,7 @@
     <widget class="QLineEdit" name="lineEditZmianaHaslaPowtorz">
      <property name="geometry">
       <rect>
-       <x>110</x>
+       <x>130</x>
        <y>128</y>
        <width>108</width>
        <height>22</height>
@@ -3005,7 +3100,7 @@
     <widget class="QLineEdit" name="lineEditZmianaHaslaNowe">
      <property name="geometry">
       <rect>
-       <x>110</x>
+       <x>130</x>
        <y>99</y>
        <width>108</width>
        <height>22</height>
@@ -3023,9 +3118,9 @@
     <widget class="QPushButton" name="pushButtonZmienHaslo">
      <property name="geometry">
       <rect>
-       <x>240</x>
+       <x>260</x>
        <y>126</y>
-       <width>80</width>
+       <width>91</width>
        <height>25</height>
       </rect>
      </property>
@@ -3067,7 +3162,7 @@
       <rect>
        <x>20</x>
        <y>200</y>
-       <width>171</width>
+       <width>201</width>
        <height>16</height>
       </rect>
      </property>
@@ -3087,9 +3182,14 @@
       <rect>
        <x>20</x>
        <y>230</y>
-       <width>198</width>
+       <width>241</width>
        <height>371</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+      </font>
      </property>
      <column>
       <property name="text">
@@ -3097,8 +3197,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -3108,8 +3209,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -3119,7 +3221,7 @@
       <rect>
        <x>570</x>
        <y>40</y>
-       <width>101</width>
+       <width>111</width>
        <height>25</height>
       </rect>
      </property>
@@ -3136,7 +3238,7 @@
     <widget class="QPushButton" name="pushButtonGatunkiEdytuj">
      <property name="geometry">
       <rect>
-       <x>240</x>
+       <x>270</x>
        <y>230</y>
        <width>101</width>
        <height>25</height>
@@ -3155,9 +3257,9 @@
     <widget class="QLabel" name="label_67">
      <property name="geometry">
       <rect>
-       <x>380</x>
+       <x>352</x>
        <y>10</y>
-       <width>181</width>
+       <width>201</width>
        <height>16</height>
       </rect>
      </property>
@@ -3175,9 +3277,9 @@
     <widget class="QLineEdit" name="lineEditDodajGatunek">
      <property name="geometry">
       <rect>
-       <x>380</x>
+       <x>350</x>
        <y>42</y>
-       <width>171</width>
+       <width>201</width>
        <height>21</height>
       </rect>
      </property>
@@ -3190,7 +3292,7 @@
     <widget class="QPushButton" name="pushButtonDodajUzytkownika">
      <property name="geometry">
       <rect>
-       <x>250</x>
+       <x>270</x>
        <y>147</y>
        <width>81</width>
        <height>25</height>
@@ -3241,7 +3343,7 @@
       <rect>
        <x>61</x>
        <y>290</y>
-       <width>181</width>
+       <width>211</width>
        <height>16</height>
       </rect>
      </property>
@@ -3261,9 +3363,14 @@
       <rect>
        <x>60</x>
        <y>350</y>
-       <width>621</width>
+       <width>711</width>
        <height>251</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>8</pointsize>
+      </font>
      </property>
      <column>
       <property name="text">
@@ -3271,8 +3378,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -3282,8 +3390,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -3293,8 +3402,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -3304,8 +3414,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -3315,8 +3426,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -3326,8 +3438,9 @@
       </property>
       <property name="font">
        <font>
-        <weight>75</weight>
-        <bold>true</bold>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
      </column>
@@ -3337,7 +3450,7 @@
       <rect>
        <x>61</x>
        <y>320</y>
-       <width>171</width>
+       <width>201</width>
        <height>22</height>
       </rect>
      </property>
@@ -3351,9 +3464,9 @@
     <widget class="QLabel" name="label_55">
      <property name="geometry">
       <rect>
-       <x>400</x>
+       <x>430</x>
        <y>320</y>
-       <width>301</width>
+       <width>341</width>
        <height>22</height>
       </rect>
      </property>
@@ -3364,7 +3477,7 @@
     <widget class="QPushButton" name="pushButtonEdytujUzytkownika">
      <property name="geometry">
       <rect>
-       <x>700</x>
+       <x>790</x>
        <y>350</y>
        <width>100</width>
        <height>25</height>
@@ -3383,7 +3496,7 @@
     <widget class="QLineEdit" name="lineEditNazwiskolWyszukajEdytuj">
      <property name="geometry">
       <rect>
-       <x>240</x>
+       <x>270</x>
        <y>320</y>
        <width>150</width>
        <height>22</height>
@@ -3415,7 +3528,7 @@
     <widget class="QLineEdit" name="lineEditTelefonUzytkownika">
      <property name="geometry">
       <rect>
-       <x>115</x>
+       <x>135</x>
        <y>150</y>
        <width>108</width>
        <height>22</height>
@@ -3432,7 +3545,7 @@
       <rect>
        <x>60</x>
        <y>10</y>
-       <width>171</width>
+       <width>191</width>
        <height>16</height>
       </rect>
      </property>
@@ -3466,7 +3579,7 @@
     <widget class="QLineEdit" name="lineEditLogin">
      <property name="geometry">
       <rect>
-       <x>115</x>
+       <x>135</x>
        <y>38</y>
        <width>108</width>
        <height>22</height>
@@ -3513,7 +3626,7 @@
     <widget class="QLineEdit" name="lineEditHaslo">
      <property name="geometry">
       <rect>
-       <x>115</x>
+       <x>135</x>
        <y>66</y>
        <width>108</width>
        <height>22</height>
@@ -3531,7 +3644,7 @@
     <widget class="QLineEdit" name="lineEditImieUzytkownika">
      <property name="geometry">
       <rect>
-       <x>115</x>
+       <x>135</x>
        <y>94</y>
        <width>108</width>
        <height>22</height>
@@ -3548,7 +3661,7 @@
       <rect>
        <x>61</x>
        <y>122</y>
-       <width>48</width>
+       <width>61</width>
        <height>16</height>
       </rect>
      </property>
@@ -3562,7 +3675,7 @@
     <widget class="QLineEdit" name="lineEditNazwiskoUzytkownika">
      <property name="geometry">
       <rect>
-       <x>115</x>
+       <x>135</x>
        <y>122</y>
        <width>108</width>
        <height>22</height>
@@ -3577,9 +3690,9 @@
     <widget class="QLabel" name="label_74">
      <property name="geometry">
       <rect>
-       <x>240</x>
+       <x>260</x>
        <y>40</y>
-       <width>321</width>
+       <width>391</width>
        <height>16</height>
       </rect>
      </property>

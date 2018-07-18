@@ -5,7 +5,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QTableWidgetItem>
-//#include <QDebug>
+#include <QDebug>
 #include "filtr.h"
 #include <QFileDialog>
 #include <QMessageBox>
@@ -37,6 +37,7 @@ class MainWindow : public QMainWindow
     int ileLinii;
     QTableWidgetItem *itm;
 
+
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
@@ -45,13 +46,13 @@ public:
 
 private slots:
 
-    void on_pushButton_3_clicked();
+    void on_pushButtonWstawWiersz_clicked();
 
-    void on_pushButton_4_clicked();
+    void on_pushButtonUsunWiersz_clicked();
 
     void on_actionZapisz_triggered();
 
-    void on_pushButton_clicked();
+    void on_pushButtonDodajWiersz_clicked();
 
     void on_actionOtworz_triggered();
 
@@ -64,6 +65,8 @@ private slots:
     void oblicz(QTableWidgetItem*);
     void obliczPrzyOtwarciu();
 //    void slotOblicz(int);
+
+    void on_tableWidget_cellChanged(int row, int column);
 
 public slots:
 
