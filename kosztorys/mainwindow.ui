@@ -39,41 +39,84 @@
      <property name="text">
       <string>Ozn. normy</string>
      </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
     </column>
     <column>
      <property name="text">
       <string>Opis czynności</string>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
      </property>
     </column>
     <column>
      <property name="text">
       <string>Jedn. miary</string>
      </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
     </column>
     <column>
      <property name="text">
       <string>Ilość</string>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
      </property>
     </column>
     <column>
      <property name="text">
       <string>Cena</string>
      </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
     </column>
     <column>
      <property name="text">
       <string>Wartość</string>
+     </property>
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
      </property>
     </column>
    </widget>
    <widget class="QPushButton" name="pushButtonWstawWiersz">
     <property name="geometry">
      <rect>
-      <x>1230</x>
-      <y>180</y>
-      <width>93</width>
-      <height>28</height>
+      <x>1290</x>
+      <y>150</y>
+      <width>130</width>
+      <height>33</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
     </property>
     <property name="text">
      <string>Wstaw wiersz</string>
@@ -82,37 +125,38 @@
    <widget class="QPushButton" name="pushButtonUsunWiersz">
     <property name="geometry">
      <rect>
-      <x>1230</x>
-      <y>220</y>
-      <width>93</width>
-      <height>28</height>
+      <x>1290</x>
+      <y>200</y>
+      <width>130</width>
+      <height>33</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
     </property>
     <property name="text">
      <string>Usuń wiersz</string>
     </property>
    </widget>
-   <widget class="QLabel" name="komunikaty">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>0</y>
-      <width>441</width>
-      <height>61</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Komunikaty</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="pushButtonDodajWiersz">
     <property name="geometry">
      <rect>
-      <x>1230</x>
-      <y>140</y>
-      <width>91</width>
-      <height>25</height>
+      <x>1290</x>
+      <y>100</y>
+      <width>130</width>
+      <height>33</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
     </property>
     <property name="text">
      <string>Dodaj wiersz</string>

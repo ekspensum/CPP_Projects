@@ -13,7 +13,6 @@
 #include <QComboBox>
 #include <QStringList>
 #include <QVariant>
-#include <QList>
 
 namespace Ui {
 class MainWindow;
@@ -23,11 +22,8 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
     QString otwartyPlik;
-//    QFile plik(otwartyPlik);
-//    QTextStream strumien(plik);
     QString temp, norma, opis;
     double ilosc, cena, wartosc;
-    bool text;
     QMessageBox pustyItem;
     QMessageBox openFile;
     QMessageBox znakiFiltr;
@@ -35,7 +31,7 @@ class MainWindow : public QMainWindow
     QComboBox *combo, *comboOut;
     QVariant jmv;
     int ileLinii;
-    QTableWidgetItem *itm;
+    QLabel *labelWartosc;
 
 
 public:
@@ -60,23 +56,20 @@ private slots:
 
     void on_actionZapisz_jako_triggered();
 
-    bool filtrItem();
-    bool isNoEmptyItem();
-    void oblicz(QTableWidgetItem*);
-    void obliczPrzyOtwarciu();
-//    void slotOblicz(int);
-
     void on_tableWidget_cellChanged(int row, int column);
+
 
 public slots:
 
 
 signals:
-//    void signalOblicz(bool x);
+
 
 private:
     Ui::MainWindow *ui;
-//    int y=1;
+    bool filtrItem();
+    bool isNoEmptyItem();
+
 };
 
 #endif // MAINWINDOW_H

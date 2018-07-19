@@ -1,0 +1,5 @@
+knr1#G³adzie gipsowe#m2#10#25.5
+knr2#Ok³adziny z p³yt regips#m2#20#30.9
+knr 2-02#Gruntowanie#m2#30#2.96
+knr3#Malowanie emulsyjne#m2#30#12
+knr 4-01#Malowanie grzejników rurowych#m#17.6#7.87
