@@ -185,7 +185,7 @@ bool MainWindow::isNoEmptyItem()
     int m=0;
     for(int i=0; i<ui->tableWidget->rowCount(); i++)
     {
-        if(ui->tableWidget->item(i,0) == 0x0 || ui->tableWidget->item(i,0)->text().isEmpty())
+        if(ui->tableWidget->item(i,0) == nullptr || ui->tableWidget->item(i,0)->text().isEmpty())
         {
             ui->tableWidget->setCurrentCell(i,0);
             k=0;
@@ -195,7 +195,7 @@ bool MainWindow::isNoEmptyItem()
         {
             for(int j=0; j<ui->tableWidget->columnCount()-1; j++)
             {
-                if(ui->tableWidget->item(i,j) == 0x0 || ui->tableWidget->item(i,j)->text().isEmpty())
+                if(ui->tableWidget->item(i,j) == nullptr || ui->tableWidget->item(i,j)->text().isEmpty())
                 {
                     ui->tableWidget->setCurrentCell(i,j);
                     k=0;
@@ -204,7 +204,7 @@ bool MainWindow::isNoEmptyItem()
                 }
             }
         }
-        if(ui->tableWidget->item(i,m) == 0x0)
+        if(ui->tableWidget->item(i,m) == nullptr)
             break;
     }
     return k;
@@ -224,6 +224,7 @@ void MainWindow::on_tableWidget_cellChanged(int row, int column)
                 temp = ui->tableWidget->item(i,4)->text();
                 cena = temp.toDouble();
                 wartosc=cena*ilosc;
+                // wywołanie new QTableWidgetItem w którymkolwiek ze slotów QTableWidet powoduje błąd działania programu
                 ui->tableWidget->setCellWidget(i, 5, new QLabel(QString("%1").arg(wartosc)));
                 labelWartosc = new QLabel();
                 labelWartosc = (QLabel *)ui->tableWidget->cellWidget(i, 5);
