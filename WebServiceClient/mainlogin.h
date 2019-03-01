@@ -13,22 +13,17 @@ class MainLogin
 public:
     MainLogin();
 
-    User *getUser() const;
-    void setUser(User *value);
-
     bool createFileUsersList(QList<User *> userList);
     QList<User *> readFileUsersList();
 
-    QList<User *> getUserList() const;
-    void setUserList(const QList<User *> &value);
+    User *getLoggedUser(QString login, QString password);
 
 
 private:
 
     QString path = QDir::currentPath() + QDir::separator() + "users.u";
-    User usr;
-    User *user = &usr;
-    QList<User*> userList;
+    User user;
+    User *pUser = &user;
 
 };
 

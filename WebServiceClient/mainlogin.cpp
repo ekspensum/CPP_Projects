@@ -5,16 +5,6 @@ MainLogin::MainLogin()
 
 }
 
-User *MainLogin::getUser() const
-{
-    return user;
-}
-
-void MainLogin::setUser(User *value)
-{
-    user = value;
-}
-
 bool MainLogin::createFileUsersList(QList<User *> list)
 {
 
@@ -46,15 +36,15 @@ QList<User *> MainLogin::readFileUsersList(){
         QDataStream stream(&file);
 
         for (int i=0;i==j;i++) {
-            stream >> index >> user->idUser >> user->login >> user->password >> user->firstName >> user->lastName >> user->email;
+            stream >> index >> pUser->idUser >> pUser->login >> pUser->password >> pUser->firstName >> pUser->lastName >> pUser->email;
             if (i==index) {
                 u = new User();
-                u->setIdUser(user->idUser);
-                u->setLogin(user->login);
-                u->setPassword(user->password);
-                u->setFirstName(user->firstName);
-                u->setLastName(user->lastName);
-                u->setEmail(user->email);
+                u->setIdUser(pUser->idUser);
+                u->setLogin(pUser->login);
+                u->setPassword(pUser->password);
+                u->setFirstName(pUser->firstName);
+                u->setLastName(pUser->lastName);
+                u->setEmail(pUser->email);
                 list.append(u);
                 j++;
             }
@@ -68,13 +58,17 @@ QList<User *> MainLogin::readFileUsersList(){
     }
 }
 
-QList<User *> MainLogin::getUserList() const
+User *MainLogin::getLoggedUser(QString login, QString password)
 {
-    return userList;
+    User *pUser = nullptr;
+    QList<User *> userList = readFileUsersList();
+    for (int i=0;i<userList.size();i++) {
+        if (login == userList.at(i)->getLogin() && password == userList.at(i)->getPassword()) {
+            pUser = userList.at(i);
+            return pUser;
+        }
+    }
+    return pUser;
 }
 
-void MainLogin::setUserList(const QList<User *> &value)
-{
-    userList = value;
-}
 
