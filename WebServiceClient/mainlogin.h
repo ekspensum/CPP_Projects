@@ -6,6 +6,7 @@
 #include <QFile>
 #include <QDir>
 #include <QDebug>
+#include <QCryptographicHash>
 
 
 class MainLogin

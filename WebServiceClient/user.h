@@ -27,6 +27,9 @@ public:
     int getIdUser() const;
     void setIdUser(int value);
 
+    QString getRole() const;
+    void setRole(const QString &value);
+
 private:
     int idUser;
     QString login;
@@ -34,6 +37,7 @@ private:
     QString firstName;
     QString lastName;
     QString email;
+    QString role;
 };
 
 #endif // USER_H

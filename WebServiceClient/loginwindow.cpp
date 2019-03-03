@@ -6,6 +6,7 @@ LoginWindow::LoginWindow(QWidget *parent) :
     ui(new Ui::LoginWindow)
 {
     ui->setupUi(this);
+    ui->pushButtonLogin->setShortcut(QKeySequence(Qt::Key_Return));
 }
 
 LoginWindow::~LoginWindow()
@@ -15,34 +16,22 @@ LoginWindow::~LoginWindow()
 
 void LoginWindow::on_pushButtonLogin_clicked()
 {
-    //    QList<User *> list;
-    //    User user;
-    //    User *pUser = &user;
-    //    pUser->setLogin("login1");
-    //    pUser->setPassword("pass1");
-    //    pUser->setFirstName("FirstName1");
-    //    pUser->setLastName("LastName1");
-    //    pUser->setEmail("e-mail1");
-    //    pUser->setIdUser(0);
+//    add default user which role is "Admin":
+//    QList<User *> list;
+//    User user;
+//    User *pUser1 = &user;
+//    pUser1->setLogin("admin1");
+//    QByteArray passByteArray1;
+//    QString passHash1 = QString(QCryptographicHash::hash(passByteArray1.append("Admin11"), QCryptographicHash::Md5).toHex());
+//    pUser1->setPassword(passHash1);
+//    pUser1->setFirstName("FirstName1");
+//    pUser1->setLastName("LastName1");
+//    pUser1->setEmail("admin1@gmail.com");
+//    pUser1->setIdUser(0);
+//    pUser1->setRole("Admin");
 
-    //    list.append(pUser);
-
-    //    User usr2;
-    //    User *pUser2 = &usr2;
-    //    pUser2->setLogin("login2");
-    //    pUser2->setPassword("pass2");
-    //    pUser2->setFirstName("FirstName2");
-    //    pUser2->setLastName("LastName2");
-    //    pUser2->setEmail("e-mail2");
-    //    pUser2->setIdUser(1);
-
-    //    list.append(pUser2);
-
-    //    pLogin->createFileUsersList(list);
-
-    //    list = pLogin->readFileUsersList();
-    //    qDebug() << list.at(0)->getFirstName();
-    //    qDebug() << list.at(1)->getFirstName();
+//    list.append(pUser1);
+//    login.createFileUsersList(list);
 
     User *pUser = login.getLoggedUser(ui->lineEditLogin->text(), ui->lineEditPassword->text());
     if(pUser != nullptr){

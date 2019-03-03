@@ -65,3 +65,13 @@ void User::setIdUser(int value)
     idUser = value;
 }
 
+QString User::getRole() const
+{
+    return role;
+}
+
+void User::setRole(const QString &value)
+{
+    role = value;
+}
+

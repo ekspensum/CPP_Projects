@@ -38,9 +38,9 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>50</y>
+      <y>40</y>
       <width>1131</width>
-      <height>511</height>
+      <height>521</height>
      </rect>
     </property>
     <property name="font">
@@ -49,7 +49,7 @@
      </font>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="findProductTab">
      <attribute name="title">
@@ -70,6 +70,102 @@
      <attribute name="title">
       <string>Ustawienia</string>
      </attribute>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>178</width>
+        <height>212</height>
+       </rect>
+      </property>
+      <layout class="QFormLayout" name="formLayout">
+       <item row="0" column="0" colspan="2">
+        <widget class="QLabel" name="labelAddNewUser">
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Dodaj nowego użytkownika:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="labelLogin">
+         <property name="text">
+          <string>Login</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="lineEditLogin"/>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="labelPassword">
+         <property name="text">
+          <string>Hasło</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="lineEditPassword">
+         <property name="echoMode">
+          <enum>QLineEdit::Password</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="labelFirstName">
+         <property name="text">
+          <string>Imię</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QLineEdit" name="lineEditFirstName"/>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="labelLastName">
+         <property name="text">
+          <string>Nazwisko</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1">
+        <widget class="QLineEdit" name="lineEditLastName"/>
+       </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="labelEmail">
+         <property name="text">
+          <string>Email</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1">
+        <widget class="QLineEdit" name="lineEditEmail"/>
+       </item>
+       <item row="6" column="0">
+        <widget class="QLabel" name="labelRole">
+         <property name="text">
+          <string>Rola</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1">
+        <widget class="QComboBox" name="comboBoxRole"/>
+       </item>
+       <item row="7" column="1">
+        <widget class="QPushButton" name="pushButtonAddNewUser">
+         <property name="text">
+          <string>Dodaj</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </widget>
   </widget>

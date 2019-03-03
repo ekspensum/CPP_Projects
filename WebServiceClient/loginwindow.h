@@ -7,6 +7,7 @@
 #include <user.h>
 #include <QList>
 #include <QMessageBox>
+#include <QCryptographicHash>
 
 namespace Ui {
 class LoginWindow;
