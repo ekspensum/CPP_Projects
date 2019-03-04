@@ -74,4 +74,3 @@ void User::setRole(const QString &value)
 {
     role = value;
 }
-

@@ -74,5 +74,3 @@ User *MainLogin::getLoggedUser(QString login, QString password)
     }
     return pUser;
 }
-
-

@@ -3,6 +3,7 @@
 Validation::Validation()
 {
 
+
 }
 
 bool Validation::validLogin(QString login)

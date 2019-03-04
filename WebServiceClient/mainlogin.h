@@ -21,7 +21,6 @@ public:
 
 
 private:
-
     QString path = QDir::currentPath() + QDir::separator() + "users.u";
     User user;
     User *pUser = &user;
