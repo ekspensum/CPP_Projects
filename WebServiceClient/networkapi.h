@@ -2,19 +2,22 @@
 #define NETWORKAPI_H
 
 #include <QObject>
-//#include <QtNetwork>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
-//#include <QNetworkRequest>
 #include <QtCore>
+#include <QXmlStreamReader>
+#include <product.h>
 
 class NetworkAPI : public QObject
 {
     Q_OBJECT
 public:
     explicit NetworkAPI(QObject *parent = nullptr);
-    void getProduct();
+    void getProcessors();
     void getDataJson();
+    void parseProcessors(QNetworkReply *reply);
+
+    Product getProduct() const;
 
 signals:
 
@@ -24,6 +27,7 @@ public slots:
 private:
     QNetworkAccessManager *netMngr;
     QNetworkReply *reply;
+    Product product;
 
 };
 

@@ -89,14 +89,11 @@ void ServiceWindow::on_pushButtonAddNewUser_clicked()
 
 void ServiceWindow::on_pushButton_clicked()
 {
-    NetworkAPI net;
-    net.getProduct();
-    qDebug() << "przeszło getProduct";
+    net.getProcessors();
+    qDebug() << "ServiceWindow " << net.getProduct().getImage();
 }
 
 void ServiceWindow::on_pushButton_2_clicked()
 {
-    NetworkAPI net;
     net.getDataJson();
-    qDebug() << "przeszło getDataJson";
 }

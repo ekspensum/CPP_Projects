@@ -17,8 +17,8 @@
    <widget class="QLabel" name="labelWhoLogin">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>20</y>
+      <x>10</x>
+      <y>10</y>
       <width>571</width>
       <height>25</height>
      </rect>
@@ -26,6 +26,8 @@
     <property name="font">
      <font>
       <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
      </font>
     </property>
     <property name="text">
@@ -42,7 +44,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -80,11 +82,16 @@
       </property>
      </widget>
     </widget>
+    <widget class="QWidget" name="tab_3">
+     <attribute name="title">
+      <string>Strona</string>
+     </attribute>
+    </widget>
     <widget class="QWidget" name="settingTab">
      <attribute name="title">
       <string>Ustawienia</string>
      </attribute>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>40</x>
@@ -176,7 +183,7 @@
      <x>0</x>
      <y>0</y>
      <width>1185</width>
-     <height>25</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>

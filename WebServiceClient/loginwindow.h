@@ -8,6 +8,7 @@
 #include <QList>
 #include <QMessageBox>
 #include <QCryptographicHash>
+#include <networkapi.h>
 
 namespace Ui {
 class LoginWindow;
@@ -24,12 +25,15 @@ public:
 private slots:
     void on_pushButtonLogin_clicked();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::LoginWindow *ui;
     User user;
     User *pUser = &user;
     MainLogin login;
     QMessageBox msg;
+    NetworkAPI net;
 };
 
 #endif // LOGINWINDOW_H

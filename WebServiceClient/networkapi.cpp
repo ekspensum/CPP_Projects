@@ -3,37 +3,26 @@
 NetworkAPI::NetworkAPI(QObject *parent) : QObject(parent)
 {
     //    "QT += network" is necessary add to *.pro for netMngr below:
-//        netMngr = new QNetworkAccessManager(this);
-//        connect(netMngr, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyFinished(QNetworkReply *)));
+    netMngr = new QNetworkAccessManager(this);
+    //    connect(netMngr, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyFinished(QNetworkReply *)));
 }
 
-void NetworkAPI::getProduct()
+void NetworkAPI::getProcessors()
 {
+    connect(netMngr, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyFinished(QNetworkReply *)));
+
     QUrlQuery query;
-//    query.addQueryItem()
-
-    QUrl myurl;
-    myurl.setScheme("http");
-//    myurl.setHost("localhost");
-    myurl.setHost("api.nbp.pl");
-//    myurl.setPort(8080);
-//    myurl.setPath("/ShopAppWebService/rest/ShopResource/ProcessorsByte/");
-    myurl.setQuery("format=xml");
-    myurl.setPath("/api/exchangerates/tables/a/");
-
-    QEventLoop eventLoop;
-
-    netMngr = new QNetworkAccessManager(this);
-//    connect(netMngr, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyFinished(QNetworkReply *)));
-    connect(netMngr, SIGNAL(finished(QNetworkReply *)), &eventLoop, SLOT(quit()));
+    QUrl url;
+    url.setScheme("http");
+    url.setHost("localhost");
+    url.setPort(8080);
+    url.setQuery("format=xml");
+    url.setPath("/ShopAppWebService/rest/ShopResource/Processors");
 
     QNetworkRequest request;
-    request.setUrl(myurl);
+    request.setUrl(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/xml");
     reply = netMngr->get(request);
-    eventLoop.exec();
-
-    qDebug() << "replyFinished " << reply->readAll();
 
 }
 
@@ -55,27 +44,49 @@ void NetworkAPI::getDataJson()
 
     qDebug() << myurl.toString();
 
-    netMngr = new QNetworkAccessManager(this);
-    connect(netMngr, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyFinished(QNetworkReply *)));
-
     QNetworkRequest request;
     request.setUrl(myurl);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
-    reply = netMngr->post(request,payload);
+}
 
-//    connect(reply, &QNetworkReply::finished, this, &NetworkAPI::replyFinished);
+void NetworkAPI::parseProcessors(QNetworkReply *reply)
+{
+    QByteArray array = reply->readAll();
+    QXmlStreamReader xml(array);
 
-//    reply->deleteLater();
+    while (!xml.atEnd()) {
+        xml.readNext();
 
+        if(xml.isStartElement()){
+
+            if(xml.name() == "Processor")
+            {
+                QXmlStreamAttributes atr = xml.attributes();
+                QString x = atr.value("id").toString();
+                //            qDebug() << "atrybut" << x;
+            }
+
+            if (xml.name() == "productImage") {
+                //            qDebug() << xml.readElementText();
+                product.setImage(xml.readElementText());
+            }
+        }
+    }
 }
 
 void NetworkAPI::replyFinished(QNetworkReply *reply)
 {
-    qDebug() << "replyFinished " << reply->readAll();
+
     if (reply->error() != QNetworkReply::NoError)
         qDebug() << reply->error() << reply->errorString();
+    else
+        parseProcessors(reply);
 
-//    qDebug() << "Reply " << reply->bytesToWrite() << reply->readBufferSize() << reply->readAll() << reply->read(2048);
-//    qDebug() << "Reply " << reply->Text << reply->url() << reply->error() << reply->isRunning() << reply->isFinished() << reply->rawHeaderList() << reply->bytesAvailable();
+    //    qDebug() << "Reply " << reply->Text << reply->url() << reply->error() << reply->isRunning() << reply->isFinished() << reply->rawHeaderList() << reply->bytesAvailable();
+}
+
+Product NetworkAPI::getProduct() const
+{
+    return product;
 }

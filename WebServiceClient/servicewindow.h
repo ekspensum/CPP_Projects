@@ -37,6 +37,7 @@ private:
     QList<User *> usersList;
     Validation valid;
     QMessageBox msg;
+    NetworkAPI net;
 };
 
 #endif // SERVICEWINDOW_H

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>722</width>
-    <height>428</height>
+    <width>537</width>
+    <height>316</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,21 +17,31 @@
    <widget class="QLineEdit" name="lineEditLogin">
     <property name="geometry">
      <rect>
-      <x>350</x>
-      <y>130</y>
+      <x>250</x>
+      <y>100</y>
       <width>120</width>
-      <height>25</height>
+      <height>23</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEditPassword">
     <property name="geometry">
      <rect>
-      <x>350</x>
-      <y>180</y>
+      <x>250</x>
+      <y>140</y>
       <width>120</width>
-      <height>25</height>
+      <height>23</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
     </property>
     <property name="echoMode">
      <enum>QLineEdit::Password</enum>
@@ -40,11 +50,16 @@
    <widget class="QLabel" name="labelLogin">
     <property name="geometry">
      <rect>
-      <x>260</x>
-      <y>130</y>
+      <x>190</x>
+      <y>100</y>
       <width>55</width>
-      <height>25</height>
+      <height>23</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>Login:</string>
@@ -53,11 +68,16 @@
    <widget class="QLabel" name="labelPassword">
     <property name="geometry">
      <rect>
-      <x>260</x>
-      <y>180</y>
+      <x>190</x>
+      <y>140</y>
       <width>55</width>
-      <height>25</height>
+      <height>23</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>Hasło:</string>
@@ -66,34 +86,34 @@
    <widget class="QPushButton" name="pushButtonLogin">
     <property name="geometry">
      <rect>
-      <x>390</x>
-      <y>230</y>
+      <x>290</x>
+      <y>183</y>
       <width>80</width>
-      <height>25</height>
+      <height>23</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>Zaloguj</string>
     </property>
    </widget>
-  </widget>
-  <widget class="QMenuBar" name="menuBar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>722</width>
-     <height>25</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QToolBar" name="mainToolBar">
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>240</y>
+      <width>80</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>PushButton</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
