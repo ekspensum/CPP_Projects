@@ -5,6 +5,7 @@ NetworkAPI::NetworkAPI(QObject *parent) : QObject(parent)
     //    "QT += network" is necessary add to *.pro for netMngr below:
     netMngr = new QNetworkAccessManager(this);
     //    connect(netMngr, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyFinished(QNetworkReply *)));
+
 }
 
 void NetworkAPI::getProcessors()
@@ -23,7 +24,6 @@ void NetworkAPI::getProcessors()
     request.setUrl(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/xml");
     reply = netMngr->get(request);
-
 }
 
 void NetworkAPI::getDataJson()
@@ -54,25 +54,73 @@ void NetworkAPI::parseProcessors(QNetworkReply *reply)
 {
     QByteArray array = reply->readAll();
     QXmlStreamReader xml(array);
-
+    int i = 0;
+    QXmlStreamAttributes atr;
+    QString x;
     while (!xml.atEnd()) {
-        xml.readNext();
 
-        if(xml.isStartElement()){
+        QXmlStreamReader::TokenType token = xml.readNext();
 
-            if(xml.name() == "Processor")
-            {
-                QXmlStreamAttributes atr = xml.attributes();
-                QString x = atr.value("id").toString();
-                //            qDebug() << "atrybut" << x;
+        if(token == xml.StartDocument){
+            qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
+            continue;
+        }
+
+        if(token == xml.StartElement) {
+            qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
+
+            if(xml.name() == "Processor") {
+
+                atr = xml.attributes();
+                x = atr.value("id").toString();
+
+                if(x.toInt() > i){
+                    i++;
+                    productList.append(pProduct);
+                }
+
+                pProduct = new Product();
+                pProduct->setId(x.toInt());
+
+                qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
+                continue;
             }
 
-            if (xml.name() == "productImage") {
-                //            qDebug() << xml.readElementText();
-                product.setImage(xml.readElementText());
+            if (xml.name() == "productName"){
+                pProduct->setName(xml.readElementText());
+                qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
+                continue;
             }
+
+            if(xml.name() == "productDescription"){
+                pProduct->setDescription(xml.readElementText());
+                qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
+                continue;
+            }
+
+            if(xml.name() == "productPrice"){
+                pProduct->setPrice(xml.readElementText().toDouble());
+                qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
+                continue;
+            }
+
+            if(xml.name() == "productUnitsInStock"){
+                pProduct->setUnitsInStock(xml.readElementText().toInt());
+                qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
+                continue;
+            }
+
+            if (xml.name() == "productImage"){
+                pProduct->setImage(xml.readElementText());
+                qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
+                continue;
+            }
+
+            continue;
         }
     }
+    productList.append(pProduct);
+    emit setProductsList();
 }
 
 void NetworkAPI::replyFinished(QNetworkReply *reply)
@@ -86,7 +134,8 @@ void NetworkAPI::replyFinished(QNetworkReply *reply)
     //    qDebug() << "Reply " << reply->Text << reply->url() << reply->error() << reply->isRunning() << reply->isFinished() << reply->rawHeaderList() << reply->bytesAvailable();
 }
 
-Product NetworkAPI::getProduct() const
+QList<Product *> NetworkAPI::getProductList() const
 {
-    return product;
+    return productList;
 }
+

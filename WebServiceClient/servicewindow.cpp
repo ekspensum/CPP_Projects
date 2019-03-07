@@ -22,11 +22,21 @@ ServiceWindow::ServiceWindow(User *user, QWidget *parent) :
     roleList.append("Operator");
     ui->comboBoxRole->addItems(roleList);
     usersList = mainLogin.readFileUsersList();
+
+    connect(&net, SIGNAL(setProductsList()), this, SLOT(getProductsList()));
 }
 
 ServiceWindow::~ServiceWindow()
 {
     delete ui;
+}
+
+void ServiceWindow::getProductsList()
+{
+    qDebug() << "List size " << net.getProductList().size();
+    for (int i=0;i<net.getProductList().size(); i++) {
+        qDebug() << net.getProductList().at(i)->getName() << net.getProductList().at(i)->getId();
+    }
 }
 
 void ServiceWindow::on_pushButtonAddNewUser_clicked()
@@ -90,7 +100,6 @@ void ServiceWindow::on_pushButtonAddNewUser_clicked()
 void ServiceWindow::on_pushButton_clicked()
 {
     net.getProcessors();
-    qDebug() << "ServiceWindow " << net.getProduct().getImage();
 }
 
 void ServiceWindow::on_pushButton_2_clicked()

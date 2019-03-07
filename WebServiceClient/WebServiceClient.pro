@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui widgets network xml
+QT += core gui widgets network xml
 
 TARGET = WebServiceClient
 TEMPLATE = app
@@ -29,7 +29,8 @@ SOURCES += \
     validation.cpp \
     user.cpp \
     mainlogin.cpp \
-    networkapi.cpp
+    networkapi.cpp \
+    product.cpp
 
 HEADERS += \
         loginwindow.h \
@@ -37,7 +38,8 @@ HEADERS += \
     validation.h \
     user.h \
     mainlogin.h \
-    networkapi.h
+    networkapi.h \
+    product.h
 
 FORMS += \
         loginwindow.ui \

@@ -45,7 +45,3 @@ void LoginWindow::on_pushButtonLogin_clicked()
         }
 }
 
-void LoginWindow::on_pushButton_clicked()
-{
-    net.getProduct();
-}

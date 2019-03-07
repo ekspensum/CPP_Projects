@@ -17,9 +17,12 @@ public:
     void getDataJson();
     void parseProcessors(QNetworkReply *reply);
 
-    Product getProduct() const;
+
+    QList<Product *> getProductList() const;
 
 signals:
+    void setProductsList();
+    void someSignal();
 
 public slots:
     void replyFinished(QNetworkReply *reply);
@@ -28,6 +31,8 @@ private:
     QNetworkAccessManager *netMngr;
     QNetworkReply *reply;
     Product product;
+    Product *pProduct;
+    QList<Product *> productList;
 
 };
 

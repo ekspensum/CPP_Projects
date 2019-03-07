@@ -22,6 +22,7 @@ public:
     ~ServiceWindow();
 
 private slots:
+    void getProductsList();
     void on_pushButtonAddNewUser_clicked();
 
     void on_pushButton_clicked();
@@ -38,6 +39,8 @@ private:
     Validation valid;
     QMessageBox msg;
     NetworkAPI net;
+
+
 };
 
 #endif // SERVICEWINDOW_H
