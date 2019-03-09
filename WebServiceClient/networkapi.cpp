@@ -23,6 +23,7 @@ void NetworkAPI::getProducts(QString product, QString path)
     request.setUrl(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/xml");
     reply = netMngr->get(request);
+    connect(reply, SIGNAL(downloadProgress(qint64, qint64)), this, SLOT(progressSignal(qint64, qint64)));
 }
 
 void NetworkAPI::getDataJson()
@@ -73,6 +74,11 @@ void NetworkAPI::parseProduct(QNetworkReply *reply)
 //                qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
                 continue;
             }
+            if (xml.name() == "idPproduct"){
+                pProduct->setIdProduct(xml.readElementText().toInt());
+//                qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
+                continue;
+            }
             if (xml.name() == "productName"){
                 pProduct->setName(xml.readElementText());
 //                qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
@@ -114,6 +120,11 @@ void NetworkAPI::replyFinished(QNetworkReply *reply)
         parseProduct(reply);
 
     //    qDebug() << "Reply " << reply->Text << reply->url() << reply->error() << reply->isRunning() << reply->isFinished() << reply->rawHeaderList() << reply->bytesAvailable();
+}
+
+void NetworkAPI::progressSignal(qint64 bytesReceived, qint64 bytesTotal)
+{
+    emit setProgressSignal(bytesReceived, bytesTotal);
 }
 
 QList<Product *> NetworkAPI::getProductList() const

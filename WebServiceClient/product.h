@@ -26,8 +26,12 @@ public:
     QString getImage() const;
     void setImage(const QString &value);
 
+    int getIdProduct() const;
+    void setIdProduct(int value);
+
 private:
     int id;
+    int idProduct;
     QString name;
     QString description;
     double price;

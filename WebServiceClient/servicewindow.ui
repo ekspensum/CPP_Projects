@@ -60,10 +60,10 @@
      <widget class="QPushButton" name="pushButtonGetProducts">
       <property name="geometry">
        <rect>
-        <x>190</x>
-        <y>60</y>
+        <x>189</x>
+        <y>80</y>
         <width>51</width>
-        <height>25</height>
+        <height>24</height>
        </rect>
       </property>
       <property name="text">
@@ -74,9 +74,9 @@
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>60</y>
+        <y>80</y>
         <width>141</width>
-        <height>25</height>
+        <height>23</height>
        </rect>
       </property>
       <property name="font">
@@ -96,7 +96,18 @@
       </property>
       <column>
        <property name="text">
-        <string>Id</string>
+        <string>Lp</string>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Id produktu</string>
        </property>
        <property name="font">
         <font>
@@ -160,6 +171,79 @@
         </font>
        </property>
       </column>
+     </widget>
+     <widget class="QLineEdit" name="lineEditProductIdFrom">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>40</y>
+        <width>80</width>
+        <height>23</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEditProductIdTo">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>40</y>
+        <width>80</width>
+        <height>23</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>111</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Id produktu od:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>20</y>
+        <width>111</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Id produktu do:</string>
+      </property>
+     </widget>
+     <widget class="QProgressBar" name="progressBarGet">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>40</y>
+        <width>821</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="value">
+       <number>0</number>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="tabPost">

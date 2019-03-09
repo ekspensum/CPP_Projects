@@ -22,10 +22,12 @@ public:
 
 signals:
     void setProductsList();
-    void someSignal();
+    void setProgressSignal(qint64 bytesReceived, qint64 bytesTotal);
+
 
 public slots:
     void replyFinished(QNetworkReply *reply);
+    void progressSignal(qint64 bytesReceived, qint64 bytesTotal);
 
 private:
     QNetworkAccessManager *netMngr;

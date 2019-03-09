@@ -64,3 +64,13 @@ void Product::setImage(const QString &value)
 {
     image = value;
 }
+
+int Product::getIdProduct() const
+{
+    return idProduct;
+}
+
+void Product::setIdProduct(int value)
+{
+    idProduct = value;
+}

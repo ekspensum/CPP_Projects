@@ -23,6 +23,7 @@ public:
 
 private slots:
     void getProductsList();
+    void getProgressSignal(qint64 bytesReceived, qint64 bytesTotal);
     void on_pushButtonAddNewUser_clicked();
     void on_pushButtonGetProducts_clicked();
 
@@ -37,7 +38,9 @@ private:
     Validation valid;
     QMessageBox msg;
     NetworkAPI net;
-
+    QString procesors = "/ShopAppWebService/rest/ShopResource/Processors";
+    QString hardisks = "/ShopAppWebService/rest/ShopResource/HardDisks";
+    QString products = "";
 
 };
 
