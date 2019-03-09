@@ -21,7 +21,18 @@ ServiceWindow::ServiceWindow(User *user, QWidget *parent) :
     roleList.append("Admin");
     roleList.append("Operator");
     ui->comboBoxRole->addItems(roleList);
+    QString procesors = "/ShopAppWebService/rest/ShopResource/Processors";
+    QString hardisks = "/ShopAppWebService/rest/ShopResource/HardDisks";
+    ui->comboBoxProduct->addItem("Processor", QVariant::fromValue(procesors));
+    ui->comboBoxProduct->addItem("HardDisk", QVariant::fromValue(hardisks));
     usersList = mainLogin.readFileUsersList();
+    ui->tableWidgetGet->verticalHeader()->close();
+    ui->tableWidgetGet->setColumnWidth(0, 20);
+    ui->tableWidgetGet->setColumnWidth(1, 150);
+    ui->tableWidgetGet->setColumnWidth(2, 300);
+    ui->tableWidgetGet->setColumnWidth(3, 120);
+    ui->tableWidgetGet->setColumnWidth(4, 100);
+    ui->tableWidgetGet->setColumnWidth(5, 200);
 
     connect(&net, SIGNAL(setProductsList()), this, SLOT(getProductsList()));
 }
@@ -33,9 +44,20 @@ ServiceWindow::~ServiceWindow()
 
 void ServiceWindow::getProductsList()
 {
-    qDebug() << "List size " << net.getProductList().size();
+    ui->tableWidgetGet->setRowCount(net.getProductList().size());
     for (int i=0;i<net.getProductList().size(); i++) {
-        qDebug() << net.getProductList().at(i)->getName() << net.getProductList().at(i)->getId();
+        ui->tableWidgetGet->setItem(i, 0, new QTableWidgetItem(QString("%1").arg(net.getProductList().at(i)->getId())));
+        ui->tableWidgetGet->setItem(i, 1, new QTableWidgetItem(net.getProductList().at(i)->getName()));
+        ui->tableWidgetGet->setItem(i, 2, new QTableWidgetItem(net.getProductList().at(i)->getDescription()));
+        ui->tableWidgetGet->setItem(i, 3, new QTableWidgetItem(QString("%1").arg(net.getProductList().at(i)->getUnitsInStock())));
+        ui->tableWidgetGet->setItem(i, 4, new QTableWidgetItem(QString("%1").arg(net.getProductList().at(i)->getPrice())));
+        QPixmap image;
+        image.loadFromData(QByteArray::fromBase64(net.getProductList().at(i)->getImage().toUtf8()));
+        image = image.scaled(150, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        QTableWidgetItem *imageItem = new QTableWidgetItem();
+        imageItem->setData(Qt::DecorationRole ,image);
+        ui->tableWidgetGet->setItem(i, 5, imageItem);
+        ui->tableWidgetGet->setRowHeight(i, 100);
     }
 }
 
@@ -97,12 +119,7 @@ void ServiceWindow::on_pushButtonAddNewUser_clicked()
         }
 }
 
-void ServiceWindow::on_pushButton_clicked()
+void ServiceWindow::on_pushButtonGetProducts_clicked()
 {
-    net.getProcessors();
-}
-
-void ServiceWindow::on_pushButton_2_clicked()
-{
-    net.getDataJson();
+    net.getProducts(ui->comboBoxProduct->currentText(), ui->comboBoxProduct->itemData(ui->comboBoxProduct->currentIndex()).toString());
 }

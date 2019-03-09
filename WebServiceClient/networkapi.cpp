@@ -4,21 +4,20 @@ NetworkAPI::NetworkAPI(QObject *parent) : QObject(parent)
 {
     //    "QT += network" is necessary add to *.pro for netMngr below:
     netMngr = new QNetworkAccessManager(this);
-    //    connect(netMngr, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyFinished(QNetworkReply *)));
+    connect(netMngr, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyFinished(QNetworkReply *)));
 
 }
 
-void NetworkAPI::getProcessors()
+void NetworkAPI::getProducts(QString product, QString path)
 {
-    connect(netMngr, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyFinished(QNetworkReply *)));
-
+    productTemp = product;
     QUrlQuery query;
     QUrl url;
     url.setScheme("http");
     url.setHost("localhost");
     url.setPort(8080);
     url.setQuery("format=xml");
-    url.setPath("/ShopAppWebService/rest/ShopResource/Processors");
+    url.setPath(path);
 
     QNetworkRequest request;
     request.setUrl(url);
@@ -28,8 +27,9 @@ void NetworkAPI::getProcessors()
 
 void NetworkAPI::getDataJson()
 {
+//    connect(netMngr, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyFinished(QNetworkReply *)));
     QVariantMap feed;
-    feed.insert("api_key","XXXXXXXX XXXXXXXX”");
+    feed.insert("api_key","api_key");
     feed.insert("field1",QVariant(25).toString());
     feed.insert("field2",QVariant(72).toString());
     feed.insert("field3",QVariant(900).toString());
@@ -37,99 +37,81 @@ void NetworkAPI::getDataJson()
 
     qDebug() << QVariant(payload).toString();
 
-    QUrl myurl;
-    myurl.setScheme("http"); //https also applicable
-    myurl.setHost("api.thingspeak.com");
-    myurl.setPath("/update.json");
+    QUrl url;
+    url.setScheme("http");
+    url.setHost("api.thingspeak.com");
+    url.setPath("/update.json");
 
-    qDebug() << myurl.toString();
+    qDebug() << url.toString();
 
     QNetworkRequest request;
-    request.setUrl(myurl);
+    request.setUrl(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
 }
 
-void NetworkAPI::parseProcessors(QNetworkReply *reply)
+void NetworkAPI::parseProduct(QNetworkReply *reply)
 {
+    productList.clear();
     QByteArray array = reply->readAll();
     QXmlStreamReader xml(array);
-    int i = 0;
     QXmlStreamAttributes atr;
     QString x;
     while (!xml.atEnd()) {
-
         QXmlStreamReader::TokenType token = xml.readNext();
-
         if(token == xml.StartDocument){
-            qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
+//            qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
             continue;
         }
-
         if(token == xml.StartElement) {
-            qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
-
-            if(xml.name() == "Processor") {
-
+//            qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
+            if(xml.name() == productTemp) {
                 atr = xml.attributes();
                 x = atr.value("id").toString();
-
-                if(x.toInt() > i){
-                    i++;
-                    productList.append(pProduct);
-                }
-
                 pProduct = new Product();
                 pProduct->setId(x.toInt());
-
-                qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
+//                qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
                 continue;
             }
-
             if (xml.name() == "productName"){
                 pProduct->setName(xml.readElementText());
-                qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
+//                qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
                 continue;
             }
-
             if(xml.name() == "productDescription"){
                 pProduct->setDescription(xml.readElementText());
-                qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
+//                qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
                 continue;
             }
-
             if(xml.name() == "productPrice"){
                 pProduct->setPrice(xml.readElementText().toDouble());
-                qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
+//                qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
                 continue;
             }
-
             if(xml.name() == "productUnitsInStock"){
                 pProduct->setUnitsInStock(xml.readElementText().toInt());
-                qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
+//                qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
                 continue;
             }
-
             if (xml.name() == "productImage"){
                 pProduct->setImage(xml.readElementText());
-                qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
+//                qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
+                productList.append(pProduct);
                 continue;
             }
-
             continue;
         }
     }
-    productList.append(pProduct);
     emit setProductsList();
+    xml.clear();
 }
 
 void NetworkAPI::replyFinished(QNetworkReply *reply)
 {
-
     if (reply->error() != QNetworkReply::NoError)
         qDebug() << reply->error() << reply->errorString();
     else
-        parseProcessors(reply);
+        parseProduct(reply);
 
     //    qDebug() << "Reply " << reply->Text << reply->url() << reply->error() << reply->isRunning() << reply->isFinished() << reply->rawHeaderList() << reply->bytesAvailable();
 }

@@ -43,48 +43,133 @@
       <height>661</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
     <property name="currentIndex">
      <number>0</number>
     </property>
-    <widget class="QWidget" name="tab">
+    <widget class="QWidget" name="tabGet">
      <attribute name="title">
-      <string>Tab 1</string>
+      <string>Pobierz rodukty</string>
      </attribute>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="pushButtonGetProducts">
       <property name="geometry">
        <rect>
-        <x>230</x>
-        <y>110</y>
-        <width>80</width>
+        <x>190</x>
+        <y>60</y>
+        <width>51</width>
         <height>25</height>
        </rect>
       </property>
       <property name="text">
-       <string>PushButton</string>
+       <string>OK</string>
       </property>
      </widget>
-    </widget>
-    <widget class="QWidget" name="tab_2">
-     <attribute name="title">
-      <string>Tab 2</string>
-     </attribute>
-     <widget class="QPushButton" name="pushButton_2">
+     <widget class="QComboBox" name="comboBoxProduct">
       <property name="geometry">
        <rect>
-        <x>210</x>
-        <y>110</y>
-        <width>80</width>
+        <x>20</x>
+        <y>60</y>
+        <width>141</width>
         <height>25</height>
        </rect>
       </property>
-      <property name="text">
-       <string>PushButton</string>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
       </property>
      </widget>
+     <widget class="QTableWidget" name="tableWidgetGet">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>120</y>
+        <width>1111</width>
+        <height>501</height>
+       </rect>
+      </property>
+      <column>
+       <property name="text">
+        <string>Id</string>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Nazwa produktu</string>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Opis produktu</string>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Dostępna ilość</string>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Cena</string>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Zdjęcie</string>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+      </column>
+     </widget>
     </widget>
-    <widget class="QWidget" name="tab_3">
+    <widget class="QWidget" name="tabPost">
      <attribute name="title">
-      <string>Strona</string>
+      <string>Dodaj produkty</string>
+     </attribute>
+    </widget>
+    <widget class="QWidget" name="tabPut">
+     <attribute name="title">
+      <string>Modyfikuj produkt</string>
      </attribute>
     </widget>
     <widget class="QWidget" name="settingTab">

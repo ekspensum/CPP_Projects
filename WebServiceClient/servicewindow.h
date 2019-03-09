@@ -24,10 +24,8 @@ public:
 private slots:
     void getProductsList();
     void on_pushButtonAddNewUser_clicked();
+    void on_pushButtonGetProducts_clicked();
 
-    void on_pushButton_clicked();
-
-    void on_pushButton_2_clicked();
 
 private:
     Ui::ServiceWindow *ui;

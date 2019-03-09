@@ -13,9 +13,9 @@ class NetworkAPI : public QObject
     Q_OBJECT
 public:
     explicit NetworkAPI(QObject *parent = nullptr);
-    void getProcessors();
+    void getProducts(QString product, QString path);
     void getDataJson();
-    void parseProcessors(QNetworkReply *reply);
+    void parseProduct(QNetworkReply *reply);
 
 
     QList<Product *> getProductList() const;
@@ -33,6 +33,7 @@ private:
     Product product;
     Product *pProduct;
     QList<Product *> productList;
+    QString productTemp;
 
 };
 
