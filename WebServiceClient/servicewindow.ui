@@ -53,6 +53,9 @@
     <property name="currentIndex">
      <number>0</number>
     </property>
+    <property name="tabsClosable">
+     <bool>false</bool>
+    </property>
     <widget class="QWidget" name="tabGet">
      <attribute name="title">
       <string>Pobierz rodukty</string>
@@ -265,7 +268,7 @@
        <rect>
         <x>40</x>
         <y>40</y>
-        <width>170</width>
+        <width>221</width>
         <height>213</height>
        </rect>
       </property>
@@ -342,6 +345,46 @@
         </widget>
        </item>
       </layout>
+     </widget>
+     <widget class="QTableWidget" name="tableWidgetUser">
+      <property name="geometry">
+       <rect>
+        <x>450</x>
+        <y>41</y>
+        <width>661</width>
+        <height>301</height>
+       </rect>
+      </property>
+      <column>
+       <property name="text">
+        <string>Id</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Login</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Imię</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Nazwisko</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Email</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Rola</string>
+       </property>
+      </column>
      </widget>
     </widget>
    </widget>

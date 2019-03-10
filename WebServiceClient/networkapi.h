@@ -16,8 +16,6 @@ public:
     void getProducts(QString product, QString path);
     void getDataJson();
     void parseProduct(QNetworkReply *reply);
-
-
     QList<Product *> getProductList() const;
 
 signals:
@@ -32,10 +30,9 @@ public slots:
 private:
     QNetworkAccessManager *netMngr;
     QNetworkReply *reply;
-    Product product;
     Product *pProduct;
     QList<Product *> productList;
-    QString productTemp;
+    QString productVariant;
 
 };
 

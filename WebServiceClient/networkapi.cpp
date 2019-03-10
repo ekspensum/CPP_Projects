@@ -10,7 +10,7 @@ NetworkAPI::NetworkAPI(QObject *parent) : QObject(parent)
 
 void NetworkAPI::getProducts(QString product, QString path)
 {
-    productTemp = product;
+    productVariant = product;
     QUrlQuery query;
     QUrl url;
     url.setScheme("http");
@@ -66,7 +66,7 @@ void NetworkAPI::parseProduct(QNetworkReply *reply)
         }
         if(token == xml.StartElement) {
 //            qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
-            if(xml.name() == productTemp) {
+            if(xml.name() == productVariant) {
                 atr = xml.attributes();
                 x = atr.value("id").toString();
                 pProduct = new Product();

@@ -27,8 +27,6 @@ private slots:
 
 private:
     Ui::LoginWindow *ui;
-    User user;
-    User *pUser = &user;
     MainLogin login;
     QMessageBox msg;
     NetworkAPI net;

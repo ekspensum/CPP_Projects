@@ -18,8 +18,7 @@ void LoginWindow::on_pushButtonLogin_clicked()
 {
     //    add default user which role is "Admin":
     //    QList<User *> list;
-    //    User user;
-    //    User *pUser1 = &user;
+    //    User *pUser1 = new User();
     //    pUser1->setLogin("admin1");
     //    QByteArray passByteArray1;
     //    QString passHash1 = QString(QCryptographicHash::hash(passByteArray1.append("Admin11"), QCryptographicHash::Md5).toHex());

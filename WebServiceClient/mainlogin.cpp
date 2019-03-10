@@ -16,10 +16,10 @@ bool MainLogin::createFileUsersList(QList<User *> list)
     QDataStream stream(&file);
     stream.setVersion(QDataStream::Qt_4_7);
 
-    for (int i=0;i<list.size();i++)
+    for (int i=0;i<list.size();i++) {
+        pUser = new User();
         stream << i << list.at(i)->idUser << list.at(i)->login << list.at(i)->password << list.at(i)->firstName << list.at(i)->lastName << list.at(i)->email << list.at(i)->role;
-
-
+    }
     file.flush();
     file.close();
     return true;
@@ -37,6 +37,7 @@ QList<User *> MainLogin::readFileUsersList(){
         QDataStream stream(&file);
 
         for (int i=0;i==j;i++) {
+            pUser = new User();
             stream >> index >> pUser->idUser >> pUser->login >> pUser->password >> pUser->firstName >> pUser->lastName >> pUser->email >> pUser->role;
             if (i==index) {
                 u = new User();
@@ -64,7 +65,6 @@ User *MainLogin::getLoggedUser(QString login, QString password)
 {
     QByteArray passByteArray;
     QString passHash = QString(QCryptographicHash::hash(passByteArray.append(password), QCryptographicHash::Md5).toHex());
-    User *pUser = nullptr;
     QList<User *> userList = readFileUsersList();
     for (int i=0;i<userList.size();i++) {
         if (login == userList.at(i)->getLogin() && passHash == userList.at(i)->getPassword()) {

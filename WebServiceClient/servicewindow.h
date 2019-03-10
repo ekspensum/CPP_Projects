@@ -27,11 +27,9 @@ private slots:
     void on_pushButtonAddNewUser_clicked();
     void on_pushButtonGetProducts_clicked();
 
-
 private:
     Ui::ServiceWindow *ui;
-    User user;
-    User *pUser = &user;
+    User *pUser;
     QStringList roleList;
     MainLogin mainLogin;
     QList<User *> usersList;
@@ -41,6 +39,7 @@ private:
     QString procesors = "/ShopAppWebService/rest/ShopResource/Processors";
     QString hardisks = "/ShopAppWebService/rest/ShopResource/HardDisks";
     QString products = "";
+    void fillUserTable();
 
 };
 
