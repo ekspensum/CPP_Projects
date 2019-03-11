@@ -4,14 +4,13 @@ NetworkAPI::NetworkAPI(QObject *parent) : QObject(parent)
 {
     //    "QT += network" is necessary add to *.pro for netMngr below:
     netMngr = new QNetworkAccessManager(this);
-    connect(netMngr, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyFinished(QNetworkReply *)));
-
+    connect(netMngr, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyFinishedXml(QNetworkReply *)));
+    connect(netMngr, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyFinishedJson(QNetworkReply *)));
 }
 
-void NetworkAPI::getProducts(QString product, QString path)
+void NetworkAPI::getProductsXml(QString product, QString path)
 {
     productVariant = product;
-    QUrlQuery query;
     QUrl url;
     url.setScheme("http");
     url.setHost("localhost");
@@ -26,9 +25,8 @@ void NetworkAPI::getProducts(QString product, QString path)
     connect(reply, SIGNAL(downloadProgress(qint64, qint64)), this, SLOT(progressSignal(qint64, qint64)));
 }
 
-void NetworkAPI::getDataJson()
+void NetworkAPI::getProductsJson(QString product, QString path)
 {
-//    connect(netMngr, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyFinished(QNetworkReply *)));
     QVariantMap feed;
     feed.insert("api_key","api_key");
     feed.insert("field1",QVariant(25).toString());
@@ -40,86 +38,164 @@ void NetworkAPI::getDataJson()
 
     QUrl url;
     url.setScheme("http");
-    url.setHost("api.thingspeak.com");
-    url.setPath("/update.json");
+    url.setHost("loclhost");
+    url.setPort(8080);
+    url.setQuery("format=json");
+    url.setPath(path);
 
     qDebug() << url.toString();
 
     QNetworkRequest request;
     request.setUrl(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-
+    reply = netMngr->get(request);
+    connect(reply, SIGNAL(downloadProgress(qint64, qint64)), this, SLOT(progressSignal(qint64, qint64)));
 }
 
-void NetworkAPI::parseProduct(QNetworkReply *reply)
+void NetworkAPI::parseProductXml(QNetworkReply *reply)
 {
     productList.clear();
     QByteArray array = reply->readAll();
     QXmlStreamReader xml(array);
-    QXmlStreamAttributes atr;
-    QString x;
-    while (!xml.atEnd()) {
-        QXmlStreamReader::TokenType token = xml.readNext();
-        if(token == xml.StartDocument){
-//            qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
-            continue;
+
+    if (productVariant == "mainBoard") {
+        int i = 0;
+        while (!xml.atEnd()) {
+            QXmlStreamReader::TokenType token = xml.readNext();
+            if(token == xml.StartDocument){
+//                qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
+                continue;
+            }
+            if(token == xml.StartElement) {
+//                qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
+
+                if(xml.name() == "collection") {
+//                    qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
+                    continue;
+                }
+                if(xml.name() == productVariant) {
+                    pProduct = new Product();
+                    pProduct->setId(i);
+                    continue;
+                }
+                if(xml.name() == "base64Image") {
+                    pProduct->setImage(xml.readElementText());
+//                    qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
+                    continue;
+                }
+                if(xml.name() == "description"){
+                    pProduct->setDescription(xml.readElementText());
+//                    qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
+                    continue;
+                }
+                if (xml.name() == "id"){
+                    pProduct->setIdProduct(xml.readElementText().toInt());
+//                    qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
+                    continue;
+                }
+                if (xml.name() == "name"){
+                    pProduct->setName(xml.readElementText());
+//                    qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
+                    continue;
+                }
+                if(xml.name() == "price"){
+                    pProduct->setPrice(xml.readElementText().toDouble());
+//                    qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
+                    continue;
+                }
+                if(xml.name() == "unitsInStock"){
+                    pProduct->setUnitsInStock(xml.readElementText().toInt());
+//                    qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
+                    productList.append(pProduct);
+                    i++;
+                    continue;
+                }
+            }
         }
-        if(token == xml.StartElement) {
-//            qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
-            if(xml.name() == productVariant) {
-                atr = xml.attributes();
-                x = atr.value("id").toString();
-                pProduct = new Product();
-                pProduct->setId(x.toInt());
-//                qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
+        emit setProductsList();
+        xml.clear();
+
+    } else {
+        QXmlStreamAttributes atr;
+        QString x;
+        while (!xml.atEnd()) {
+            QXmlStreamReader::TokenType token = xml.readNext();
+            if(token == xml.StartDocument){
+                //            qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
                 continue;
             }
-            if (xml.name() == "idPproduct"){
-                pProduct->setIdProduct(xml.readElementText().toInt());
-//                qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
+            if(token == xml.StartElement) {
+                //            qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
+                if(xml.name() == productVariant) {
+                    atr = xml.attributes();
+                    x = atr.value("id").toString();
+                    pProduct = new Product();
+                    pProduct->setId(x.toInt());
+                    //                qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
+                    continue;
+                }
+                if (xml.name() == "idPproduct"){
+                    pProduct->setIdProduct(xml.readElementText().toInt());
+                    //                qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
+                    continue;
+                }
+                if (xml.name() == "productName"){
+                    pProduct->setName(xml.readElementText());
+                    //                qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
+                    continue;
+                }
+                if(xml.name() == "productDescription"){
+                    pProduct->setDescription(xml.readElementText());
+                    //                qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
+                    continue;
+                }
+                if(xml.name() == "productPrice"){
+                    pProduct->setPrice(xml.readElementText().toDouble());
+                    //                qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
+                    continue;
+                }
+                if(xml.name() == "productUnitsInStock"){
+                    pProduct->setUnitsInStock(xml.readElementText().toInt());
+                    //                qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
+                    continue;
+                }
+                if (xml.name() == "productImage"){
+                    pProduct->setImage(xml.readElementText());
+                    //                qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
+                    productList.append(pProduct);
+                    continue;
+                }
                 continue;
             }
-            if (xml.name() == "productName"){
-                pProduct->setName(xml.readElementText());
-//                qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
-                continue;
-            }
-            if(xml.name() == "productDescription"){
-                pProduct->setDescription(xml.readElementText());
-//                qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
-                continue;
-            }
-            if(xml.name() == "productPrice"){
-                pProduct->setPrice(xml.readElementText().toDouble());
-//                qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
-                continue;
-            }
-            if(xml.name() == "productUnitsInStock"){
-                pProduct->setUnitsInStock(xml.readElementText().toInt());
-//                qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
-                continue;
-            }
-            if (xml.name() == "productImage"){
-                pProduct->setImage(xml.readElementText());
-//                qDebug() << xml.name() << xml.tokenType() << xml.errorString() << xml.lineNumber() << xml.columnNumber() << xml.characterOffset();
-                productList.append(pProduct);
-                continue;
-            }
-            continue;
         }
+        emit setProductsList();
+        xml.clear();
     }
-    emit setProductsList();
-    xml.clear();
+
+
 }
 
-void NetworkAPI::replyFinished(QNetworkReply *reply)
+void NetworkAPI::parseProductJson(QNetworkReply *reply)
+{
+
+}
+
+void NetworkAPI::replyFinishedXml(QNetworkReply *reply)
 {
     if (reply->error() != QNetworkReply::NoError)
         qDebug() << reply->error() << reply->errorString();
     else
-        parseProduct(reply);
+        parseProductXml(reply);
 
     //    qDebug() << "Reply " << reply->Text << reply->url() << reply->error() << reply->isRunning() << reply->isFinished() << reply->rawHeaderList() << reply->bytesAvailable();
+}
+
+void NetworkAPI::replyFinishedJson(QNetworkReply *reply)
+{
+    if (reply->error() != QNetworkReply::NoError)
+        qDebug() << reply->error() << reply->errorString();
+    else
+        parseProductJson(reply);
 }
 
 void NetworkAPI::progressSignal(qint64 bytesReceived, qint64 bytesTotal)

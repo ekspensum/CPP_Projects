@@ -27,6 +27,8 @@ ServiceWindow::ServiceWindow(User *user, QWidget *parent) :
     ui->comboBoxRole->addItems(roleList);
     ui->comboBoxProduct->addItem("Processor", QVariant::fromValue(procesors));
     ui->comboBoxProduct->addItem("HardDisk", QVariant::fromValue(hardisks));
+    ui->comboBoxProduct->addItem("mainBoard", QVariant::fromValue(mainBoards));
+    ui->comboBoxProduct->addItem("ramMemory", QVariant::fromValue(ramMemory));
     ui->comboBoxProduct->addItem("Product", QVariant::fromValue(products));
     ui->tableWidgetGet->verticalHeader()->close();
     ui->tableWidgetGet->setColumnWidth(0, 20);
@@ -144,8 +146,8 @@ void ServiceWindow::on_pushButtonGetProducts_clicked()
 {
     if (!ui->lineEditProductIdFrom->text().isEmpty() && !ui->lineEditProductIdTo->text().isEmpty()) {
         products = "/ShopAppWebService/rest/ShopResource/Products/"+ui->lineEditProductIdFrom->text()+"/"+ui->lineEditProductIdTo->text();
-        ui->comboBoxProduct->setItemData(2, products);
-        net.getProducts(ui->comboBoxProduct->currentText(), ui->comboBoxProduct->itemData(ui->comboBoxProduct->currentIndex()).toString());
+        ui->comboBoxProduct->setItemData(4, products);
+        net.getProductsXml(ui->comboBoxProduct->currentText(), ui->comboBoxProduct->itemData(ui->comboBoxProduct->currentIndex()).toString());
     } else {
         msg.setText("Proszę uzupełnić oba pola numerów Id !");
         msg.exec();

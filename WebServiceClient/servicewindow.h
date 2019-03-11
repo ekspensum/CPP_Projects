@@ -38,6 +38,8 @@ private:
     NetworkAPI net;
     QString procesors = "/ShopAppWebService/rest/ShopResource/Processors";
     QString hardisks = "/ShopAppWebService/rest/ShopResource/HardDisks";
+    QString mainBoards = "/ShopAppWebService/rest/ShopResource/MainBoards";
+    QString ramMemory = "/ShopAppWebService/rest/ShopResource/RamMemory";
     QString products = "";
     void fillUserTable();
 
