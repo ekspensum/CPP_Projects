@@ -25,7 +25,8 @@ private slots:
     void getProductsList();
     void getProgressSignal(qint64 bytesReceived, qint64 bytesTotal);
     void on_pushButtonAddNewUser_clicked();
-    void on_pushButtonGetProducts_clicked();
+    void on_pushButtonGetProductsXml_clicked();
+    void on_pushButtonGetProductJson_clicked();
 
 private:
     Ui::ServiceWindow *ui;
@@ -36,11 +37,32 @@ private:
     Validation valid;
     QMessageBox msg;
     NetworkAPI net;
-    QString procesors = "/ShopAppWebService/rest/ShopResource/Processors";
-    QString hardisks = "/ShopAppWebService/rest/ShopResource/HardDisks";
-    QString mainBoards = "/ShopAppWebService/rest/ShopResource/MainBoards";
-    QString ramMemory = "/ShopAppWebService/rest/ShopResource/RamMemory";
-    QString products = "";
+
+    QString procesorsXmlElement = "Processor";
+    QString procesorsXmlPath = "/ShopAppWebService/rest/ShopResource/ProcessorsXml";
+    QVariantList processorXmlList = {QVariant::fromValue(procesorsXmlElement), QVariant::fromValue(procesorsXmlPath)};
+
+    QString hardDisksXmlElement = "HardDisk";
+    QString hardDisksXmlPath = "/ShopAppWebService/rest/ShopResource/HardDisksXml";
+    QVariantList hardDisksXmlList = {QVariant::fromValue(hardDisksXmlElement), QVariant::fromValue(hardDisksXmlPath)};
+
+    QString mainBoardsXmlElement = "mainBoardXml";
+    QString mainBoardsXmlPath = "/ShopAppWebService/rest/ShopResource/MainBoardsXml";
+    QVariantList mainBoardsXmlList = {QVariant::fromValue(mainBoardsXmlElement), QVariant::fromValue(mainBoardsXmlPath)};
+
+    QString ramMemoryXmlElement = "ramMemoryXml";
+    QString ramMemoryXmlPath = "/ShopAppWebService/rest/ShopResource/RamMemoryXml";
+    QVariantList ramMemoryXmlList = {QVariant::fromValue(ramMemoryXmlElement), QVariant::fromValue(ramMemoryXmlPath)};
+
+    QString allProductsXmlElement = "Product";
+    QString allProductsXmlPath = "";
+    QVariantList allProductsXmlList = {QVariant::fromValue(allProductsXmlElement), QVariant::fromValue(allProductsXmlPath)};
+
+    QString procesorsJson = "/ShopAppWebService/rest/ShopResource/ProcessorsJson";
+    QString hardisksJson = "/ShopAppWebService/rest/ShopResource/HardDisksJson";
+    QString mainBoardsJson = "/ShopAppWebService/rest/ShopResource/MainBoardsJson";
+    QString ramMemoryJson = "/ShopAppWebService/rest/ShopResource/RamMemoryJson";
+    QString productsJson = "";
     void fillUserTable();
 
 };

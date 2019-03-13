@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>WebService Client</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="labelWhoLogin">
@@ -58,27 +58,27 @@
     </property>
     <widget class="QWidget" name="tabGet">
      <attribute name="title">
-      <string>Pobierz rodukty</string>
+      <string>Pobierz produkty</string>
      </attribute>
-     <widget class="QPushButton" name="pushButtonGetProducts">
+     <widget class="QPushButton" name="pushButtonGetProductsXml">
       <property name="geometry">
        <rect>
-        <x>189</x>
-        <y>80</y>
+        <x>179</x>
+        <y>85</y>
         <width>51</width>
-        <height>24</height>
+        <height>23</height>
        </rect>
       </property>
       <property name="text">
        <string>OK</string>
       </property>
      </widget>
-     <widget class="QComboBox" name="comboBoxProduct">
+     <widget class="QComboBox" name="comboBoxProductXml">
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>80</y>
-        <width>141</width>
+        <y>85</y>
+        <width>151</width>
         <height>23</height>
        </rect>
       </property>
@@ -175,21 +175,21 @@
        </property>
       </column>
      </widget>
-     <widget class="QLineEdit" name="lineEditProductIdFrom">
+     <widget class="QLineEdit" name="lineEditProductIdFromXml">
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>40</y>
+        <y>55</y>
         <width>80</width>
         <height>23</height>
        </rect>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEditProductIdTo">
+     <widget class="QLineEdit" name="lineEditProductIdToXml">
       <property name="geometry">
        <rect>
-        <x>160</x>
-        <y>40</y>
+        <x>150</x>
+        <y>55</y>
         <width>80</width>
         <height>23</height>
        </rect>
@@ -199,7 +199,7 @@
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>20</y>
+        <y>35</y>
         <width>111</width>
         <height>16</height>
        </rect>
@@ -218,9 +218,9 @@
      <widget class="QLabel" name="label_2">
       <property name="geometry">
        <rect>
-        <x>160</x>
-        <y>20</y>
-        <width>111</width>
+        <x>150</x>
+        <y>35</y>
+        <width>91</width>
         <height>16</height>
        </rect>
       </property>
@@ -238,14 +238,123 @@
      <widget class="QProgressBar" name="progressBarGet">
       <property name="geometry">
        <rect>
-        <x>310</x>
-        <y>40</y>
-        <width>821</width>
+        <x>580</x>
+        <y>55</y>
+        <width>551</width>
         <height>23</height>
        </rect>
       </property>
       <property name="value">
        <number>0</number>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButtonGetProductJson">
+      <property name="geometry">
+       <rect>
+        <x>450</x>
+        <y>85</y>
+        <width>51</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>OK</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboBoxProductJson">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>85</y>
+        <width>151</width>
+        <height>23</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>420</x>
+        <y>35</y>
+        <width>91</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Id produktu do:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEditProductIdFromJson">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>55</y>
+        <width>80</width>
+        <height>23</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEditProductIdToJson">
+      <property name="geometry">
+       <rect>
+        <x>420</x>
+        <y>55</y>
+        <width>80</width>
+        <height>23</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>35</y>
+        <width>91</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>8</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Id produktu od:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_5">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>15</y>
+        <width>191</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Format XML:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_6">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>15</y>
+        <width>191</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Format Json:</string>
       </property>
      </widget>
     </widget>

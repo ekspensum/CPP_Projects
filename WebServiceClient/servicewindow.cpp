@@ -25,11 +25,16 @@ ServiceWindow::ServiceWindow(User *user, QWidget *parent) :
     roleList.append("Admin");
     roleList.append("Operator");
     ui->comboBoxRole->addItems(roleList);
-    ui->comboBoxProduct->addItem("Processor", QVariant::fromValue(procesors));
-    ui->comboBoxProduct->addItem("HardDisk", QVariant::fromValue(hardisks));
-    ui->comboBoxProduct->addItem("mainBoard", QVariant::fromValue(mainBoards));
-    ui->comboBoxProduct->addItem("ramMemory", QVariant::fromValue(ramMemory));
-    ui->comboBoxProduct->addItem("Product", QVariant::fromValue(products));
+    ui->comboBoxProductXml->addItem("Procesory", QVariant::fromValue(processorXmlList));
+    ui->comboBoxProductXml->addItem("Dyski twarde", QVariant::fromValue(hardDisksXmlList));
+    ui->comboBoxProductXml->addItem("Płyty główne", QVariant::fromValue(mainBoardsXmlList));
+    ui->comboBoxProductXml->addItem("Pamięci RAM", QVariant::fromValue(ramMemoryXmlList));
+    ui->comboBoxProductXml->addItem("Wszystkie produkty", QVariant::fromValue(allProductsXmlList));
+    ui->comboBoxProductJson->addItem("Procesory", QVariant::fromValue(procesorsJson));
+    ui->comboBoxProductJson->addItem("Dyski twarde", QVariant::fromValue(hardisksJson));
+    ui->comboBoxProductJson->addItem("Płyty główne", QVariant::fromValue(mainBoardsJson));
+    ui->comboBoxProductJson->addItem("Pamięci RAM", QVariant::fromValue(ramMemoryJson));
+    ui->comboBoxProductJson->addItem("Wszystkie produkty", QVariant::fromValue(productsJson));
     ui->tableWidgetGet->verticalHeader()->close();
     ui->tableWidgetGet->setColumnWidth(0, 20);
     ui->tableWidgetGet->setColumnWidth(1, 80);
@@ -45,8 +50,10 @@ ServiceWindow::ServiceWindow(User *user, QWidget *parent) :
     ui->tableWidgetUser->setColumnWidth(3, 120);
     ui->tableWidgetUser->setColumnWidth(4, 150);
     ui->tableWidgetUser->setColumnWidth(5, 100);
-    ui->lineEditProductIdFrom->setText("0");
-    ui->lineEditProductIdTo->setText("100");
+    ui->lineEditProductIdFromXml->setText("0");
+    ui->lineEditProductIdToXml->setText("100");
+    ui->lineEditProductIdFromJson->setText("0");
+    ui->lineEditProductIdToJson->setText("100");
     fillUserTable();
     connect(&net, SIGNAL(setProductsList()), this, SLOT(getProductsList()));
     connect(&net, SIGNAL(setProgressSignal(qint64, qint64)), this, SLOT(getProgressSignal(qint64, qint64)));
@@ -142,12 +149,13 @@ void ServiceWindow::on_pushButtonAddNewUser_clicked()
     }
 }
 
-void ServiceWindow::on_pushButtonGetProducts_clicked()
+void ServiceWindow::on_pushButtonGetProductsXml_clicked()
 {
-    if (!ui->lineEditProductIdFrom->text().isEmpty() && !ui->lineEditProductIdTo->text().isEmpty()) {
-        products = "/ShopAppWebService/rest/ShopResource/Products/"+ui->lineEditProductIdFrom->text()+"/"+ui->lineEditProductIdTo->text();
-        ui->comboBoxProduct->setItemData(4, products);
-        net.getProductsXml(ui->comboBoxProduct->currentText(), ui->comboBoxProduct->itemData(ui->comboBoxProduct->currentIndex()).toString());
+    if (!ui->lineEditProductIdFromXml->text().isEmpty() && !ui->lineEditProductIdToXml->text().isEmpty()) {
+        allProductsXmlPath = "/ShopAppWebService/rest/ShopResource/ProductsXml/"+ui->lineEditProductIdFromXml->text()+"/"+ui->lineEditProductIdToXml->text();
+        allProductsXmlList = {QVariant::fromValue(allProductsXmlElement), QVariant::fromValue(allProductsXmlPath)};
+        ui->comboBoxProductXml->setItemData(4, allProductsXmlList);
+        net.getProductsXml(ui->comboBoxProductXml->itemData(ui->comboBoxProductXml->currentIndex()).toList().at(0).toString(), ui->comboBoxProductXml->itemData(ui->comboBoxProductXml->currentIndex()).toList().at(1).toString());
     } else {
         msg.setText("Proszę uzupełnić oba pola numerów Id !");
         msg.exec();
@@ -167,3 +175,14 @@ void ServiceWindow::fillUserTable()
     }
 }
 
+void ServiceWindow::on_pushButtonGetProductJson_clicked()
+{
+    if (!ui->lineEditProductIdFromJson->text().isEmpty() && !ui->lineEditProductIdToJson->text().isEmpty()) {
+        productsJson = "/ShopAppWebService/rest/ShopResource/ProductsJson/"+ui->lineEditProductIdFromJson->text()+"/"+ui->lineEditProductIdToJson->text();
+        ui->comboBoxProductJson->setItemData(4, productsJson);
+        net.getProductsJson(ui->comboBoxProductJson->itemData(ui->comboBoxProductJson->currentIndex()).toString());
+    } else {
+        msg.setText("Proszę uzupełnić oba pola numerów Id !");
+        msg.exec();
+    }
+}

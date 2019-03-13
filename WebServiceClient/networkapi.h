@@ -14,7 +14,7 @@ class NetworkAPI : public QObject
 public:
     explicit NetworkAPI(QObject *parent = nullptr);
     void getProductsXml(QString product, QString path);
-    void getProductsJson(QString product, QString path);
+    void getProductsJson(QString path);
     void parseProductXml(QNetworkReply *reply);
     void parseProductJson(QNetworkReply *reply);
     QList<Product *> getProductList() const;
