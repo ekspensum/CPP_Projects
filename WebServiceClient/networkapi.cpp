@@ -231,27 +231,43 @@ void NetworkAPI::parseProductJson(QNetworkReply *reply)
     productList.clear();
     QByteArray array = reply->readAll();
     QJsonDocument jsonDoc = QJsonDocument::fromJson(array);
-    if(!jsonDoc.isArray()){
-        qDebug()<< "Json doc is not an array!";
-        return;
-    }
     if(jsonDoc.isEmpty()){
         qDebug() << "Json doc is empty!";
         return;
     }
-    QJsonArray jsonArray = jsonDoc.array();
-    for (int i=0;i<jsonArray.size();i++) {
-        pProduct = new Product();
-        pProduct->setId(i);
-        pProduct->setIdProduct(jsonArray.at(i).toArray().at(0).toInt());
-        pProduct->setName(jsonArray.at(i).toArray().at(1).toString());
-        pProduct->setDescription(jsonArray.at(i).toArray().at(2).toString());
-        pProduct->setPrice(jsonArray.at(i).toArray().at(3).toDouble());
-        pProduct->setUnitsInStock(jsonArray.at(i).toArray().at(4).toInt());
-        pProduct->setImage(jsonArray.at(i).toArray().at(5).toString());
-        productList.append(pProduct);
-    }
-    emit setProductsList();
+    if(jsonDoc.isArray()){
+        QJsonArray jsonArray = jsonDoc.array();
+        for (int i=0;i<jsonArray.size();i++) {
+            pProduct = new Product();
+            pProduct->setId(i);
+            pProduct->setIdProduct(jsonArray.at(i).toArray().at(0).toInt());
+            pProduct->setName(jsonArray.at(i).toArray().at(1).toString());
+            pProduct->setDescription(jsonArray.at(i).toArray().at(2).toString());
+            pProduct->setPrice(jsonArray.at(i).toArray().at(3).toDouble());
+            pProduct->setUnitsInStock(jsonArray.at(i).toArray().at(4).toInt());
+            pProduct->setImage(jsonArray.at(i).toArray().at(5).toString());
+            productList.append(pProduct);
+        }
+        emit setProductsList();
+    } else if (jsonDoc.isObject()) {
+        QJsonObject jsonObject = jsonDoc.object();
+        int k=0;
+        for(int i=0; i<jsonObject.keys().size(); i++)
+            for(int j=0; j<jsonObject.value(jsonObject.keys().at(i)).toArray().at(j).toObject().size(); j++){
+                pProduct = new Product();
+                pProduct->setId(k);
+                pProduct->setIdProduct(jsonObject.value(jsonObject.keys().at(i)).toArray().at(j).toObject().value("id").toInt());
+                pProduct->setName(jsonObject.value(jsonObject.keys().at(i)).toArray().at(j).toObject().value("name").toString());
+                pProduct->setDescription(jsonObject.value(jsonObject.keys().at(i)).toArray().at(j).toObject().value("description").toString());
+                pProduct->setPrice(jsonObject.value(jsonObject.keys().at(i)).toArray().at(j).toObject().value("price").toDouble());
+                pProduct->setUnitsInStock(jsonObject.value(jsonObject.keys().at(i)).toArray().at(j).toObject().value("unitsInStock").toInt());
+                pProduct->setImage(jsonObject.value(jsonObject.keys().at(i)).toArray().at(j).toObject().value("base64Image").toString());
+                productList.append(pProduct);
+                k++;
+            }
+        emit setProductsList();
+    } else
+        qDebug()<< "Json doc is not an array and not object!";
 }
 
 void NetworkAPI::replyFinishedXml(QNetworkReply *reply)
