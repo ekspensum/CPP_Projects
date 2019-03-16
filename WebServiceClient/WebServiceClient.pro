@@ -30,7 +30,8 @@ SOURCES += \
     user.cpp \
     mainlogin.cpp \
     networkapi.cpp \
-    product.cpp
+    product.cpp \
+    category.cpp
 
 HEADERS += \
         loginwindow.h \
@@ -39,7 +40,8 @@ HEADERS += \
     user.h \
     mainlogin.h \
     networkapi.h \
-    product.h
+    product.h \
+    category.h
 
 FORMS += \
         loginwindow.ui \

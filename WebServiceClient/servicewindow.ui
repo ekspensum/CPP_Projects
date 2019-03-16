@@ -51,7 +51,7 @@
      </font>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <property name="tabsClosable">
      <bool>false</bool>
@@ -360,13 +360,299 @@
     </widget>
     <widget class="QWidget" name="tabPost">
      <attribute name="title">
-      <string>Dodaj produkty</string>
+      <string>Dodaj produkt</string>
      </attribute>
+     <widget class="QLineEdit" name="lineEditProductName">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>60</y>
+        <width>331</width>
+        <height>23</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QTextEdit" name="textEditProductDescription">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>90</y>
+        <width>681</width>
+        <height>181</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboBoxCategory1">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>340</y>
+        <width>181</width>
+        <height>23</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboBoxCategory2">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>370</y>
+        <width>181</width>
+        <height>23</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="doubleSpinBoxPrice">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>310</y>
+        <width>80</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="singleStep">
+       <double>1.000000000000000</double>
+      </property>
+      <property name="stepType">
+       <enum>QAbstractSpinBox::AdaptiveDecimalStepType</enum>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="spinBoxUnitsInStock">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>280</y>
+        <width>80</width>
+        <height>23</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_8">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>60</y>
+        <width>135</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Nazwa produktu</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_9">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>90</y>
+        <width>135</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Opis produktu</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_10">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>280</y>
+        <width>135</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Ilość</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_11">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>310</y>
+        <width>135</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Cena</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelSelectCategory1">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>340</y>
+        <width>135</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Kategoraę główna</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelSelectCategory2">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>370</y>
+        <width>135</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Kategoria dodatkowa</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelAddPhoto">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>400</y>
+        <width>135</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Dodaj zdjęcie</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButtonSelectImageFile">
+      <property name="geometry">
+       <rect>
+        <x>400</x>
+        <y>400</y>
+        <width>101</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Wybierz plik</string>
+      </property>
+     </widget>
+     <widget class="QCommandLinkButton" name="commandLinkButtonAddProduct">
+      <property name="geometry">
+       <rect>
+        <x>710</x>
+        <y>460</y>
+        <width>168</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Dodaj produkt</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEditFileName">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>400</y>
+        <width>181</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Nie wybrano pliku...</string>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="tabPut">
      <attribute name="title">
       <string>Modyfikuj produkt</string>
      </attribute>
+     <widget class="QTableWidget" name="tableWidgetGetPut">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>110</y>
+        <width>1111</width>
+        <height>501</height>
+       </rect>
+      </property>
+      <column>
+       <property name="text">
+        <string>Lp</string>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Id produktu</string>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Nazwa produktu</string>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Opis produktu</string>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Dostępna ilość</string>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Cena</string>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Zdjęcie</string>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+      </column>
+     </widget>
     </widget>
     <widget class="QWidget" name="settingTab">
      <attribute name="title">

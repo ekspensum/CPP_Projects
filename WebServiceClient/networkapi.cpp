@@ -47,6 +47,24 @@ void NetworkAPI::getProductsJson(QString path)
     connect(reply, SIGNAL(downloadProgress(qint64, qint64)), this, SLOT(progressSignal(qint64, qint64)));
 }
 
+void NetworkAPI::getCategoryJson(QString path)
+{
+    //    "QT += network" is necessary add to *.pro for netMngr below:
+    netMngr = new QNetworkAccessManager(this);
+    connect(netMngr, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyFinishedCategoryJson(QNetworkReply *)));
+    QUrl url;
+    url.setScheme("http");
+    url.setHost("localhost");
+    url.setPort(8080);
+    url.setQuery("format=json");
+    url.setPath(path);
+
+    QNetworkRequest request;
+    request.setUrl(url);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+    reply = netMngr->get(request);
+}
+
 void NetworkAPI::parseProductXml(QNetworkReply *reply)
 {
     productList.clear();
@@ -270,6 +288,28 @@ void NetworkAPI::parseProductJson(QNetworkReply *reply)
         qDebug()<< "Json doc is not an array and not object!";
 }
 
+void NetworkAPI::parseCategoryJson(QNetworkReply *reply)
+{
+    categoryList.clear();
+    QByteArray array = reply->readAll();
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(array);
+    if(jsonDoc.isEmpty()){
+        qDebug() << "Json doc is empty!";
+        return;
+    }
+    if(jsonDoc.isArray()){
+        QJsonArray jsonArray = jsonDoc.array();
+        for (int i=0;i<jsonArray.size();i++) {
+            pCategory = new Category();
+            pCategory->setId(jsonArray.at(i).toArray().at(0).toInt());
+            pCategory->setName(jsonArray.at(i).toArray().at(1).toString());
+            categoryList.append(pCategory);
+        }
+        emit setCategoryList();
+    } else
+        qDebug()<< "Json doc is not an array";
+}
+
 void NetworkAPI::replyFinishedXml(QNetworkReply *reply)
 {
     if (reply->error() != QNetworkReply::NoError)
@@ -288,9 +328,22 @@ void NetworkAPI::replyFinishedJson(QNetworkReply *reply)
         parseProductJson(reply);
 }
 
+void NetworkAPI::replyFinishedCategoryJson(QNetworkReply *reply)
+{
+    if (reply->error() != QNetworkReply::NoError)
+        qDebug() << reply->error() << reply->errorString();
+    else
+        parseCategoryJson(reply);
+}
+
 void NetworkAPI::progressSignal(qint64 bytesReceived, qint64 bytesTotal)
 {
     emit setProgressSignal(bytesReceived, bytesTotal);
+}
+
+QList<Category *> NetworkAPI::getCategoryList() const
+{
+    return categoryList;
 }
 
 QList<Product *> NetworkAPI::getProductList() const

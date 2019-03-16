@@ -57,6 +57,9 @@ ServiceWindow::ServiceWindow(User *user, QWidget *parent) :
     fillUserTable();
     connect(&net, SIGNAL(setProductsList()), this, SLOT(getProductsList()));
     connect(&net, SIGNAL(setProgressSignal(qint64, qint64)), this, SLOT(getProgressSignal(qint64, qint64)));
+    connect(&net, SIGNAL(setCategoryList()), this, SLOT(getCategoryList()));
+    net.getCategoryJson("/ShopAppWebService/rest/ShopResource/AllCategoryJson");
+
 }
 
 ServiceWindow::~ServiceWindow()
@@ -81,6 +84,14 @@ void ServiceWindow::getProductsList()
         imageItem->setData(Qt::DecorationRole ,image);
         ui->tableWidgetGet->setItem(i, 6, imageItem);
         ui->tableWidgetGet->setRowHeight(i, 100);
+    }
+}
+
+void ServiceWindow::getCategoryList()
+{
+    for(int i=0; i<net.getCategoryList().size(); i++){
+        ui->comboBoxCategory1->addItem(net.getCategoryList().at(i)->getName(), QVariant::fromValue(net.getCategoryList().at(i)->getId()));
+        ui->comboBoxCategory2->addItem(net.getCategoryList().at(i)->getName(), QVariant::fromValue(net.getCategoryList().at(i)->getId()));
     }
 }
 
@@ -185,4 +196,29 @@ void ServiceWindow::on_pushButtonGetProductJson_clicked()
         msg.setText("Proszę uzupełnić oba pola numerów Id !");
         msg.exec();
     }
+}
+
+void ServiceWindow::on_pushButtonSelectImageFile_clicked()
+{
+    byteFileImage.clear();
+    fileImagePath = QFileDialog::getOpenFileName(this, "Wybierz plik", QDir::homePath(), "Plik jpg (*.jpg);; Plik png(*.png);; Wszystkie pliki (*.*)");
+    QFile fileImage(fileImagePath);
+    if(!fileImage.open(QIODevice::ReadOnly)){
+        msg.setText("Błąd otwarcia pliku!");
+        msg.exec();
+        return;
+    }
+    QFileInfo fileInfo(fileImagePath);
+    if(fileInfo.size() > 100000){
+        msg.setText("Rozmiar pliku to "+QString("%1").arg(fileInfo.size()/1000)+"kB i jest powyżej 100kB. Proszę wybrać mniejszy plik!");
+        msg.exec();
+        return;
+    }
+    byteFileImage = QFile::encodeName(fileImagePath);
+    ui->lineEditFileName->setText(fileInfo.fileName());
+}
+
+void ServiceWindow::on_commandLinkButtonAddProduct_clicked()
+{
+
 }

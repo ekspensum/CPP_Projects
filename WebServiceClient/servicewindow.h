@@ -7,6 +7,10 @@
 #include <validation.h>
 #include <QMessageBox>
 #include <networkapi.h>
+#include <QFileDialog>
+#include <QDir>
+#include <QFile>
+#include <QByteArray>
 
 namespace Ui {
 class ServiceWindow;
@@ -23,10 +27,14 @@ public:
 
 private slots:
     void getProductsList();
+    void getCategoryList();
     void getProgressSignal(qint64 bytesReceived, qint64 bytesTotal);
     void on_pushButtonAddNewUser_clicked();
     void on_pushButtonGetProductsXml_clicked();
     void on_pushButtonGetProductJson_clicked();
+    void on_pushButtonSelectImageFile_clicked();
+    void on_commandLinkButtonAddProduct_clicked();
+
 
 private:
     Ui::ServiceWindow *ui;
@@ -37,6 +45,8 @@ private:
     Validation valid;
     QMessageBox msg;
     NetworkAPI net;
+    QString fileImagePath;
+    QByteArray byteFileImage;
 
     QString procesorsXmlElement = "Processor";
     QString procesorsXmlPath = "/ShopAppWebService/rest/ShopResource/ProcessorsXml";
