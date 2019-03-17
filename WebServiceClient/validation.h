@@ -12,6 +12,8 @@ public:
     bool validPassword(QString password);
     bool validName(QString name);
     bool validEmail(QString email);
+    bool validProductName(QString name);
+    bool validProductDescription(QString description);
 
 private:
     QRegularExpression regex;

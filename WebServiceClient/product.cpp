@@ -74,3 +74,24 @@ void Product::setIdProduct(int value)
 {
     idProduct = value;
 }
+
+int Product::getCategory1Id() const
+{
+    return category1Id;
+}
+
+void Product::setCategory1Id(int value)
+{
+    category1Id = value;
+}
+
+int Product::getCategory2Id() const
+{
+    return category2Id;
+}
+
+void Product::setCategory2Id(int value)
+{
+    category2Id = value;
+}
+

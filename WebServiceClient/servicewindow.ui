@@ -143,7 +143,7 @@
       </column>
       <column>
        <property name="text">
-        <string>Dostępna ilość</string>
+        <string>Ilość</string>
        </property>
        <property name="font">
         <font>
@@ -367,7 +367,7 @@
        <rect>
         <x>200</x>
         <y>60</y>
-        <width>331</width>
+        <width>681</width>
         <height>23</height>
        </rect>
       </property>
@@ -387,7 +387,7 @@
        <rect>
         <x>200</x>
         <y>340</y>
-        <width>181</width>
+        <width>251</width>
         <height>23</height>
        </rect>
       </property>
@@ -397,7 +397,7 @@
        <rect>
         <x>200</x>
         <y>370</y>
-        <width>181</width>
+        <width>251</width>
         <height>23</height>
        </rect>
       </property>
@@ -407,9 +407,12 @@
        <rect>
         <x>200</x>
         <y>310</y>
-        <width>80</width>
+        <width>121</width>
         <height>23</height>
        </rect>
+      </property>
+      <property name="maximum">
+       <double>99999.990000000005239</double>
       </property>
       <property name="singleStep">
        <double>1.000000000000000</double>
@@ -522,7 +525,7 @@
      <widget class="QPushButton" name="pushButtonSelectImageFile">
       <property name="geometry">
        <rect>
-        <x>400</x>
+        <x>480</x>
         <y>400</y>
         <width>101</width>
         <height>23</height>
@@ -550,7 +553,7 @@
        <rect>
         <x>200</x>
         <y>400</y>
-        <width>181</width>
+        <width>251</width>
         <height>23</height>
        </rect>
       </property>

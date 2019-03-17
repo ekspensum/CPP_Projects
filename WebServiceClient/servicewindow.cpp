@@ -39,9 +39,9 @@ ServiceWindow::ServiceWindow(User *user, QWidget *parent) :
     ui->tableWidgetGet->setColumnWidth(0, 20);
     ui->tableWidgetGet->setColumnWidth(1, 80);
     ui->tableWidgetGet->setColumnWidth(2, 150);
-    ui->tableWidgetGet->setColumnWidth(3, 300);
-    ui->tableWidgetGet->setColumnWidth(4, 120);
-    ui->tableWidgetGet->setColumnWidth(5, 100);
+    ui->tableWidgetGet->setColumnWidth(3, 540);
+    ui->tableWidgetGet->setColumnWidth(4, 60);
+    ui->tableWidgetGet->setColumnWidth(5, 60);
     ui->tableWidgetGet->setColumnWidth(6, 150);
     ui->tableWidgetUser->verticalHeader()->close();
     ui->tableWidgetUser->setColumnWidth(0, 20);
@@ -58,6 +58,7 @@ ServiceWindow::ServiceWindow(User *user, QWidget *parent) :
     connect(&net, SIGNAL(setProductsList()), this, SLOT(getProductsList()));
     connect(&net, SIGNAL(setProgressSignal(qint64, qint64)), this, SLOT(getProgressSignal(qint64, qint64)));
     connect(&net, SIGNAL(setCategoryList()), this, SLOT(getCategoryList()));
+    connect(&net, SIGNAL(setAddProductAnswer(QString)), this, SLOT(getAddProductAnswer(QString)));
     net.getCategoryJson("/ShopAppWebService/rest/ShopResource/AllCategoryJson");
 
 }
@@ -93,6 +94,12 @@ void ServiceWindow::getCategoryList()
         ui->comboBoxCategory1->addItem(net.getCategoryList().at(i)->getName(), QVariant::fromValue(net.getCategoryList().at(i)->getId()));
         ui->comboBoxCategory2->addItem(net.getCategoryList().at(i)->getName(), QVariant::fromValue(net.getCategoryList().at(i)->getId()));
     }
+}
+
+void ServiceWindow::getAddProductAnswer(QString str)
+{
+    msg.setText(str);
+    msg.exec();
 }
 
 void ServiceWindow::getProgressSignal(qint64 bytesReceived, qint64 bytesTotal)
@@ -131,7 +138,7 @@ void ServiceWindow::on_pushButtonAddNewUser_clicked()
     }
     if (ui->comboBoxRole->currentText() == "Wybierz") {
         validation = false;
-        msg.setText("Proszę wybrać rolę uzytkownika!");
+        msg.setText("Proszę wybrać rolę użytkownika!");
         msg.exec();
     }
     if (validation) {
@@ -200,7 +207,6 @@ void ServiceWindow::on_pushButtonGetProductJson_clicked()
 
 void ServiceWindow::on_pushButtonSelectImageFile_clicked()
 {
-    byteFileImage.clear();
     fileImagePath = QFileDialog::getOpenFileName(this, "Wybierz plik", QDir::homePath(), "Plik jpg (*.jpg);; Plik png(*.png);; Wszystkie pliki (*.*)");
     QFile fileImage(fileImagePath);
     if(!fileImage.open(QIODevice::ReadOnly)){
@@ -209,16 +215,77 @@ void ServiceWindow::on_pushButtonSelectImageFile_clicked()
         return;
     }
     QFileInfo fileInfo(fileImagePath);
-    if(fileInfo.size() > 100000){
-        msg.setText("Rozmiar pliku to "+QString("%1").arg(fileInfo.size()/1000)+"kB i jest powyżej 100kB. Proszę wybrać mniejszy plik!");
+    if(fileInfo.size() > 600000){
+        msg.setText("Rozmiar pliku to "+QString("%1").arg(fileInfo.size()/1000)+"kB i jest powyżej 600kB. Proszę wybrać mniejszy plik!");
         msg.exec();
         return;
     }
-    byteFileImage = QFile::encodeName(fileImagePath);
+    byteFileImage = fileImage.readAll();
     ui->lineEditFileName->setText(fileInfo.fileName());
 }
 
 void ServiceWindow::on_commandLinkButtonAddProduct_clicked()
 {
-
+    bool validation = true;
+    if(pUser->getRole() != "Operator"){
+        validation = false;
+        msg.setText("Obecnie zalogowany użytkowanik nie ma uprawnień do tej akcji!");
+        msg.exec();
+        return;
+    }
+    if(!valid.validProductName(ui->lineEditProductName->text())){
+        validation = false;
+        msg.setText("Nazwa produktu zawiera niepoprawne znaki lub niewłaściwą ilośc znaków!");
+        msg.exec();
+    }
+    if(!valid.validProductDescription(ui->textEditProductDescription->toPlainText())){
+        validation = false;
+        msg.setText("Opis produktu zawiera niepoprawne znaki lub niewłaściwą ilośc znaków!");
+        msg.exec();
+    }
+    if(ui->spinBoxUnitsInStock->value() == 0){
+        validation = false;
+        msg.setText("Ilość produktu jest zerowa!");
+        msg.exec();
+    }
+    if(ui->doubleSpinBoxPrice->value() == 0.00){
+        validation = false;
+        msg.setText("Cena produktu jest zerowa!");
+        msg.exec();
+    }
+    if (ui->comboBoxCategory1->currentIndex() == 0) {
+        validation = false;
+        msg.setText("Proszę wybrać kategorie nr 1!");
+        msg.exec();
+    }
+    if (ui->comboBoxCategory1->currentText() == ui->comboBoxCategory2->currentText()) {
+        validation = false;
+        msg.setText("Kategoria nr 1 jest taka sama jak kategoria nr 2!");
+        msg.exec();
+    }
+    if(byteFileImage.size() == 0){
+        validation = false;
+        msg.setText("Nie dodano zdjęcia produktu!");
+        msg.exec();
+    }
+    if (validation) {
+        pProduct = new Product();
+        pProduct->setName(ui->lineEditProductName->text());
+        pProduct->setDescription(ui->textEditProductDescription->toPlainText());
+        pProduct->setPrice(ui->doubleSpinBoxPrice->value());
+        pProduct->setUnitsInStock(ui->spinBoxUnitsInStock->value());
+        pProduct->setCategory1Id(ui->comboBoxCategory1->itemData(ui->comboBoxCategory1->currentIndex()).toInt());
+        pProduct->setCategory2Id(ui->comboBoxCategory2->itemData(ui->comboBoxCategory2->currentIndex()).toInt());
+        pProduct->setImage(byteFileImage.toBase64());
+        if(net.addProductJson("/ShopAppWebService/rest/ShopResource/ProductAddJson", pProduct, pUser)){
+            ui->lineEditProductName->clear();
+            ui->textEditProductDescription->clear();
+            ui->doubleSpinBoxPrice->setValue(0);
+            ui->spinBoxUnitsInStock->setValue(0);
+            ui->comboBoxCategory1->setCurrentIndex(0);
+            ui->comboBoxCategory2->setCurrentIndex(0);
+            ui->lineEditFileName->clear();
+            byteFileImage.clear();
+        }
+    }
 }

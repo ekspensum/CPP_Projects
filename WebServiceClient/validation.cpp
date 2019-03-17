@@ -34,3 +34,17 @@ bool Validation::validEmail(QString email)
     match = regex.match(email);
     return match.hasMatch();
 }
+
+bool Validation::validProductName(QString name)
+{
+    regex.setPattern("^[^|'\":%^#~}{\\]\\[;=<>`]{2,255}$");
+    match = regex.match(name);
+    return match.hasMatch();
+}
+
+bool Validation::validProductDescription(QString description)
+{
+    regex.setPattern("^[^|'\"^#~}{\\]\\[;=<>`]{2,1200}$");
+    match = regex.match(description);
+    return match.hasMatch();
+}

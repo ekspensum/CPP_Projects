@@ -65,6 +65,37 @@ void NetworkAPI::getCategoryJson(QString path)
     reply = netMngr->get(request);
 }
 
+bool NetworkAPI::addProductJson(QString path, Product *pProduct, User *pUser)
+{
+    QJsonDocument jsonDoc;
+    QJsonObject jsonObject;
+
+    jsonObject["login"] = pUser->getLogin();
+    jsonObject["password"] = pUser->getPassword();
+    jsonObject["name"] = pProduct->getName();
+    jsonObject["description"] = pProduct->getDescription();
+    jsonObject["price"] = pProduct->getPrice();
+    jsonObject["unitsInStock"] = pProduct->getUnitsInStock();
+    jsonObject["category1Name"] = pProduct->getCategory1Id();
+    jsonObject["category2Name"] = pProduct->getCategory2Id();
+    jsonObject["image"] = pProduct->getImage();
+    jsonDoc.setObject(jsonObject);
+
+    netMngr = new QNetworkAccessManager(this);
+    connect(netMngr, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyFinishedAddProductJson(QNetworkReply *)));
+    QUrl url;
+    url.setScheme("http");
+    url.setHost("localhost");
+    url.setPort(8080);
+    url.setQuery("format=json");
+    url.setPath(path);
+
+    QNetworkRequest request;
+    request.setUrl(url);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+    reply = netMngr->post(request, jsonDoc.toJson());
+}
+
 void NetworkAPI::parseProductXml(QNetworkReply *reply)
 {
     productList.clear();
@@ -334,6 +365,16 @@ void NetworkAPI::replyFinishedCategoryJson(QNetworkReply *reply)
         qDebug() << reply->error() << reply->errorString();
     else
         parseCategoryJson(reply);
+}
+
+void NetworkAPI::replyFinishedAddProductJson(QNetworkReply *reply)
+{
+    if (reply->error() != QNetworkReply::NoError)
+        qDebug() << reply->error() << reply->errorString();
+    else {
+        QString answer = "Odpowiedź serwera: ";
+        emit setAddProductAnswer(answer+reply->readAll());
+    }
 }
 
 void NetworkAPI::progressSignal(qint64 bytesReceived, qint64 bytesTotal)

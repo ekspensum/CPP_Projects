@@ -29,6 +29,12 @@ public:
     int getIdProduct() const;
     void setIdProduct(int value);
 
+    int getCategory1Id() const;
+    void setCategory1Id(int value);
+
+    int getCategory2Id() const;
+    void setCategory2Id(int value);
+
 private:
     int id;
     int idProduct;
@@ -37,6 +43,8 @@ private:
     double price;
     int unitsInStock;
     QString image;
+    int category1Id;
+    int category2Id;
 
 
 };

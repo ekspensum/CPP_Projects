@@ -8,6 +8,7 @@
 #include <QXmlStreamReader>
 #include <product.h>
 #include <category.h>
+#include <user.h>
 
 class NetworkAPI : public QObject
 {
@@ -17,6 +18,7 @@ public:
     void getProductsXml(QString product, QString path);
     void getProductsJson(QString path);
     void getCategoryJson(QString path);
+    bool addProductJson(QString path, Product *pProduct, User *pUser);
     void parseProductXml(QNetworkReply *reply);
     void parseProductJson(QNetworkReply *reply);
     void parseCategoryJson(QNetworkReply *reply);
@@ -27,12 +29,14 @@ signals:
     void setProductsList();
     void setCategoryList();
     void setProgressSignal(qint64 bytesReceived, qint64 bytesTotal);
+    void setAddProductAnswer(QString str);
 
 
 public slots:
     void replyFinishedXml(QNetworkReply *reply);
     void replyFinishedJson(QNetworkReply *reply);
     void replyFinishedCategoryJson(QNetworkReply *reply);
+    void replyFinishedAddProductJson(QNetworkReply *reply);
     void progressSignal(qint64 bytesReceived, qint64 bytesTotal);
 
 private:

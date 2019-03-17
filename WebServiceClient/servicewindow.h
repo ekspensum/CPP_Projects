@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <user.h>
+#include <product.h>
 #include <mainlogin.h>
 #include <validation.h>
 #include <QMessageBox>
@@ -28,6 +29,7 @@ public:
 private slots:
     void getProductsList();
     void getCategoryList();
+    void getAddProductAnswer(QString str);
     void getProgressSignal(qint64 bytesReceived, qint64 bytesTotal);
     void on_pushButtonAddNewUser_clicked();
     void on_pushButtonGetProductsXml_clicked();
@@ -47,6 +49,7 @@ private:
     NetworkAPI net;
     QString fileImagePath;
     QByteArray byteFileImage;
+    Product *pProduct;
 
     QString procesorsXmlElement = "Processor";
     QString procesorsXmlPath = "/ShopAppWebService/rest/ShopResource/ProcessorsXml";
