@@ -14,9 +14,13 @@ ServiceWindow::ServiceWindow(User *user, QWidget *parent) :
 {
     this->pUser = user;
     ui->setupUi(this);
+    ui->tabWidget->setCurrentIndex(0);
     ui->tabWidget->setStyleSheet("QTabWidget::pane > QWidget { background-color: #b8b8b8; }");
     ui->tableWidgetGet->setStyleSheet("QWidget::pane > QWidget { background-color: #C3C3AE; }");
     ui->tableWidgetUser->setStyleSheet("QWidget::pane > QWidget { background-color: #C3C3AE; }");
+    ui->lineEditProductName->setStyleSheet("QWidget::pane > QWidget { background-color: #C3C3AE; }");
+    ui->textEditProductDescription->setStyleSheet("QWidget::pane > QWidget { background-color: #C3C3AE; }");
+    ui->tableWidgetPut->setStyleSheet("QWidget::pane > QWidget { background-color: #C3C3AE; }");
     ui->labelWhoLogin->setText("Zalogowany jako: " + this->pUser->getFirstName() + " " + this->pUser->getLastName() + " rola: " + this->pUser->getRole());
     usersList = mainLogin.readFileUsersList();
     if(pUser->getRole() != "Admin")
@@ -55,12 +59,22 @@ ServiceWindow::ServiceWindow(User *user, QWidget *parent) :
     ui->lineEditProductIdFromJson->setText("0");
     ui->lineEditProductIdToJson->setText("100");
     fillUserTable();
+    ui->tableWidgetPut->verticalHeader()->close();
+    ui->tableWidgetPut->setColumnWidth(0, 15);
+    ui->tableWidgetPut->setColumnWidth(1, 15);
+    ui->tableWidgetPut->setColumnWidth(2, 140);
+    ui->tableWidgetPut->setColumnWidth(3, 350);
+    ui->tableWidgetPut->setColumnWidth(4, 40);
+    ui->tableWidgetPut->setColumnWidth(5, 50);
+    ui->tableWidgetPut->setColumnWidth(6, 150);
+    ui->tableWidgetPut->setColumnWidth(7, 100);
+    ui->tableWidgetPut->setColumnWidth(8, 180);
     connect(&net, SIGNAL(setProductsList()), this, SLOT(getProductsList()));
     connect(&net, SIGNAL(setProgressSignal(qint64, qint64)), this, SLOT(getProgressSignal(qint64, qint64)));
     connect(&net, SIGNAL(setCategoryList()), this, SLOT(getCategoryList()));
     connect(&net, SIGNAL(setAddProductAnswer(QString)), this, SLOT(getAddProductAnswer(QString)));
     net.getCategoryJson("/ShopAppWebService/rest/ShopResource/AllCategoryJson");
-
+    connect(&net, SIGNAL(findProductList()), this, SLOT(findProductList()));
 }
 
 ServiceWindow::~ServiceWindow()
@@ -288,4 +302,59 @@ void ServiceWindow::on_commandLinkButtonAddProduct_clicked()
             byteFileImage.clear();
         }
     }
+}
+
+void ServiceWindow::findProductList()
+{
+    ui->tableWidgetPut->setRowCount(net.getProductList().size());
+    for (int i=0;i<net.getProductList().size(); i++) {
+        ui->tableWidgetPut->setItem(i, 0, new QTableWidgetItem(QString("%1").arg(net.getProductList().at(i)->getId())));
+        ui->tableWidgetPut->setItem(i, 1, new QTableWidgetItem(QString("%1").arg(net.getProductList().at(i)->getIdProduct())));
+        ui->tableWidgetPut->setItem(i, 2, new QTableWidgetItem(net.getProductList().at(i)->getName()));
+        ui->tableWidgetPut->setItem(i, 3, new QTableWidgetItem(net.getProductList().at(i)->getDescription()));
+        ui->tableWidgetPut->setItem(i, 4, new QTableWidgetItem(QString("%1").arg(net.getProductList().at(i)->getUnitsInStock())));
+        ui->tableWidgetPut->setItem(i, 5, new QTableWidgetItem(QString("%1").arg(net.getProductList().at(i)->getPrice())));
+        QPixmap image;
+        image.loadFromData(QByteArray::fromBase64(net.getProductList().at(i)->getImage().toUtf8()));
+        image = image.scaled(150, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        QTableWidgetItem *imageItem = new QTableWidgetItem();
+        imageItem->setData(Qt::DecorationRole ,image);
+        ui->tableWidgetPut->setItem(i, 6, imageItem);
+        ui->tableWidgetPut->setRowHeight(i, 100);
+        comboCategory1 = new QComboBox();
+        comboCategory1->setFixedSize(100, 23);
+        comboCategory2 = new QComboBox();
+        comboCategory2->setFixedSize(180, 23);
+        for (int j=0;j<net.getCategoryList().size();j++) {
+            comboCategory1->addItem(net.getCategoryList().at(j)->getName());
+            if(net.getCategoryList().at(j)->getId() == net.getProductList().at(i)->getCategory1Id())
+                comboCategory1->setCurrentText(net.getCategoryList().at(j)->getName());
+            comboCategory2->addItem(net.getCategoryList().at(j)->getName());
+            if(net.getCategoryList().at(j)->getId() == net.getProductList().at(i)->getCategory2Id())
+                comboCategory2->setCurrentText(net.getCategoryList().at(j)->getName());
+        }
+        ui->tableWidgetPut->setCellWidget(i, 7, comboCategory1);
+        ui->tableWidgetPut->setCellWidget(i, 8, comboCategory2);
+    }
+}
+
+void ServiceWindow::on_pushButtonFindProduct_clicked()
+{
+    if (!ui->lineEditFindProductName->text().isEmpty()) {
+        productsJson = "/ShopAppWebService/rest/ShopResource/ProductsByNameJson/"+ui->lineEditFindProductName->text();
+        net.findProductJson(productsJson);
+    } else {
+        msg.setText("Proszę uzupełnić pole wyszukiwania!");
+        msg.exec();
+    }
+}
+
+void ServiceWindow::on_commandLinkButtonUpdate_clicked()
+{
+    if(ui->tableWidgetPut->selectedRanges().size() != 1){
+        msg.setText("Powinien być zaznaczony jeden wiersz do edycji!");
+        msg.exec();
+        return;
+    }
+    qDebug() << ui->tableWidgetPut->currentRow() << ui->tableWidgetPut->item(ui->tableWidgetPut->currentRow(), 1)->text();
 }

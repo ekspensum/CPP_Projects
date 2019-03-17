@@ -12,6 +12,7 @@
 #include <QDir>
 #include <QFile>
 #include <QByteArray>
+#include <QComboBox>
 
 namespace Ui {
 class ServiceWindow;
@@ -36,7 +37,9 @@ private slots:
     void on_pushButtonGetProductJson_clicked();
     void on_pushButtonSelectImageFile_clicked();
     void on_commandLinkButtonAddProduct_clicked();
-
+    void findProductList();
+    void on_pushButtonFindProduct_clicked();
+    void on_commandLinkButtonUpdate_clicked();
 
 private:
     Ui::ServiceWindow *ui;
@@ -77,6 +80,8 @@ private:
     QString ramMemoryJson = "/ShopAppWebService/rest/ShopResource/RamMemoryJson";
     QString productsJson = "";
     void fillUserTable();
+    QComboBox *comboCategory1;
+    QComboBox *comboCategory2;
 
 };
 

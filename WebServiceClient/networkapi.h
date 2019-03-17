@@ -19,9 +19,11 @@ public:
     void getProductsJson(QString path);
     void getCategoryJson(QString path);
     bool addProductJson(QString path, Product *pProduct, User *pUser);
+    void findProductJson(QString path);
     void parseProductXml(QNetworkReply *reply);
     void parseProductJson(QNetworkReply *reply);
     void parseCategoryJson(QNetworkReply *reply);
+    void parseFindProductJson(QNetworkReply *reply);
     QList<Product *> getProductList() const;
     QList<Category *> getCategoryList() const;
 
@@ -30,6 +32,7 @@ signals:
     void setCategoryList();
     void setProgressSignal(qint64 bytesReceived, qint64 bytesTotal);
     void setAddProductAnswer(QString str);
+    void findProductList();
 
 
 public slots:
@@ -37,9 +40,11 @@ public slots:
     void replyFinishedJson(QNetworkReply *reply);
     void replyFinishedCategoryJson(QNetworkReply *reply);
     void replyFinishedAddProductJson(QNetworkReply *reply);
+    void replyFinishedFindProductJson(QNetworkReply *reply);
     void progressSignal(qint64 bytesReceived, qint64 bytesTotal);
 
 private:
+    QString const HOST = "localhost";
     QNetworkAccessManager *netMngr;
     QNetworkReply *reply;
     Product *pProduct;

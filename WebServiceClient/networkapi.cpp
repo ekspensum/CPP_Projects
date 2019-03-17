@@ -16,7 +16,7 @@ void NetworkAPI::getProductsXml(QString product, QString path)
     productVariant = product;
     QUrl url;
     url.setScheme("http");
-    url.setHost("localhost");
+    url.setHost(HOST);
     url.setPort(8080);
     url.setQuery("format=xml");
     url.setPath(path);
@@ -35,7 +35,7 @@ void NetworkAPI::getProductsJson(QString path)
     connect(netMngr, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyFinishedJson(QNetworkReply *)));
     QUrl url;
     url.setScheme("http");
-    url.setHost("localhost");
+    url.setHost(HOST);
     url.setPort(8080);
     url.setQuery("format=json");
     url.setPath(path);
@@ -54,7 +54,7 @@ void NetworkAPI::getCategoryJson(QString path)
     connect(netMngr, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyFinishedCategoryJson(QNetworkReply *)));
     QUrl url;
     url.setScheme("http");
-    url.setHost("localhost");
+    url.setHost(HOST);
     url.setPort(8080);
     url.setQuery("format=json");
     url.setPath(path);
@@ -85,7 +85,7 @@ bool NetworkAPI::addProductJson(QString path, Product *pProduct, User *pUser)
     connect(netMngr, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyFinishedAddProductJson(QNetworkReply *)));
     QUrl url;
     url.setScheme("http");
-    url.setHost("localhost");
+    url.setHost(HOST);
     url.setPort(8080);
     url.setQuery("format=json");
     url.setPath(path);
@@ -94,6 +94,24 @@ bool NetworkAPI::addProductJson(QString path, Product *pProduct, User *pUser)
     request.setUrl(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     reply = netMngr->post(request, jsonDoc.toJson());
+    return true;
+}
+
+void NetworkAPI::findProductJson(QString path)
+{
+    netMngr = new QNetworkAccessManager(this);
+    connect(netMngr, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyFinishedFindProductJson(QNetworkReply *)));
+    QUrl url;
+    url.setScheme("http");
+    url.setHost(HOST);
+    url.setPort(8080);
+    url.setQuery("format=json");
+    url.setPath(path);
+
+    QNetworkRequest request;
+    request.setUrl(url);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+    reply = netMngr->get(request);
 }
 
 void NetworkAPI::parseProductXml(QNetworkReply *reply)
@@ -341,6 +359,36 @@ void NetworkAPI::parseCategoryJson(QNetworkReply *reply)
         qDebug()<< "Json doc is not an array";
 }
 
+void NetworkAPI::parseFindProductJson(QNetworkReply *reply)
+{
+    productList.clear();
+    QByteArray array = reply->readAll();
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(array);
+    if(jsonDoc.isEmpty()){
+        qDebug() << "Json doc is empty!";
+        return;
+    }
+    if(jsonDoc.isArray()){
+        QJsonArray jsonArray = jsonDoc.array();
+        QJsonObject obj;
+        for (int i=0;i<jsonArray.size();i++) {
+            pProduct = new Product();
+            pProduct->setId(i);
+            pProduct->setName(jsonArray.at(i).toObject().value("name").toString());
+            pProduct->setDescription(jsonArray.at(i).toObject().value("description").toString());
+            pProduct->setPrice(jsonArray.at(i).toObject().value("price").toDouble());
+            pProduct->setUnitsInStock(jsonArray.at(i).toObject().value("unitsInStock").toInt());
+            pProduct->setImage(jsonArray.at(i).toObject().value("image").toString());
+            pProduct->setCategory1Id(jsonArray.at(i).toObject().value("category1Name").toInt());
+            pProduct->setCategory2Id(jsonArray.at(i).toObject().value("category2Name").toInt());
+            pProduct->setIdProduct(jsonArray.at(i).toObject().value("idProduct").toInt());
+            productList.append(pProduct);
+        }
+        emit findProductList();
+    } else
+        qDebug()<< "Json doc is not an array";
+}
+
 void NetworkAPI::replyFinishedXml(QNetworkReply *reply)
 {
     if (reply->error() != QNetworkReply::NoError)
@@ -375,6 +423,14 @@ void NetworkAPI::replyFinishedAddProductJson(QNetworkReply *reply)
         QString answer = "Odpowiedź serwera: ";
         emit setAddProductAnswer(answer+reply->readAll());
     }
+}
+
+void NetworkAPI::replyFinishedFindProductJson(QNetworkReply *reply)
+{
+    if (reply->error() != QNetworkReply::NoError)
+        qDebug() << reply->error() << reply->errorString();
+    else
+        parseFindProductJson(reply);
 }
 
 void NetworkAPI::progressSignal(qint64 bytesReceived, qint64 bytesTotal)
