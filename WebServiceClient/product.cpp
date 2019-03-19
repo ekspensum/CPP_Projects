@@ -95,3 +95,33 @@ void Product::setCategory2Id(int value)
     category2Id = value;
 }
 
+int Product::getImageSize() const
+{
+    return imageSize;
+}
+
+void Product::setImageSize(int value)
+{
+    imageSize = value;
+}
+
+int Product::getPreviousCategory1Id() const
+{
+    return previousCategory1Id;
+}
+
+void Product::setPreviousCategory1Id(int value)
+{
+    previousCategory1Id = value;
+}
+
+int Product::getPreviousCategory2Id() const
+{
+    return previousCategory2Id;
+}
+
+void Product::setPreviousCategory2Id(int value)
+{
+    previousCategory2Id = value;
+}
+

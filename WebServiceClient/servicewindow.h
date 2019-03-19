@@ -31,15 +31,17 @@ private slots:
     void getProductsList();
     void getCategoryList();
     void getAddProductAnswer(QString str);
+    void getUpdateProductAnswer(QString str);
     void getProgressSignal(qint64 bytesReceived, qint64 bytesTotal);
     void on_pushButtonAddNewUser_clicked();
     void on_pushButtonGetProductsXml_clicked();
     void on_pushButtonGetProductJson_clicked();
-    void on_pushButtonSelectImageFile_clicked();
+    void on_pushButtonSelectImageFilePost_clicked();
     void on_commandLinkButtonAddProduct_clicked();
     void findProductList();
     void on_pushButtonFindProduct_clicked();
-    void on_commandLinkButtonUpdate_clicked();
+    void on_commandLinkButtonUpdateProduct_clicked();
+    void on_pushButtonSelectImageFilePut_clicked();
 
 private:
     Ui::ServiceWindow *ui;
@@ -50,8 +52,10 @@ private:
     Validation valid;
     QMessageBox msg;
     NetworkAPI net;
-    QString fileImagePath;
-    QByteArray byteFileImage;
+    QString fileImagePathPost;
+    QString fileImagePathPut;
+    QByteArray byteFileImagePost;
+    QByteArray byteFileImagePut;
     Product *pProduct;
 
     QString procesorsXmlElement = "Processor";
@@ -82,6 +86,9 @@ private:
     void fillUserTable();
     QComboBox *comboCategory1;
     QComboBox *comboCategory2;
+    QList<int> previousCategory1IdList;
+    QList<int> previousCategory2IdList;
+    int imageSize;
 
 };
 

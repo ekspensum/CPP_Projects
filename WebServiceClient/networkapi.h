@@ -15,10 +15,12 @@ class NetworkAPI : public QObject
     Q_OBJECT
 public:
     explicit NetworkAPI(QObject *parent = nullptr);
+    ~NetworkAPI();
     void getProductsXml(QString product, QString path);
     void getProductsJson(QString path);
     void getCategoryJson(QString path);
     bool addProductJson(QString path, Product *pProduct, User *pUser);
+    bool updateProductJson(QString path, Product *pProduct, User *pUser);
     void findProductJson(QString path);
     void parseProductXml(QNetworkReply *reply);
     void parseProductJson(QNetworkReply *reply);
@@ -32,6 +34,7 @@ signals:
     void setCategoryList();
     void setProgressSignal(qint64 bytesReceived, qint64 bytesTotal);
     void setAddProductAnswer(QString str);
+    void setUpdateProductAnswer(QString str);
     void findProductList();
 
 
@@ -40,6 +43,7 @@ public slots:
     void replyFinishedJson(QNetworkReply *reply);
     void replyFinishedCategoryJson(QNetworkReply *reply);
     void replyFinishedAddProductJson(QNetworkReply *reply);
+    void replyFinishedUpdateProductJson(QNetworkReply *reply);
     void replyFinishedFindProductJson(QNetworkReply *reply);
     void progressSignal(qint64 bytesReceived, qint64 bytesTotal);
 

@@ -2,10 +2,15 @@
 
 NetworkAPI::NetworkAPI(QObject *parent) : QObject(parent)
 {
-    //    "QT += network" is necessary add to *.pro for netMngr below:
-    //    netMngr = new QNetworkAccessManager(this);
-    //    connect(netMngr, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyFinishedXml(QNetworkReply *)));
-    //    connect(netMngr, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyFinishedJson(QNetworkReply *)));
+
+}
+
+NetworkAPI::~NetworkAPI()
+{
+    delete netMngr;
+    delete reply;
+    delete pProduct;
+    delete pCategory;
 }
 
 void NetworkAPI::getProductsXml(QString product, QString path)
@@ -76,8 +81,8 @@ bool NetworkAPI::addProductJson(QString path, Product *pProduct, User *pUser)
     jsonObject["description"] = pProduct->getDescription();
     jsonObject["price"] = pProduct->getPrice();
     jsonObject["unitsInStock"] = pProduct->getUnitsInStock();
-    jsonObject["category1Name"] = pProduct->getCategory1Id();
-    jsonObject["category2Name"] = pProduct->getCategory2Id();
+    jsonObject["category1Id"] = pProduct->getCategory1Id();
+    jsonObject["category2Id"] = pProduct->getCategory2Id();
     jsonObject["image"] = pProduct->getImage();
     jsonDoc.setObject(jsonObject);
 
@@ -94,6 +99,42 @@ bool NetworkAPI::addProductJson(QString path, Product *pProduct, User *pUser)
     request.setUrl(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     reply = netMngr->post(request, jsonDoc.toJson());
+    return true;
+}
+
+bool NetworkAPI::updateProductJson(QString path, Product *pProduct, User *pUser)
+{
+    QJsonDocument jsonDoc;
+    QJsonObject jsonObject;
+
+    jsonObject["login"] = pUser->getLogin();
+    jsonObject["password"] = pUser->getPassword();
+    jsonObject["idProduct"] = pProduct->getIdProduct();
+    jsonObject["name"] = pProduct->getName();
+    jsonObject["description"] = pProduct->getDescription();
+    jsonObject["price"] = pProduct->getPrice();
+    jsonObject["unitsInStock"] = pProduct->getUnitsInStock();
+    jsonObject["category1Id"] = pProduct->getCategory1Id();
+    jsonObject["category2Id"] = pProduct->getCategory2Id();
+    jsonObject["image"] = pProduct->getImage();
+    jsonObject["previousCategory1Id"] = pProduct->getPreviousCategory1Id();
+    jsonObject["previousCategory2Id"] = pProduct->getPreviousCategory2Id();
+    jsonObject["imageSize"] = pProduct->getImageSize();
+    jsonDoc.setObject(jsonObject);
+
+    netMngr = new QNetworkAccessManager(this);
+    connect(netMngr, SIGNAL(finished(QNetworkReply *)), this, SLOT(replyFinishedAddProductJson(QNetworkReply *)));
+    QUrl url;
+    url.setScheme("http");
+    url.setHost(HOST);
+    url.setPort(8080);
+    url.setQuery("format=json");
+    url.setPath(path);
+
+    QNetworkRequest request;
+    request.setUrl(url);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+    reply = netMngr->put(request, jsonDoc.toJson());
     return true;
 }
 
@@ -379,8 +420,8 @@ void NetworkAPI::parseFindProductJson(QNetworkReply *reply)
             pProduct->setPrice(jsonArray.at(i).toObject().value("price").toDouble());
             pProduct->setUnitsInStock(jsonArray.at(i).toObject().value("unitsInStock").toInt());
             pProduct->setImage(jsonArray.at(i).toObject().value("image").toString());
-            pProduct->setCategory1Id(jsonArray.at(i).toObject().value("category1Name").toInt());
-            pProduct->setCategory2Id(jsonArray.at(i).toObject().value("category2Name").toInt());
+            pProduct->setCategory1Id(jsonArray.at(i).toObject().value("category1Id").toInt());
+            pProduct->setCategory2Id(jsonArray.at(i).toObject().value("category2Id").toInt());
             pProduct->setIdProduct(jsonArray.at(i).toObject().value("idProduct").toInt());
             productList.append(pProduct);
         }
@@ -417,12 +458,24 @@ void NetworkAPI::replyFinishedCategoryJson(QNetworkReply *reply)
 
 void NetworkAPI::replyFinishedAddProductJson(QNetworkReply *reply)
 {
-    if (reply->error() != QNetworkReply::NoError)
+    QString answer = "Odpowiedź serwera: ";
+    if (reply->error() != QNetworkReply::NoError){
         qDebug() << reply->error() << reply->errorString();
-    else {
-        QString answer = "Odpowiedź serwera: ";
-        emit setAddProductAnswer(answer+reply->readAll());
+        emit setAddProductAnswer(answer+reply->errorString());
     }
+    else
+        emit setAddProductAnswer(answer+reply->readAll());
+}
+
+void NetworkAPI::replyFinishedUpdateProductJson(QNetworkReply *reply)
+{
+    QString answer = "Odpowiedź serwera: ";
+    if (reply->error() != QNetworkReply::NoError){
+        qDebug() << reply->error() << reply->errorString();
+        emit setUpdateProductAnswer(answer+reply->errorString());
+    }
+    else
+        emit setUpdateProductAnswer(answer+reply->readAll());
 }
 
 void NetworkAPI::replyFinishedFindProductJson(QNetworkReply *reply)

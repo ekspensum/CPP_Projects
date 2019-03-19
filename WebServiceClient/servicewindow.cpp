@@ -63,9 +63,9 @@ ServiceWindow::ServiceWindow(User *user, QWidget *parent) :
     ui->tableWidgetPut->setColumnWidth(0, 15);
     ui->tableWidgetPut->setColumnWidth(1, 15);
     ui->tableWidgetPut->setColumnWidth(2, 140);
-    ui->tableWidgetPut->setColumnWidth(3, 350);
-    ui->tableWidgetPut->setColumnWidth(4, 40);
-    ui->tableWidgetPut->setColumnWidth(5, 50);
+    ui->tableWidgetPut->setColumnWidth(3, 330);
+    ui->tableWidgetPut->setColumnWidth(4, 50);
+    ui->tableWidgetPut->setColumnWidth(5, 60);
     ui->tableWidgetPut->setColumnWidth(6, 150);
     ui->tableWidgetPut->setColumnWidth(7, 100);
     ui->tableWidgetPut->setColumnWidth(8, 180);
@@ -73,6 +73,7 @@ ServiceWindow::ServiceWindow(User *user, QWidget *parent) :
     connect(&net, SIGNAL(setProgressSignal(qint64, qint64)), this, SLOT(getProgressSignal(qint64, qint64)));
     connect(&net, SIGNAL(setCategoryList()), this, SLOT(getCategoryList()));
     connect(&net, SIGNAL(setAddProductAnswer(QString)), this, SLOT(getAddProductAnswer(QString)));
+    connect(&net, SIGNAL(setUpdateProductAnswer(QString)), this, SLOT(getUpdateProductAnswer(QString)));
     net.getCategoryJson("/ShopAppWebService/rest/ShopResource/AllCategoryJson");
     connect(&net, SIGNAL(findProductList()), this, SLOT(findProductList()));
 }
@@ -80,6 +81,10 @@ ServiceWindow::ServiceWindow(User *user, QWidget *parent) :
 ServiceWindow::~ServiceWindow()
 {
     delete ui;
+    delete pProduct;
+    delete comboCategory1;
+    delete comboCategory2;
+    delete pUser;
 }
 
 void ServiceWindow::getProductsList()
@@ -116,10 +121,16 @@ void ServiceWindow::getAddProductAnswer(QString str)
     msg.exec();
 }
 
+void ServiceWindow::getUpdateProductAnswer(QString str)
+{
+    msg.setText(str);
+    msg.exec();
+}
+
 void ServiceWindow::getProgressSignal(qint64 bytesReceived, qint64 bytesTotal)
 {
-    ui->progressBarGet->setRange(0, bytesTotal);
-    ui->progressBarGet->setValue(bytesReceived);
+    ui->progressBarGet->setRange(0, static_cast<int>(bytesTotal));
+    ui->progressBarGet->setValue(static_cast<int>(bytesReceived));
 }
 
 void ServiceWindow::on_pushButtonAddNewUser_clicked()
@@ -219,23 +230,23 @@ void ServiceWindow::on_pushButtonGetProductJson_clicked()
     }
 }
 
-void ServiceWindow::on_pushButtonSelectImageFile_clicked()
+void ServiceWindow::on_pushButtonSelectImageFilePost_clicked()
 {
-    fileImagePath = QFileDialog::getOpenFileName(this, "Wybierz plik", QDir::homePath(), "Plik jpg (*.jpg);; Plik png(*.png);; Wszystkie pliki (*.*)");
-    QFile fileImage(fileImagePath);
+    fileImagePathPost = QFileDialog::getOpenFileName(this, "Wybierz plik", QDir::homePath(), "Plik jpg (*.jpg);; Plik png(*.png);; Wszystkie pliki (*.*)");
+    QFile fileImage(fileImagePathPost);
     if(!fileImage.open(QIODevice::ReadOnly)){
         msg.setText("Błąd otwarcia pliku!");
         msg.exec();
         return;
     }
-    QFileInfo fileInfo(fileImagePath);
+    QFileInfo fileInfo(fileImagePathPost);
     if(fileInfo.size() > 600000){
         msg.setText("Rozmiar pliku to "+QString("%1").arg(fileInfo.size()/1000)+"kB i jest powyżej 600kB. Proszę wybrać mniejszy plik!");
         msg.exec();
         return;
     }
-    byteFileImage = fileImage.readAll();
-    ui->lineEditFileName->setText(fileInfo.fileName());
+    byteFileImagePost = fileImage.readAll();
+    ui->lineEditFileNamePost->setText(fileInfo.fileName());
 }
 
 void ServiceWindow::on_commandLinkButtonAddProduct_clicked()
@@ -277,7 +288,7 @@ void ServiceWindow::on_commandLinkButtonAddProduct_clicked()
         msg.setText("Kategoria nr 1 jest taka sama jak kategoria nr 2!");
         msg.exec();
     }
-    if(byteFileImage.size() == 0){
+    if(byteFileImagePost.size() == 0){
         validation = false;
         msg.setText("Nie dodano zdjęcia produktu!");
         msg.exec();
@@ -290,7 +301,7 @@ void ServiceWindow::on_commandLinkButtonAddProduct_clicked()
         pProduct->setUnitsInStock(ui->spinBoxUnitsInStock->value());
         pProduct->setCategory1Id(ui->comboBoxCategory1->itemData(ui->comboBoxCategory1->currentIndex()).toInt());
         pProduct->setCategory2Id(ui->comboBoxCategory2->itemData(ui->comboBoxCategory2->currentIndex()).toInt());
-        pProduct->setImage(byteFileImage.toBase64());
+        pProduct->setImage(byteFileImagePost.toBase64());
         if(net.addProductJson("/ShopAppWebService/rest/ShopResource/ProductAddJson", pProduct, pUser)){
             ui->lineEditProductName->clear();
             ui->textEditProductDescription->clear();
@@ -298,22 +309,37 @@ void ServiceWindow::on_commandLinkButtonAddProduct_clicked()
             ui->spinBoxUnitsInStock->setValue(0);
             ui->comboBoxCategory1->setCurrentIndex(0);
             ui->comboBoxCategory2->setCurrentIndex(0);
-            ui->lineEditFileName->clear();
-            byteFileImage.clear();
+            ui->lineEditFileNamePost->clear();
+            byteFileImagePost.clear();
         }
     }
 }
 
 void ServiceWindow::findProductList()
 {
+    previousCategory1IdList.clear();
+    previousCategory2IdList.clear();
     ui->tableWidgetPut->setRowCount(net.getProductList().size());
     for (int i=0;i<net.getProductList().size(); i++) {
         ui->tableWidgetPut->setItem(i, 0, new QTableWidgetItem(QString("%1").arg(net.getProductList().at(i)->getId())));
+        ui->tableWidgetPut->item(i, 0)->setFlags(Qt::ItemIsEditable);
         ui->tableWidgetPut->setItem(i, 1, new QTableWidgetItem(QString("%1").arg(net.getProductList().at(i)->getIdProduct())));
+        ui->tableWidgetPut->item(i, 1)->setFlags(Qt::ItemIsEditable);
         ui->tableWidgetPut->setItem(i, 2, new QTableWidgetItem(net.getProductList().at(i)->getName()));
         ui->tableWidgetPut->setItem(i, 3, new QTableWidgetItem(net.getProductList().at(i)->getDescription()));
-        ui->tableWidgetPut->setItem(i, 4, new QTableWidgetItem(QString("%1").arg(net.getProductList().at(i)->getUnitsInStock())));
-        ui->tableWidgetPut->setItem(i, 5, new QTableWidgetItem(QString("%1").arg(net.getProductList().at(i)->getPrice())));
+
+        QSpinBox *spinBox = new QSpinBox();
+        spinBox->setFixedSize(50, 25);
+        spinBox->setRange(0, 1000);
+        spinBox->setValue(net.getProductList().at(i)->getUnitsInStock());
+        ui->tableWidgetPut->setCellWidget(i, 4, spinBox);
+
+        QDoubleSpinBox *doubleBox = new QDoubleSpinBox();
+        doubleBox->setFixedSize(60, 25);
+        doubleBox->setRange(0.00, 99999.99);
+        doubleBox->setValue(net.getProductList().at(i)->getPrice());
+        ui->tableWidgetPut->setCellWidget(i, 5, doubleBox);
+
         QPixmap image;
         image.loadFromData(QByteArray::fromBase64(net.getProductList().at(i)->getImage().toUtf8()));
         image = image.scaled(150, 100, Qt::KeepAspectRatio, Qt::SmoothTransformation);
@@ -321,17 +347,22 @@ void ServiceWindow::findProductList()
         imageItem->setData(Qt::DecorationRole ,image);
         ui->tableWidgetPut->setItem(i, 6, imageItem);
         ui->tableWidgetPut->setRowHeight(i, 100);
+
         comboCategory1 = new QComboBox();
-        comboCategory1->setFixedSize(100, 23);
+        comboCategory1->setFixedSize(100, 25);
         comboCategory2 = new QComboBox();
-        comboCategory2->setFixedSize(180, 23);
+        comboCategory2->setFixedSize(180, 25);
         for (int j=0;j<net.getCategoryList().size();j++) {
-            comboCategory1->addItem(net.getCategoryList().at(j)->getName());
-            if(net.getCategoryList().at(j)->getId() == net.getProductList().at(i)->getCategory1Id())
+            comboCategory1->addItem(net.getCategoryList().at(j)->getName(), QVariant::fromValue(net.getCategoryList().at(j)->getId()));
+            if(net.getCategoryList().at(j)->getId() == net.getProductList().at(i)->getCategory1Id()){
                 comboCategory1->setCurrentText(net.getCategoryList().at(j)->getName());
-            comboCategory2->addItem(net.getCategoryList().at(j)->getName());
-            if(net.getCategoryList().at(j)->getId() == net.getProductList().at(i)->getCategory2Id())
+                previousCategory1IdList.append(net.getCategoryList().at(j)->getId());
+            }
+            comboCategory2->addItem(net.getCategoryList().at(j)->getName(), QVariant::fromValue(net.getCategoryList().at(j)->getId()));
+            if(net.getCategoryList().at(j)->getId() == net.getProductList().at(i)->getCategory2Id()){
                 comboCategory2->setCurrentText(net.getCategoryList().at(j)->getName());
+                previousCategory2IdList.append(net.getCategoryList().at(j)->getId());
+            }
         }
         ui->tableWidgetPut->setCellWidget(i, 7, comboCategory1);
         ui->tableWidgetPut->setCellWidget(i, 8, comboCategory2);
@@ -349,12 +380,93 @@ void ServiceWindow::on_pushButtonFindProduct_clicked()
     }
 }
 
-void ServiceWindow::on_commandLinkButtonUpdate_clicked()
+void ServiceWindow::on_commandLinkButtonUpdateProduct_clicked()
 {
     if(ui->tableWidgetPut->selectedRanges().size() != 1){
         msg.setText("Powinien być zaznaczony jeden wiersz do edycji!");
         msg.exec();
         return;
     }
-    qDebug() << ui->tableWidgetPut->currentRow() << ui->tableWidgetPut->item(ui->tableWidgetPut->currentRow(), 1)->text();
+    int currentRow = ui->tableWidgetPut->currentRow();
+    bool validation = true;
+    if(pUser->getRole() != "Operator"){
+        validation = false;
+        msg.setText("Obecnie zalogowany użytkowanik nie ma uprawnień do tej akcji!");
+        msg.exec();
+        return;
+    }
+    if(!valid.validProductName(ui->tableWidgetPut->item(currentRow, 2)->text())){
+        validation = false;
+        msg.setText("Nazwa produktu zawiera niepoprawne znaki lub niewłaściwą ilośc znaków!");
+        msg.exec();
+    }
+    if(!valid.validProductDescription(ui->tableWidgetPut->item(currentRow, 3)->text())){
+        validation = false;
+        msg.setText("Opis produktu zawiera niepoprawne znaki lub niewłaściwą ilośc znaków!");
+        msg.exec();
+    }
+    QSpinBox *spinBox = dynamic_cast<QSpinBox *>(ui->tableWidgetPut->cellWidget(currentRow, 4));
+    if(spinBox->value() == 0){
+        validation = false;
+        msg.setText("Ilość produktu jest zerowa!");
+        msg.exec();
+    }
+    QDoubleSpinBox *doubleBox = dynamic_cast<QDoubleSpinBox *>(ui->tableWidgetPut->cellWidget(currentRow, 5));
+    if(doubleBox->value() == 0.00){
+        validation = false;
+        msg.setText("Cena produktu jest zerowa!");
+        msg.exec();
+    }
+    comboCategory1 = dynamic_cast <QComboBox *> (ui->tableWidgetPut->cellWidget(currentRow, 7));
+    if (comboCategory1->currentIndex() == 0) {
+        validation = false;
+        msg.setText("Proszę wybrać kategorie nr 1!");
+        msg.exec();
+    }
+    comboCategory2 = dynamic_cast<QComboBox *>(ui->tableWidgetPut->cellWidget(currentRow, 8));
+    if (comboCategory1->currentText() == comboCategory2->currentText()) {
+        validation = false;
+        msg.setText("Kategoria nr 1 jest taka sama jak kategoria nr 2!");
+        msg.exec();
+    }
+    if (validation) {
+        pProduct = new Product();
+        pProduct->setIdProduct(ui->tableWidgetPut->item(currentRow, 1)->text().toInt());
+        pProduct->setName(ui->tableWidgetPut->item(currentRow, 2)->text());
+        pProduct->setDescription(ui->tableWidgetPut->item(currentRow, 3)->text());
+        pProduct->setPrice(doubleBox->value());
+        pProduct->setUnitsInStock(spinBox->value());
+        pProduct->setCategory1Id(comboCategory1->itemData(comboCategory1->currentIndex()).toInt());
+        pProduct->setCategory2Id(comboCategory2->itemData(comboCategory2->currentIndex()).toInt());
+        pProduct->setImage(byteFileImagePut.toBase64());
+        pProduct->setPreviousCategory1Id(previousCategory1IdList.at(currentRow));
+        pProduct->setPreviousCategory2Id(previousCategory2IdList.at(currentRow));
+        pProduct->setImageSize(imageSize);
+        if(net.updateProductJson("/ShopAppWebService/rest/ShopResource/ProductUpdateJson", pProduct, pUser)){
+            ui->lineEditFileNamePut->clear();
+            byteFileImagePost.clear();
+            imageSize = 0;
+            ui->tableWidgetPut->setRowCount(0);
+        }
+    }
+}
+
+void ServiceWindow::on_pushButtonSelectImageFilePut_clicked()
+{
+    fileImagePathPut = QFileDialog::getOpenFileName(this, "Wybierz plik", QDir::homePath(), "Plik jpg (*.jpg);; Plik png(*.png);; Wszystkie pliki (*.*)");
+    QFile fileImage(fileImagePathPut);
+    if(!fileImage.open(QIODevice::ReadOnly)){
+        msg.setText("Błąd otwarcia pliku!");
+        msg.exec();
+        return;
+    }
+    QFileInfo fileInfo(fileImagePathPut);
+    if(fileInfo.size() > 600000){
+        msg.setText("Rozmiar pliku to "+QString("%1").arg(fileInfo.size()/1000)+"kB i jest powyżej 600kB. Proszę wybrać mniejszy plik!");
+        msg.exec();
+        return;
+    }
+    byteFileImagePut = fileImage.readAll();
+    ui->lineEditFileNamePut->setText(fileInfo.fileName());
+    imageSize = static_cast<int>(fileInfo.size());
 }

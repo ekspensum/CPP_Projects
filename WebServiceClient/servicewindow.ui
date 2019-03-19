@@ -51,7 +51,7 @@
      </font>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
     <property name="tabsClosable">
      <bool>false</bool>
@@ -522,7 +522,7 @@
        <string>Dodaj zdjęcie</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButtonSelectImageFile">
+     <widget class="QPushButton" name="pushButtonSelectImageFilePost">
       <property name="geometry">
        <rect>
         <x>480</x>
@@ -544,11 +544,17 @@
         <height>41</height>
        </rect>
       </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;Dodaje produkt do bazy danych.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"> background-color: #C3C3AE;</string>
+      </property>
       <property name="text">
        <string>Dodaj produkt</string>
       </property>
      </widget>
-     <widget class="QLineEdit" name="lineEditFileName">
+     <widget class="QLineEdit" name="lineEditFileNamePost">
       <property name="geometry">
        <rect>
         <x>200</x>
@@ -684,26 +690,26 @@
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>60</y>
-        <width>231</width>
+        <y>40</y>
+        <width>311</width>
         <height>23</height>
        </rect>
       </property>
       <property name="text">
-       <string>Wyszukaj wg nazwy lub fragmentu:</string>
+       <string>Wyszukaj produkt wg nazwy lub fragmentu:</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="lineEditFindProductName">
       <property name="geometry">
        <rect>
-        <x>280</x>
-        <y>60</y>
+        <x>20</x>
+        <y>70</y>
         <width>251</width>
         <height>23</height>
        </rect>
       </property>
      </widget>
-     <widget class="QCommandLinkButton" name="commandLinkButtonUpdate">
+     <widget class="QCommandLinkButton" name="commandLinkButtonUpdateProduct">
       <property name="geometry">
        <rect>
         <x>960</x>
@@ -712,21 +718,82 @@
         <height>41</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:400;&quot;&gt;Zapisuje do bazy modyfikacje produktu wprowadzone w zaznaczonym wierszu&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"> background-color: #C3C3AE;</string>
+      </property>
       <property name="text">
        <string>Zapisz modyfikacje</string>
+      </property>
+      <property name="checkable">
+       <bool>false</bool>
+      </property>
+      <property name="description">
+       <string/>
       </property>
      </widget>
      <widget class="QPushButton" name="pushButtonFindProduct">
       <property name="geometry">
        <rect>
-        <x>560</x>
-        <y>60</y>
+        <x>280</x>
+        <y>70</y>
         <width>80</width>
         <height>23</height>
        </rect>
       </property>
       <property name="text">
        <string>Wyszukaj</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="lineEditFileNamePut">
+      <property name="geometry">
+       <rect>
+        <x>450</x>
+        <y>70</y>
+        <width>251</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Nie wybrano pliku...</string>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="labelFindProduct_2">
+      <property name="geometry">
+       <rect>
+        <x>450</x>
+        <y>40</y>
+        <width>311</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Wybierz plik do zamiany zdjęcia produktu:</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButtonSelectImageFilePut">
+      <property name="geometry">
+       <rect>
+        <x>710</x>
+        <y>70</y>
+        <width>80</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Wybierz</string>
       </property>
      </widget>
     </widget>

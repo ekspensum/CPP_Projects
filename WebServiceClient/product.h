@@ -35,6 +35,15 @@ public:
     int getCategory2Id() const;
     void setCategory2Id(int value);
 
+    int getImageSize() const;
+    void setImageSize(int value);
+
+    int getPreviousCategory1Id() const;
+    void setPreviousCategory1Id(int value);
+
+    int getPreviousCategory2Id() const;
+    void setPreviousCategory2Id(int value);
+
 private:
     int id;
     int idProduct;
@@ -45,6 +54,9 @@ private:
     QString image;
     int category1Id;
     int category2Id;
+    int imageSize;
+    int previousCategory1Id;
+    int previousCategory2Id;
 
 
 };
