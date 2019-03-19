@@ -7,10 +7,7 @@ NetworkAPI::NetworkAPI(QObject *parent) : QObject(parent)
 
 NetworkAPI::~NetworkAPI()
 {
-    delete netMngr;
-    delete reply;
-    delete pProduct;
-    delete pCategory;
+
 }
 
 void NetworkAPI::getProductsXml(QString product, QString path)
