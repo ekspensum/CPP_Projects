@@ -15,7 +15,6 @@ class NetworkAPI : public QObject
     Q_OBJECT
 public:
     explicit NetworkAPI(QObject *parent = nullptr);
-    ~NetworkAPI();
     void getProductsXml(QString product, QString path);
     void getProductsJson(QString path);
     void getCategoryJson(QString path);

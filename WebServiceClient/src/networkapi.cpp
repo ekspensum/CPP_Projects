@@ -5,11 +5,6 @@ NetworkAPI::NetworkAPI(QObject *parent) : QObject(parent)
 
 }
 
-NetworkAPI::~NetworkAPI()
-{
-
-}
-
 void NetworkAPI::getProductsXml(QString product, QString path)
 {
     //    "QT += network" is necessary add to *.pro for netMngr below:
