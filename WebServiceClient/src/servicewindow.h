@@ -2,6 +2,7 @@
 #define SERVICEWINDOW_H
 
 #include <QMainWindow>
+#include <QDebug>
 #include <user.h>
 #include <product.h>
 #include <mainlogin.h>

@@ -1,11 +1,9 @@
 #include <QtTest>
 
 // add necessary includes here
-//#include <networkapi.h>
 #include <validation.h>
-#include <mainlogin.h>
 #include <user.h>
-
+#include <mainlogin.h>
 
 class AllTests : public QObject
 {
@@ -13,6 +11,8 @@ class AllTests : public QObject
 
 private:
     Validation val;
+    MainLogin mainLogin;
+
 
 public:
     AllTests();
@@ -21,7 +21,6 @@ public:
 private slots:
     void test_caseValidation();
     void test_caseMainLogin();
-
 
 };
 
@@ -57,7 +56,10 @@ void AllTests::test_caseValidation()
 
 void AllTests::test_caseMainLogin()
 {
-
+    QCOMPARE("Admin", mainLogin.getLoggedUser("admin1", "Admin11")->getRole());
+    QCOMPARE("admin1", mainLogin.getLoggedUser("admin1", "Admin11")->getLogin());
+    QCOMPARE("Admin", mainLogin.readFileUsersList().at(0)->getRole());
+    QCOMPARE("admin1", mainLogin.readFileUsersList().at(0)->getLogin());
 }
 
 QTEST_APPLESS_MAIN(AllTests)

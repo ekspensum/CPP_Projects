@@ -51,7 +51,7 @@
      </font>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>1</number>
     </property>
     <property name="tabsClosable">
      <bool>false</bool>
@@ -418,7 +418,7 @@
        <double>1.000000000000000</double>
       </property>
       <property name="stepType">
-       <enum>QAbstractSpinBox::AdaptiveDecimalStepType</enum>
+       <enum>QAbstractSpinBox::DefaultStepType</enum>
       </property>
      </widget>
      <widget class="QSpinBox" name="spinBoxUnitsInStock">

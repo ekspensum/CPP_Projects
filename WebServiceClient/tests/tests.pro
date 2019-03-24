@@ -11,5 +11,7 @@ SOURCES +=  tst_alltests.cpp \
     ../src/mainlogin.cpp \
     ../src/user.cpp
 
+HEADERS += ../src/mainlogin.h
+
 INCLUDEPATH += \
     ../src
